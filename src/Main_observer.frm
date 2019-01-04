@@ -244,6 +244,7 @@ Begin VB.Form ModelEditor
          Left            =   240
          TabIndex        =   93
          Top             =   1800
+         Value           =   1  'Checked
          Width           =   1335
       End
       Begin MSComCtl2.UpDown FrameDataPartUpDown 
