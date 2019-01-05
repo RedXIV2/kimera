@@ -7,7 +7,11 @@ For more information on the Kimera tool itself, please view the forum post here:
 [Original Kimera forum post on Qhimm](http://forums.qhimm.com/index.php?topic=4194.0)
 
 ## Usage 
-To use this tool, please download the standalone package which should run as an executable. This will allow you to use models extracted from Final Fantasy VII. To extract these models from the steam or square enix versions of the games, you can follow some [instructions here](http://mirex.mypage.sk/FILES/gamedata.txt) or reach out to the community in [Qhimm](http://forums.qhimm.com/index.php) who may have resources to help.
+To use this tool, please download the standalone package which should run as an executable. 
+
+[You can grab the latest version here](https://github.com/RedXIV2/kimera/releases/latest)
+
+This will allow you to use models extracted from Final Fantasy VII. To extract these models from the steam or square enix versions of the games, you can follow some [instructions here](http://mirex.mypage.sk/FILES/gamedata.txt) or reach out to the community in [Qhimm](http://forums.qhimm.com/index.php) who may have resources to help.
 
 ## Contributing
 If you are interested in contributing to the project, you will need to use the Visual Basic 6 IDE which can be found here: [Torrent & Zip links](https://archive.org/details/VS6enCDs)
