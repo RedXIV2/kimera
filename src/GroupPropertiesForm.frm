@@ -239,7 +239,7 @@ Begin VB.Form GroupPropertiesForm
          Height          =   375
          Left            =   120
          TabIndex        =   4
-         ToolTipText     =   "¿?"
+         ToolTipText     =   "ï¿½?"
          Top             =   1080
          Width           =   1095
       End

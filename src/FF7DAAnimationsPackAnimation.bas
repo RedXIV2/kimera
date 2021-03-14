@@ -193,7 +193,7 @@ Sub CreateEmptyDAAnimationsPackAnimation(ByRef Anim As DAAnimation, ByVal NumBon
         CreateEmptyDAAnimationsPackAnimation1stFrame .Frames(0), NumBones
     End With
 End Sub
-'Ensure the animation delta between two consecutive frames stays always on the (-180º, 180º) boundary (it's not possible to encode values outside)
+'Ensure the animation delta between two consecutive frames stays always on the (-180ï¿½, 180ï¿½) boundary (it's not possible to encode values outside)
 Sub NormalizeDAAnimationsPackAnimation(ByRef Anim As DAAnimation)
     Dim fi As Integer
     

@@ -1353,7 +1353,7 @@ End Function
 '---------------------------------------------------------------------------------------------------------
 'Function creaDC(ByVal x As Long, ByVal y As Long) As Long
 '    Dim hBITMAP As Long, hdc As Long, tam As tagSIZE, tipo As Integer, error As String
-'    error = "Error de gráficos!"
+'    error = "Error de grï¿½ficos!"
 '    tipo = 0 + 0 + 16
 '    While hdc < 1
 '        hdc = CreateCompatibleDC(GetDC(0))

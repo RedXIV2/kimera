@@ -160,7 +160,7 @@ Public Const PI_180 = 3.141593 / 180
 
 Public Const BI_RGB = 0&
 Public Const DIB_RGB_COLORS = 0   '  tabla de color en RGB (rojo-verde-azul)
-Public Const DIB_PAL_COLORS = 1   '  tabla de color en los índices de la paleta
+Public Const DIB_PAL_COLORS = 1   '  tabla de color en los ï¿½ndices de la paleta
 
 Public Const GL_FUNC_ADD = 32774
 Public Const GL_FUNC_SUBTRACT = 32778
@@ -270,7 +270,7 @@ Declare Sub gluPickMatrix Lib "glu32.dll" (ByVal x As Double, ByVal y As Double,
 
 Function creaDC(ByVal dc As Long, ByVal x As Long, ByVal y As Long) As Long
 Dim hBitmap As Long, hdc As Long, tipo As Integer, error As String
-error = "Error de gráficos!"
+error = "Error de grï¿½ficos!"
 tipo = 0 + 0 + 16
 Do
     hdc = CreateCompatibleDC(dc)

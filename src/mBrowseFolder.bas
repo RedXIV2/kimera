@@ -1,6 +1,6 @@
 Attribute VB_Name = "mBrowseFolder"
 ' mBrowseFolder
-' 2000/12/17 Copyright © 2000, Larry Rebich, using the VAIO
+' 2000/12/17 Copyright ï¿½ 2000, Larry Rebich, using the VAIO
 ' 2000/12/17 larry@buygold.net, www.buygold.net, 760.771.4730
 '
 ' Use this module in conjunction with class module: cBrowseFolder.cls

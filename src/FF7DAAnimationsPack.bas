@@ -72,7 +72,7 @@ Sub WriteDAAnimationsPack(ByVal filename As String, ByRef AnimationsPack As DAAn
     
     On Error GoTo ErrHandRead
     
-    'Since we're using signed data there is no way we can store values outside the [-180º, 180º] (shoudln't matter though, due to angular equivalences)
+    'Since we're using signed data there is no way we can store values outside the [-180ï¿½, 180ï¿½] (shoudln't matter though, due to angular equivalences)
     'Normalize just to be safe
     NormalizeDAAnimationsPack AnimationsPack
     

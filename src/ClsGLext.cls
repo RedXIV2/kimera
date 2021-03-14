@@ -275,7 +275,7 @@ Private Function ReplaceVtableEntry(ByVal entry As Integer, ByVal lpfn As Long) 
     If lOldAddr <> lpfn Then
         VirtualProtect lpfnAddr, 4, PAGE_EXECUTE_READWRITE, lOldProtect
         CopyMemory ByVal lpfnAddr, lpfn, 4
-        'Don’t bother to reprotect
+        'Donï¿½t bother to reprotect
         VirtualProtect lpfnAddr, 4, lOldProtect, lOldProtect
     End If
     ReplaceVtableEntry = lOldAddr
@@ -296,7 +296,7 @@ Private Function ReplaceEntryWithDLLFunction(ByVal entry As Integer, ByVal lpfn 
         CopyMemory ByVal lFuncAddr + 4, lpfn, 4
         CopyMemory ByVal lFuncAddr + 8, &HE0FF, 2
         
-        'Don’t bother to reprotect
+        'Donï¿½t bother to reprotect
         VirtualProtect lFuncAddr, 10, lOldProtect, lOldProtect
     End If
     ReplaceEntryWithDLLFunction = lFuncAddr

@@ -829,7 +829,7 @@ Sub KillEmptyGroups(ByRef obj As PModel)
     Wend
 End Sub
 Sub KillUnusedVertices(ByRef obj As PModel)
-'------------------------------¡WARNINGS!------------------------------
+'------------------------------ï¿½WARNINGS!------------------------------
 '-------*Causes the Normals to be inconsistent (call ComputeNormals).--
     Dim gi As Long
     Dim gi2 As Long
@@ -1487,7 +1487,7 @@ Function AddPolygon(ByRef obj As PModel, ByRef verts_index_buff() As Integer) As
 End Function
 'Removes all polygons refering to the vertex, but doesn't remove the vertex itself
 Sub DisableVertex(ByRef obj As PModel, ByVal v_index As Integer)
-'------------------------------¡WARNINGS!------------------------------
+'------------------------------ï¿½WARNINGS!------------------------------
 '-------*Causes the Normals to be inconsistent (call ComputeNormals).--
 '-------*Causes inconsistent edges (call ComputeEdges).----------------
 '-------*Causes unused vertices (call KillUnusedVertices).-------------
@@ -1504,7 +1504,7 @@ Sub DisableVertex(ByRef obj As PModel, ByVal v_index As Integer)
     Next PI
 End Sub
 Sub RemovePolygon(ByRef obj As PModel, ByVal p_index As Integer)
-'------------------------------¡WARNINGS!------------------------------
+'------------------------------ï¿½WARNINGS!------------------------------
 '-------*Causes the Normals to be inconsistent (call ComputeNormals).--
 '-------*Causes inconsistent edges (call ComputeEdges).----------------
 '-------*Can cause unused vertices (call KillUnusedVertices).----------
@@ -1726,7 +1726,7 @@ Sub RemoveGroupHeader(ByRef obj As PModel, g_index As Integer)
 End Sub
 
 Sub PaintPolygon(ByRef obj As PModel, ByVal p_index As Integer, ByVal r As Byte, ByVal g As Byte, ByVal B As Byte)
-'------------------------------¡WARNINGS!----------------------------------
+'------------------------------ï¿½WARNINGS!----------------------------------
 '-------*Can causes the Normals to be inconsistent (call ComputeNormals).--
 '-------*Can causes inconsistent edges (call ComputeEdges).----------------
 '-------*Can cause unused vertices (call KillUnusedVertices).--------------

@@ -12,7 +12,7 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 ' cBrowseFolder
-' 2000/12/17 Copyright © 2000, Larry Rebich, using the VAIO
+' 2000/12/17 Copyright ï¿½ 2000, Larry Rebich, using the VAIO
 ' 2000/12/17 larry@buygold.net, www.buygold.net, 760.771.4730
 '            Some parts of this code from Randy Birch and others.
 '
@@ -22,7 +22,7 @@ Attribute VB_Exposed = False
     DefLng A-Z
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-' Some parts copyright ©1996-2000 VBnet, Randy Birch, All Rights Reserved.
+' Some parts copyright ï¿½1996-2000 VBnet, Randy Birch, All Rights Reserved.
 ' http://www.mvps.org/vbnet/index.html
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
