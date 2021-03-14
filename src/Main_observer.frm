@@ -1,12 +1,12 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form ModelEditor 
-   Caption         =   "Kimera - FF7PC simple model editor v0.98b by Borde - maintained by RedXIV"
-   ClientHeight    =   9190
+   Caption         =   "Kimera - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
+   ClientHeight    =   9195
    ClientLeft      =   60
-   ClientTop       =   350
-   ClientWidth     =   9830
+   ClientTop       =   345
+   ClientWidth     =   9825
    Icon            =   "Main_observer.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
@@ -151,9 +151,9 @@ Begin VB.Form ModelEditor
       Begin VB.PictureBox TextureViewer 
          Height          =   1335
          Left            =   120
-         ScaleHeight     =   130
+         ScaleHeight     =   85
          ScaleMode       =   3  'Pixel
-         ScaleWidth      =   142
+         ScaleWidth      =   93
          TabIndex        =   74
          Top             =   240
          Width           =   1455
@@ -164,8 +164,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   88
          Top             =   1560
          Width           =   240
-         _ExtentX        =   459
-         _ExtentY        =   670
+         _ExtentX        =   450
+         _ExtentY        =   661
          _Version        =   393216
          Wrap            =   -1  'True
          Enabled         =   -1  'True
@@ -253,8 +253,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   83
          Top             =   240
          Width           =   240
-         _ExtentX        =   459
-         _ExtentY        =   459
+         _ExtentX        =   450
+         _ExtentY        =   450
          _Version        =   393216
          Max             =   2
          Wrap            =   -1  'True
@@ -273,8 +273,8 @@ Begin VB.Form ModelEditor
             TabIndex        =   82
             Top             =   960
             Width           =   240
-            _ExtentX        =   459
-            _ExtentY        =   459
+            _ExtentX        =   450
+            _ExtentY        =   450
             _Version        =   393216
             Increment       =   10000
             Max             =   7200000
@@ -287,8 +287,8 @@ Begin VB.Form ModelEditor
             TabIndex        =   81
             Top             =   600
             Width           =   240
-            _ExtentX        =   459
-            _ExtentY        =   459
+            _ExtentX        =   450
+            _ExtentY        =   450
             _Version        =   393216
             Increment       =   10000
             Max             =   7200000
@@ -301,8 +301,8 @@ Begin VB.Form ModelEditor
             TabIndex        =   80
             Top             =   240
             Width           =   240
-            _ExtentX        =   459
-            _ExtentY        =   459
+            _ExtentX        =   450
+            _ExtentY        =   450
             _Version        =   393216
             Increment       =   10000
             Max             =   7200000
@@ -758,8 +758,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   79
          Top             =   1320
          Width           =   240
-         _ExtentX        =   459
-         _ExtentY        =   459
+         _ExtentX        =   450
+         _ExtentY        =   450
          _Version        =   393216
          Max             =   999999999
          Min             =   -999999999
@@ -771,8 +771,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   78
          Top             =   960
          Width           =   240
-         _ExtentX        =   459
-         _ExtentY        =   512
+         _ExtentX        =   450
+         _ExtentY        =   503
          _Version        =   393216
          BuddyControl    =   "ResizeBoneZText"
          BuddyDispid     =   196694
@@ -792,8 +792,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   77
          Top             =   600
          Width           =   240
-         _ExtentX        =   459
-         _ExtentY        =   512
+         _ExtentX        =   450
+         _ExtentY        =   503
          _Version        =   393216
          BuddyControl    =   "ResizeBoneYText"
          BuddyDispid     =   196695
@@ -813,8 +813,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   76
          Top             =   240
          Width           =   240
-         _ExtentX        =   459
-         _ExtentY        =   512
+         _ExtentX        =   450
+         _ExtentY        =   503
          _Version        =   393216
          BuddyControl    =   "ResizeBoneXText"
          BuddyDispid     =   196690
@@ -941,9 +941,9 @@ Begin VB.Form ModelEditor
       Height          =   8775
       Left            =   2280
       Negotiate       =   -1  'True
-      ScaleHeight     =   874
+      ScaleHeight     =   581
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   562
+      ScaleWidth      =   373
       TabIndex        =   0
       Top             =   0
       Width           =   5655
@@ -1102,7 +1102,7 @@ Dim ReDoBuffer() As ModelEditorState
 Dim UnDoCursor As Integer
 Dim ReDoCursor As Integer
 
-Public Sub OpenFF7File(ByVal fileName As String)
+Public Sub OpenFF7File(ByVal filename As String)
     On Error GoTo errorH
     Dim p_min As Point3D
     Dim p_max As Point3D
@@ -1128,7 +1128,7 @@ Public Sub OpenFF7File(ByVal fileName As String)
     glClearColor 0.5, 0.5, 1, 0
     
     Picture1.Cls
-    Picture1.Print "Loading ", fileName
+    Picture1.Print "Loading ", filename
     
     SelectedBone = -1
     SelectedBonePiece = -1
@@ -1136,8 +1136,8 @@ Public Sub OpenFF7File(ByVal fileName As String)
     SelectedBoneFrame.Enabled = False
     SelectedPieceFrame.Enabled = False
     
-    If LCase(Right$(fileName, 2)) = ".p" Then
-        ReadPModel P_Model, fileName
+    If LCase(Right$(filename, 2)) = ".p" Then
+        ReadPModel P_Model, filename
         If P_Model.head.NumVerts > 0 Then
             UnDoCursor = 0
             ReDoCursor = 0
@@ -1180,11 +1180,11 @@ Public Sub OpenFF7File(ByVal fileName As String)
             InterpolateAnimationButton.Visible = False
         End If
     Else
-        If LCase(Right$(fileName, 4)) = ".hrc" Then
+        If LCase(Right$(filename, 4)) = ".hrc" Then
             UnDoCursor = 0
             ReDoCursor = 0
             
-            ReadHRCSkeleton hrc_sk, fileName, True
+            ReadHRCSkeleton hrc_sk, filename, True
             ReadFirstCompatibleAAnimation
             ComputeHRCBoundingBox hrc_sk, AAnim.Frames(0), p_min, p_max
             diameter = ComputeHRCDiameter(hrc_sk)
@@ -1228,11 +1228,11 @@ Public Sub OpenFF7File(ByVal fileName As String)
             Call SetFrameEditorFields
             Call SetTextureEditorFields
         Else
-            If LCase(Right$(fileName, 2)) = "aa" Then
+            If LCase(Right$(filename, 2)) = "aa" Then
                 UnDoCursor = 0
                 ReDoCursor = 0
                 
-                ReadAASkeleton fileName, aa_sk, False, True
+                ReadAASkeleton filename, aa_sk, False, True
                 num_weapons = aa_sk.NumWeapons
                 WeaponCombo.Clear
                 For wi = 0 To num_weapons - 1
@@ -1241,8 +1241,8 @@ Public Sub OpenFF7File(ByVal fileName As String)
                 If aa_sk.IsBattleLocation Then
                     CreateEmptyDAAnimationsPack DAAnims, aa_sk.NumBones + 1
                 Else
-                    If FileExist(LCase(Left$(Right$(fileName, 4), 2)) + "da") Then
-                        ReadDAAnimationsPack LCase(Left$(Right$(fileName, 4), 2)) + "da", aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims
+                    If FileExist(LCase(Left$(Right$(filename, 4), 2)) + "da") Then
+                        ReadDAAnimationsPack LCase(Left$(Right$(filename, 4), 2)) + "da", aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims
                     Else
                         CreateCompatibleDAAnimationsPack aa_sk, DAAnims
                     End If
@@ -1298,7 +1298,7 @@ Public Sub OpenFF7File(ByVal fileName As String)
                 SaveFF7ModelButton.Visible = True
                 SaveFF7AnimationButton.Visible = True
                 SaveFF7AnimationButton.Caption = "Save anims. pack"
-                ChangeAnimationButton.Visible = ModelHasLimitBreaks(fileName)
+                ChangeAnimationButton.Visible = ModelHasLimitBreaks(filename)
                 ChangeAnimationButton.Caption = "Load anims. pack"
                 AnimationOptionsFrame.Visible = True
                 ShowTextureOptionsButton.Visible = True
@@ -1316,14 +1316,14 @@ Public Sub OpenFF7File(ByVal fileName As String)
                 Call SetFrameEditorFields
                 Call SetTextureEditorFields
             Else
-                If LCase(Right$(fileName, 2)) = ".d" Then
+                If LCase(Right$(filename, 2)) = ".d" Then
                     UnDoCursor = 0
                     ReDoCursor = 0
                     
-                    ReadMagicSkeleton fileName, aa_sk, True
+                    ReadMagicSkeleton filename, aa_sk, True
                     
-                    If FileExist(LCase(Left$(fileName, Len(fileName) - 1)) + "a00") Then
-                        ReadDAAnimationsPack LCase(Left$(fileName, Len(fileName) - 1)) + "a00", aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims
+                    If FileExist(LCase(Left$(filename, Len(filename) - 1)) + "a00") Then
+                        ReadDAAnimationsPack LCase(Left$(filename, Len(filename) - 1)) + "a00", aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims
                         num_weapons = 0
                     Else
                         CreateCompatibleDAAnimationsPack aa_sk, DAAnims
@@ -1391,11 +1391,11 @@ Public Sub OpenFF7File(ByVal fileName As String)
                     Call SetFrameEditorFields
                     Call SetTextureEditorFields
                 Else
-                    If LCase(Right$(fileName, 4)) = ".3ds" Then
-                        Load3DS fileName, models3ds_auxV
+                    If LCase(Right$(filename, 4)) = ".3ds" Then
+                        Load3DS filename, models3ds_auxV
                         ConvertModels3DsToPModel models3ds_auxV, P_Model
                     Else
-                        ReadPModel P_Model, fileName
+                        ReadPModel P_Model, filename
                     End If
                     
                     If P_Model.head.NumVerts > 0 Then
@@ -1467,11 +1467,11 @@ Public Sub OpenFF7File(ByVal fileName As String)
 errorH:
     MsgBox "Error while loading file ", vbCritical, "ERROR!!!!"
 End Sub
-Sub SetFieldModelAnimation(ByRef fileName As String)
+Sub SetFieldModelAnimation(ByRef filename As String)
     Dim AAnim_tmp As AAnimation
     
-    If (fileName <> "") Then
-        ReadAAnimation AAnim_tmp, fileName
+    If (filename <> "") Then
+        ReadAAnimation AAnim_tmp, filename
         FixAAnimation hrc_sk, AAnim_tmp
         If AAnim_tmp.NumBones <> hrc_sk.NumBones Then
             MsgBox "The animation has a wrong number of bones", vbOKOnly, "Error"
@@ -1489,17 +1489,17 @@ Sub SetFieldModelAnimation(ByRef fileName As String)
     Picture1_Paint
 End Sub
 
-Sub SetBattleModelAnimationsPack(ByRef fileName As String)
+Sub SetBattleModelAnimationsPack(ByRef filename As String)
     Dim DAAnims_tmp As DAAnimationsPack
     Dim ai As Integer
     
-    If (fileName <> "") Then
-        If Right$(fileName, 2) = "da" Then
+    If (filename <> "") Then
+        If Right$(filename, 2) = "da" Then
             aa_sk.IsLimitBreak = False
-            ReadDAAnimationsPack fileName, aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims_tmp
+            ReadDAAnimationsPack filename, aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims_tmp
         Else
             aa_sk.IsLimitBreak = True
-            ReadDAAnimationsPack fileName, aa_sk.NumBones, 8, 8, DAAnims_tmp
+            ReadDAAnimationsPack filename, aa_sk.NumBones, 8, 8, DAAnims_tmp
         End If
 
         DAAnims = DAAnims_tmp
@@ -1544,7 +1544,7 @@ Sub ReadFirstCompatibleAAnimation()
     
     On Error GoTo errorH
     
-    hrc_file = LCase(hrc_sk.fileName)
+    hrc_file = LCase(hrc_sk.filename)
     animFile = LCase(Dir("*.a"))
     anim_foundQ = False
     While Not anim_foundQ And animFile <> ""
@@ -1594,13 +1594,13 @@ Private Sub AddPieceButton_Click()
         pattern = "FF7 Field Part file|*.p|FF7 Battle Part file|*.*|3D Studio model|*.3ds"
         CommonDialog1.Filter = pattern
         CommonDialog1.ShowOpen 'Display the Open File Common Dialog
-        If (CommonDialog1.fileName = "") Then Exit Sub
+        If (CommonDialog1.filename = "") Then Exit Sub
         
-        If LCase(Right$(CommonDialog1.fileName, 4)) = ".3ds" Then
-            Load3DS CommonDialog1.fileName, models3ds_auxV
+        If LCase(Right$(CommonDialog1.filename, 4)) = ".3ds" Then
+            Load3DS CommonDialog1.filename, models3ds_auxV
             ConvertModels3DsToPModel models3ds_auxV, AdditionalP
         Else
-            ReadPModel AdditionalP, CommonDialog1.fileName
+            ReadPModel AdditionalP, CommonDialog1.filename
         End If
         
         If AdditionalP.head.NumVerts > 0 Then
@@ -1635,8 +1635,8 @@ Private Sub AddTextureButton_Click()
     CommonDialog1.CancelError = True
     CommonDialog1.ShowOpen 'Display the Open File Common Dialog
 
-    If (CommonDialog1.fileName <> "") Then
-        LoadImageAsTexTexture CommonDialog1.fileName, tex
+    If (CommonDialog1.filename <> "") Then
+        LoadImageAsTexTexture CommonDialog1.filename, tex
         Select Case ModelType
             Case K_HRC_SKELETON:
                 If SelectedBone > -1 And SelectedBonePiece > -1 Then
@@ -1728,8 +1728,8 @@ Private Sub ChangeTextureButton_Click()
     CommonDialog1.CancelError = True
     CommonDialog1.ShowOpen 'Display the Open File Common Dialog
 
-    If (CommonDialog1.fileName <> "") Then
-        LoadImageAsTexTexture CommonDialog1.fileName, tex
+    If (CommonDialog1.filename <> "") Then
+        LoadImageAsTexTexture CommonDialog1.filename, tex
         Select Case ModelType
             Case K_HRC_SKELETON:
                 If SelectedBone > -1 Then
@@ -2438,8 +2438,8 @@ Private Sub SaveFF7AnimationButton_Click()
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
                 
-                If (CommonDialog1.fileName <> "") Then
-                    If FileExist(CommonDialog1.fileName) Then _
+                If (CommonDialog1.filename <> "") Then
+                    If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite it?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
                             
@@ -2455,12 +2455,12 @@ Private Sub SaveFF7AnimationButton_Click()
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
                 
-                If (CommonDialog1.fileName <> "") Then
-                    If FileExist(CommonDialog1.fileName) Then _
+                If (CommonDialog1.filename <> "") Then
+                    If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite it?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
                             
-                    WriteDAAnimationsPack CommonDialog1.fileName, DAAnims
+                    WriteDAAnimationsPack CommonDialog1.filename, DAAnims
                 End If
         End Select
     End If
@@ -2697,9 +2697,9 @@ Private Sub OpenFF7ModelButton_Click()
     CommonDialog1.CancelError = True
     CommonDialog1.ShowOpen 'Display the Open File Common Dialog
    
-    If (CommonDialog1.fileName <> "") Then
+    If (CommonDialog1.filename <> "") Then
         If loaded Then DestroyCurrentModel
-        OpenFF7File CommonDialog1.fileName
+        OpenFF7File CommonDialog1.filename
     End If
     
     Editor.Hide
@@ -2719,7 +2719,7 @@ Private Sub ChangeAnimationButton_Click()
     If loaded Then
         Dim pattern As String
         If ModelType = K_AA_SKELETON Then
-            pattern = GetModelAnimationPacksFilter(aa_sk.fileName)
+            pattern = GetModelAnimationPacksFilter(aa_sk.filename)
         Else
             pattern = "FF7 Field-model animation|*.a"
         End If
@@ -2728,9 +2728,9 @@ Private Sub ChangeAnimationButton_Click()
         CommonDialog1.ShowOpen 'Display the Open File Common Dialog
         
         If ModelType = K_AA_SKELETON Then
-            SetBattleModelAnimationsPack CommonDialog1.fileName
+            SetBattleModelAnimationsPack CommonDialog1.filename
         Else
-            SetFieldModelAnimation CommonDialog1.fileName
+            SetFieldModelAnimation CommonDialog1.filename
         End If
     End If
     Timer1.Enabled = True
@@ -2770,8 +2770,8 @@ Private Sub SaveFF7ModelButton_Click()
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
                 
-                If (CommonDialog1.fileName <> "") Then
-                    If FileExist(CommonDialog1.fileName) Then _
+                If (CommonDialog1.filename <> "") Then
+                    If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite (including asociated RSB & P files)?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
                         
@@ -2786,7 +2786,7 @@ Private Sub SaveFF7ModelButton_Click()
                     ApplyHRCChanges hrc_sk, AAnim.Frames(CurrentFrameScroll.value), _
                                     (MsgBox("Compile multi-P bones in a single file?", vbYesNo, "Confirmation") = vbYes)
                     
-                    WriteHRCSkeleton hrc_sk, CommonDialog1.fileName
+                    WriteHRCSkeleton hrc_sk, CommonDialog1.filename
                     'WriteAAnimation AAnim, AAnim.AFile
                     CreateDListsFromHRCSkeleton hrc_sk
                 End If
@@ -2796,8 +2796,8 @@ Private Sub SaveFF7ModelButton_Click()
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
                 
-                If (CommonDialog1.fileName <> "") Then
-                    If FileExist(CommonDialog1.fileName) Then _
+                If (CommonDialog1.filename <> "") Then
+                    If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite (including asociated files)?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
                             
@@ -2818,19 +2818,19 @@ Private Sub SaveFF7ModelButton_Click()
                     
                     ApplyAAChanges aa_sk, DAAnims.BodyAnimations(0).Frames(0), aux_weapon_anim 'DAAnims.WeaponAnimations(0).Frames(0)
                     
-                    If LCase(Right$(CommonDialog1.fileName, 2)) = ".d" Then
+                    If LCase(Right$(CommonDialog1.filename, 2)) = ".d" Then
                         'Magic model
                         'If aa_sk.IsLimitBreak Then
                         '    If MsgBox("The skeleton was loaded as a Limit Break. Overwrite it? Choose 'No' to write just animations.", vbYesNo, "Confirmation") = vbYes Then _
                         '        WriteAASkeleton BATTLE_LGP_PATH + "\" + GetLimitCharacterFileName(CommonDialog1.filename), aa_sk
                         'Else
-                            WriteMagicSkeleton CommonDialog1.fileName, aa_sk
+                            WriteMagicSkeleton CommonDialog1.filename, aa_sk
                         'End If
                         'anims_pack_filename = Left$(CommonDialog1.filename, _
                         '    Len(CommonDialog1.filename) - 2) + ".a00"
                     Else
                         'Standard battle model
-                        WriteAASkeleton CommonDialog1.fileName, aa_sk
+                        WriteAASkeleton CommonDialog1.filename, aa_sk
                         'anims_pack_filename = Left$(CommonDialog1.filename, _
                         '    Len(CommonDialog1.filename) - 2) + "da"
                     End If
@@ -2844,8 +2844,8 @@ Private Sub SaveFF7ModelButton_Click()
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
                 
-                If (CommonDialog1.fileName <> "") Then
-                    If FileExist(CommonDialog1.fileName) Then _
+                If (CommonDialog1.filename <> "") Then
+                    If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
                     
@@ -2859,7 +2859,7 @@ Private Sub SaveFF7ModelButton_Click()
                                         .RotationQuaternion, _
                                         .ResizeX, .ResizeY, .ResizeZ
                     End With
-                    ApplyPChanges P_Model, (LCase(Right$(CommonDialog1.fileName, 2)) <> ".p")
+                    ApplyPChanges P_Model, (LCase(Right$(CommonDialog1.filename, 2)) <> ".p")
                     
                     ComputePModelBoundingBox P_Model, p_min, p_max
                     SetCameraAroundModel p_min, p_max, _
@@ -2871,7 +2871,7 @@ Private Sub SaveFF7ModelButton_Click()
                         ApplyCurrentVColors P_Model
                         
                     glPopMatrix
-                    WritePModel P_Model, CommonDialog1.fileName
+                    WritePModel P_Model, CommonDialog1.filename
                     CreateDListsFromPModel P_Model
                 End If
         End Select
