@@ -1,5 +1,5 @@
 VERSION 5.00
-Begin VB.Form LogWindow 
+Begin VB.Form LogWindow
    BorderStyle     =   4  'Fixed ToolWindow
    Caption         =   "Log Window"
    ClientHeight    =   1830
@@ -14,7 +14,7 @@ Begin VB.Form LogWindow
    ScaleWidth      =   314
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.ListBox Log 
+   Begin VB.ListBox Log
       Height          =   1815
       ItemData        =   "StateWindow.frx":0000
       Left            =   0

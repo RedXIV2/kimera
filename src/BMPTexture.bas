@@ -26,13 +26,13 @@ End Type
 Function ReadBMPTexture(ByRef Texture As BMPTexture, ByVal fileName As String) As Integer
     Dim NFile As Integer
     Dim ci As Integer
-    
+
     On Error GoTo errorH
-    
+
     If FileExist(fileName) Then
         NFile = FreeFile
         Open fileName For Binary As NFile
-        
+
         With Texture
             .fileName = fileName
             Get NFile, 1, .MagicId
@@ -51,7 +51,7 @@ Function ReadBMPTexture(ByRef Texture As BMPTexture, ByVal fileName As String) A
             Get NFile, &H2A + 1, .Yresolution
             Get NFile, &H2E + 1, .Ncolours
             Get NFile, &H32 + 1, .Importantcolours
-        
+
             If .Bits <= 8 Then
                 ReDim .Pallete(2 ^ .Bits * 4 - 1)
                 Get NFile, &H36 + 1, .Pallete
@@ -74,12 +74,12 @@ End Function
 Sub WriteBMPTexture(ByRef Bmp As BMPTexture, ByVal fileName As String)
     Dim NFile As Integer
     Dim ci As Integer
-    
+
     On Error GoTo errorH
-    
+
     NFile = FreeFile
     Open fileName For Binary As NFile
-    
+
     With Bmp
         .fileName = fileName
         Put NFile, 1, .MagicId
@@ -98,7 +98,7 @@ Sub WriteBMPTexture(ByRef Bmp As BMPTexture, ByVal fileName As String)
         Put NFile, &H2A + 1, .Yresolution
         Put NFile, &H2E + 1, .Ncolours
         Put NFile, &H32 + 1, .Importantcolours
-    
+
         If .Bits <= 8 Then
             Put NFile, &H36 + 1, .Pallete
         End If
@@ -113,12 +113,12 @@ End Sub
 Sub GetBMPTextureFromBitmap(ByRef tex_out As BMPTexture, ByRef hdc As Long, ByVal hbmp As Long)
     Dim ci As Long
     Dim Bits As Integer
-    
+
     Dim PicInfo As BITMAPINFO
     Dim PicData() As Byte
-    
+
     GetAllBitmapData hdc, hbmp, PicData, PicInfo
-    
+
     Bits = PicInfo.bmiHeader.biBitCount
     With tex_out
         .MagicId = &H4D42
@@ -142,13 +142,13 @@ Sub GetBMPTextureFromBitmap(ByRef tex_out As BMPTexture, ByRef hdc As Long, ByVa
             .Ncolours = 0
             .Importantcolours = 0
         End If
-        
+
         .BitMap = PicData
-        
+
         If Bits <= 8 Then
             ReDim .Pallete(4 * .Ncolours - 1)
             CopyMemory .Pallete(0), PicInfo.bmiColors(0), 4 * .Ncolours
-            
+
             For ci = 0 To .Ncolours - 1
                 .Pallete(ci * 4 + 3) = &HFF
             Next ci

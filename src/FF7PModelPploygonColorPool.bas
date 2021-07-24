@@ -10,10 +10,10 @@ End Sub
 Sub MergePColors(ByRef pc1() As color, ByRef pc2() As color)
     Dim NumPColorsPC1 As Integer
     Dim NumPColorsPC2 As Integer
-    
+
     NumPColorsPC1 = UBound(pc1) + 1
     NumPColorsPC2 = UBound(pc2) + 1
     ReDim Preserve pc1(NumPColorsPC1 + NumPColorsPC2 - 1)
-    
+
     CopyMemory pc1(NumPColorsPC1), pc2(0), NumPColorsPC2 * 4
 End Sub

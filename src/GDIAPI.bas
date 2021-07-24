@@ -198,7 +198,7 @@ Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, ByVal x As Long, ByV
                                      ByVal nwidth As Long, ByVal nheight As Long, _
                                      ByVal hSrcDC As Long, ByVal xSrc As Long, _
                                      ByVal ySrc As Long, ByVal dwRop As Long) As Long
-                                     
+
 Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hdc As Long) As Long
 Declare Function SelectObject Lib "gdi32" (ByVal hdc As Long, ByVal hObject As Long) As Long
 Declare Function DeleteDC Lib "gdi32" (ByVal hdc As Long) As Long
@@ -293,26 +293,26 @@ BitBlt creaDC, 0, 0, x, y, creaDC, 0, 0, Blackness
 End Function
 Sub GetHeaderBitmapInfo(ByVal hdc As Long, ByVal hbmp As Long, ByRef BMPinfo As BITMAPINFO)
     BMPinfo.bmiHeader.biSize = 40
-    
+
     GetDIBits hdc, hbmp, 0, 0, ByVal 0&, BMPinfo, DIB_RGB_COLORS
 End Sub
 'Uses the 3-call method to GetDIBits for retriving the bitmap data (including original pallete)
 Sub GetAllBitmapData(ByVal hdc As Long, ByVal hbmp As Long, ByRef BMPData() As Byte, ByRef BMPinfo As BITMAPINFO)
-    
+
     GetHeaderBitmapInfo hdc, hbmp, BMPinfo
-    
+
     If (BMPinfo.bmiHeader.biBitCount <= 8) Then
         Dim OldUsed As Long
         OldUsed = BMPinfo.bmiHeader.biClrUsed ' Read bitmap palette
         Call GetDIBits(hdc, hbmp, 0, 0, ByVal 0&, BMPinfo, 0)
         BMPinfo.bmiHeader.biClrUsed = OldUsed
     End If
-    
+
     With BMPinfo.bmiHeader ' Allocate data array
         ReDim BMPData((((((.biWidth * .biBitCount) + 31) And _
             &HFFFFFFE0) \ &H20) * .biHeight) * 4 - 1) As Byte
     End With
-    
+
     ' Read image data
     Call GetDIBits(hdc, hbmp, 0, _
         BMPinfo.bmiHeader.biHeight, BMPData(0), BMPinfo, 0)

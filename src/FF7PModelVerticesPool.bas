@@ -10,11 +10,11 @@ End Sub
 Sub MergeVerts(ByRef v1() As Point3D, ByRef v2() As Point3D)
     Dim NumVertsV1 As Integer
     Dim NumVertsV2 As Integer
-    
+
     NumVertsV1 = UBound(v1) + 1
     NumVertsV2 = UBound(v2) + 1
     ReDim Preserve v1(NumVertsV1 + NumVertsV2 - 1)
-    
+
     CopyMemory v1(NumVertsV1), v2(0), NumVertsV2 * 12
 End Sub
 Function GetVertexProjectedCoords(ByRef Verts() As Point3D, ByVal vi As Integer) As Point3D

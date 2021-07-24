@@ -3,17 +3,17 @@
 	What's this?:
 	-------------
 		Kimera is a small characters/3D models editor for Final Fantasy VII (PC version). Features:
-			-Display most of the 3D models found in the game. Field models and battle models including their 
+			-Display most of the 3D models found in the game. Field models and battle models including their
 			animations. The minigames models should work as well.
-			-Supports editing the individual pieces that define the models (P files). Specifically, it can move 
-			vertices, change their color, erase, create and cut triangles. It can also erase groups present on 
-			a P file or change their rendering settings. Standard geometrical transformations 
+			-Supports editing the individual pieces that define the models (P files). Specifically, it can move
+			vertices, change their color, erase, create and cut triangles. It can also erase groups present on
+			a P file or change their rendering settings. Standard geometrical transformations
 			(rotate, resize and reposition) are also supported.
 			-Add/Change/Remove textures (supports TEX, BMP, JPG and GIF files).
 			-Add pre-cooked lighting for a single part and for the whole model (with up to four ligth sources)
 			-Edit the bone lengths of a skeleton and attach and remove pieces to them.
 			-Animations interpolation.
-			-Field and battle animations can be edited, but the interface is rather unfriendly. 
+			-Field and battle animations can be edited, but the interface is rather unfriendly.
 
 	New in this version:
 	--------------------
@@ -54,9 +54,9 @@
 			-Group trasparency level.
 			-Several misc functions.
 			-Rise or lower the brightness level of the model.
-			-Assign a function to the left, right and middle mouse buttons. Left-click, right-click or middle-click 
+			-Assign a function to the left, right and middle mouse buttons. Left-click, right-click or middle-click
 			in one of the available functions (Bottom right corner). The one hi-lighted in red is assigned to the left button
-			, the one hi-lighted in blue is assigned to the right button and the one hi-lighted in green is assigned to the 
+			, the one hi-lighted in blue is assigned to the right button and the one hi-lighted in green is assigned to the
 			middle button.
 			Available functions:
 				-Paint: Click on a polygon to paint it with the selected color. If you hold shift while clicking
@@ -144,7 +144,7 @@
 			polygons).
 		v0.6d:
 			-Now the program uses OpenGL. Defintly looks better and is easier.
-			-Added lighting support. Now you can set precalculated lighting like that one 
+			-Added lighting support. Now you can set precalculated lighting like that one
 			originally aplied to the battle models. You can disable it, though, if you don't like it.
 			-Added Zomming. Just press the right mouse button and move down to set the camera
 			further or up to set it closer.
@@ -152,13 +152,13 @@
 			you will be asked to continue or not.
 			-I had to redo the fat/thin control from scratch. Now it behaves in a more precise way.
 			(not necesarily a good thing...)
-			-Killed many bugs (such as the wrong distance calculation that caused models to be 
+			-Killed many bugs (such as the wrong distance calculation that caused models to be
 			completly unviewable).
 			-Killed many silly bugs releated with the normals
 		v0.7:
 			-New GUI: Now we are closer to the all-in-one model editor. You can view the whole models decribed by the
 			HRC files, test animations, change the length of the bones, add more parts to a bone and, of course, edit
-			the parts of the model by double-clicking on them. Now you can do everything directly from Kimera but working 
+			the parts of the model by double-clicking on them. Now you can do everything directly from Kimera but working
 			with textures (patience, I'll probably end up adding it too).
 			-Added General lighting. Now you won't need to set the light for every single part if you want to add
 			pre-calculated lighting to a model.
@@ -170,7 +170,7 @@
 			-Multi-P bones are now compiled in a single P file.
 			-Resize/Reposition/Rotate directly in the skeleton view.
 			-Paning in both the Skeleton view and the P editor.
-			-Now you can chose between the classic (and buggy) palletized colors and the direct color control 
+			-Now you can chose between the classic (and buggy) palletized colors and the direct color control
 			(simple and more acurate).
 			-You can now assign independently functions to the right and left mouse buttons in the P editor.
 			-New functions on the P editor: Cut edge and move vertex.
@@ -188,31 +188,31 @@
 			no animation could be loaded.
 			-Killed many bugs here and there.
 		v.083:
-			-Killed the fatal bug that was causing heavy data corruption with some models 
+			-Killed the fatal bug that was causing heavy data corruption with some models
 			(or so I hope).
 			-Solved a few texture problems.
 			-Added a rudimentary (and experimental) animation edition tool. Only for field
 			models currently.
-			Keep in mind that now also the animation will be written to disk when you save 
+			Keep in mind that now also the animation will be written to disk when you save
 			your model.
 		v.084:
 			-Added battle aniamtion playback. Still imperfect. Some animations may show wrong
 			rotations and not every animation can be loaded.
 			-Added summons support (maybe other magic.lgp models?).
-			-Now you can also add pieces to battle models. Keep in mind that they will be joiend 
+			-Now you can also add pieces to battle models. Keep in mind that they will be joiend
 			when you save the model.
 			-Added a button to remove pieces (yeah, I should have added it long ago...).
-			-D-Lists management has poven to be buggy, so I added an option to disable this 
+			-D-Lists management has poven to be buggy, so I added an option to disable this
 			optimization.
 			-Solved most of the texture clipping problems.
 			-Killed several minor bugs.
 		v0.9:
 			-Added support for weapons and their animations.
-			-Added support for battle animations edition. The whole animations pack will be saved 
+			-Added support for battle animations edition. The whole animations pack will be saved
 			along with the model.
-			-Added a textures loader (can load TEX, BMP, JPG, GIF and ICO files). Textures will be 
+			-Added a textures loader (can load TEX, BMP, JPG, GIF and ICO files). Textures will be
 			saved as TEX files along with the rest of the model.
-			-Updated the field animations and TEX formats so they match the lastest specification 
+			-Updated the field animations and TEX formats so they match the lastest specification
 			posted on the wiki.
 			-Battle animations are now decoded properly.
 			-Solved the precision problems when editing animations.
@@ -238,7 +238,7 @@
 			-Killed several bugs.
 			-Fixed the "Delete all polygons but those with the selected color"/
 			"Delete all polygons with the selected color". Well, actually their code was simply empty since v0.8.
-			-Added undo/redo buffer. You know how this works: CTL+Z = Undo, CRTL+Y = Redo	
+			-Added undo/redo buffer. You know how this works: CTL+Z = Undo, CRTL+Y = Redo
 		v0.93
 			-Bugfixes. A lot of them:
 				-The produced animations now work correctly in-game
@@ -269,7 +269,7 @@
 			-Fixed the bug on RSB file names generation.
 		v0.96
 			-Added animation blending for field and battle skeletons:
-				-For a single frame: Adds a new frame between the current and the previous. Assumes the animation is a loop (and thus, the 
+				-For a single frame: Adds a new frame between the current and the previous. Assumes the animation is a loop (and thus, the
 				previous of the first is the last)
 				-For the whole animation: Doubles the number of frames. If the animation is not a loop the firt->last frame is discarded.
 			-Fixed some overflow errors.
@@ -311,7 +311,7 @@
 		-seb, for his notes about the weapon animations.
 		-Qhimm, for his great forum.
 		-Kim Shoemaker, for his excelent generic euler<->quaternion code.
-		-Larry Rebich, for his code to deal with the browse folder dialog. 
+		-Larry Rebich, for his code to deal with the browse folder dialog.
  		-And the people from Qhimm's forum for betatesting and brainstorming.
 
 	Disclaimer:

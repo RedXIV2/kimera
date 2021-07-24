@@ -25,7 +25,7 @@ Attribute VB_Exposed = False
 ' Some parts copyright �1996-2000 VBnet, Randy Birch, All Rights Reserved.
 ' http://www.mvps.org/vbnet/index.html
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    
+
     Private Type BROWSEINFO
        hOwner           As Long
        pidlRoot         As Long
@@ -42,25 +42,25 @@ Attribute VB_Exposed = False
     Private Declare Function SHGetPathFromIDList _
         Lib "shell32.dll" Alias "SHGetPathFromIDListA" _
        (ByVal pidl As Long, ByVal pszPath As String) As Long
-    
+
     Private Declare Function SHBrowseForFolder Lib "shell32.dll" _
         Alias "SHBrowseForFolderA" _
        (lpBrowseInfo As BROWSEINFO) As Long
-    
+
     Private Declare Sub CoTaskMemFree Lib "ole32.dll" (ByVal pv As Long)
-   
+
     Private Declare Function SHSimpleIDListFromPath Lib "shell32" Alias "#162" (ByVal szPath As String) As Long
-    
+
     Private Declare Function LocalAlloc Lib "kernel32" (ByVal uFlags As Long, ByVal uBytes As Long) As Long
-    
+
     Private Declare Function LocalFree Lib "kernel32" (ByVal hMem As Long) As Long
-    
+
     Private Declare Sub MoveMemory Lib "kernel32" Alias "RtlMoveMemory" (pDest As Any, pSource As Any, ByVal dwLength As Long)
-    
+
     Const LMEM_FIXED = &H0
     Const LMEM_ZEROINIT = &H40
     Const LPTR = (LMEM_FIXED Or LMEM_ZEROINIT)
-   
+
     Private mlhWnd      As Long
     Private msTitle     As String
     Private msFolder    As String
@@ -109,7 +109,7 @@ Public Function ShowBrowse(Optional vnthWnd As Variant, Optional vntTitle As Var
     Dim iPos As Integer
     Const MAX_PATH = 260
     Dim sFolder As String * MAX_PATH
-    
+
     'allow user to specify params in the call
     If Not IsMissing(vnthWnd) Then
         Me.lhWnd = vnthWnd
@@ -120,7 +120,7 @@ Public Function ShowBrowse(Optional vnthWnd As Variant, Optional vntTitle As Var
     If Not IsMissing(vntFolder) Then
         Me.sFolder = vntFolder
     End If
-    
+
     With BI                     'initilize the structure
         .hOwner = Me.lhWnd      'owner's hWnd
         .ulFlags = Me.lFlags    'flags, default is BIF_RETURNONLYFSDIRS
@@ -130,9 +130,9 @@ Public Function ShowBrowse(Optional vnthWnd As Variant, Optional vntTitle As Var
         MoveMemory ByVal lpSelPath, ByVal Me.sFolder, Len(Me.sFolder)
         .lParam = lpSelPath     'now into structure
     End With
-    
+
     pidl = SHBrowseForFolder(BI)    'do the browse
-    
+
     If pidl Then                    'if not cancelled
         If SHGetPathFromIDList(pidl, sFolder) Then  'get the folder
             sFolder = Left$(sFolder, InStr(sFolder, vbNullChar) - 1)    'dump all after null character
@@ -141,11 +141,11 @@ Public Function ShowBrowse(Optional vnthWnd As Variant, Optional vntTitle As Var
     Else
         Me.bCancelled = True        'report cancelled
     End If
-    
+
     Call LocalFree(lpSelPath)       'free memory
 
     Me.sFolder = sFolder            'report the result
-    
+
     If Me.sFolder = "" Then         'if none, then say cancelled
         Me.bCancelled = True
     Else

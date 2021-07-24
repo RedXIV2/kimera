@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Begin VB.Form ModelEditor 
+Begin VB.Form ModelEditor
    Caption         =   "Kimera - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
    ClientHeight    =   9195
    ClientLeft      =   60
@@ -14,7 +14,7 @@ Begin VB.Form ModelEditor
    ScaleMode       =   0  'User
    ScaleWidth      =   656.313
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CommandButton SaveFF7AnimationButton 
+   Begin VB.CommandButton SaveFF7AnimationButton
       Caption         =   "Save Animation"
       Height          =   255
       Left            =   8040
@@ -23,7 +23,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CommandButton InterpolateAllAnimsCommand 
+   Begin VB.CommandButton InterpolateAllAnimsCommand
       Caption         =   "Interpolate all anims"
       Height          =   255
       Left            =   8040
@@ -31,7 +31,7 @@ Begin VB.Form ModelEditor
       Top             =   8880
       Width           =   1695
    End
-   Begin VB.CommandButton ShowCharModelDBButton 
+   Begin VB.CommandButton ShowCharModelDBButton
       Caption         =   "Show Char.lgp DB"
       CausesValidation=   0   'False
       Height          =   375
@@ -40,7 +40,7 @@ Begin VB.Form ModelEditor
       Top             =   720
       Width           =   1695
    End
-   Begin VB.CommandButton InterpolateAnimationButton 
+   Begin VB.CommandButton InterpolateAnimationButton
       Caption         =   "Interpolate Animation"
       Height          =   255
       Left            =   8040
@@ -49,7 +49,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CommandButton ComputeWeaponPositionButton 
+   Begin VB.CommandButton ComputeWeaponPositionButton
       Caption         =   "Compute attached weapon position"
       Height          =   435
       Left            =   0
@@ -58,7 +58,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   2175
    End
-   Begin VB.CommandButton ComputeGroundHeightButton 
+   Begin VB.CommandButton ComputeGroundHeightButton
       Caption         =   "Compute ground height"
       Height          =   255
       Left            =   0
@@ -67,7 +67,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   2175
    End
-   Begin VB.CheckBox ShowLastFrameGhostCheck 
+   Begin VB.CheckBox ShowLastFrameGhostCheck
       Caption         =   "Overlap last frame ghost"
       Height          =   255
       Left            =   0
@@ -75,7 +75,7 @@ Begin VB.Form ModelEditor
       Top             =   6840
       Width           =   2055
    End
-   Begin VB.CommandButton ChangeAnimationButton 
+   Begin VB.CommandButton ChangeAnimationButton
       Caption         =   "Load field animation"
       Height          =   375
       Left            =   8040
@@ -84,7 +84,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CheckBox ShowGroundCheck 
+   Begin VB.CheckBox ShowGroundCheck
       Caption         =   "Show ground"
       Height          =   255
       Left            =   0
@@ -92,7 +92,7 @@ Begin VB.Form ModelEditor
       Top             =   7080
       Width           =   1335
    End
-   Begin VB.CommandButton ShowTextureOptionsButton 
+   Begin VB.CommandButton ShowTextureOptionsButton
       Caption         =   "Show Texture options"
       Height          =   255
       Left            =   8040
@@ -101,7 +101,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Frame TexturesFrame 
+   Begin VB.Frame TexturesFrame
       Caption         =   " Textures (Part)"
       Height          =   3015
       Left            =   9840
@@ -109,14 +109,14 @@ Begin VB.Form ModelEditor
       Top             =   2160
       Visible         =   0   'False
       Width           =   1695
-      Begin VB.ComboBox TextureSelectCombo 
+      Begin VB.ComboBox TextureSelectCombo
          Height          =   315
          Left            =   360
          TabIndex        =   89
          Top             =   1560
          Width           =   1215
       End
-      Begin VB.CommandButton RemoveTextureButton 
+      Begin VB.CommandButton RemoveTextureButton
          Caption         =   "Remove Texture"
          Height          =   255
          Left            =   120
@@ -124,7 +124,7 @@ Begin VB.Form ModelEditor
          Top             =   2640
          Width           =   1455
       End
-      Begin VB.CommandButton AddTextureButton 
+      Begin VB.CommandButton AddTextureButton
          Caption         =   "Add Texture"
          Height          =   255
          Left            =   120
@@ -132,7 +132,7 @@ Begin VB.Form ModelEditor
          Top             =   2400
          Width           =   1455
       End
-      Begin VB.CommandButton ChangeTextureButton 
+      Begin VB.CommandButton ChangeTextureButton
          Caption         =   "Change Texture"
          Height          =   255
          Left            =   120
@@ -140,7 +140,7 @@ Begin VB.Form ModelEditor
          Top             =   2160
          Width           =   1455
       End
-      Begin VB.CheckBox ZeroAsTransparent 
+      Begin VB.CheckBox ZeroAsTransparent
          Caption         =   "0 as transparent"
          Height          =   255
          Left            =   120
@@ -148,7 +148,7 @@ Begin VB.Form ModelEditor
          Top             =   1920
          Width           =   1455
       End
-      Begin VB.PictureBox TextureViewer 
+      Begin VB.PictureBox TextureViewer
          Height          =   1335
          Left            =   120
          ScaleHeight     =   85
@@ -158,7 +158,7 @@ Begin VB.Form ModelEditor
          Top             =   240
          Width           =   1455
       End
-      Begin MSComCtl2.UpDown MoveTexureUpDown 
+      Begin MSComCtl2.UpDown MoveTexureUpDown
          Height          =   375
          Left            =   120
          TabIndex        =   88
@@ -171,7 +171,7 @@ Begin VB.Form ModelEditor
          Enabled         =   -1  'True
       End
    End
-   Begin VB.ComboBox WeaponCombo 
+   Begin VB.ComboBox WeaponCombo
       Height          =   315
       Left            =   1320
       TabIndex        =   70
@@ -180,7 +180,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   855
    End
-   Begin VB.ComboBox BattleAnimationCombo 
+   Begin VB.ComboBox BattleAnimationCombo
       Height          =   315
       Left            =   1320
       TabIndex        =   67
@@ -189,7 +189,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   855
    End
-   Begin VB.CheckBox DListEnableCheck 
+   Begin VB.CheckBox DListEnableCheck
       Caption         =   "Render using DLists"
       Height          =   255
       Left            =   0
@@ -197,7 +197,7 @@ Begin VB.Form ModelEditor
       Top             =   7320
       Width           =   1815
    End
-   Begin VB.CommandButton AnimationOptionsButton 
+   Begin VB.CommandButton AnimationOptionsButton
       Caption         =   "Show Frame options"
       Height          =   255
       Left            =   8040
@@ -206,7 +206,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Frame AnimationOptionsFrame 
+   Begin VB.Frame AnimationOptionsFrame
       Caption         =   "Frame options"
       Height          =   2895
       Left            =   9840
@@ -214,7 +214,7 @@ Begin VB.Form ModelEditor
       Top             =   5520
       Visible         =   0   'False
       Width           =   1695
-      Begin VB.CommandButton InterpolateFrameButton 
+      Begin VB.CommandButton InterpolateFrameButton
          Caption         =   "Interpolate Frame"
          Height          =   255
          Left            =   120
@@ -222,7 +222,7 @@ Begin VB.Form ModelEditor
          Top             =   2520
          Width           =   1455
       End
-      Begin VB.CommandButton DuplicateFrameButton 
+      Begin VB.CommandButton DuplicateFrameButton
          Caption         =   "Duplicate Frame"
          Height          =   255
          Left            =   120
@@ -230,7 +230,7 @@ Begin VB.Form ModelEditor
          Top             =   2280
          Width           =   1455
       End
-      Begin VB.CommandButton RemoveFrameButton 
+      Begin VB.CommandButton RemoveFrameButton
          Caption         =   "Remove Frame"
          Height          =   255
          Left            =   120
@@ -238,7 +238,7 @@ Begin VB.Form ModelEditor
          Top             =   2040
          Width           =   1455
       End
-      Begin VB.CheckBox PropagateChangesForwardCheck 
+      Begin VB.CheckBox PropagateChangesForwardCheck
          Caption         =   "Propagate f."
          Height          =   255
          Left            =   240
@@ -247,7 +247,7 @@ Begin VB.Form ModelEditor
          Value           =   1  'Checked
          Width           =   1335
       End
-      Begin MSComCtl2.UpDown FrameDataPartUpDown 
+      Begin MSComCtl2.UpDown FrameDataPartUpDown
          Height          =   255
          Left            =   1320
          TabIndex        =   83
@@ -260,14 +260,14 @@ Begin VB.Form ModelEditor
          Wrap            =   -1  'True
          Enabled         =   -1  'True
       End
-      Begin VB.Frame FrameDataPartOptions 
+      Begin VB.Frame FrameDataPartOptions
          Caption         =   "Bone Rotation"
          Height          =   1335
          Left            =   120
          TabIndex        =   58
          Top             =   480
          Width           =   1455
-         Begin MSComCtl2.UpDown ZAnimationFramePartUpDown 
+         Begin MSComCtl2.UpDown ZAnimationFramePartUpDown
             Height          =   255
             Left            =   1080
             TabIndex        =   82
@@ -281,7 +281,7 @@ Begin VB.Form ModelEditor
             Wrap            =   -1  'True
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown YAnimationFramePartUpDown 
+         Begin MSComCtl2.UpDown YAnimationFramePartUpDown
             Height          =   255
             Left            =   1080
             TabIndex        =   81
@@ -295,7 +295,7 @@ Begin VB.Form ModelEditor
             Wrap            =   -1  'True
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown XAnimationFramePartUpDown 
+         Begin MSComCtl2.UpDown XAnimationFramePartUpDown
             Height          =   255
             Left            =   1080
             TabIndex        =   80
@@ -309,28 +309,28 @@ Begin VB.Form ModelEditor
             Wrap            =   -1  'True
             Enabled         =   -1  'True
          End
-         Begin VB.TextBox YAnimationFramePartText 
+         Begin VB.TextBox YAnimationFramePartText
             Height          =   285
             Left            =   360
             TabIndex        =   61
             Top             =   600
             Width           =   735
          End
-         Begin VB.TextBox ZAnimationFramePartText 
+         Begin VB.TextBox ZAnimationFramePartText
             Height          =   285
             Left            =   360
             TabIndex        =   60
             Top             =   960
             Width           =   735
          End
-         Begin VB.TextBox XAnimationFramePartText 
+         Begin VB.TextBox XAnimationFramePartText
             Height          =   285
             Left            =   360
             TabIndex        =   59
             Top             =   240
             Width           =   735
          End
-         Begin VB.Label ZAnimationFramePartLabel 
+         Begin VB.Label ZAnimationFramePartLabel
             AutoSize        =   -1  'True
             Caption         =   "Z"
             Height          =   195
@@ -339,7 +339,7 @@ Begin VB.Form ModelEditor
             Top             =   960
             Width           =   105
          End
-         Begin VB.Label YAnimationFramePartLabel 
+         Begin VB.Label YAnimationFramePartLabel
             AutoSize        =   -1  'True
             Caption         =   "Y"
             Height          =   195
@@ -348,7 +348,7 @@ Begin VB.Form ModelEditor
             Top             =   600
             Width           =   105
          End
-         Begin VB.Label XAnimationFramePartLabel 
+         Begin VB.Label XAnimationFramePartLabel
             AutoSize        =   -1  'True
             Caption         =   "X"
             Height          =   195
@@ -358,7 +358,7 @@ Begin VB.Form ModelEditor
             Width           =   105
          End
       End
-      Begin VB.Label FrameOptionsPart 
+      Begin VB.Label FrameOptionsPart
          AutoSize        =   -1  'True
          Caption         =   "Frame data part"
          Height          =   195
@@ -368,7 +368,7 @@ Begin VB.Form ModelEditor
          Width           =   1110
       End
    End
-   Begin VB.CheckBox ShowBonesCheck 
+   Begin VB.CheckBox ShowBonesCheck
       Caption         =   "Show Bones"
       Enabled         =   0   'False
       Height          =   255
@@ -378,7 +378,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1215
    End
-   Begin VB.Frame SelectedPieceFrame 
+   Begin VB.Frame SelectedPieceFrame
       Caption         =   "Selected Piece"
       Enabled         =   0   'False
       Height          =   6495
@@ -386,14 +386,14 @@ Begin VB.Form ModelEditor
       TabIndex        =   25
       Top             =   0
       Width           =   2175
-      Begin VB.Frame ResizeFrame 
+      Begin VB.Frame ResizeFrame
          Caption         =   "Resize"
          Height          =   2055
          Left            =   120
          TabIndex        =   46
          Top             =   240
          Width           =   1935
-         Begin VB.TextBox ResizePieceZText 
+         Begin VB.TextBox ResizePieceZText
             Height          =   285
             Left            =   1320
             TabIndex        =   52
@@ -401,7 +401,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   375
          End
-         Begin VB.TextBox ResizePieceYText 
+         Begin VB.TextBox ResizePieceYText
             Height          =   285
             Left            =   1320
             TabIndex        =   51
@@ -409,7 +409,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   375
          End
-         Begin VB.TextBox ResizePieceXText 
+         Begin VB.TextBox ResizePieceXText
             Height          =   285
             Left            =   1320
             TabIndex        =   50
@@ -417,7 +417,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   375
          End
-         Begin VB.HScrollBar ResizePieceZ 
+         Begin VB.HScrollBar ResizePieceZ
             Height          =   255
             Left            =   240
             Max             =   400
@@ -426,7 +426,7 @@ Begin VB.Form ModelEditor
             Value           =   100
             Width           =   975
          End
-         Begin VB.HScrollBar ResizePieceY 
+         Begin VB.HScrollBar ResizePieceY
             Height          =   255
             Left            =   240
             Max             =   400
@@ -435,7 +435,7 @@ Begin VB.Form ModelEditor
             Value           =   100
             Width           =   975
          End
-         Begin VB.HScrollBar ResizePieceX 
+         Begin VB.HScrollBar ResizePieceX
             Height          =   255
             Left            =   240
             Max             =   400
@@ -444,7 +444,7 @@ Begin VB.Form ModelEditor
             Value           =   100
             Width           =   975
          End
-         Begin VB.Label ResizePieceZLabel 
+         Begin VB.Label ResizePieceZLabel
             Caption         =   "Z re-size"
             Height          =   255
             Left            =   120
@@ -452,7 +452,7 @@ Begin VB.Form ModelEditor
             Top             =   1440
             Width           =   855
          End
-         Begin VB.Label ResizePieceYLabel 
+         Begin VB.Label ResizePieceYLabel
             Caption         =   "Y re-size"
             Height          =   255
             Left            =   120
@@ -460,7 +460,7 @@ Begin VB.Form ModelEditor
             Top             =   840
             Width           =   1095
          End
-         Begin VB.Label ResizePieceXLabel 
+         Begin VB.Label ResizePieceXLabel
             Caption         =   "X re-size"
             Height          =   255
             Left            =   120
@@ -469,14 +469,14 @@ Begin VB.Form ModelEditor
             Width           =   1215
          End
       End
-      Begin VB.Frame RotateFrame 
+      Begin VB.Frame RotateFrame
          Caption         =   "Rotation"
          Height          =   2055
          Left            =   120
          TabIndex        =   36
          Top             =   4320
          Width           =   1935
-         Begin VB.HScrollBar RotateGamma 
+         Begin VB.HScrollBar RotateGamma
             Height          =   255
             Left            =   240
             Max             =   360
@@ -484,7 +484,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   975
          End
-         Begin VB.TextBox RotateGammaText 
+         Begin VB.TextBox RotateGammaText
             Height          =   285
             Left            =   1320
             TabIndex        =   41
@@ -492,7 +492,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   375
          End
-         Begin VB.TextBox RotateBetaText 
+         Begin VB.TextBox RotateBetaText
             Height          =   285
             Left            =   1320
             TabIndex        =   40
@@ -500,7 +500,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   375
          End
-         Begin VB.TextBox RotateAlphaText 
+         Begin VB.TextBox RotateAlphaText
             Height          =   285
             Left            =   1320
             TabIndex        =   39
@@ -508,7 +508,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   375
          End
-         Begin VB.HScrollBar RotateBeta 
+         Begin VB.HScrollBar RotateBeta
             Height          =   255
             Left            =   240
             Max             =   360
@@ -516,7 +516,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   975
          End
-         Begin VB.HScrollBar RotateAlpha 
+         Begin VB.HScrollBar RotateAlpha
             Height          =   255
             Left            =   240
             Max             =   360
@@ -524,7 +524,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   975
          End
-         Begin VB.Label RotateGammaLabel 
+         Begin VB.Label RotateGammaLabel
             Caption         =   "Gama rotation (Z-axis)"
             Height          =   255
             Left            =   120
@@ -532,7 +532,7 @@ Begin VB.Form ModelEditor
             Top             =   1440
             Width           =   1575
          End
-         Begin VB.Label RotateBetaLabel 
+         Begin VB.Label RotateBetaLabel
             Caption         =   "Beta rotation (Y-axis)"
             Height          =   255
             Left            =   120
@@ -540,7 +540,7 @@ Begin VB.Form ModelEditor
             Top             =   840
             Width           =   1575
          End
-         Begin VB.Label RotateAlphaLabel 
+         Begin VB.Label RotateAlphaLabel
             Caption         =   "Alpha rotation (X-axis)"
             Height          =   255
             Left            =   120
@@ -549,14 +549,14 @@ Begin VB.Form ModelEditor
             Width           =   1575
          End
       End
-      Begin VB.Frame RepositionFrame 
+      Begin VB.Frame RepositionFrame
          Caption         =   "Reposition"
          Height          =   2055
          Left            =   120
          TabIndex        =   26
          Top             =   2280
          Width           =   1935
-         Begin VB.TextBox RepositionZText 
+         Begin VB.TextBox RepositionZText
             Height          =   285
             Left            =   1320
             TabIndex        =   32
@@ -564,7 +564,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   375
          End
-         Begin VB.TextBox RepositionYText 
+         Begin VB.TextBox RepositionYText
             Height          =   285
             Left            =   1320
             TabIndex        =   31
@@ -572,7 +572,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   375
          End
-         Begin VB.TextBox RepositionXText 
+         Begin VB.TextBox RepositionXText
             Height          =   285
             Left            =   1320
             TabIndex        =   30
@@ -580,7 +580,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   375
          End
-         Begin VB.HScrollBar RepositionZ 
+         Begin VB.HScrollBar RepositionZ
             Height          =   255
             Left            =   240
             Max             =   100
@@ -589,7 +589,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   975
          End
-         Begin VB.HScrollBar RepositionY 
+         Begin VB.HScrollBar RepositionY
             Height          =   255
             Left            =   240
             Max             =   100
@@ -598,7 +598,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   975
          End
-         Begin VB.HScrollBar RepositionX 
+         Begin VB.HScrollBar RepositionX
             Height          =   255
             Left            =   240
             Max             =   100
@@ -607,7 +607,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   975
          End
-         Begin VB.Label RepositionZLabel 
+         Begin VB.Label RepositionZLabel
             Caption         =   "Z re-position"
             Height          =   255
             Left            =   120
@@ -615,7 +615,7 @@ Begin VB.Form ModelEditor
             Top             =   1440
             Width           =   1095
          End
-         Begin VB.Label RepositionYLabel 
+         Begin VB.Label RepositionYLabel
             Caption         =   "Y re-position"
             Height          =   255
             Left            =   120
@@ -623,7 +623,7 @@ Begin VB.Form ModelEditor
             Top             =   840
             Width           =   1095
          End
-         Begin VB.Label RepositionXLabel 
+         Begin VB.Label RepositionXLabel
             Caption         =   "X re-position"
             Height          =   255
             Left            =   120
@@ -633,14 +633,14 @@ Begin VB.Form ModelEditor
          End
       End
    End
-   Begin VB.Frame GeneralLightingFrame 
+   Begin VB.Frame GeneralLightingFrame
       Caption         =   "General Lighting"
       Height          =   2295
       Left            =   8040
       TabIndex        =   17
       Top             =   5520
       Width           =   1695
-      Begin VB.CheckBox InifintyFarLightsCheck 
+      Begin VB.CheckBox InifintyFarLightsCheck
          Caption         =   "Ininitely far lights"
          Height          =   255
          Left            =   120
@@ -648,28 +648,28 @@ Begin VB.Form ModelEditor
          Top             =   1920
          Width           =   1455
       End
-      Begin VB.HScrollBar LightPosZScroll 
+      Begin VB.HScrollBar LightPosZScroll
          Height          =   255
          Left            =   360
          TabIndex        =   101
          Top             =   960
          Width           =   1215
       End
-      Begin VB.HScrollBar LightPosYScroll 
+      Begin VB.HScrollBar LightPosYScroll
          Height          =   255
          Left            =   360
          TabIndex        =   100
          Top             =   600
          Width           =   1215
       End
-      Begin VB.HScrollBar LightPosXScroll 
+      Begin VB.HScrollBar LightPosXScroll
          Height          =   255
          Left            =   360
          TabIndex        =   99
          Top             =   240
          Width           =   1215
       End
-      Begin VB.CheckBox RightLight 
+      Begin VB.CheckBox RightLight
          Caption         =   "Right"
          Height          =   195
          Left            =   840
@@ -677,7 +677,7 @@ Begin VB.Form ModelEditor
          Top             =   1560
          Width           =   735
       End
-      Begin VB.CheckBox LeftLight 
+      Begin VB.CheckBox LeftLight
          Caption         =   "Left"
          Height          =   255
          Left            =   840
@@ -685,7 +685,7 @@ Begin VB.Form ModelEditor
          Top             =   1320
          Width           =   615
       End
-      Begin VB.CheckBox RearLight 
+      Begin VB.CheckBox RearLight
          Caption         =   "Rear"
          Height          =   255
          Left            =   120
@@ -693,7 +693,7 @@ Begin VB.Form ModelEditor
          Top             =   1560
          Width           =   735
       End
-      Begin VB.CheckBox FrontLight 
+      Begin VB.CheckBox FrontLight
          Caption         =   "Front"
          Height          =   255
          Left            =   120
@@ -701,7 +701,7 @@ Begin VB.Form ModelEditor
          Top             =   1320
          Width           =   735
       End
-      Begin VB.Label LightPosZLabel 
+      Begin VB.Label LightPosZLabel
          Caption         =   "Z:"
          Height          =   255
          Left            =   120
@@ -709,7 +709,7 @@ Begin VB.Form ModelEditor
          Top             =   960
          Width           =   135
       End
-      Begin VB.Label LightPosYLabel 
+      Begin VB.Label LightPosYLabel
          Caption         =   "Y:"
          Height          =   255
          Left            =   120
@@ -717,7 +717,7 @@ Begin VB.Form ModelEditor
          Top             =   600
          Width           =   135
       End
-      Begin VB.Label LightPosXLabel 
+      Begin VB.Label LightPosXLabel
          Caption         =   "X:"
          Height          =   255
          Left            =   120
@@ -726,7 +726,7 @@ Begin VB.Form ModelEditor
          Width           =   135
       End
    End
-   Begin VB.ComboBox BoneSelector 
+   Begin VB.ComboBox BoneSelector
       Height          =   315
       Left            =   8040
       TabIndex        =   10
@@ -734,7 +734,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CommandButton SaveFF7ModelButton 
+   Begin VB.CommandButton SaveFF7ModelButton
       Caption         =   "Save Model"
       Height          =   255
       Left            =   8040
@@ -743,7 +743,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Frame SelectedBoneFrame 
+   Begin VB.Frame SelectedBoneFrame
       Caption         =   "Bone options"
       Enabled         =   0   'False
       Height          =   3015
@@ -752,7 +752,7 @@ Begin VB.Form ModelEditor
       Top             =   2160
       Visible         =   0   'False
       Width           =   1695
-      Begin MSComCtl2.UpDown BoneLengthUpDown 
+      Begin MSComCtl2.UpDown BoneLengthUpDown
          Height          =   255
          Left            =   1320
          TabIndex        =   79
@@ -765,7 +765,7 @@ Begin VB.Form ModelEditor
          Min             =   -999999999
          Enabled         =   -1  'True
       End
-      Begin MSComCtl2.UpDown ResizeBoneZUpDown 
+      Begin MSComCtl2.UpDown ResizeBoneZUpDown
          Height          =   285
          Left            =   1320
          TabIndex        =   78
@@ -786,7 +786,7 @@ Begin VB.Form ModelEditor
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin MSComCtl2.UpDown ResizeBoneYUpDown 
+      Begin MSComCtl2.UpDown ResizeBoneYUpDown
          Height          =   285
          Left            =   1320
          TabIndex        =   77
@@ -807,7 +807,7 @@ Begin VB.Form ModelEditor
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin MSComCtl2.UpDown ResizeBoneXUpDown 
+      Begin MSComCtl2.UpDown ResizeBoneXUpDown
          Height          =   285
          Left            =   1335
          TabIndex        =   76
@@ -828,14 +828,14 @@ Begin VB.Form ModelEditor
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin VB.TextBox ResizeBoneXText 
+      Begin VB.TextBox ResizeBoneXText
          Height          =   285
          Left            =   840
          TabIndex        =   72
          Top             =   240
          Width           =   495
       End
-      Begin VB.CommandButton RemovePieceButton 
+      Begin VB.CommandButton RemovePieceButton
          Caption         =   "Remove part from the bone"
          Height          =   495
          Left            =   120
@@ -843,7 +843,7 @@ Begin VB.Form ModelEditor
          Top             =   2280
          Width           =   1455
       End
-      Begin VB.CommandButton AddPieceButton 
+      Begin VB.CommandButton AddPieceButton
          Caption         =   "Add part to the bone"
          Height          =   495
          Left            =   120
@@ -851,28 +851,28 @@ Begin VB.Form ModelEditor
          Top             =   1680
          Width           =   1455
       End
-      Begin VB.TextBox BoneLengthText 
+      Begin VB.TextBox BoneLengthText
          Height          =   285
          Left            =   720
          TabIndex        =   15
          Top             =   1320
          Width           =   615
       End
-      Begin VB.TextBox ResizeBoneZText 
+      Begin VB.TextBox ResizeBoneZText
          Height          =   285
          Left            =   840
          TabIndex        =   13
          Top             =   960
          Width           =   495
       End
-      Begin VB.TextBox ResizeBoneYText 
+      Begin VB.TextBox ResizeBoneYText
          Height          =   285
          Left            =   840
          TabIndex        =   12
          Top             =   600
          Width           =   495
       End
-      Begin VB.Label BoneLengthLabel 
+      Begin VB.Label BoneLengthLabel
          AutoSize        =   -1  'True
          Caption         =   "Length"
          Height          =   195
@@ -881,7 +881,7 @@ Begin VB.Form ModelEditor
          Top             =   1320
          Width           =   495
       End
-      Begin VB.Label Label4 
+      Begin VB.Label Label4
          AutoSize        =   -1  'True
          Caption         =   "Z Scale"
          Height          =   195
@@ -890,7 +890,7 @@ Begin VB.Form ModelEditor
          Top             =   960
          Width           =   555
       End
-      Begin VB.Label Label3 
+      Begin VB.Label Label3
          AutoSize        =   -1  'True
          Caption         =   "Y Scale"
          Height          =   195
@@ -899,7 +899,7 @@ Begin VB.Form ModelEditor
          Top             =   600
          Width           =   555
       End
-      Begin VB.Label Label2 
+      Begin VB.Label Label2
          AutoSize        =   -1  'True
          Caption         =   "X Scale"
          Height          =   195
@@ -909,7 +909,7 @@ Begin VB.Form ModelEditor
          Width           =   555
       End
    End
-   Begin VB.TextBox AnimationFrameText 
+   Begin VB.TextBox AnimationFrameText
       Enabled         =   0   'False
       Height          =   285
       Left            =   3480
@@ -918,7 +918,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   375
    End
-   Begin VB.HScrollBar CurrentFrameScroll 
+   Begin VB.HScrollBar CurrentFrameScroll
       Enabled         =   0   'False
       Height          =   255
       Left            =   3960
@@ -928,7 +928,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   2415
    End
-   Begin VB.CommandButton OpenFF7ModelButton 
+   Begin VB.CommandButton OpenFF7ModelButton
       Caption         =   "Open Model"
       Height          =   255
       Left            =   8040
@@ -936,7 +936,7 @@ Begin VB.Form ModelEditor
       Top             =   0
       Width           =   1695
    End
-   Begin VB.PictureBox Picture1 
+   Begin VB.PictureBox Picture1
       AutoSize        =   -1  'True
       Height          =   8775
       Left            =   2280
@@ -947,12 +947,12 @@ Begin VB.Form ModelEditor
       TabIndex        =   0
       Top             =   0
       Width           =   5655
-      Begin VB.Timer Timer1 
+      Begin VB.Timer Timer1
          Interval        =   1
          Left            =   480
          Top             =   0
       End
-      Begin MSComDlg.CommonDialog CommonDialog1 
+      Begin MSComDlg.CommonDialog CommonDialog1
          Left            =   0
          Top             =   0
          _ExtentX        =   847
@@ -960,7 +960,7 @@ Begin VB.Form ModelEditor
          _Version        =   393216
       End
    End
-   Begin VB.Label WeaponLabel 
+   Begin VB.Label WeaponLabel
       Caption         =   "Weapon:"
       Height          =   255
       Left            =   0
@@ -969,7 +969,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1215
    End
-   Begin VB.Label BattleAnimationLabel 
+   Begin VB.Label BattleAnimationLabel
       Caption         =   "Battle Animation:"
       Height          =   255
       Left            =   0
@@ -978,7 +978,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1215
    End
-   Begin VB.Label BoneSelectorLabel 
+   Begin VB.Label BoneSelectorLabel
       Caption         =   "Selected bone:"
       Height          =   255
       Left            =   8040
@@ -987,7 +987,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Label AnimationFrameLabel 
+   Begin VB.Label AnimationFrameLabel
       Caption         =   "Animation Frame"
       Height          =   255
       Left            =   2280
@@ -1070,10 +1070,10 @@ Private Type ModelEditorState
     P_Model As PModel
     aa_sk As AASkeleton
     hrc_sk As HRCSkeleton
-    
+
     DAAnims As DAAnimationsPack
     AAnim As AAnimation
-    
+
     FrameIndex As Integer
     BattleAnimationIndex As Integer
     WeaponIndex As Integer
@@ -1081,16 +1081,16 @@ Private Type ModelEditorState
 
     SelectedBone As Integer
     SelectedBonePiece As Integer
-    
+
     EditedBone As Integer
     EditedBonePiece As Integer
-    
+
     alpha As Double
     Beta As Double
     Gamma As Double
-    
+
     DIST As Double
-    
+
     PanX As Single
     PanY As Single
     PanZ As Single
@@ -1098,7 +1098,7 @@ End Type
 
 Dim UnDoBuffer() As ModelEditorState
 Dim ReDoBuffer() As ModelEditorState
-    
+
 Dim UnDoCursor As Integer
 Dim ReDoCursor As Integer
 
@@ -1111,37 +1111,37 @@ Public Sub OpenFF7File(ByVal filename As String)
     Dim wi As Integer
     Dim num_weapons As Integer
     Dim anim_index As Integer
-    
+
     Dim models3ds_auxV() As Model3Ds
-    
+
     Dim p_model_aux As PModel
-    
+
     P_Model = p_model_aux
-    
+
     DisableOpenGL OGLContext
     OGLContext = CreateOGLContext(Picture1.hdc)
     SetOGLContext Picture1.hdc, OGLContext
     ''Debug.Print "Initializing OGL ...", glGetError = GL_NO_ERROR
-    
+
     glEnable GL_DEPTH_TEST
-    
+
     glClearColor 0.5, 0.5, 1, 0
-    
+
     Picture1.Cls
     Picture1.Print "Loading ", filename
-    
+
     SelectedBone = -1
     SelectedBonePiece = -1
-    
+
     SelectedBoneFrame.Enabled = False
     SelectedPieceFrame.Enabled = False
-    
+
     If LCase(Right$(filename, 2)) = ".p" Then
         ReadPModel P_Model, filename
         If P_Model.head.NumVerts > 0 Then
             UnDoCursor = 0
             ReDoCursor = 0
-            
+
             ComputePModelBoundingBox P_Model, p_min, p_max
             diameter = ComputeDiameter(P_Model.BoundingBox)
             With CurrentFrameScroll
@@ -1155,12 +1155,12 @@ Public Sub OpenFF7File(ByVal filename As String)
             ChangeAnimationButton.Enabled = False
             ShowBonesCheck.Enabled = False
             AnimationOptionsFrame.Left = ModelEditor.ScaleWidth + 10
-            
+
             BattleAnimationCombo.Visible = False
             BattleAnimationLabel.Visible = False
             WeaponCombo.Visible = False
             WeaponLabel.Visible = False
-            
+
             SaveFF7ModelButton.Visible = True
             SaveFF7AnimationButton.Visible = False
             ChangeAnimationButton.Visible = False
@@ -1183,7 +1183,7 @@ Public Sub OpenFF7File(ByVal filename As String)
         If LCase(Right$(filename, 4)) = ".hrc" Then
             UnDoCursor = 0
             ReDoCursor = 0
-            
+
             ReadHRCSkeleton hrc_sk, filename, True
             ReadFirstCompatibleAAnimation
             ComputeHRCBoundingBox hrc_sk, AAnim.Frames(0), p_min, p_max
@@ -1198,12 +1198,12 @@ Public Sub OpenFF7File(ByVal filename As String)
             AddPieceButton.Enabled = True
             ChangeAnimationButton.Enabled = True
             ShowBonesCheck.Enabled = True
-            
+
             BattleAnimationCombo.Visible = False
             BattleAnimationLabel.Visible = False
             WeaponCombo.Visible = False
             WeaponLabel.Visible = False
-            
+
             SaveFF7ModelButton.Visible = True
             SaveFF7AnimationButton.Visible = True
             SaveFF7AnimationButton.Caption = "Save animation"
@@ -1231,7 +1231,7 @@ Public Sub OpenFF7File(ByVal filename As String)
             If LCase(Right$(filename, 2)) = "aa" Then
                 UnDoCursor = 0
                 ReDoCursor = 0
-                
+
                 ReadAASkeleton filename, aa_sk, False, True
                 num_weapons = aa_sk.NumWeapons
                 WeaponCombo.Clear
@@ -1254,14 +1254,14 @@ Public Sub OpenFF7File(ByVal filename As String)
                     If DAAnims.BodyAnimations(ai).NumFrames2 > 0 Then _
                         BattleAnimationCombo.AddItem (ai)
                 Next ai
-                
+
                 If Not aa_sk.IsBattleLocation Then _
                     anim_index = val(BattleAnimationCombo.List(0))
                 ComputeAABoundingBox aa_sk, _
                     DAAnims.BodyAnimations(anim_index).Frames(0), _
                     p_min, p_max
                 diameter = ComputeAADiameter(aa_sk)
-                    
+
                 SelectedBone = -1
                 SelectedBonePiece = -1
                 If aa_sk.IsBattleLocation Then
@@ -1272,14 +1272,14 @@ Public Sub OpenFF7File(ByVal filename As String)
                     BattleAnimationCombo.Visible = True
                     BattleAnimationLabel.Visible = True
                 End If
-                
+
                 With CurrentFrameScroll
                     .value = 0
                     .Min = -1
                     .max = max(1, DAAnims.BodyAnimations(0).NumFrames2)
                     .Enabled = True
                 End With
-                
+
                 AddPieceButton.Enabled = True
                 If num_weapons > 0 Then
                     WeaponCombo.ListIndex = 0
@@ -1290,11 +1290,11 @@ Public Sub OpenFF7File(ByVal filename As String)
                     WeaponCombo.Visible = False
                     WeaponLabel.Visible = False
                 End If
-                
+
                 TexturesFrame.Visible = True
                 TexturesFrame.Enabled = True
                 TexturesFrame.Caption = "Textures (model)"
-                
+
                 SaveFF7ModelButton.Visible = True
                 SaveFF7AnimationButton.Visible = True
                 SaveFF7AnimationButton.Caption = "Save anims. pack"
@@ -1319,16 +1319,16 @@ Public Sub OpenFF7File(ByVal filename As String)
                 If LCase(Right$(filename, 2)) = ".d" Then
                     UnDoCursor = 0
                     ReDoCursor = 0
-                    
+
                     ReadMagicSkeleton filename, aa_sk, True
-                    
+
                     If FileExist(LCase(Left$(filename, Len(filename) - 1)) + "a00") Then
                         ReadDAAnimationsPack LCase(Left$(filename, Len(filename) - 1)) + "a00", aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, DAAnims
                         num_weapons = 0
                     Else
                         CreateCompatibleDAAnimationsPack aa_sk, DAAnims
                     End If
-                    
+
                     ModelType = K_AA_SKELETON
                     ShowBonesCheck.Enabled = True
                     BattleAnimationCombo.Clear
@@ -1337,27 +1337,27 @@ Public Sub OpenFF7File(ByVal filename As String)
                             BattleAnimationCombo.AddItem (ai)
                     Next ai
                     BattleAnimationCombo.ListIndex = 0
-                    
+
                     anim_index = BattleAnimationCombo.List(0)
                     ComputeAABoundingBox aa_sk, _
                         DAAnims.BodyAnimations(anim_index).Frames(0), _
                         p_min, p_max
                     diameter = ComputeAADiameter(aa_sk)
-                    
+
                     BattleAnimationCombo.Visible = True
                     BattleAnimationLabel.Visible = True
                     WeaponCombo.Visible = False
                     WeaponLabel.Visible = False
-                    
+
                     AddPieceButton.Enabled = True
-                    
+
                     With CurrentFrameScroll
                         .value = 0
                         .Min = -1
                         .max = DAAnims.BodyAnimations(0).NumFrames2 - 1
                         .Enabled = True
                     End With
-                    
+
                     If num_weapons > 0 Then
                         WeaponCombo.ListIndex = 0
                         WeaponCombo.Visible = True
@@ -1367,7 +1367,7 @@ Public Sub OpenFF7File(ByVal filename As String)
                         WeaponCombo.Visible = False
                         WeaponLabel.Visible = False
                     End If
-                    
+
                     SaveFF7ModelButton.Visible = True
                     SaveFF7AnimationButton.Visible = True
                     SaveFF7AnimationButton.Caption = "Save anims. pack"
@@ -1397,22 +1397,22 @@ Public Sub OpenFF7File(ByVal filename As String)
                     Else
                         ReadPModel P_Model, filename
                     End If
-                    
+
                     If P_Model.head.NumVerts > 0 Then
                         UnDoCursor = 0
                         ReDoCursor = 0
-                        
+
                         ComputePModelBoundingBox P_Model, p_min, p_max
                         diameter = ComputeDiameter(P_Model.BoundingBox)
                         ModelType = K_P_BATTLE_MODEL
                         ShowBonesCheck.Enabled = False
                         AddPieceButton.Enabled = False
-                        
+
                         BattleAnimationCombo.Visible = False
                         BattleAnimationLabel.Visible = False
                         WeaponCombo.Visible = False
                         WeaponLabel.Visible = False
-                
+
                         TextureSelectCombo.Clear
                         TexturesFrame.Enabled = False
                         SaveFF7ModelButton.Visible = True
@@ -1440,9 +1440,9 @@ Public Sub OpenFF7File(ByVal filename As String)
         End If
     End If
     loaded = True
-    
+
     FillBoneSelector
-    
+
     alpha = 200
     Beta = 45
     Gamma = 0
@@ -1451,7 +1451,7 @@ Public Sub OpenFF7File(ByVal filename As String)
     PanZ = 0
     DIST = -2 * ComputeSceneRadius(p_min, p_max)
     SelectBoneForWeaponAttachmentQ = False
-    
+
     glClearDepth 1#
     glDepthFunc GL_LEQUAL
     glEnable GL_DEPTH_TEST
@@ -1461,7 +1461,7 @@ Public Sub OpenFF7File(ByVal filename As String)
     glAlphaFunc GL_GREATER, 0
     glCullFace GL_FRONT
     glEnable GL_CULL_FACE
-    
+
     Picture1_Paint
     Exit Sub
 errorH:
@@ -1469,7 +1469,7 @@ errorH:
 End Sub
 Sub SetFieldModelAnimation(ByRef filename As String)
     Dim AAnim_tmp As AAnimation
-    
+
     If (filename <> "") Then
         ReadAAnimation AAnim_tmp, filename
         FixAAnimation hrc_sk, AAnim_tmp
@@ -1480,19 +1480,19 @@ Sub SetFieldModelAnimation(ByRef filename As String)
             AAnim = AAnim_tmp
             Call SetFrameEditorFields
         End If
-        
+
         CurrentFrameScroll.value = 0
-    
+
         CurrentFrameScroll.max = AAnim.NumFrames
     End If
-    
+
     Picture1_Paint
 End Sub
 
 Sub SetBattleModelAnimationsPack(ByRef filename As String)
     Dim DAAnims_tmp As DAAnimationsPack
     Dim ai As Integer
-    
+
     If (filename <> "") Then
         If Right$(filename, 2) = "da" Then
             aa_sk.IsLimitBreak = False
@@ -1504,7 +1504,7 @@ Sub SetBattleModelAnimationsPack(ByRef filename As String)
 
         DAAnims = DAAnims_tmp
         Call SetFrameEditorFields
-        
+
         BattleAnimationCombo.Clear
         For ai = 0 To DAAnims.NumBodyAnimations - 1
             If DAAnims.BodyAnimations(ai).NumFrames2 > 0 Then _
@@ -1520,7 +1520,7 @@ Sub SetBattleModelAnimationsPack(ByRef filename As String)
             BattleAnimationCombo.Visible = True
             BattleAnimationLabel.Visible = True
         End If
-        
+
         With CurrentFrameScroll
             .value = 0
             .Min = -1
@@ -1528,7 +1528,7 @@ Sub SetBattleModelAnimationsPack(ByRef filename As String)
             .Enabled = True
         End With
     End If
-    
+
     Picture1_Paint
 End Sub
 Sub ReadFirstCompatibleAAnimation()
@@ -1536,14 +1536,14 @@ Sub ReadFirstCompatibleAAnimation()
     Dim hrc_file As String
     Dim num_bones As Integer
     Dim anim_foundQ As Boolean
-    
+
     If hrc_sk.NumBones < 2 Then
         CreateCompatibleHRCAAnimation hrc_sk, AAnim
         Exit Sub
     End If
-    
+
     On Error GoTo errorH
-    
+
     hrc_file = LCase(hrc_sk.filename)
     animFile = LCase(Dir("*.a"))
     anim_foundQ = False
@@ -1557,17 +1557,17 @@ Sub ReadFirstCompatibleAAnimation()
     If anim_foundQ Then
         num_bones = ReadAAnimationNBones(animFile)
     End If
-        
+
     If num_bones <> hrc_sk.NumBones Then
         animFile = Dir("*.a")
-        
+
         num_bones = ReadAAnimationNBones(animFile)
         While num_bones <> hrc_sk.NumBones And animFile <> ""
             animFile = Dir()
             num_bones = ReadAAnimationNBones(animFile)
         Wend
     End If
-    
+
     If num_bones <> hrc_sk.NumBones Then
         MsgBox "There is no animation file that fits the model in the same folder", vbCritical, "Error loading animation"
         CreateCompatibleHRCAAnimation hrc_sk, AAnim
@@ -1585,24 +1585,24 @@ Private Sub AddPieceButton_Click()
     Dim models3ds_auxV() As Model3Ds
     Dim AdditionalP As PModel
     Dim pattern As String
-    
+
     On Error GoTo hand
-    
+
     Picture1.Enabled = False
-    
+
     If ModelType = K_HRC_SKELETON Or ModelType = K_AA_SKELETON Then
         pattern = "FF7 Field Part file|*.p|FF7 Battle Part file|*.*|3D Studio model|*.3ds"
         CommonDialog1.Filter = pattern
         CommonDialog1.ShowOpen 'Display the Open File Common Dialog
         If (CommonDialog1.filename = "") Then Exit Sub
-        
+
         If LCase(Right$(CommonDialog1.filename, 4)) = ".3ds" Then
             Load3DS CommonDialog1.filename, models3ds_auxV
             ConvertModels3DsToPModel models3ds_auxV, AdditionalP
         Else
             ReadPModel AdditionalP, CommonDialog1.filename
         End If
-        
+
         If AdditionalP.head.NumVerts > 0 Then
             AddStateToBuffer
             If ModelType = K_HRC_SKELETON Then
@@ -1625,11 +1625,11 @@ End Sub
 Private Sub AddTextureButton_Click()
     Dim pattern As String
     Dim tex As TEXTexture
-    
+
     On Error GoTo hand
-    
+
     Picture1.Enabled = False
-    
+
     pattern = "Any Image file(*.bmp;*.jpg;*.gif;*.ico;*.rle;*.wmf;*.emf)|*.bmp;*.jpg;*.gif;*.png;*.ico;*.rle;*.wmf;*.emf|TEX texture|*.tex"
     CommonDialog1.Filter = pattern
     CommonDialog1.CancelError = True
@@ -1641,7 +1641,7 @@ Private Sub AddTextureButton_Click()
             Case K_HRC_SKELETON:
                 If SelectedBone > -1 And SelectedBonePiece > -1 Then
                     AddStateToBuffer
-                    
+
                     With hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece)
                         ReDim Preserve .textures(IIf(.NumTextures = 0, 0, .NumTextures + 1))
                         .textures(.NumTextures) = tex
@@ -1654,7 +1654,7 @@ Private Sub AddTextureButton_Click()
                 With aa_sk
                     If .NumTextures <= 10 Then
                         AddStateToBuffer
-                        
+
                         ReDim Preserve .textures(IIf(.NumTextures = 0, 0, .NumTextures + 1))
                         ReDim Preserve .TexIDS(IIf(.NumTextures = 0, 0, .NumTextures + 1))
                         .NumTextures = .NumTextures + 1
@@ -1704,7 +1704,7 @@ End Sub
 Private Sub BoneLengthText_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(BoneLengthText.Text) Then
         BoneLengthUpDown.value = BoneLengthText.Text * 10000
         'Call ResizeBoneZUpDown_Change
@@ -1718,11 +1718,11 @@ Private Sub ChangeTextureButton_Click()
     Dim pattern As String
     Dim tex As TEXTexture
     Dim tex_index As Integer
-    
+
     On Error GoTo hand
-    
+
     Picture1.Enabled = False
-    
+
     pattern = "Any Image file(*.bmp;*.jpg;*.gif;*.ico;*.rle;*.wmf;*.emf)|*.bmp;*.jpg;*.gif;*.png;*.ico;*.rle;*.wmf;*.emf|TEX texture|*.tex"
     CommonDialog1.Filter = pattern
     CommonDialog1.CancelError = True
@@ -1736,7 +1736,7 @@ Private Sub ChangeTextureButton_Click()
                     tex_index = TextureSelectCombo.ListIndex
                     If (tex_index > -1) Then
                         AddStateToBuffer
-                        
+
                         With hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece)
                             'This is dirty, but will prevent problems with the undo/redo
                             'UnloadTexture .textures(tex_index)
@@ -1753,7 +1753,7 @@ Private Sub ChangeTextureButton_Click()
                     tex_index = TextureSelectCombo.ListIndex
                     If (tex_index > -1) Then
                         AddStateToBuffer
-                        
+
                         'This is dirty, but will prevent problems with the undo/redo
                         'UnloadTexture .textures(tex_index)
                         .textures(tex_index) = tex
@@ -1785,7 +1785,7 @@ Private Sub ComputeGroundHeightButton_Click()
     Dim anim_index As Integer
     Dim fi As Integer
     Dim max_diff As Single
-    
+
     AddStateToBuffer
     max_diff = INFINITY_SINGLE
     Select Case ModelType
@@ -1795,7 +1795,7 @@ Private Sub ComputeGroundHeightButton_Click()
                     ComputeHRCBoundingBox hrc_sk, AAnim.Frames(fi), p_min, p_max
                     If max_diff > p_max.y Then max_diff = p_max.y
                 Next fi
-                
+
                 For fi = 0 To .NumFrames - 1
                     .Frames(fi).RootTranslationY = .Frames(fi).RootTranslationY + max_diff
                 Next fi
@@ -1809,12 +1809,12 @@ Private Sub ComputeGroundHeightButton_Click()
                         p_min, p_max
                     If max_diff > p_max.y Then max_diff = p_max.y
                 Next fi
-                
+
                 If max_diff <> 0 Then
                     For fi = 0 To .NumFrames2 - 1
                         .Frames(fi).Y_start = .Frames(fi).Y_start - max_diff
                     Next fi
-                        
+
                     'Also don't forget the weapon frames if available
                     If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
                         For fi = 0 To .NumFrames2 - 1
@@ -1848,7 +1848,7 @@ Private Sub DuplicateFrameButton_Click()
     Dim daframe_w_aux As DAFrame
     Dim fi As Integer
     Dim primary_secondary_counters_coef As Single
-    
+
     AddStateToBuffer
     Select Case ModelType
         Case K_HRC_SKELETON:
@@ -1858,7 +1858,7 @@ Private Sub DuplicateFrameButton_Click()
                 For fi = .NumFrames - 2 To CurrentFrameScroll.value Step -1
                     .Frames(fi + 1) = .Frames(fi)
                 Next fi
-                
+
                 CopyAFrame .Frames(CurrentFrameScroll.value), aframe_aux
                 .Frames(CurrentFrameScroll.value) = aframe_aux
                 CurrentFrameScroll.max = CurrentFrameScroll.max + 1
@@ -1871,14 +1871,14 @@ Private Sub DuplicateFrameButton_Click()
                 .NumFrames2 = .NumFrames2 + 1
                 .NumFrames1 = .NumFrames2 * primary_secondary_counters_coef
                 ReDim Preserve .Frames(.NumFrames2 - 1)
-                
+
                 For fi = .NumFrames2 - 2 To CurrentFrameScroll.value Step -1
                     .Frames(fi + 1) = .Frames(fi)
                 Next fi
-                
+
                 CopyDAFrame .Frames(CurrentFrameScroll.value), daframe_aux
                 .Frames(CurrentFrameScroll.value) = daframe_aux
-                
+
                 'Also don't forget about the weapon frames (where available)
                 If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
                     ReDim Preserve DAAnims.WeaponAnimations(anim_index).Frames(.NumFrames2 - 1)
@@ -1891,7 +1891,7 @@ Private Sub DuplicateFrameButton_Click()
                     DAAnims.WeaponAnimations(anim_index).NumFrames2 = .NumFrames2
                     DAAnims.WeaponAnimations(anim_index).NumFrames1 = .NumFrames1
                 End If
-                    
+
                 CurrentFrameScroll.max = CurrentFrameScroll.max + 1
             End With
     End Select
@@ -1906,32 +1906,32 @@ End Sub
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     If KeyCode = KEY_HOME Then _
         ResetCamera
-        
+
     If KeyCode = KEY_ESCAPE Then _
         SelectBoneForWeaponAttachmentQ = False
-    
+
     If KeyCode = vbKeyControl Then _
         ControlPressedQ = True
-        
+
     If KeyCode = vbKeyZ And ControlPressedQ Then _
         UnDo
     If KeyCode = vbKeyY And ControlPressedQ Then _
         ReDo
-        
+
     If KeyCode = vbKeyUp Then _
         alpha = alpha + 1
-    
+
     If KeyCode = vbKeyDown Then _
         alpha = alpha - 1
-        
+
     If KeyCode = vbKeyLeft Then _
         Beta = Beta - 1
-    
+
     If KeyCode = vbKeyRight Then _
         Beta = Beta + 1
-    
+
     'Debug.Print alpha; "/"; Beta
-        
+
     Picture1_Paint
 End Sub
 
@@ -1980,27 +1980,27 @@ Private Sub InterpolateAnimationButton_Click()
     Dim base_final_frame As Integer
     Dim primary_secondary_counters_coef As Single
     Dim aux_daframe As DAFrame
-    
+
     num_interpolated_frames_str = InputBox("Number of frames to interpolate between each frame", _
                                             "Animation interpolation", _
                                             IIf(ModelType = K_HRC_SKELETON, Str$(DEFAULT_FIELD_INTERP_FRAMES), _
                                                                             Str$(DEFAULT_BATTLE_INTERP_FRAMES)))
-    
+
     If num_interpolated_frames_str = "" Or Not IsNumeric(num_interpolated_frames_str) Then
         Exit Sub
     End If
-    
+
     num_interpolated_frames = CInt(num_interpolated_frames_str)
     next_elem_diff = num_interpolated_frames + 1
-    
+
     AddStateToBuffer
-    
+
     is_loop = MsgBox("Is this animation a loop?", vbYesNo, "Animation type")
     frame_offset = 0
     If is_loop = vbNo Then
         frame_offset = num_interpolated_frames
     End If
-    
+
     Select Case ModelType
         Case K_HRC_SKELETON:
             With AAnim
@@ -2008,7 +2008,7 @@ Private Sub InterpolateAnimationButton_Click()
                     MsgBox "Can't intrpolate animations with a single frame", vbOKOnly, "Interpolation error"
                     Exit Sub
                 End If
-                
+
                 'Create new frames
                 .NumFrames = .NumFrames * (num_interpolated_frames + 1) - frame_offset
                 ReDim Preserve .Frames(.NumFrames - 1)
@@ -2016,7 +2016,7 @@ Private Sub InterpolateAnimationButton_Click()
                 For fi = .NumFrames - (1 + num_interpolated_frames - frame_offset) To 0 Step -next_elem_diff
                     .Frames(fi) = .Frames(fi / (num_interpolated_frames + 1))
                 Next fi
-                
+
                 'Interpolate the new frames
                 For fi = 0 To .NumFrames - (1 + next_elem_diff + num_interpolated_frames - frame_offset) Step next_elem_diff
                     For ifi = 1 To num_interpolated_frames
@@ -2024,7 +2024,7 @@ Private Sub InterpolateAnimationButton_Click()
                         GetTwoAFramesInterpolation hrc_sk, .Frames(fi), .Frames(fi + num_interpolated_frames + 1), alpha, .Frames(fi + ifi)
                     Next ifi
                 Next fi
-                
+
                 If is_loop = vbYes Then
                     base_final_frame = .NumFrames - num_interpolated_frames - 1
                     For ifi = 1 To num_interpolated_frames
@@ -2043,17 +2043,17 @@ Private Sub InterpolateAnimationButton_Click()
                     MsgBox "Can't intrpolate animations with a single frame", vbOKOnly, "Interpolation error"
                     Exit Sub
                 End If
-                
+
                 'Create new frames
                 .NumFrames2 = .NumFrames2 * (num_interpolated_frames + 1) - frame_offset
                 .NumFrames1 = .NumFrames2 * primary_secondary_counters_coef
-                
+
                 ReDim Preserve .Frames(.NumFrames2 - 1)
                 'Move the original frames into their new positions
                 For fi = .NumFrames2 - (1 + num_interpolated_frames - frame_offset) To 0 Step -next_elem_diff
                     .Frames(fi) = .Frames(fi / (num_interpolated_frames + 1))
                 Next fi
-                
+
                 'Interpolate the new frames
                 For fi = 0 To .NumFrames2 - (1 + next_elem_diff + num_interpolated_frames - frame_offset) Step next_elem_diff
                     For ifi = 1 To num_interpolated_frames
@@ -2068,7 +2068,7 @@ Private Sub InterpolateAnimationButton_Click()
                     'GetTwoDAFramesInterpolation AA_sk, .Frames(fi), .Frames(fi + num_interpolated_frames + 1), 0, aux_daframe
                     'CopyDAFrame aux_daframe, .Frames(fi)
                 Next fi
-                
+
                 base_final_frame = .NumFrames2 - num_interpolated_frames - 1
                 If is_loop = vbYes Then
                     For ifi = 1 To num_interpolated_frames
@@ -2082,22 +2082,22 @@ Private Sub InterpolateAnimationButton_Click()
                 End If
                 'GetTwoDAFramesInterpolation AA_sk, .Frames(base_final_frame), .Frames(.NumFrames2 - 1), 1#, aux_daframe
                 'CopyDAFrame aux_daframe, .Frames(.NumFrames2 - 1)
-                
+
                 'NormalizeDAAnimationsPackAnimation DAAnims.BodyAnimations(anim_index)
             End With
-                
+
             'Also don't forget about the weapon frames (where available)
             If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
                 With DAAnims.WeaponAnimations(anim_index)
                     .NumFrames2 = DAAnims.BodyAnimations(anim_index).NumFrames2
                     .NumFrames1 = DAAnims.BodyAnimations(anim_index).NumFrames1
-                    
+
                     ReDim Preserve .Frames(.NumFrames2 - 1)
                     'Move the original frames into their new positions
                     For fi = .NumFrames2 - (1 + num_interpolated_frames - frame_offset) To 0 Step -next_elem_diff
                         .Frames(fi) = .Frames(fi / (num_interpolated_frames + 1))
                     Next fi
-                    
+
                     'Interpolate the new frames
                     For fi = 0 To .NumFrames2 - (1 + num_interpolated_frames + num_interpolated_frames - frame_offset) Step next_elem_diff
                         For ifi = 1 To num_interpolated_frames
@@ -2107,7 +2107,7 @@ Private Sub InterpolateAnimationButton_Click()
                         'GetTwoDAFramesWeaponInterpolation AA_sk, .Frames(fi), .Frames(fi + num_interpolated_frames + 1), 0, aux_daframe
                         'CopyDAFrame aux_daframe, .Frames(fi)
                     Next fi
-                    
+
                     base_final_frame = .NumFrames2 - num_interpolated_frames - 1
                     If is_loop = vbYes Then
                         For ifi = 1 To num_interpolated_frames
@@ -2118,11 +2118,11 @@ Private Sub InterpolateAnimationButton_Click()
                     'GetTwoDAFramesWeaponInterpolation AA_sk, .Frames(base_final_frame), .Frames(.NumFrames2 - 1), 1#, aux_daframe
                     'CopyDAFrame aux_daframe, .Frames(.NumFrames2 - 1)
                 End With
-                
+
                 'NormalizeDAAnimationsPackAnimation DAAnims.WeaponAnimations(anim_index)
             End If
     End Select
-    
+
     CurrentFrameScroll.max = CurrentFrameScroll.max * (num_interpolated_frames + 1) - frame_offset
     CurrentFrameScroll.value = CurrentFrameScroll.value * (num_interpolated_frames + 1)
     Call SetFrameEditorFields
@@ -2140,24 +2140,24 @@ Private Sub InterpolateFrameButton_Click()
     Dim num_interpolated_frames As Integer
     Dim alpha As Single
     Dim primary_secondary_counter_coef As Single
-    
+
     num_interpolated_frames_str = InputBox("Number of frames to interpolate between each frame", "Animation interpolation", IIf(ModelType = K_HRC_SKELETON, "1", "2"))
-    
+
     If num_interpolated_frames_str = "" Or Not IsNumeric(num_interpolated_frames_str) Then
         Exit Sub
     End If
-    
+
     num_interpolated_frames = CInt(num_interpolated_frames_str)
-    
+
     current_frame = CurrentFrameScroll.value
     next_frame = current_frame + num_interpolated_frames + 1
-    
+
     If CurrentFrameScroll.value = CurrentFrameScroll.max - 1 Then
         next_frame = 0
     End If
-    
+
     AddStateToBuffer
-    
+
     Select Case ModelType
         Case K_HRC_SKELETON:
             With AAnim
@@ -2168,7 +2168,7 @@ Private Sub InterpolateFrameButton_Click()
                 For fi = .NumFrames - 1 To current_frame + num_interpolated_frames Step -1
                     .Frames(fi) = .Frames(fi - num_interpolated_frames)
                 Next fi
-                
+
                 'Interpolate the new frames
                 For fi = 1 To num_interpolated_frames
                     alpha = CSng(fi) / CSng(num_interpolated_frames + 1)
@@ -2187,14 +2187,14 @@ Private Sub InterpolateFrameButton_Click()
                 For fi = .NumFrames2 - 1 To current_frame + num_interpolated_frames + 1 Step -1
                     .Frames(fi) = .Frames(fi - num_interpolated_frames)
                 Next fi
-                
+
                 'Interpolate the new frames
                 For fi = 1 To num_interpolated_frames
                     alpha = CSng(fi) / CSng(num_interpolated_frames + 1)
                     GetTwoDAFramesInterpolation aa_sk, .Frames(current_frame), .Frames(next_frame), alpha, .Frames(current_frame + fi)
                 Next fi
             End With
-                
+
             'Also don't forget about the weapon frames (where available)
             If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
                 num_frames = DAAnims.BodyAnimations(anim_index).NumFrames2
@@ -2207,7 +2207,7 @@ Private Sub InterpolateFrameButton_Click()
                     For fi = .NumFrames2 - 1 To current_frame + num_interpolated_frames + 1 Step -1
                         .Frames(fi) = .Frames(fi - num_interpolated_frames)
                     Next fi
-                    
+
                     'Interpolate the new frames
                     For fi = 1 To num_interpolated_frames
                         alpha = CSng(fi) / CSng(num_interpolated_frames + 1)
@@ -2327,7 +2327,7 @@ Private Sub RemoveFrameButton_Click()
     Dim anim_index As Integer
     Dim fi As Integer
     Dim primary_secondary_counter_coef As Single
-    
+
     AddStateToBuffer
     Select Case ModelType
         Case K_HRC_SKELETON:
@@ -2349,7 +2349,7 @@ Private Sub RemoveFrameButton_Click()
                     .NumFrames2 = .NumFrames2 - 1
                     .NumFrames1 = .NumFrames2 * primary_secondary_counter_coef
                     ReDim Preserve .Frames(.NumFrames2 - 1)
-                    
+
                     'Also don't forget the weapon frames if available
                     If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
                         For fi = CurrentFrameScroll.value To .NumFrames2 - 2
@@ -2360,7 +2360,7 @@ Private Sub RemoveFrameButton_Click()
                         DAAnims.WeaponAnimations(anim_index).NumFrames2 = .NumFrames2
                         DAAnims.WeaponAnimations(anim_index).NumFrames1 = .NumFrames1
                     End If
-                    
+
                     If (CurrentFrameScroll.value = CurrentFrameScroll.max - 1) Then _
                         CurrentFrameScroll.value = CurrentFrameScroll.value - 1
                     CurrentFrameScroll.max = CurrentFrameScroll.max - 1
@@ -2380,7 +2380,7 @@ Private Sub RemoveTextureButton_Click()
         Case K_HRC_SKELETON:
             If SelectedBone > -1 Then
                 AddStateToBuffer
-                
+
                 If hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece).NumTextures > 0 Then
                     tex_index = TextureSelectCombo.ListIndex
                     With hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece)
@@ -2399,7 +2399,7 @@ Private Sub RemoveTextureButton_Click()
             End If
         Case K_AA_SKELETON:
             AddStateToBuffer
-            
+
             tex_index = TextureSelectCombo.ListIndex
             With aa_sk
                 If .NumTextures > 0 Then
@@ -2425,11 +2425,11 @@ End Sub
 Private Sub SaveFF7AnimationButton_Click()
     Dim pattern As String
     Dim error_message As String
-           
+
     On Error GoTo hand
-    
+
     Picture1.Enabled = False
-        
+
     If loaded Then
         Select Case (ModelType)
             Case K_HRC_SKELETON:
@@ -2437,12 +2437,12 @@ Private Sub SaveFF7AnimationButton_Click()
                 CommonDialog1.Filter = pattern
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
-                
+
                 If (CommonDialog1.filename <> "") Then
                     If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite it?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
-                            
+
                     WriteAAnimation AAnim, AAnim.AFile
                 End If
             Case K_AA_SKELETON:
@@ -2454,12 +2454,12 @@ Private Sub SaveFF7AnimationButton_Click()
                 CommonDialog1.Filter = pattern
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
-                
+
                 If (CommonDialog1.filename <> "") Then
                     If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite it?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
-                            
+
                     WriteDAAnimationsPack CommonDialog1.filename, DAAnims
                 End If
         End Select
@@ -2514,7 +2514,7 @@ Private Sub TextureViewer_Paint()
         SetStretchBltMode TextureViewer.hdc, HALFTONE
         SetBrushOrgEx TextureViewer.hdc, 0, 0, aux
         TextureViewer.Cls
-        
+
         Select Case ModelType
             Case K_HRC_SKELETON:
                 If SelectedBone > -1 And SelectedBonePiece > -1 Then
@@ -2567,7 +2567,7 @@ End Sub
 Private Sub XAnimationFramePartText_Change()
     If LoadingAnimationQ Then _
         Exit Sub
-        
+
     If IsNumeric(XAnimationFramePartText.Text) Then
         If XAnimationFramePartText.Text * 10000 <= XAnimationFramePartUpDown.max _
         And XAnimationFramePartText.Text * 10000 >= XAnimationFramePartUpDown.Min Then
@@ -2582,7 +2582,7 @@ End Sub
 Private Sub YAnimationFramePartText_Change()
     If LoadingAnimationQ Then _
         Exit Sub
-        
+
     If IsNumeric(YAnimationFramePartText.Text) Then
         If YAnimationFramePartText.Text * 10000 <= YAnimationFramePartUpDown.max _
         And YAnimationFramePartText.Text * 10000 >= YAnimationFramePartUpDown.Min Then
@@ -2597,7 +2597,7 @@ End Sub
 Private Sub ZAnimationFramePartText_Change()
     If LoadingAnimationQ Then _
         Exit Sub
-        
+
     If IsNumeric(ZAnimationFramePartText.Text) Then
         If ZAnimationFramePartText.Text * 10000 <= ZAnimationFramePartUpDown.max _
         And ZAnimationFramePartText.Text * 10000 >= ZAnimationFramePartUpDown.Min Then
@@ -2623,7 +2623,7 @@ End Sub
 
 Private Sub RemovePieceButton_Click()
     On Error GoTo hand
-    
+
     If ModelType = K_HRC_SKELETON Then
         If hrc_sk.Bones(SelectedBone).NumResources > 0 Then
             AddStateToBuffer
@@ -2649,7 +2649,7 @@ End Sub
 Private Sub ResizeBoneXUpDown_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -2690,18 +2690,18 @@ End Sub
 Private Sub OpenFF7ModelButton_Click()
     On Error GoTo hand
     Dim pattern As String
-    
+
     Picture1.Enabled = False
     pattern = "Any FF7 3D Model|*.*|FF7 Field Model file|*.p|FF7 Battle Model file|*.*|FF7 Field Skeleton file|*.hrc|FF7 Battle Skeleton file|*aa|FF7 Magic Skeleton file|*.d|3D Studio model|*.3ds"
     CommonDialog1.Filter = pattern
     CommonDialog1.CancelError = True
     CommonDialog1.ShowOpen 'Display the Open File Common Dialog
-   
+
     If (CommonDialog1.filename <> "") Then
         If loaded Then DestroyCurrentModel
         OpenFF7File CommonDialog1.filename
     End If
-    
+
     Editor.Hide
     Timer1.Enabled = True
     Exit Sub
@@ -2714,7 +2714,7 @@ End Sub
 
 Private Sub ChangeAnimationButton_Click()
     On Error GoTo hand
-    
+
     Picture1.Enabled = False
     If loaded Then
         Dim pattern As String
@@ -2726,7 +2726,7 @@ Private Sub ChangeAnimationButton_Click()
         CommonDialog1.Filter = pattern
         CommonDialog1.CancelError = True
         CommonDialog1.ShowOpen 'Display the Open File Common Dialog
-        
+
         If ModelType = K_AA_SKELETON Then
             SetBattleModelAnimationsPack CommonDialog1.filename
         Else
@@ -2757,11 +2757,11 @@ Private Sub SaveFF7ModelButton_Click()
     Dim anims_pack_filename As String
     Dim aux_weapon_anim As DAFrame
     Dim anim_index As Integer
-           
+
     On Error GoTo hand
-    
+
     Picture1.Enabled = False
-        
+
     If loaded Then
         Select Case (ModelType)
             Case K_HRC_SKELETON:
@@ -2769,23 +2769,23 @@ Private Sub SaveFF7ModelButton_Click()
                 CommonDialog1.Filter = pattern
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
-                
+
                 If (CommonDialog1.filename <> "") Then
                     If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite (including asociated RSB & P files)?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
-                        
+
                     AddStateToBuffer
-                    
+
                     ComputeHRCBoundingBox hrc_sk, AAnim.Frames(CurrentFrameScroll.value), p_min, p_max
                     SetCameraAroundModel p_min, p_max, 0, 0, -2 * ComputeSceneRadius(p_min, p_max), _
                         0, 0, 0, 1, 1, 1
-                    
+
                     SetLights
-                    
+
                     ApplyHRCChanges hrc_sk, AAnim.Frames(CurrentFrameScroll.value), _
                                     (MsgBox("Compile multi-P bones in a single file?", vbYesNo, "Confirmation") = vbYes)
-                    
+
                     WriteHRCSkeleton hrc_sk, CommonDialog1.filename
                     'WriteAAnimation AAnim, AAnim.AFile
                     CreateDListsFromHRCSkeleton hrc_sk
@@ -2795,14 +2795,14 @@ Private Sub SaveFF7ModelButton_Click()
                 CommonDialog1.Filter = pattern
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
-                
+
                 If (CommonDialog1.filename <> "") Then
                     If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite (including asociated files)?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
-                            
+
                     AddStateToBuffer
-                    
+
                     If Not aa_sk.IsBattleLocation Then _
                             anim_index = val(BattleAnimationCombo.List(BattleAnimationCombo.ListIndex))
                     ComputeAABoundingBox aa_sk, _
@@ -2810,14 +2810,14 @@ Private Sub SaveFF7ModelButton_Click()
                         p_min, p_max
                     SetCameraAroundModel p_min, p_max, 0, 0, -2 * ComputeSceneRadius(p_min, p_max), _
                         0, 0, 0, 1, 1, 1
-                        
+
                     SetLights
-                
+
                     If (aa_sk.NumWeaponAnims > 0) Then _
                         aux_weapon_anim = DAAnims.WeaponAnimations(0).Frames(0)
-                    
+
                     ApplyAAChanges aa_sk, DAAnims.BodyAnimations(0).Frames(0), aux_weapon_anim 'DAAnims.WeaponAnimations(0).Frames(0)
-                    
+
                     If LCase(Right$(CommonDialog1.filename, 2)) = ".d" Then
                         'Magic model
                         'If aa_sk.IsLimitBreak Then
@@ -2843,14 +2843,14 @@ Private Sub SaveFF7ModelButton_Click()
                 CommonDialog1.Filter = pattern
                 CommonDialog1.CancelError = True
                 CommonDialog1.ShowSave 'Display the Open File Common Dialog
-                
+
                 If (CommonDialog1.filename <> "") Then
                     If FileExist(CommonDialog1.filename) Then _
                         If MsgBox("File already exists, overwrite?", vbYesNo, "Confirmation") = vbNo Then _
                             GoTo cleanup
-                    
+
                     AddStateToBuffer
-                    
+
                     glMatrixMode GL_MODELVIEW
                     glPushMatrix
                     With P_Model
@@ -2860,16 +2860,16 @@ Private Sub SaveFF7ModelButton_Click()
                                         .ResizeX, .ResizeY, .ResizeZ
                     End With
                     ApplyPChanges P_Model, (LCase(Right$(CommonDialog1.filename, 2)) <> ".p")
-                    
+
                     ComputePModelBoundingBox P_Model, p_min, p_max
                     SetCameraAroundModel p_min, p_max, _
                         0, 0, -2 * ComputeSceneRadius(p_min, p_max), _
                         0, 0, 0, 1, 1, 1
                     SetLights
-                    
+
                     If glIsEnabled(GL_LIGHTING) = GL_TRUE Then _
                         ApplyCurrentVColors P_Model
-                        
+
                     glPopMatrix
                     WritePModel P_Model, CommonDialog1.filename
                     CreateDListsFromPModel P_Model
@@ -2900,7 +2900,7 @@ Private Sub Form_Load()
     ReadCharFilterFile
     ReDim UnDoBuffer(UNDO_BUFFER_CAPACITY)
     ReDim ReDoBuffer(UNDO_BUFFER_CAPACITY)
-    
+
     DoNotAddStateQ = False
     LightPosXScroll.max = LIGHT_STEPS
     LightPosXScroll.Min = -LIGHT_STEPS
@@ -2908,30 +2908,30 @@ Private Sub Form_Load()
     LightPosYScroll.Min = -LIGHT_STEPS
     LightPosZScroll.max = LIGHT_STEPS
     LightPosZScroll.Min = -LIGHT_STEPS
-    
+
     loaded = False
     BoneSelector.AddItem "None", 0
     UnDoCursor = 0
     ReDoCursor = 0
-    
+
     ''Debug.Print "RES=", GetDeviceCaps(GetDC(0), HORZRES), GetDeviceCaps(GetDC(0), VERTRES)
-    
+
     glEnable GL_DEPTH_TEST
-    
+
     glClearColor 0.5, 0.5, 1, 0
-    
+
     Set Editor = Forms.Add("PEditor")
     Dim comm As String
-    
+
     comm = GetCommLine
-    
+
     If Left$(comm, 1) = Chr$(34) Then comm = Right$(comm, Len(comm) - 1)
-    
+
     If Len(comm) > 0 Then OpenFF7File comm
-    
+
     MinFormWidth = Me.width
     MinFormHeight = Me.height
-    
+
     DontRefreshPicture = False
 End Sub
 
@@ -3002,7 +3002,7 @@ End Sub
 Private Sub ResizeBoneYUpDown_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3078,33 +3078,33 @@ End Sub
 Private Sub Picture1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     Dim BI As Integer
     Dim PI As Integer
-    
+
     Dim anim_index As Integer
     Dim weapon_index As Integer
     Dim weapon_frame As DAFrame
-    
+
     If loaded Then
         SetOGLSettings
-        
+
         glClearColor 0.5, 0.5, 1, 0
         glViewport 0, 0, Picture1.ScaleWidth, Picture1.ScaleHeight
         glClear GL_COLOR_BUFFER_BIT Or GL_DEPTH_BUFFER_BIT
-        
+
         Select Case (ModelType)
             Case K_HRC_SKELETON:
                 ComputeHRCBoundingBox hrc_sk, AAnim.Frames(CurrentFrameScroll.value), p_min, p_max
                 SetCameraAroundModel p_min, p_max, PanX, PanY, PanZ + DIST, _
                     alpha, Beta, Gamma, 1, 1, 1
-                
+
                 BI = GetClosestHRCBone(hrc_sk, AAnim.Frames(CurrentFrameScroll.value), x, y, DIST)
                 SelectedBone = BI
                 BoneSelector.ListIndex = BI
                 If BI > -1 Then
                     PI = GetClosestHRCBonePiece(hrc_sk, AAnim.Frames(CurrentFrameScroll.value), BI, x, y, DIST)
-                    
+
                     SelectedBonePiece = PI
                     If PI > -1 Then
                         SetBonePieceModifiers
@@ -3120,7 +3120,7 @@ Private Sub Picture1_MouseDown(Button As Integer, Shift As Integer, x As Single,
                     SelectedPieceFrame.Enabled = False
                 End If
                 SetTextureEditorFields
-                
+
             Case K_AA_SKELETON:
                 If Not aa_sk.IsBattleLocation Then _
                     anim_index = val(BattleAnimationCombo.List(BattleAnimationCombo.ListIndex))
@@ -3135,7 +3135,7 @@ Private Sub Picture1_MouseDown(Button As Integer, Shift As Integer, x As Single,
                         weapon_index = WeaponCombo.List(WeaponCombo.ListIndex)
                     weapon_frame = DAAnims.WeaponAnimations(anim_index).Frames(CurrentFrameScroll.value)
                 End If
-                
+
                 BI = GetClosestAABone(aa_sk, DAAnims.BodyAnimations(anim_index).Frames(CurrentFrameScroll.value), weapon_frame, weapon_index, x, y, DIST)
                 SelectedBone = BI
                 If BI <= aa_sk.NumBones Then _
@@ -3144,7 +3144,7 @@ Private Sub Picture1_MouseDown(Button As Integer, Shift As Integer, x As Single,
                     If SelectBoneForWeaponAttachmentQ Then _
                         SetWeaponAnimationAttachedToBone (Button = vbRightButton)
                     PI = GetClosestAABoneModel(aa_sk, DAAnims.BodyAnimations(anim_index).Frames(CurrentFrameScroll.value), BI, x, y, DIST)
-                    
+
                     SelectedBonePiece = PI
                     SetBoneModifiers
                     If PI > -1 Then
@@ -3166,9 +3166,9 @@ Private Sub Picture1_MouseDown(Button As Integer, Shift As Integer, x As Single,
                     SelectedPieceFrame.Enabled = False
                 End If
         End Select
-        
+
         'AnimationOptionsFrame.Enabled = SelectedBoneFrame.Enabled
-        
+
         Picture1_Paint
         x_last = x
         y_last = y
@@ -3178,7 +3178,7 @@ End Sub
 Private Sub Picture1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     Dim p_temp As Point3D
     Dim p_temp2 As Point3D
     Dim aux_alpha As Single
@@ -3186,7 +3186,7 @@ Private Sub Picture1_MouseMove(Button As Integer, Shift As Integer, x As Single,
     Dim aux_dist As Single
     Dim anim_index As Integer
     Dim wasValidQ As Boolean
-    
+
     If loaded And Button <> 0 Then
         If ShowGroundCheck.value = vbChecked Then
             SetCameraModelView PanX, PanY, PanZ + DIST, _
@@ -3195,7 +3195,7 @@ Private Sub Picture1_MouseMove(Button As Integer, Shift As Integer, x As Single,
         Else
             wasValidQ = False
         End If
-        
+
         Select Case (Button)
             Case vbLeftButton:
                 Beta = (Beta + x - x_last) Mod 360
@@ -3208,7 +3208,7 @@ Private Sub Picture1_MouseMove(Button As Integer, Shift As Integer, x As Single,
             Case vbRightButton:
                 aux_dist = DIST
                 DIST = DIST + (y - y_last) * diameter / 100
-                
+
                 SetCameraModelView PanX, PanY, PanZ + DIST, _
                     alpha, Beta, Gamma, 1, 1, 1
                 If wasValidQ And IsCameraUnderGround Then _
@@ -3232,41 +3232,41 @@ Private Sub Picture1_MouseMove(Button As Integer, Shift As Integer, x As Single,
                         SetCameraAroundModel p_min, p_max, 0, 0, DIST, _
                             0, 0, 0, 1, 1, 1
                 End Select
-                
+
                 aux_y = PanY
-                
+
                 With p_temp
                     .x = x
                     .y = y
                     .z = GetDepthZ(p_temp2)
                 End With
                 p_temp = GetUnProjectedCoords(p_temp)
-                
+
                 With p_temp
                     PanX = PanX + .x
                     PanY = PanY + .y
                     PanZ = PanZ + .z
                 End With
-                
+
                 With p_temp
                     .x = x_last
                     .y = y_last
                     .z = GetDepthZ(p_temp2)
                 End With
                 p_temp = GetUnProjectedCoords(p_temp)
-                
+
                 With p_temp
                     PanX = PanX - .x
                     PanY = PanY - .y
                     PanZ = PanZ - .z
                 End With
-                
+
                 SetCameraModelView PanX, PanY, PanZ + DIST, _
                     alpha, Beta, Gamma, 1, 1, 1
                 If wasValidQ And IsCameraUnderGround Then _
                     PanY = aux_y
         End Select
-        
+
         x_last = x
         y_last = y
 
@@ -3297,7 +3297,7 @@ End Sub
 Private Sub ResizeBoneXText_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizeBoneXText.Text) Then
         ResizeBoneXUpDown.value = ResizeBoneXText.Text
         'Call ResizeBoneXUpDown_Change
@@ -3309,7 +3309,7 @@ End Sub
 Private Sub ResizeBoneYText_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizeBoneYText.Text) Then
         ResizeBoneYUpDown.value = ResizeBoneYText.Text
         'Call ResizeBoneYUpDown_Change
@@ -3321,7 +3321,7 @@ End Sub
 Private Sub ResizeBoneZText_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizeBoneZText.Text) Then
         ResizeBoneZUpDown.value = ResizeBoneZText.Text
         'Call ResizeBoneZUpDown_Change
@@ -3333,7 +3333,7 @@ End Sub
 Private Sub BoneLengthUpDown_Change()
     If LoadingBoneModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3356,67 +3356,67 @@ Sub DrawCurrentModel()
     Dim p_max As Point3D
     Dim diameter As Integer
     Dim turn_on_lightsQ As Boolean
-    
+
     Select Case ModelType
         Case K_P_FIELD_MODEL:
             ComputePModelBoundingBox P_Model, p_min, p_max
             SetCameraAroundModel p_min, p_max, PanX, PanY, PanZ + DIST, _
                 alpha, Beta, Gamma, 1, 1, 1
-            
+
             If ShowGroundCheck.value = vbChecked Then
                 glDisable GL_LIGHTING
                 DrawGround
                 DrawShadow p_min, p_max
             End If
-            
+
             SetLights
-            
+
             glMatrixMode GL_MODELVIEW
             glPushMatrix
             With P_Model
                 glTranslatef .RepositionX, .RepositionY, .RepositionZ
-                
+
                 BuildRotationMatrixWithQuaternionsXYZ .RotateAlpha, .RotateBeta, _
                     .RotateGamma, rot_mat
                 glMultMatrixd rot_mat(0)
-                
+
                 glScalef .ResizeX, .ResizeY, .ResizeZ
             End With
-            
+
             DrawPModel P_Model, tex_ids, False
             glPopMatrix
         Case K_P_BATTLE_MODEL:
             ComputePModelBoundingBox P_Model, p_min, p_max
             SetCameraAroundModel p_min, p_max, PanX, PanY, PanZ + DIST, _
                 alpha, Beta, Gamma, 1, 1, 1
-            
+
             If ShowGroundCheck.value = vbChecked Then
                 glDisable GL_LIGHTING
                 DrawGround
                 DrawShadow p_min, p_max
             End If
-            
+
             SetLights
-            
+
             glMatrixMode GL_MODELVIEW
             glPushMatrix
             With P_Model
                 glTranslatef .RepositionX, .RepositionY, .RepositionZ
-                
+
                 BuildRotationMatrixWithQuaternionsXYZ .RotateAlpha, .RotateBeta, _
                     .RotateGamma, rot_mat
                 glMultMatrixd rot_mat(0)
-                
+
                 glScalef .ResizeX, .ResizeY, .ResizeZ
             End With
-            
+
             DrawPModel P_Model, tex_ids, False
             glPopMatrix
         Case K_HRC_SKELETON:
             ComputeHRCBoundingBox hrc_sk, AAnim.Frames(CurrentFrameScroll.value), p_min, p_max
             SetCameraAroundModel p_min, p_max, PanX, PanY, PanZ + DIST, _
                 alpha, Beta, Gamma, 1, 1, 1
-                
+
             If ShowGroundCheck.value = vbChecked Then
                 glDisable GL_LIGHTING
                 DrawGround
@@ -3434,7 +3434,7 @@ Sub DrawCurrentModel()
                 glColorMask GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE
             End If
             SelectHRCBoneAndPiece hrc_sk, AAnim.Frames(CurrentFrameScroll.value), SelectedBone, SelectedBonePiece
-            
+
             If ShowBonesCheck.value = vbChecked Then
                 glDisable GL_DEPTH_TEST
                 glDisable GL_LIGHTING
@@ -3442,9 +3442,9 @@ Sub DrawCurrentModel()
                 DrawHRCSkeletonBones hrc_sk, AAnim.Frames(CurrentFrameScroll.value)
                 glEnable GL_DEPTH_TEST
             End If
-               
+
         Case K_AA_SKELETON:
-            
+
             If Not aa_sk.IsBattleLocation Then _
                 anim_index = val(BattleAnimationCombo.List(BattleAnimationCombo.ListIndex))
             ComputeAABoundingBox aa_sk, _
@@ -3452,7 +3452,7 @@ Sub DrawCurrentModel()
                 p_min, p_max
             SetCameraAroundModel p_min, p_max, PanX, PanY, PanZ + DIST, _
                 alpha, Beta, Gamma, 1, 1, 1
-                
+
             If ShowGroundCheck.value = vbChecked Then
                 glDisable GL_LIGHTING
                 DrawGround
@@ -3460,7 +3460,7 @@ Sub DrawCurrentModel()
             End If
 
             SetLights
-            
+
             With DAAnims.BodyAnimations(anim_index)
                 weapon_index = -1
                 If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
@@ -3468,7 +3468,7 @@ Sub DrawCurrentModel()
                         weapon_index = WeaponCombo.List(WeaponCombo.ListIndex)
                     aux_anim = DAAnims.WeaponAnimations(anim_index).Frames(CurrentFrameScroll.value)
                 End If
-                
+
                 DrawAASkeleton aa_sk, .Frames(CurrentFrameScroll.value), aux_anim, weapon_index, (DListEnableCheck.value = vbChecked)
                 If ShowLastFrameGhostCheck.value = vbChecked And Not aa_sk.IsBattleLocation Then
                     glColorMask GL_TRUE, GL_TRUE, GL_FALSE, GL_TRUE
@@ -3480,7 +3480,7 @@ Sub DrawCurrentModel()
                     glColorMask GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE
                 End If
                 SelectAABoneAndModel aa_sk, .Frames(CurrentFrameScroll.value), aux_anim, weapon_index, SelectedBone, SelectedBonePiece
-                
+
                 If ShowBonesCheck.value = vbChecked Then
                     glDisable GL_DEPTH_TEST
                     glDisable GL_LIGHTING
@@ -3494,7 +3494,7 @@ End Sub
 Private Sub ResizePieceX_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3522,7 +3522,7 @@ End Sub
 Private Sub ResizePieceY_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3550,7 +3550,7 @@ End Sub
 Private Sub ResizePieceZ_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3578,7 +3578,7 @@ End Sub
 Private Sub RepositionX_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3606,7 +3606,7 @@ End Sub
 Private Sub RepositionY_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3634,7 +3634,7 @@ End Sub
 Private Sub RepositionZ_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType
@@ -3674,7 +3674,7 @@ End Sub
 Private Sub RepositionXText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-            
+
     If IsNumeric(RepositionXText.Text) Then
         If RepositionXText.Text >= -100 And RepositionXText.Text <= 100 Then
             RepositionX.value = RepositionXText.Text
@@ -3693,10 +3693,10 @@ End Sub
 Private Sub RotateAlphaText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RotateAlphaText.Text) Then
         If RotateAlphaText.Text >= 0 And RotateAlphaText.Text <= 360 Then
             RotateAlpha.value = RotateAlphaText.Text
@@ -3715,7 +3715,7 @@ End Sub
 Private Sub RotateBetaText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RotateBetaText.Text) Then
         If RotateBetaText.Text >= 0 And RotateBetaText.Text <= 360 Then
             RotateBeta.value = RotateBetaText.Text
@@ -3734,7 +3734,7 @@ End Sub
 Private Sub RotateGammaText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RotateGammaText.Text) Then
         If RotateGammaText.Text >= 0 And RotateGammaText.Text <= 360 Then
             RotateGamma.value = RotateGammaText.Text
@@ -3753,7 +3753,7 @@ End Sub
 Private Sub ResizePieceXText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizePieceXText.Text) Then
         If ResizePieceXText.Text >= 0 And ResizePieceXText.Text <= 400 Then
             ResizePieceX.value = ResizePieceXText.Text
@@ -3771,7 +3771,7 @@ End Sub
 Private Sub ResizePieceYText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizePieceYText.Text) Then
         If ResizePieceYText.Text >= 0 And ResizePieceYText.Text <= 400 Then
             ResizePieceY.value = ResizePieceYText.Text
@@ -3790,7 +3790,7 @@ End Sub
 Private Sub ResizePieceZText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizePieceZText.Text) Then
         If ResizePieceZText.Text >= 0 And ResizePieceZText.Text <= 400 Then
             ResizePieceZ.value = ResizePieceZText.Text
@@ -3809,10 +3809,10 @@ End Sub
 Private Sub RepositionZText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RepositionZText.Text) Then
         If RepositionZText.Text >= -100 And RepositionZText.Text <= 100 Then
             RepositionZ.value = RepositionZText.Text
@@ -3831,7 +3831,7 @@ End Sub
 Private Sub RepositionYText_Change()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RepositionYText.Text) Then
         If RepositionYText.Text >= -100 And RepositionYText.Text <= 100 Then
             RepositionY.value = RepositionYText.Text
@@ -3851,7 +3851,7 @@ Sub SetFrameEditorFields()
     FrameDataPartOptions.Enabled = True
 
     LoadingAnimationQ = True
-    
+
     'If FrameDataPartUpDown.value = K_FRAME_ROOT_TRANSLATION Then
         XAnimationFramePartUpDown.max = 999999999
         XAnimationFramePartUpDown.Min = -999999999
@@ -3960,7 +3960,7 @@ Sub SetFrameEditorFields()
                     End If
             End Select
     End Select
-    
+
     'If FrameDataPartUpDown.value <> K_FRAME_ROOT_TRANSLATION Then
     '    XAnimationFramePartUpDown.max = 7200000
     '    XAnimationFramePartUpDown.Min = -7200000
@@ -3969,12 +3969,12 @@ Sub SetFrameEditorFields()
     '    ZAnimationFramePartUpDown.max = 7200000
     '    ZAnimationFramePartUpDown.Min = -7200000
     'End If
-    
+
     LoadingAnimationQ = False
 End Sub
 Sub SetTextureEditorFields()
     Dim ti As Integer
-    
+
     TextureSelectCombo.Clear
     Select Case ModelType
         Case K_HRC_SKELETON:
@@ -4008,27 +4008,27 @@ Sub SetTextureEditorFields()
 End Sub
 Sub SetBoneModifiers()
     LoadingBoneModifiersQ = True
-    
+
     Select Case ModelType
         Case K_HRC_SKELETON:
             With hrc_sk.Bones(SelectedBone)
                 ResizeBoneXUpDown.value = .ResizeX * 100
                 ResizeBoneYUpDown.value = .ResizeY * 100
                 ResizeBoneZUpDown.value = .ResizeZ * 100
-                
+
                 BoneLengthText.Text = .length
                 BoneLengthUpDown.value = .length * 10000
                 BoneLengthUpDown.Increment = Abs(BoneLengthUpDown.value / 100)
             End With
             Call SetFrameEditorFields
-            
+
         Case K_AA_SKELETON:
             If (SelectedBone = aa_sk.NumBones) Then
                 With aa_sk.WeaponModels(WeaponCombo.ListIndex)
                     ResizeBoneXUpDown.value = .ResizeX * 100
                     ResizeBoneYUpDown.value = .ResizeY * 100
                     ResizeBoneZUpDown.value = .ResizeZ * 100
-                    
+
                     BoneLengthLabel.Visible = False
                     BoneLengthText.Visible = False
                     BoneLengthUpDown.Visible = False
@@ -4040,11 +4040,11 @@ Sub SetBoneModifiers()
                     ResizeBoneXUpDown.value = .ResizeX * 100
                     ResizeBoneYUpDown.value = .ResizeY * 100
                     ResizeBoneZUpDown.value = .ResizeZ * 100
-                    
+
                     BoneLengthText.Text = .length
                     BoneLengthUpDown.value = .length * 10000
                     BoneLengthUpDown.Increment = Abs(BoneLengthUpDown.value / 100)
-                    
+
                     BoneLengthText.Visible = True
                     BoneLengthUpDown.Visible = True
                     AddPieceButton.Visible = True
@@ -4052,10 +4052,10 @@ Sub SetBoneModifiers()
                     BoneLengthLabel.Visible = True
                 End With
             End If
-                
+
             Call SetFrameEditorFields
     End Select
-    
+
     LoadingBoneModifiersQ = False
 End Sub
 Sub DestroyCurrentModel()
@@ -4071,9 +4071,9 @@ Sub SetBonePieceModifiers()
     Dim obj As PModel
     Dim Diam As Single
     Dim weapon_index As Integer
-    
+
     LoadingBonePieceModifiersQ = True
-    
+
     Select Case ModelType
         Case K_HRC_SKELETON:
             obj = hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece).Model
@@ -4091,45 +4091,45 @@ Sub SetBonePieceModifiers()
             obj = P_Model
             Diam = ComputeDiameter(P_Model.BoundingBox) / 100
     End Select
-    
+
     With obj
         ResizePieceX.value = .ResizeX * 100
         ResizePieceY.value = .ResizeY * 100
         ResizePieceZ.value = .ResizeZ * 100
-        
+
         RepositionX.value = .RepositionX / Diam
         RepositionY.value = .RepositionY / Diam
         RepositionZ.value = .RepositionZ / Diam
-        
+
         RotateAlpha.value = .RotateAlpha
         RotateBeta.value = .RotateBeta
         RotateGamma.value = .RotateGamma
-        
+
         ResizePieceXText.Text = .ResizeX * 100
         ResizePieceYText.Text = .ResizeY * 100
         ResizePieceZText.Text = .ResizeZ * 100
-        
+
         RepositionXText.Text = .RepositionX / Diam
         RepositionYText.Text = .RepositionY / Diam
         RepositionZText.Text = .RepositionZ / Diam
-        
+
         RotateAlphaText.Text = .RotateAlpha
         RotateBetaText.Text = .RotateBeta
         RotateGammaText.Text = .RotateGamma
-        
+
         ResizePieceX.Refresh
         ResizePieceY.Refresh
         ResizePieceZ.Refresh
-        
+
         RepositionX.Refresh
         RepositionY.Refresh
         RepositionZ.Refresh
-        
+
         RotateAlpha.Refresh
         RotateBeta.Refresh
         RotateGamma.Refresh
     End With
-    
+
     LoadingBonePieceModifiersQ = False
 End Sub
 Sub UpdateEditedPiece()
@@ -4148,7 +4148,7 @@ Sub UpdateEditedPiece()
                 aa_sk.Bones(EditedBone).Models(EditedBonePiece) = EditedPModel
                 CreateDListsFromAASkeleton aa_sk
             End If
-            
+
         Case Else:
             P_Model = EditedPModel
             SetOGLContext Picture1.hdc, OGLContext
@@ -4160,9 +4160,9 @@ Sub UpdateEditedPiece()
 End Sub
 Sub FillBoneSelector()
     Dim BI
-    
+
     BoneSelector.Clear
-    
+
     Select Case ModelType
         Case K_HRC_SKELETON:
             With hrc_sk
@@ -4188,16 +4188,16 @@ Sub SetLights()
     Dim light_x As Single
     Dim light_y As Single
     Dim light_z As Single
-    
+
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     Dim scene_diameter As Single
-    
+
     Dim anim_index As Integer
-    
+
     Dim infinityFarQ As Boolean
-    
+
     If FrontLight.value = vbUnchecked And _
        RearLight.value = vbUnchecked And _
        RightLight.value = vbUnchecked And _
@@ -4205,7 +4205,7 @@ Sub SetLights()
         glDisable GL_LIGHTING
         Exit Sub
     End If
-    
+
     Select Case ModelType
         Case K_P_FIELD_MODEL:
             ComputePModelBoundingBox P_Model, p_min, p_max
@@ -4220,33 +4220,33 @@ Sub SetLights()
                 DAAnims.BodyAnimations(anim_index).Frames(CurrentFrameScroll.value), _
                 p_min, p_max
     End Select
-    
+
     scene_diameter = -2 * ComputeSceneRadius(p_min, p_max)
-    
+
     light_x = scene_diameter / LIGHT_STEPS * LightPosXScroll.value
     light_y = scene_diameter / LIGHT_STEPS * LightPosYScroll.value
     light_z = scene_diameter / LIGHT_STEPS * LightPosZScroll.value
-    
+
     infinityFarQ = (InifintyFarLightsCheck.value = vbChecked)
-    
+
     If RightLight.value = vbChecked Then
         SetLighting GL_LIGHT0, light_z, light_y, light_x, 0.5, 0.5, 0.5, infinityFarQ
     Else
         glDisable GL_LIGHT0
     End If
-    
+
     If LeftLight.value = vbChecked Then
         SetLighting GL_LIGHT1, -light_z, light_y, light_x, 0.5, 0.5, 0.5, infinityFarQ
     Else
         glDisable GL_LIGHT1
     End If
-    
+
     If FrontLight.value = vbChecked Then
         SetLighting GL_LIGHT2, light_x, light_y, light_z, 1, 1, 1, infinityFarQ
     Else
         glDisable GL_LIGHT2
     End If
-    
+
     If RearLight.value = vbChecked Then
         SetLighting GL_LIGHT3, light_x, light_y, -light_z, 0.75, 0.75, 0.75, infinityFarQ
     Else
@@ -4261,13 +4261,13 @@ Private Sub XAnimationFramePartUpDown_Change()
     Dim fi As Integer
     Dim val As Single
     Dim diff As Single
-    
+
     If LoadingAnimationQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
-    
+
     val = XAnimationFramePartUpDown.value / 10000
     XAnimationFramePartText.Text = val
 
@@ -4377,13 +4377,13 @@ Private Sub YAnimationFramePartUpDown_Change()
     Dim fi As Integer
     Dim val As Single
     Dim diff As Single
-    
+
     If LoadingAnimationQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
-    
+
     val = YAnimationFramePartUpDown.value / 10000
     YAnimationFramePartText.Text = val
 
@@ -4493,13 +4493,13 @@ Private Sub ZAnimationFramePartUpDown_Change()
     Dim fi As Integer
     Dim val As Single
     Dim diff As Single
-    
+
     If LoadingAnimationQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
-    
+
     val = ZAnimationFramePartUpDown.value / 10000
     ZAnimationFramePartText.Text = val
 
@@ -4647,13 +4647,13 @@ Private Sub DrawShadow(ByRef p_min As Point3D, ByRef p_max As Point3D)
     Dim si As Integer
     Dim PI As Double
     PI = 3.141593
-    
+
     Dim cx As Single
     Dim CZ As Single
-    
+
     cx = 0
     CZ = 0
-    
+
     sub_y = p_max.y
     p_min_aux = p_min
     p_max_aux = p_max
@@ -4676,7 +4676,7 @@ Private Sub DrawShadow(ByRef p_min As Point3D, ByRef p_max As Point3D)
     glEnd
     glEnable GL_DEPTH_TEST
     glDisable GL_FOG
-    
+
     'Draw underlying box (just depth)
     glColorMask GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE
     glColor3f 1, 1, 1
@@ -4685,29 +4685,29 @@ Private Sub DrawShadow(ByRef p_min As Point3D, ByRef p_max As Point3D)
         glVertex3f p_max.x, 0, p_min.z
         glVertex3f p_min.x, 0, p_min.z
         glVertex3f p_min.x, 0, p_max.z
-    
+
         glVertex3f p_max.x, 0, p_max.z
         glVertex3f p_max.x, sub_y, p_max.z
         glVertex3f p_max.x, sub_y, p_min.z
         glVertex3f p_max.x, 0, p_min.z
-        
+
         glVertex3f p_max.x, 0, p_min.z
         glVertex3f p_max.x, sub_y, p_min.z
         glVertex3f p_min.x, sub_y, p_min.z
         glVertex3f p_min.x, 0, p_min.z
-        
+
         glVertex3f p_min.x, sub_y, p_max.z
         glVertex3f p_min.x, 0, p_max.z
         glVertex3f p_min.x, 0, p_min.z
         glVertex3f p_min.x, sub_y, p_min.z
-        
+
         glVertex3f p_max.x, sub_y, p_max.z
         glVertex3f p_max.x, 0, p_max.z
         glVertex3f p_min.x, 0, p_max.z
         glVertex3f p_min.x, sub_y, p_max.z
     glEnd
     glColorMask GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE
-    
+
 End Sub
 
 Private Sub DrawGround()
@@ -4716,17 +4716,17 @@ Private Sub DrawGround()
     Dim g As Single
     Dim B As Single
     Dim lw As Integer
-    
+
     glMatrixMode GL_PROJECTION
     glPushMatrix
     glLoadIdentity
     gluPerspective 60, Picture1.ScaleWidth / Picture1.ScaleHeight, 0.1, 1000000
-    
+
     Dim f_mode As Long
     Dim f_color(4) As Single
     Dim f_end As Single
     Dim f_start As Single
-    
+
     f_color(0) = 0.5
     f_color(1) = 0.5
     f_color(2) = 1
@@ -4734,13 +4734,13 @@ Private Sub DrawGround()
     glEnable GL_FOG
     glFogiv GL_FOG_MODE, f_mode
     glFogfv GL_FOG_COLOR, f_color(0)
-    
-    
+
+
     f_end = 100000
     f_start = 10000
     glFogfv GL_FOG_END, f_end
     glFogfv GL_FOG_START, f_start
-    
+
     'Draw plane
     glColor3f 0.9, 0.9, 1
     glDisable GL_DEPTH_TEST
@@ -4750,7 +4750,7 @@ Private Sub DrawGround()
         glVertex4f -1, 0, -1, 0.000001
         glVertex4f -1, 0, 1, 0.000001
     glEnd
-    
+
     r = 0.9
     g = 0.9
     B = 1
@@ -4772,7 +4772,7 @@ Private Sub DrawGround()
     Next gi
     glLineWidth 1
     'glDisable (GL_LINE_SMOOTH)
-    
+
     glEnable GL_DEPTH_TEST
     glDisable GL_FOG
     glClear GL_DEPTH_BUFFER_BIT
@@ -4783,7 +4783,7 @@ Sub SetWeaponAnimationAttachedToBone(ByVal middleQ As Boolean)
     Dim fi As Integer
     Dim MV_matrix(16) As Double
     Dim jsp As Integer
-    
+
     AddStateToBuffer
     anim_index = BattleAnimationCombo.List(BattleAnimationCombo.ListIndex)
     With DAAnims.BodyAnimations(anim_index)
@@ -4812,7 +4812,7 @@ Sub SetWeaponAnimationAttachedToBone(ByVal middleQ As Boolean)
 End Sub
 Private Sub AddStateToBuffer()
     Dim si As Integer
-    
+
     If (UnDoCursor < UNDO_BUFFER_CAPACITY) Then
         StoreState UnDoBuffer(UnDoCursor)
         UnDoCursor = UnDoCursor + 1
@@ -4826,7 +4826,7 @@ Private Sub AddStateToBuffer()
 End Sub
 Private Sub ReDo()
     Dim si As Integer
-    
+
     If Editor.Visible = True Then
         MsgBox "Can't ReDo while the editor window is open"
         Exit Sub
@@ -4844,7 +4844,7 @@ Private Sub ReDo()
                 Next si
                 StoreState UnDoBuffer(UnDoCursor)
             End If
-            
+
             RestoreState ReDoBuffer(ReDoCursor - 1)
             ReDoCursor = ReDoCursor - 1
         Else
@@ -4856,7 +4856,7 @@ Private Sub ReDo()
 End Sub
 Private Sub UnDo()
     Dim si As Integer
-    
+
     If Editor.Visible = True Then
         MsgBox "Can't UnDo while the editor window is open"
         Exit Sub
@@ -4874,7 +4874,7 @@ Private Sub UnDo()
                 Next si
                 StoreState ReDoBuffer(ReDoCursor)
             End If
-            
+
             RestoreState UnDoBuffer(UnDoCursor - 1)
             UnDoCursor = UnDoCursor - 1
         Else
@@ -4889,22 +4889,22 @@ Private Sub RestoreState(ByRef State As ModelEditorState)
     With State
         SelectedBone = .SelectedBone
         SelectedBonePiece = .SelectedBonePiece
-        
+
         alpha = .alpha
         Beta = .Beta
         Gamma = .Gamma
-        
+
         DIST = .DIST
-        
+
         PanX = .PanX
         PanY = .PanY
         PanZ = .PanZ
-    
+
         Select Case (ModelType)
             Case K_HRC_SKELETON:
                 hrc_sk = .hrc_sk
                 AAnim = .AAnim
-                
+
                 If (SelectedBone > -1) Then
                     SetBoneModifiers
                     If (SelectedBonePiece > -1) Then
@@ -4914,7 +4914,7 @@ Private Sub RestoreState(ByRef State As ModelEditorState)
                 End If
                 SetTextureEditorFields
                 SetFrameEditorFields
-                
+
                 TextureSelectCombo.ListIndex = .TextureIndex
                 If .FrameIndex > AAnim.NumFrames Then
                     CurrentFrameScroll.value = .FrameIndex
@@ -4926,7 +4926,7 @@ Private Sub RestoreState(ByRef State As ModelEditorState)
             Case K_AA_SKELETON:
                 aa_sk = .aa_sk
                 DAAnims = .DAAnims
-                
+
                 If (SelectedBone > -1) Then
                     SetBoneModifiers
                     If (SelectedBonePiece > -1) Then _
@@ -4934,7 +4934,7 @@ Private Sub RestoreState(ByRef State As ModelEditorState)
                 End If
                 SetTextureEditorFields
                 SetFrameEditorFields
-                
+
                 If BattleAnimationCombo.Visible Then _
                     BattleAnimationCombo.ListIndex = .BattleAnimationIndex
                     If .FrameIndex < .DAAnims.BodyAnimations(.BattleAnimationIndex).NumFrames2 Then
@@ -4959,28 +4959,28 @@ Private Sub StoreState(ByRef State As ModelEditorState)
     With State
         .SelectedBone = SelectedBone
         .SelectedBonePiece = SelectedBonePiece
-        
+
         .alpha = alpha
         .Beta = Beta
         .Gamma = Gamma
-        
+
         .DIST = DIST
-        
+
         .PanX = PanX
         .PanY = PanY
         .PanZ = PanZ
-    
+
         Select Case (ModelType)
             Case K_HRC_SKELETON:
                 .hrc_sk = hrc_sk
                 .AAnim = AAnim
-                
+
                 .FrameIndex = CurrentFrameScroll.value
                 .TextureIndex = TextureSelectCombo.ListIndex
             Case K_AA_SKELETON:
                 .aa_sk = aa_sk
                 .DAAnims = DAAnims
-                
+
                 .FrameIndex = CurrentFrameScroll.value
                 If BattleAnimationCombo.Visible Then _
                     .BattleAnimationIndex = BattleAnimationCombo.ListIndex
@@ -4997,9 +4997,9 @@ End Sub
 Private Sub ResetCamera()
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     Dim anim_index As Integer
-    
+
     If loaded Then
         Select Case (ModelType)
             Case K_HRC_SKELETON:
@@ -5015,7 +5015,7 @@ Private Sub ResetCamera()
             Case K_P_FIELD_MODEL:
                 ComputePModelBoundingBox P_Model, p_min, p_max
         End Select
-        
+
         alpha = 200
         Beta = 45
         Gamma = 0
@@ -5027,7 +5027,7 @@ Private Sub ResetCamera()
 End Sub
 Private Sub SetOGLSettings()
     SetOGLContext Picture1.hdc, OGLContext
-        
+
     glClearDepth 1#
     glDepthFunc GL_LEQUAL
     glEnable GL_DEPTH_TEST
@@ -5037,20 +5037,20 @@ Private Sub SetOGLSettings()
     glAlphaFunc GL_GREATER, 0
     glCullFace GL_FRONT
     glEnable GL_CULL_FACE
-    
+
     'init the function
     'InitAddrCall
-    
+
     'get your api entries
     'Initlpfns
-    
+
     Call Picture1_Paint
 End Sub
 
 Private Sub PieceRotationModifiersChanged()
     If LoadingBonePieceModifiersQ Then _
         Exit Sub
-        
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     Select Case ModelType

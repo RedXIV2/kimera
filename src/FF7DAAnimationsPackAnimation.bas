@@ -10,7 +10,7 @@ Type DAAnimation
     AnimationLength As Integer      'Don't use this field EVER. It would be interpreted as a signed value.
     AnimationLengthLong As Long     'This isn't part of the actual structure, it's used just to overcome the lack of unsigned shorts support
     key As Byte
-    
+
     Frames() As DAFrame
     UnknownData() As Byte
 End Type
@@ -23,9 +23,9 @@ Sub ReadDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByVal BonesVec
     Dim err_msg As String
     Dim missing_frame_counter As Boolean
     Dim last_offsetBit As Long
-    
+
     On Error GoTo ErrorHand
-    
+
     ''Debug.Print "+Base offset at byte" + Str$(offset)
     With Animation
         Get NFile, offset, .NumBonesModel
@@ -46,7 +46,7 @@ Sub ReadDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByVal BonesVec
         Get NFile, offset + 14, .AnimationLength
         CopyMemory .AnimationLengthLong, .AnimationLength, 2
         Get NFile, offset + 16, .key
-        
+
         'Hack for reading animations with missing secondary frame counter (which can't be actually used by FF7)
         If .NumFrames2 = .BlockLength - 5 Then
             Get NFile, offset + 12, .AnimationLength
@@ -60,20 +60,20 @@ Sub ReadDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByVal BonesVec
             Get NFile, offset + 17, AnimationStream
             .MissingNumFrames2 = False
         End If
-        
+
         sanity_check = True
-        
+
         If .NumFrames1 <> .NumFrames2 Then
             Debug.Print "WARNING!!! NumFrames1 is different from NumFrames2"
         End If
         'From now on, let's ignore the frame counter and just read as many frames a possible.
         .NumFrames2 = 9999
-        
+
         If Not (.key = 0 Or .key = 2 Or .key = 4) Then
             err_msg = "ERROR!!! Invalid key " + Str$(.key)
             sanity_check = False
         End If
-        
+
         If (Not sanity_check) Then
             MsgBox err_msg + ". Animation skipped"
             Debug.Print err_msg
@@ -83,13 +83,13 @@ Sub ReadDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByVal BonesVec
             offset = offset + .BlockLength + 12
             Exit Sub
         End If
-        
+
         ReDim .Frames(.NumFrames2 - 1)
-        
+
         offsetBit = 0
         'Debug.Print "   -First frame at byte" + Str$(offset + 17)
         'Debug.Print "   Frame 0"
-        
+
         ReadDAUncompressedFrame AnimationStream, offsetBit, .key, BonesVectorLength, .Frames(0)
         For fi = 1 To .NumFrames2 - 1
             'If we ran out of data while reading the frame, it means this frame doesn't
@@ -101,14 +101,14 @@ Sub ReadDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByVal BonesVec
                 Exit For
             End If
         Next fi
-        
+
         If (.BlockLength - .AnimationLengthLong > 5) Then
             ReDim .UnknownData(.BlockLength - .AnimationLengthLong - 1)
             'Debug.Print ".AnimationLengthLong = "; .AnimationLengthLong; "unkonwdata = "; UBound(.UnknownData) + 1; " total = "; .AnimationLengthLong + UBound(.UnknownData) + 1
             Get NFile, offset + 5 + .AnimationLengthLong + 12, .UnknownData
         End If
 
-        
+
         offset = offset + .BlockLength + 12
     End With
     Exit Sub
@@ -126,10 +126,10 @@ Sub WriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef Animati
     Dim BI As Integer
     Dim num_bones As Integer
     Dim offset_correction As Long
-    
+
     With Animation
         offset_correction = 0
-        
+
         Put NFile, offset, .NumBonesModel
         Put NFile, offset + 4, .NumFrames1
         If .BlockLength < 11 Or .NumFrames2 = 0 Then
@@ -143,7 +143,7 @@ Sub WriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef Animati
                 offset_correction = -2
             End If
             'We don't know yet the value of AnimationLength, so write it later
-            
+
             'Find highest key without exceding the maximum animation length
             .key = 0
             Do
@@ -161,7 +161,7 @@ Sub WriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef Animati
                     'Debug.Print "   Frame "; Str$(fi)
                     WriteDAFrame AnimationStream, offsetBit, .key, .Frames(fi), .Frames(fi - 1) ', AnimationCarry
                 Next fi
-                
+
                 .BlockLength = UBound(AnimationStream) + 1 + 5
                 .AnimationLengthLong = UBound(AnimationStream) + 1
                 .key = .key + 2
@@ -196,7 +196,7 @@ End Sub
 'Ensure the animation delta between two consecutive frames stays always on the (-180�, 180�) boundary (it's not possible to encode values outside)
 Sub NormalizeDAAnimationsPackAnimation(ByRef Anim As DAAnimation)
     Dim fi As Integer
-    
+
     For fi = 0 To Anim.NumFrames2 - 2
         NormalizeDAAnimationsPackAnimationFrame Anim.Frames(fi), Anim.Frames(fi + 1)
     Next fi
@@ -211,7 +211,7 @@ Sub CheckWriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef An
     Dim err_msg As String
     Dim missing_frame_counter As Boolean
     Dim last_offsetBit As Long
-    
+
     Dim NumBonesModel As Long           'Number of bones for the model + 1 (root transformation). NOT RELIABLE
     Dim NumFrames1 As Long              'Usually wrong, so refrain from using it.
     Dim BlockLength As Long
@@ -220,9 +220,9 @@ Sub CheckWriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef An
     Dim AnimationLength As Integer      'Don't use this field EVER. It would be interpreted as a signed value.
     Dim AnimationLengthLong As Long     'This isn't part of the actual structure, it's used just to overcome the lack of unsigned shorts support
     Dim key As Byte
-    
+
     Dim Frames() As DAFrame
-    
+
     With Animation
         Get NFile, offset, NumBonesModel
         If NumBonesModel <> .NumBonesModel Then
@@ -244,7 +244,7 @@ Sub CheckWriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef An
             If NumFrames2 <> .NumFrames2 Then
                 Debug.Print "Error"
             End If
-            
+
             Exit Sub
         End If
         Get NFile, offset + 12, NumFrames2
@@ -260,7 +260,7 @@ Sub CheckWriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef An
         If key <> .key Then
             Debug.Print "Error"
         End If
-        
+
         'Hack for reading animations with missing secondary frame counter (which can't be actually used by FF7)
         If NumFrames2 = BlockLength - 5 Then
             Get NFile, offset + 12, AnimationLength
@@ -280,9 +280,9 @@ Sub CheckWriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef An
             Get NFile, offset + 17, AnimationStream
             missing_frame_counter = False
         End If
-        
+
         offsetBit = 0
-        
+
         num_bones = UBound(.Frames(0).Bones) + 1
         CheckWriteDAUncompressedFrame AnimationStream, offsetBit, key, .Frames(0)
         For fi = 1 To NumFrames2 - 1
@@ -292,7 +292,7 @@ Sub CheckWriteDAAnimation(ByVal NFile As Integer, ByRef offset As Long, ByRef An
             last_offsetBit = offsetBit
             CheckWriteDAFrame AnimationStream, offsetBit, key, .Frames(fi), .Frames(fi - 1)
         Next fi
-        
+
         offset = offset + .BlockLength + 12
     End With
 End Sub

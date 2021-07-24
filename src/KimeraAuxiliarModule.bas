@@ -60,42 +60,42 @@ Public Sub UpdateTranslationTable(ByRef translation_table_vertex() As pair_i_b, 
     Dim Group As Integer
     Dim diff As Integer
     Dim base_vert As Integer
-    
+
     diff = obj.head.NumVerts - 1 - UBound(translation_table_vertex)
-    
+
     Group = GetPolygonGroup(obj.Groups, p_index)
     base_vert = obj.Groups(Group).offvert + obj.Groups(Group).numvert - 1 - diff
-    
+
     ReDim Preserve translation_table_vertex(obj.head.NumVerts - 1)
-    
+
     For vi = obj.head.NumVerts - 1 To base_vert + 1 Step -1
         With translation_table_vertex(vi)
             .i = translation_table_vertex(vi - diff).i
             .B = translation_table_vertex(vi - diff).B
         End With
     Next vi
-    
-    
+
+
     For vi = base_vert + 1 To base_vert + diff
         With translation_table_vertex(vi)
             .i = c_index
             .B = 1
         End With
     Next vi
-    
+
 End Sub
 Public Sub ApplyColorTable(ByRef obj As PModel, ByRef color_table() As color, ByRef translation_table_vertex() As pair_i_b)
     Dim gi As Integer
     Dim vi As Integer
-    
+
     Dim C As color
     Dim dv As Double
-    
+
     For vi = 0 To obj.head.NumVerts - 1
-        
+
         C = color_table(translation_table_vertex(vi).i)
         dv = translation_table_vertex(vi).B
-        
+
         With obj.vcolors(vi)
             .r = max(0, Min(255, Fix(C.r / dv)))
             .g = max(0, Min(255, Fix(C.g / dv)))
@@ -111,19 +111,19 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
     Dim col As color
     Dim it As Integer, i As Integer
     Dim diff As Long
-    
+
     With obj.head
         ReDim color_table(.NumVerts + .NumPolys + 1)
         ReDim translation_table_polys(.NumPolys - 1)
         ReDim translation_table_vertex(.NumVerts - 1)
     End With
-    
+
     For it = 0 To obj.head.NumVerts - 1
         col = obj.vcolors(it)
-        
+
         v = getBrightness(col.r, col.g, col.B)
         ''Debug.Print "Brightness(" + Str$(it) + "):" + Str$(v)
-    
+
         If v = 0 Then
             dv = 255
         Else
@@ -134,7 +134,7 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
         temp_b = Min(255, Fix(col.B * dv))
         C = -1
         diff = 765
-        
+
         For i = 0 To n_colors - 1
             With color_table(i)
                 If (.r <= Min(255, temp_r + threshold) And _
@@ -146,7 +146,7 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
                         If Abs(temp_r - .r) + _
                            Abs(temp_g - .g) + _
                            Abs(temp_b - .B) < diff Then
-                           
+
                             diff = Abs(temp_r - .r) + _
                                    Abs(temp_g - .g) + _
                                    Abs(temp_b - .B)
@@ -155,7 +155,7 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
                     End If
             End With
         Next i
-    
+
         If C = -1 Then
             color_table(n_colors).r = temp_r
             color_table(n_colors).g = temp_g
@@ -163,20 +163,20 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
 
             n_colors = n_colors + 1
         End If
-            
+
         If C = -1 Then C = n_colors - 1
-        
+
         With translation_table_vertex(it)
             translation_table_vertex(it).i = C
             translation_table_vertex(it).B = dv
         End With
     Next it
-    
+
     For it = 0 To obj.head.NumPolys - 1
         col = obj.PColors(it)
-        
+
         v = getBrightness(col.r, col.g, col.B)
-    
+
         If v = 0 Then
             dv = 128
         Else
@@ -187,7 +187,7 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
         temp_b = Min(255, Fix(col.B * dv))
         C = -1
         diff = 765
-        
+
         For i = 0 To n_colors - 1
             With color_table(i)
                 If (.r <= Min(255, temp_r + threshold) And _
@@ -199,7 +199,7 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
                         If Abs(temp_r - .r) + _
                            Abs(temp_g - .g) + _
                            Abs(temp_b - .B) < diff Then
-                           
+
                             diff = Abs(temp_r - .r) + _
                                    Abs(temp_g - .g) + _
                                    Abs(temp_b - .B)
@@ -208,20 +208,20 @@ Public Sub fill_color_table(ByRef obj As PModel, ByRef color_table() As color, B
                     End If
             End With
         Next i
-    
+
         If C = -1 Then
             With color_table(n_colors)
                 .r = temp_r
                 .g = temp_g
                 .B = temp_b
             End With
-            
+
             n_colors = n_colors + 1
             C = n_colors - 1
         End If
-            
+
         translation_table_polys(it).i = C
-        
+
         If dv = 0 Then
             translation_table_polys(it).B = 0.001
         Else
@@ -234,12 +234,12 @@ Sub ComputeFakeEdges(ByRef obj As PModel)
     Dim PI As Integer
     Dim ei As Integer
     Dim vi As Integer
-    
+
     ReDim obj.Edges(obj.head.NumPolys * 3)
-    
+
     Dim num_edges As Integer
     Dim found As Boolean
-    
+
     For gi = 0 To obj.head.NumGroups - 1
         obj.Groups(gi).offEdge = num_edges
         For PI = obj.Groups(gi).offpoly To obj.Groups(gi).offpoly + obj.Groups(gi).numPoly - 1
@@ -256,7 +256,7 @@ Sub ComputeFakeEdges(ByRef obj As PModel)
                         End If
                     End With
                 Next ei
-                
+
                 If Not found Then
                     With obj.Edges(num_edges)
                         .Verts(0) = obj.polys(PI).Verts(vi) + obj.Groups(gi).offvert
@@ -274,10 +274,10 @@ Sub ComputeFakeEdges(ByRef obj As PModel)
                 End If
             Next vi
         Next PI
-        
+
         obj.Groups(gi).numEdge = num_edges - obj.Groups(gi).offEdge
     Next gi
-    
+
     obj.head.NumEdges = num_edges
     'ReDim Preserve obj.Edges(num_edges)
 End Sub
@@ -285,7 +285,7 @@ End Sub
 Sub DrawFakeEdges(ByRef obj As PModel)
     Dim ei As Integer
     Dim vi As Integer
-    
+
     glColor3f 0, 0, 0
     For ei = 0 To obj.head.NumEdges - 1
         glBegin GL_LINES
@@ -300,33 +300,33 @@ End Sub
 'Split a polygon through one of it's edges given the alpha parameter for the line equation. Return the new vertex index.
 Sub CutEdge(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Integer, ByRef alpha As Single, ByRef intersection_vert As Integer)
     Dim Group As Integer
-    
+
     Dim vi1 As Integer
     Dim vi2 As Integer
     Dim vi3 As Integer
     Dim vi_new As Integer
     Dim tci1 As Integer
     Dim tci2 As Integer
-    
+
     Dim v_buff1(2) As Integer
     Dim v_buff2(2) As Integer
-    
+
     Dim intersection_point As Point3D
     Dim intersection_tex_coord As Point3D
-    
+
     Dim tc1 As Point3D
     Dim tc2 As Point3D
-    
+
     Dim col_temp As color
-    
+
     Group = GetPolygonGroup(obj.Groups, p_index)
-    
+
     With obj.polys(p_index)
         vi1 = .Verts(0) + obj.Groups(Group).offvert
         vi2 = .Verts(1) + obj.Groups(Group).offvert
         vi3 = .Verts(2) + obj.Groups(Group).offvert
     End With
-    
+
     With obj.polys(p_index)
         Select Case e_index
             Case 0:
@@ -336,7 +336,7 @@ Sub CutEdge(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Inte
             Case 2:
                 col_temp = CombineColor(obj.vcolors(vi3), obj.vcolors(vi1))
         End Select
-    
+
         Select Case e_index
             Case 0:
                 intersection_point = CalculateLinePoint(alpha, obj.Verts(vi1), obj.Verts(vi2))
@@ -344,12 +344,12 @@ Sub CutEdge(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Inte
                     tci1 = .Verts(0)
                     tci2 = .Verts(1)
                 End If
-                
+
                 vi_new = AddVertex(obj, Group, intersection_point, col_temp)
                 v_buff1(0) = vi1
                 v_buff1(1) = vi_new
                 v_buff1(2) = vi3
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi2
                 v_buff2(0) = vi_new
@@ -359,12 +359,12 @@ Sub CutEdge(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Inte
                     tci1 = .Verts(1)
                     tci2 = .Verts(2)
                 End If
-                
+
                 vi_new = AddVertex(obj, Group, intersection_point, col_temp)
                 v_buff1(0) = vi1
                 v_buff1(1) = vi2
                 v_buff1(2) = vi_new
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi_new
                 v_buff2(0) = vi1
@@ -374,37 +374,37 @@ Sub CutEdge(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Inte
                     tci1 = .Verts(2)
                     tci2 = .Verts(0)
                 End If
-                
+
                 vi_new = AddVertex(obj, Group, intersection_point, col_temp)
                 v_buff1(0) = vi1
                 v_buff1(1) = vi2
                 v_buff1(2) = vi_new
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi2
                 v_buff2(0) = vi_new
         End Select
     End With
-    
+
     RemovePolygon obj, p_index
     AddPolygon obj, v_buff1
     AddPolygon obj, v_buff2
-    
+
     If obj.Groups(Group).texFlag = 1 Then
         With obj.TexCoords(tci1 + obj.Groups(Group).offTex)
             tc1.x = .x
             tc1.y = .y
             tc1.z = 0
         End With
-        
+
         With obj.TexCoords(tci2 + obj.Groups(Group).offTex)
             tc2.x = .x
             tc2.y = .y
             tc2.z = 0
         End With
-        
+
         intersection_tex_coord = CalculateLinePoint(alpha, tc1, tc2)
-        
+
         With obj.TexCoords(obj.Groups(Group).offTex + vi_new - obj.Groups(Group).offvert)
             .x = intersection_tex_coord.x
             .y = intersection_tex_coord.y
@@ -416,25 +416,25 @@ End Sub
 'Must notify wether the edge was actually cut or not (if the cut point was on one of the vertices)
 Function CutEdgeAtPoint(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Integer, ByRef intersection_point As Point3D, ByRef intersection_tex_coord As Point2D) As Boolean
     Dim Group As Integer
-    
+
     Dim vi1 As Integer
     Dim vi2 As Integer
     Dim vi3 As Integer
     Dim vi_new As Integer
-    
+
     Dim v_buff1(2) As Integer
     Dim v_buff2(2) As Integer
-    
+
     Dim col_temp As color
-    
+
     Group = GetPolygonGroup(obj.Groups, p_index)
-    
+
     With obj.polys(p_index)
         vi1 = .Verts(0) + obj.Groups(Group).offvert
         vi2 = .Verts(1) + obj.Groups(Group).offvert
         vi3 = .Verts(2) + obj.Groups(Group).offvert
     End With
-    
+
     With obj.polys(p_index)
         CutEdgeAtPoint = False
         Select Case e_index
@@ -455,15 +455,15 @@ Function CutEdgeAtPoint(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_i
                         Exit Function
                 col_temp = CombineColor(obj.vcolors(vi3), obj.vcolors(vi1))
         End Select
-        
+
         vi_new = AddVertex(obj, Group, intersection_point, col_temp)
-    
+
         Select Case e_index
             Case 0:
                 v_buff1(0) = vi1
                 v_buff1(1) = vi_new
                 v_buff1(2) = vi3
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi2
                 v_buff2(0) = vi_new
@@ -471,7 +471,7 @@ Function CutEdgeAtPoint(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_i
                 v_buff1(0) = vi1
                 v_buff1(1) = vi2
                 v_buff1(2) = vi_new
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi_new
                 v_buff2(0) = vi1
@@ -479,54 +479,54 @@ Function CutEdgeAtPoint(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_i
                 v_buff1(0) = vi1
                 v_buff1(1) = vi2
                 v_buff1(2) = vi_new
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi2
                 v_buff2(0) = vi_new
         End Select
     End With
-    
+
     RemovePolygon obj, p_index
     AddPolygon obj, v_buff1
     AddPolygon obj, v_buff2
-    
+
     If obj.Groups(Group).texFlag = 1 Then
         With obj.TexCoords(obj.Groups(Group).offTex + vi_new - obj.Groups(Group).offvert)
             .x = intersection_tex_coord.x
             .y = intersection_tex_coord.y
         End With
     End If
-    
+
     CutEdgeAtPoint = True
 End Function
 Sub CutEdgeAt(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As Integer, ByVal intersection_vert As Integer)
     Dim Group As Integer
-    
+
     Dim vi1 As Integer
     Dim vi2 As Integer
     Dim vi3 As Integer
     Dim vi_new As Integer
     Dim tci1 As Integer
     Dim tci2 As Integer
-    
+
     Dim v_buff1(2) As Integer
     Dim v_buff2(2) As Integer
-    
+
     Dim tc1 As Point3D
     Dim tc2 As Point3D
-    
+
     Dim col_temp As color
-    
+
     Group = GetPolygonGroup(obj.Groups, p_index)
-    
+
     With obj.polys(p_index)
         vi1 = .Verts(0) + obj.Groups(Group).offvert
         vi2 = .Verts(1) + obj.Groups(Group).offvert
         vi3 = .Verts(2) + obj.Groups(Group).offvert
     End With
-    
+
     vi_new = intersection_vert
-    
+
     With obj.polys(p_index)
         Select Case e_index
             Case 0:
@@ -536,7 +536,7 @@ Sub CutEdgeAt(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As In
             Case 2:
                 col_temp = CombineColor(obj.vcolors(vi3), obj.vcolors(vi1))
         End Select
-    
+
         Select Case e_index
             Case 0:
                 'intersection_point = CalculateLinePoint(Alpha, obj.Verts(vi1), obj.Verts(vi2))
@@ -544,12 +544,12 @@ Sub CutEdgeAt(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As In
                     tci1 = .Verts(0)
                     tci2 = .Verts(1)
                 End If
-                
+
                 'vi_new = AddVertex(obj, Group, intersection_point, col_temp)
                 v_buff1(0) = vi1
                 v_buff1(1) = vi_new
                 v_buff1(2) = vi3
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi2
                 v_buff2(0) = vi_new
@@ -559,12 +559,12 @@ Sub CutEdgeAt(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As In
                     tci1 = .Verts(1)
                     tci2 = .Verts(2)
                 End If
-                
+
                 'vi_new = AddVertex(obj, Group, intersection_point, col_temp)
                 v_buff1(0) = vi1
                 v_buff1(1) = vi2
                 v_buff1(2) = vi_new
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi_new
                 v_buff2(0) = vi1
@@ -574,19 +574,19 @@ Sub CutEdgeAt(ByRef obj As PModel, ByVal p_index As Integer, ByVal e_index As In
                     tci1 = .Verts(2)
                     tci2 = .Verts(0)
                 End If
-                
+
                 'vi_new = AddVertex(obj, Group, intersection_point, col_temp)
                 v_buff1(0) = vi1
                 v_buff1(1) = vi2
                 v_buff1(2) = vi_new
-                
+
                 v_buff2(2) = vi3
                 v_buff2(1) = vi2
                 v_buff2(0) = vi_new
         End Select
         ''Debug.Print v_buff2(0), v_buff2(1), v_buff2(2), vi_new
     End With
-    
+
     RemovePolygon obj, p_index
     AddPolygon obj, v_buff1
     AddPolygon obj, v_buff2
@@ -595,7 +595,7 @@ End Sub
 Sub OrderVertices(ByRef obj As PModel, ByRef v_buff() As Integer)
     Dim v1 As Point3D, v2 As Point3D, v3 As Point3D
     Dim aux As Integer
-    
+
     'glMatrixMode GL_MODELVIEW
     'glPushMatrix
     'With obj
@@ -605,7 +605,7 @@ Sub OrderVertices(ByRef obj As PModel, ByRef v_buff() As Integer)
     '    glRotatef .RotateGamma, 0, 0, 1
     '    glTranslatef .RepositionX, .RepositionY, .RepositionZ
     'End With
-    
+
     v1 = GetVertexProjectedCoords(obj.Verts, v_buff(0))
     v2 = GetVertexProjectedCoords(obj.Verts, v_buff(1))
     v3 = GetVertexProjectedCoords(obj.Verts, v_buff(2))
@@ -636,45 +636,45 @@ Sub OrderVertices(ByRef obj As PModel, ByRef v_buff() As Integer)
             End If
         End If
     End If
-    
+
     'glMatrixMode GL_MODELVIEW
     'glPopMatrix
 End Sub
 Public Sub SetLighting(ByVal LightNumber As Long, ByVal x As Single, ByVal y As Single, ByVal z As Single, ByVal red As Single, ByVal green As Single, ByVal blue As Single, ByVal infintyFarQ As Boolean)
     Dim l_color(4) As Single
     Dim l_pos(4) As Single
-    
+
     l_pos(0) = x
     l_pos(1) = y
     l_pos(2) = z
     l_pos(3) = IIf(infintyFarQ, 0, 1)
-    
+
     l_color(0) = red
     l_color(1) = green
     l_color(2) = blue
     l_color(3) = 1
-    
+
     glEnable GL_LIGHTING
     glDisable LightNumber
-    
+
     glLightfv LightNumber, GL_POSITION, l_pos(0)
     glLightfv LightNumber, GL_DIFFUSE, l_color(0)
     glEnable LightNumber
 End Sub
 Public Sub Fatten(ByRef obj As PModel)
     Dim vi As Integer
-    
+
     Dim CentralZ As Single
     Dim diff_max As Double
     Dim diff_min As Double
     Dim factor As Single
-    
+
     With obj.BoundingBox
         CentralZ = 0
         diff_max = Abs(.max_z - CentralZ)
         diff_min = Abs(CentralZ - .min_z)
     End With
-    
+
     For vi = 0 To obj.head.NumVerts - 1
         With obj.Verts(vi)
             If .z > CentralZ Then
@@ -697,18 +697,18 @@ Public Sub Fatten(ByRef obj As PModel)
 End Sub
 Public Sub Slim(ByRef obj As PModel)
     Dim vi As Integer
-    
+
     Dim CentralZ As Single
     Dim diff_max As Double
     Dim diff_min As Double
     Dim factor As Single
-    
+
     With obj.BoundingBox
         CentralZ = 0
         diff_max = Abs(.max_z - CentralZ)
         diff_min = Abs(CentralZ - .min_z)
     End With
-    
+
     For vi = 0 To obj.head.NumVerts - 1
         With obj.Verts(vi)
             If .z > CentralZ Then
@@ -731,7 +731,7 @@ Public Sub Slim(ByRef obj As PModel)
 End Sub
 Public Sub RemoveTexturedGroups(ByRef obj As PModel)
     Dim gi As Integer
-    
+
     With obj
         For gi = .head.NumGroups - 1 To 0 Step -1
             If .Groups(gi).texFlag = 1 Then _
@@ -742,13 +742,13 @@ End Sub
 Public Sub HorizontalMirror(ByRef obj As PModel)
     Dim vi As Integer
     Dim PI As Integer
-    
+
     For vi = 0 To obj.head.NumVerts - 1
         With obj.Verts(vi)
             .x = -1 * .x
         End With
     Next vi
-    
+
     For PI = 0 To obj.head.NumPolys - 1
         With obj.polys(PI)
             vi = .Verts(1)
@@ -760,7 +760,7 @@ End Sub
 Public Sub ChangeBrigthness(ByRef obj As PModel, ByVal factor As Integer)
     Dim vi As Integer
     Dim PI As Integer
-    
+
     For vi = 0 To obj.head.NumVerts - 1
         With obj.vcolors(vi)
             .r = max(0, Min(255, .r + factor))
@@ -768,7 +768,7 @@ Public Sub ChangeBrigthness(ByRef obj As PModel, ByVal factor As Integer)
             .B = max(0, Min(255, .B + factor))
         End With
     Next vi
-    
+
     For PI = 0 To obj.head.NumPolys - 1
         With obj.PColors(PI)
             .r = max(0, Min(255, .r + factor))
@@ -779,7 +779,7 @@ Public Sub ChangeBrigthness(ByRef obj As PModel, ByVal factor As Integer)
 End Sub
 Public Sub KillPrecalculatedLighting(ByRef obj As PModel, ByRef translation_table_vertex() As pair_i_b)
     Dim ci As Integer
-    
+
     For ci = 0 To obj.head.NumVerts - 1
         translation_table_vertex(ci).B = 1
     Next ci
@@ -788,45 +788,45 @@ Public Function IsCameraUnderGround() As Boolean
     Dim origin As Point3D
     Dim origin_trans As Point3D
     Dim MV_matrix(16) As Double
-    
+
     glGetDoublev GL_MODELVIEW_MATRIX, MV_matrix(0)
-    
+
     InvertMatrix MV_matrix
-    
+
     With origin
         .x = 0
         .y = 0
         .z = 0
     End With
-    
+
     MultiplyPoint3DByOGLMatrix MV_matrix, origin, origin_trans
-    
+
     IsCameraUnderGround = origin_trans.y > -1
 End Function
 Public Function GetCameraUnderGroundValue() As Single
     Dim origin As Point3D
     Dim origin_trans As Point3D
     Dim MV_matrix(16) As Double
-    
+
     glGetDoublev GL_MODELVIEW_MATRIX, MV_matrix(0)
-    
+
     InvertMatrix MV_matrix
-    
+
     With origin
         .x = 0
         .y = 0
         .z = 0
     End With
-    
+
     MultiplyPoint3DByOGLMatrix MV_matrix, origin, origin_trans
-    
+
     GetCameraUnderGroundValue = -1 - origin_trans.y
 End Function
 
 Public Sub ReadCFGFile()
     Dim line As String
     Dim NFileAux As Integer
-    
+
     On Error GoTo ErrHand
     NFileAux = FreeFile
     Open App.Path + "\" + CFG_FILE_NAME For Input As #NFileAux
@@ -858,7 +858,7 @@ End Sub
 Public Sub WriteCFGFile()
     Dim line As String
     Dim NFileAux As Integer
-    
+
     On Error GoTo ErrHand
     NFileAux = FreeFile
     Open App.Path + "\" + CFG_FILE_NAME For Output As #NFileAux
@@ -896,7 +896,7 @@ Public Sub ReadCharFilterFile()
     Dim p_data_start As Long
     Dim p_data_end As Long
     Dim line_length As Long
-    
+
     On Error GoTo ErrHand
     NFileAux = FreeFile
     name = ""
@@ -904,10 +904,10 @@ Public Sub ReadCharFilterFile()
     Do
         Line Input #NFileAux, line
         line_length = Len(line)
-        
+
         If line_length > 0 Then
             file_name = Left$(line, 4)
-            
+
             If Not last_file_name = file_name Then
                 NumCharLGPRegisters = NumCharLGPRegisters + 1
                 ReDim Preserve CharLGPRegisters(NumCharLGPRegisters - 1)
@@ -915,9 +915,9 @@ Public Sub ReadCharFilterFile()
                 CharLGPRegisters(NumCharLGPRegisters - 1).NumAnims = 0
                 CharLGPRegisters(NumCharLGPRegisters - 1).NumNames = 0
             End If
-            
+
             key = Mid$(line, 5, 5)
-            
+
             p_data_start = InStr(8, line, "=") + 1
             With CharLGPRegisters(NumCharLGPRegisters - 1)
                 If key = "Names" Then
@@ -938,7 +938,7 @@ Public Sub ReadCharFilterFile()
                     Loop Until p_data_end = line_length
                 End If
             End With
-            
+
             last_file_name = file_name
         End If
     Loop Until line = "" Or EOF(NFileAux)

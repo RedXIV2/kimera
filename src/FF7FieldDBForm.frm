@@ -1,5 +1,5 @@
 VERSION 5.00
-Begin VB.Form FF7FieldDBForm 
+Begin VB.Form FF7FieldDBForm
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "FF7 Field Data Base"
    ClientHeight    =   4275
@@ -13,7 +13,7 @@ Begin VB.Form FF7FieldDBForm
    ScaleWidth      =   4680
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
-   Begin VB.CommandButton SaveFieldDataDirCommand 
+   Begin VB.CommandButton SaveFieldDataDirCommand
       Caption         =   "Save Field Data Directory"
       Height          =   375
       Left            =   120
@@ -21,7 +21,7 @@ Begin VB.Form FF7FieldDBForm
       Top             =   3840
       Width           =   4455
    End
-   Begin VB.CommandButton SelectFiedlDataDirCommand 
+   Begin VB.CommandButton SelectFiedlDataDirCommand
       Caption         =   "..."
       Height          =   375
       Left            =   3960
@@ -29,14 +29,14 @@ Begin VB.Form FF7FieldDBForm
       Top             =   3360
       Width           =   615
    End
-   Begin VB.TextBox FieldDataDirText 
+   Begin VB.TextBox FieldDataDirText
       Height          =   375
       Left            =   1080
       TabIndex        =   8
       Top             =   3360
       Width           =   2775
    End
-   Begin VB.Frame ModelNamesFrame 
+   Begin VB.Frame ModelNamesFrame
       Caption         =   "Model names"
       Height          =   2175
       Left            =   2280
@@ -44,7 +44,7 @@ Begin VB.Form FF7FieldDBForm
       ToolTipText     =   "Names used to referenced this model in field files."
       Top             =   120
       Width           =   2295
-      Begin VB.Label ModelNamesLabel 
+      Begin VB.Label ModelNamesLabel
          Height          =   1695
          Left            =   240
          TabIndex        =   6
@@ -52,7 +52,7 @@ Begin VB.Form FF7FieldDBForm
          Width           =   1815
       End
    End
-   Begin VB.CommandButton LoadCommand 
+   Begin VB.CommandButton LoadCommand
       Caption         =   "Load animation and model"
       Height          =   615
       Left            =   2280
@@ -60,7 +60,7 @@ Begin VB.Form FF7FieldDBForm
       Top             =   2400
       Width           =   2295
    End
-   Begin VB.ComboBox ModelCombo 
+   Begin VB.ComboBox ModelCombo
       Height          =   315
       Left            =   240
       TabIndex        =   1
@@ -69,7 +69,7 @@ Begin VB.Form FF7FieldDBForm
       Top             =   360
       Width           =   1935
    End
-   Begin VB.ListBox AnimationList 
+   Begin VB.ListBox AnimationList
       Height          =   2010
       Left            =   240
       TabIndex        =   0
@@ -77,7 +77,7 @@ Begin VB.Form FF7FieldDBForm
       Top             =   1080
       Width           =   1935
    End
-   Begin VB.Label FieldDataDirLabel 
+   Begin VB.Label FieldDataDirLabel
       AutoSize        =   -1  'True
       Caption         =   "Field data dir"
       Height          =   195
@@ -86,13 +86,13 @@ Begin VB.Form FF7FieldDBForm
       Top             =   3480
       Width           =   900
    End
-   Begin VB.Line Line1 
+   Begin VB.Line Line1
       X1              =   240
       X2              =   4560
       Y1              =   3240
       Y2              =   3240
    End
-   Begin VB.Label AnimationLabel 
+   Begin VB.Label AnimationLabel
       AutoSize        =   -1  'True
       Caption         =   "Animation"
       Height          =   195
@@ -101,7 +101,7 @@ Begin VB.Form FF7FieldDBForm
       Top             =   840
       Width           =   690
    End
-   Begin VB.Label ModelLabel 
+   Begin VB.Label ModelLabel
       AutoSize        =   -1  'True
       Caption         =   "Model"
       Height          =   195
@@ -118,15 +118,15 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public Sub FillControls()
     Dim mi As Integer
-    
+
     ModelCombo.Clear
     For mi = 0 To NumCharLGPRegisters - 1
         ModelCombo.AddItem CharLGPRegisters(mi).fileName
     Next mi
-    
+
     ModelCombo.ListIndex = 0
     ModelCombo_Click
-    
+
     FieldDataDirText = CHAR_LGP_PATH
 End Sub
 
@@ -145,13 +145,13 @@ Private Sub ModelCombo_Click()
     Dim ai As Integer
     Dim ni As Integer
     Dim names_str As String
-    
+
     With CharLGPRegisters(ModelCombo.ListIndex)
         AnimationList.Clear
         For ai = 0 To .NumAnims - 1
             AnimationList.AddItem .Animations(ai)
         Next ai
-        
+
         names_str = ""
         For ni = 0 To .NumNames - 1
             names_str = names_str + .Names(ni) + ", "
@@ -168,12 +168,12 @@ Private Sub SelectFiedlDataDirCommand_Click()
     ' Browse for Drive/Folder
     Dim oBrowseFolder As New cBrowseFolder
     Dim sFolder As String
-    
+
     ' Trim and addbackslash to the current folder
     sFolder = AddBackslash(Trim$(FieldDataDirText.Text))
     FieldDataDirText.Text = sFolder          'return to text
     Refresh
-    
+
     With oBrowseFolder                  'define object
         .lhWnd = Me.hWnd                'owner
         .sTitle = "Select a Drive"      'title
@@ -184,6 +184,6 @@ Private Sub SelectFiedlDataDirCommand_Click()
             FieldDataDirText.Text = RTrim$(sFolder)
         End If
     End With
-    
+
     Set oBrowseFolder = Nothing
 End Sub

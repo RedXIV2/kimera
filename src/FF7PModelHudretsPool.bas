@@ -100,11 +100,11 @@ End Sub
 Sub MergeHundrets(ByRef h1() As PHundret, ByRef h2() As PHundret)
     Dim NumHundretsH1 As Integer
     Dim NumHundretsH2 As Integer
-    
+
     NumHundretsH1 = UBound(h1) + 1
     NumHundretsH2 = UBound(h2) + 1
     ReDim Preserve h1(NumHundretsH1 + NumHundretsH2 - 1)
-    
+
     CopyMemory h1(NumHundretsH1), h2(0), NumHundretsH2 * 100
 End Sub
 

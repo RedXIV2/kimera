@@ -33,7 +33,7 @@ Sub MergeBoundingBox(ByRef b1 As PBoundingBox, ByRef b2 As PBoundingBox)
         If .max_x < b2.max_x Then .max_x = b2.max_x
         If .max_y < b2.max_y Then .max_y = b2.max_y
         If .max_z < b2.max_z Then .max_z = b2.max_z
-        
+
         If .min_x > b2.min_x Then .min_x = b2.min_x
         If .min_y > b2.min_y Then .min_y = b2.min_y
         If .min_z > b2.min_z Then .min_z = b2.min_z
@@ -43,13 +43,13 @@ Function ComputeDiameter(ByRef BoundingBox As PBoundingBox) As Single
     Dim diffx As Single
     Dim diffy As Single
     Dim diffz As Single
-    
+
     With BoundingBox
         diffx = .max_x - .min_x
         diffy = .max_y - .min_y
         diffz = .max_z - .min_z
     End With
-    
+
     If diffx > diffy Then
         If diffx > diffz Then
             ComputeDiameter = diffx
@@ -63,7 +63,7 @@ Function ComputeDiameter(ByRef BoundingBox As PBoundingBox) As Single
             ComputeDiameter = diffz
         End If
     End If
-    
+
 End Function
 Sub DrawPBoundingBox(ByRef BoundingBox As PBoundingBox)
     With BoundingBox

@@ -285,17 +285,17 @@ Private Function ReplaceEntryWithDLLFunction(ByVal entry As Integer, ByVal lpfn 
     Dim lpVtableHead As Long
     Dim lpfnAddr As Long
     Dim lOldProtect As Long
-    
+
     CopyMemory lpVtableHead, ByVal ObjPtr(Me), 4
     lpfnAddr = lpVtableHead + (entry - 1) * 4
     CopyMemory lFuncAddr, ByVal lpfnAddr, 4 'Get old entry
     If lFuncAddr <> lpfn Then
         VirtualProtect lFuncAddr, 10, PAGE_EXECUTE_READWRITE, lOldProtect
-        
+
         CopyMemory ByVal lFuncAddr, &HB824048F, 4 'pop [esp] 'mov eax,
         CopyMemory ByVal lFuncAddr + 4, lpfn, 4
         CopyMemory ByVal lFuncAddr + 8, &HE0FF, 2
-        
+
         'Don�t bother to reprotect
         VirtualProtect lFuncAddr, 10, lOldProtect, lOldProtect
     End If
@@ -309,7 +309,7 @@ Private Sub Class_Initialize()
     Dim i As Long
     '8 is the first entry
     entry = 8
-     
+
     bData = LoadResData("GLEXT", "GLEXT")
     For i = 0 To UBound(bData) - 1
         If bData(i) = 0 Then

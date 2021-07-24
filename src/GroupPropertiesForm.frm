@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
-Begin VB.Form GroupPropertiesForm 
+Begin VB.Form GroupPropertiesForm
    BorderStyle     =   4  'Fixed ToolWindow
    Caption         =   "Group properties"
    ClientHeight    =   6345
@@ -15,14 +15,14 @@ Begin VB.Form GroupPropertiesForm
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
-   Begin VB.Frame RenderStateFrame 
+   Begin VB.Frame RenderStateFrame
       Caption         =   "Render state"
       Height          =   3855
       Left            =   120
       TabIndex        =   10
       Top             =   2040
       Width           =   3735
-      Begin VB.CheckBox ShadeModeLightedCheck 
+      Begin VB.CheckBox ShadeModeLightedCheck
          Caption         =   "Lighted"
          Height          =   255
          Left            =   2160
@@ -30,7 +30,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   3480
          Width           =   1095
       End
-      Begin VB.CheckBox AlphaBlendTrueCheck 
+      Begin VB.CheckBox AlphaBlendTrueCheck
          Caption         =   "True"
          Height          =   255
          Left            =   2160
@@ -38,7 +38,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   3120
          Width           =   855
       End
-      Begin VB.CheckBox DepthMaskTrueCheck 
+      Begin VB.CheckBox DepthMaskTrueCheck
          Caption         =   "True"
          Height          =   255
          Left            =   2160
@@ -46,7 +46,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   2760
          Width           =   1095
       End
-      Begin VB.CheckBox DepthTestTrueCheck 
+      Begin VB.CheckBox DepthTestTrueCheck
          Caption         =   "True"
          Height          =   255
          Left            =   2160
@@ -54,7 +54,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   2400
          Width           =   1095
       End
-      Begin VB.CheckBox CullFaceClockWiseCheck 
+      Begin VB.CheckBox CullFaceClockWiseCheck
          Caption         =   "Cull back-facing"
          Height          =   255
          Left            =   2160
@@ -62,7 +62,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   2040
          Width           =   1455
       End
-      Begin VB.CheckBox NoCullTrueCheck 
+      Begin VB.CheckBox NoCullTrueCheck
          Caption         =   "True"
          Height          =   255
          Left            =   2160
@@ -70,7 +70,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   1680
          Width           =   855
       End
-      Begin VB.CheckBox LinearFilterTrueCheck 
+      Begin VB.CheckBox LinearFilterTrueCheck
          Caption         =   "True"
          Height          =   255
          Left            =   2160
@@ -78,7 +78,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   1320
          Width           =   975
       End
-      Begin VB.CheckBox TexturedTrueCheck 
+      Begin VB.CheckBox TexturedTrueCheck
          Caption         =   "True"
          Height          =   195
          Left            =   2160
@@ -86,7 +86,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   960
          Width           =   735
       End
-      Begin VB.CheckBox WireframeTrueCheck 
+      Begin VB.CheckBox WireframeTrueCheck
          Caption         =   "True"
          Height          =   255
          Left            =   2160
@@ -94,7 +94,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   600
          Width           =   735
       End
-      Begin VB.CheckBox V_SHADEMODE_Check 
+      Begin VB.CheckBox V_SHADEMODE_Check
          Caption         =   "V_SHADEMODE"
          Height          =   255
          Left            =   120
@@ -102,7 +102,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   3480
          Width           =   2295
       End
-      Begin VB.CheckBox V_ALPHABLEND_Check 
+      Begin VB.CheckBox V_ALPHABLEND_Check
          Caption         =   "V_ALPHABLEND"
          Height          =   255
          Left            =   120
@@ -110,7 +110,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   3120
          Width           =   2175
       End
-      Begin VB.CheckBox V_DEPTHMASK_Check 
+      Begin VB.CheckBox V_DEPTHMASK_Check
          Caption         =   "V_DEPTHMASK"
          Height          =   255
          Left            =   120
@@ -118,7 +118,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   2760
          Width           =   2175
       End
-      Begin VB.CheckBox V_DEPTHTEST_Check 
+      Begin VB.CheckBox V_DEPTHTEST_Check
          Caption         =   "V_DEPTHTEST"
          Height          =   255
          Left            =   120
@@ -126,7 +126,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   2400
          Width           =   2175
       End
-      Begin VB.CheckBox V_CULLFACE_Check 
+      Begin VB.CheckBox V_CULLFACE_Check
          Caption         =   "V_CULLFACE"
          Height          =   255
          Left            =   120
@@ -134,7 +134,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   2040
          Width           =   1935
       End
-      Begin VB.CheckBox V_NOCULL_Check 
+      Begin VB.CheckBox V_NOCULL_Check
          Caption         =   " V_NOCULL"
          Height          =   255
          Left            =   120
@@ -142,7 +142,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   1680
          Width           =   1815
       End
-      Begin VB.CheckBox V_LINEARFILTER_Check 
+      Begin VB.CheckBox V_LINEARFILTER_Check
          Caption         =   "V_LINEARFILTER"
          Height          =   255
          Left            =   120
@@ -150,7 +150,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   1320
          Width           =   2295
       End
-      Begin VB.CheckBox V_TEXTURE_Check 
+      Begin VB.CheckBox V_TEXTURE_Check
          Caption         =   "V_TEXTURE"
          Height          =   255
          Left            =   120
@@ -158,7 +158,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   960
          Width           =   1935
       End
-      Begin VB.CheckBox V_WIREFRAME_Check 
+      Begin VB.CheckBox V_WIREFRAME_Check
          Caption         =   "V_WIREFRAME"
          Height          =   255
          Left            =   120
@@ -166,7 +166,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   600
          Width           =   2175
       End
-      Begin VB.Label RSValueLabel 
+      Begin VB.Label RSValueLabel
          Caption         =   "RS Value:"
          Height          =   255
          Left            =   2040
@@ -174,7 +174,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   240
          Width           =   855
       End
-      Begin VB.Label EnableChangeLabel 
+      Begin VB.Label EnableChangeLabel
          Caption         =   "Enable RS change:"
          Height          =   255
          Left            =   120
@@ -183,7 +183,7 @@ Begin VB.Form GroupPropertiesForm
          Width           =   1455
       End
    End
-   Begin MSComCtl2.UpDown TextureIdUpDown 
+   Begin MSComCtl2.UpDown TextureIdUpDown
       Height          =   285
       Left            =   3600
       TabIndex        =   8
@@ -203,14 +203,14 @@ Begin VB.Form GroupPropertiesForm
       BuddyProperty   =   65547
       Enabled         =   -1  'True
    End
-   Begin VB.TextBox TextureIdText 
+   Begin VB.TextBox TextureIdText
       Height          =   285
       Left            =   960
       TabIndex        =   7
       Top             =   6000
       Width           =   2655
    End
-   Begin VB.CommandButton ApplyButton 
+   Begin VB.CommandButton ApplyButton
       Caption         =   "Apply"
       Height          =   1815
       Left            =   1800
@@ -218,14 +218,14 @@ Begin VB.Form GroupPropertiesForm
       Top             =   120
       Width           =   2055
    End
-   Begin VB.Frame GroupOpacityFrame 
+   Begin VB.Frame GroupOpacityFrame
       Caption         =   "Blending mode"
       Height          =   1935
       Left            =   120
       TabIndex        =   0
       Top             =   0
       Width           =   1575
-      Begin VB.OptionButton BlendingNoneOption 
+      Begin VB.OptionButton BlendingNoneOption
          Caption         =   "None"
          Height          =   255
          Left            =   120
@@ -234,7 +234,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   1560
          Width           =   855
       End
-      Begin VB.OptionButton BlendUnkownOption 
+      Begin VB.OptionButton BlendUnkownOption
          Caption         =   "Unknown (broken?)"
          Height          =   375
          Left            =   120
@@ -243,7 +243,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   1080
          Width           =   1095
       End
-      Begin VB.OptionButton BlendSubstractiveOption 
+      Begin VB.OptionButton BlendSubstractiveOption
          Caption         =   "Substractive"
          Height          =   375
          Left            =   120
@@ -252,7 +252,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   720
          Width           =   1335
       End
-      Begin VB.OptionButton BlendAdditiveOption 
+      Begin VB.OptionButton BlendAdditiveOption
          Caption         =   "Additive"
          Height          =   255
          Left            =   120
@@ -261,7 +261,7 @@ Begin VB.Form GroupPropertiesForm
          Top             =   480
          Width           =   975
       End
-      Begin VB.OptionButton BlendAverageOption 
+      Begin VB.OptionButton BlendAverageOption
          Caption         =   "Average"
          Height          =   255
          Left            =   120
@@ -271,7 +271,7 @@ Begin VB.Form GroupPropertiesForm
          Width           =   1095
       End
    End
-   Begin VB.Label TextureIdLabel 
+   Begin VB.Label TextureIdLabel
       Caption         =   "Texture Id"
       Height          =   255
       Left            =   120
@@ -290,14 +290,14 @@ Dim SelectedGroup As Integer
 Public Sub SetSelectedGroup(ByVal Group_index As Integer)
     SelectedGroup = Group_index
     Me.Caption = "Editing group " + Str$(SelectedGroup)
-    
+
     TextureIdUpDown.Enabled = _
         (EditedPModel.Groups(SelectedGroup).texFlag = 1)
-    
+
     TextureIdText.Enabled = TextureIdUpDown.Enabled
-    
+
     TextureIdText.Text = EditedPModel.Groups(SelectedGroup).TexID
-    
+
     Select Case EditedPModel.hundrets(SelectedGroup).blend_mode
         Case 0:
             BlendAverageOption.value = True
@@ -310,13 +310,13 @@ Public Sub SetSelectedGroup(ByVal Group_index As Integer)
         Case 4:
             BlendingNoneOption.value = True
     End Select
-    
+
     Dim change_render_state_values As Long
     Dim render_state_values As Long
-    
+
     change_render_state_values = EditedPModel.hundrets(SelectedGroup).field_8
     render_state_values = EditedPModel.hundrets(SelectedGroup).field_C
-    
+
     V_WIREFRAME_Check.value = IIf((change_render_state_values And &H1&) = 0, vbUnchecked, vbChecked)
     V_TEXTURE_Check.value = IIf((change_render_state_values And &H2&) = 0, vbUnchecked, vbChecked)
     V_LINEARFILTER_Check.value = IIf((change_render_state_values And &H4&) = 0, vbUnchecked, vbChecked)
@@ -326,7 +326,7 @@ Public Sub SetSelectedGroup(ByVal Group_index As Integer)
     V_DEPTHMASK_Check.value = IIf((change_render_state_values And &H10000) = 0, vbUnchecked, vbChecked)
     V_ALPHABLEND_Check.value = IIf((change_render_state_values And &H400&) = 0, vbUnchecked, vbChecked)
     V_SHADEMODE_Check.value = IIf((change_render_state_values And &H20000) = 0, vbUnchecked, vbChecked)
-    
+
     WireframeTrueCheck.value = IIf((render_state_values And &H1&) = 0, vbUnchecked, vbChecked)
     TexturedTrueCheck.value = IIf((render_state_values And &H2&) = 0, vbUnchecked, vbChecked)
     LinearFilterTrueCheck.value = IIf((render_state_values And &H4&) = 0, vbUnchecked, vbChecked)
@@ -336,7 +336,7 @@ Public Sub SetSelectedGroup(ByVal Group_index As Integer)
     DepthMaskTrueCheck.value = IIf((render_state_values And &H10000) = 0, vbUnchecked, vbChecked)
     AlphaBlendTrueCheck.value = IIf((render_state_values And &H400&) = 0, vbUnchecked, vbChecked)
     ShadeModeLightedCheck.value = IIf((render_state_values And &H20000) = 0, vbUnchecked, vbChecked)
-    
+
     SetupRSValuesEnabled
 End Sub
 Private Sub ApplyButton_Click()
@@ -352,23 +352,23 @@ Private Sub ApplyButton_Click()
         ElseIf BlendingNoneOption.value = True Then
             .blend_mode = 4
         End If
-        
+
         If EditedPModel.Groups(SelectedGroup).texFlag = 1 Then
             EditedPModel.Groups(SelectedGroup).TexID = TextureIdUpDown.value
             .TexID = TextureIdUpDown.value
         End If
-            
+
         Dim change_render_state_values As Long
         Dim render_state_values As Long
-        
+
         change_render_state_values = .field_8
         render_state_values = .field_C
-            
+
         Dim mask As Long
         Dim inv_mask_full As Long
-        
+
         inv_mask_full = Not (&H1& Or &H2& Or &H4& Or &H4000& Or &H2000& Or &H8000& Or &H10000 Or &H400& Or &H20000)
-        
+
         mask = IIf(V_WIREFRAME_Check.value = vbChecked, &H1&, &H0&) Or _
                 IIf(V_TEXTURE_Check.value = vbChecked, &H2&, &H0&) Or _
                 IIf(V_LINEARFILTER_Check.value = vbChecked, &H4&, &H0&) Or _
@@ -380,7 +380,7 @@ Private Sub ApplyButton_Click()
                 IIf(V_SHADEMODE_Check.value = vbChecked, &H20000, &H0&)
         change_render_state_values = (change_render_state_values And inv_mask_full) Or mask
 
-                                        
+
         mask = IIf(WireframeTrueCheck.value = vbChecked, &H1&, &H0&) Or _
                 IIf(TexturedTrueCheck.value = vbChecked, &H2&, &H0&) Or _
                 IIf(LinearFilterTrueCheck.value = vbChecked, &H4&, &H0&) Or _
@@ -391,10 +391,10 @@ Private Sub ApplyButton_Click()
                 IIf(AlphaBlendTrueCheck.value = vbChecked, &H400&, &H0&) Or _
                 IIf(ShadeModeLightedCheck.value = vbChecked, &H20000, &H0&)
         render_state_values = (render_state_values And inv_mask_full) Or mask
-                                        
+
         .field_8 = change_render_state_values
         .field_C = render_state_values
-        
+
         V_WIREFRAME_Check.value = IIf((change_render_state_values And &H1&) = 0, vbUnchecked, vbChecked)
         V_TEXTURE_Check.value = IIf((change_render_state_values And &H2&) = 0, vbUnchecked, vbChecked)
         V_LINEARFILTER_Check.value = IIf((change_render_state_values And &H4&) = 0, vbUnchecked, vbChecked)
@@ -404,9 +404,9 @@ Private Sub ApplyButton_Click()
         V_DEPTHMASK_Check.value = IIf((change_render_state_values And &H10000) = 0, vbUnchecked, vbChecked)
         V_ALPHABLEND_Check.value = IIf((change_render_state_values And &H400&) = 0, vbUnchecked, vbChecked)
         V_SHADEMODE_Check.value = IIf((change_render_state_values And &H20000) = 0, vbUnchecked, vbChecked)
-        
+
         SetupRSValuesEnabled
-        
+
         WireframeTrueCheck.value = IIf((render_state_values And &H1&) = 0, vbUnchecked, vbChecked)
         TexturedTrueCheck.value = IIf((render_state_values And &H2&) = 0, vbUnchecked, vbChecked)
         LinearFilterTrueCheck.value = IIf((render_state_values And &H4&) = 0, vbUnchecked, vbChecked)
