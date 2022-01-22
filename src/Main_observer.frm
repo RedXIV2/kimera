@@ -1473,7 +1473,7 @@ Sub SetFieldModelAnimation(ByRef filename As String)
     If (filename <> "") Then
         ReadAAnimation AAnim_tmp, filename
         FixAAnimation hrc_sk, AAnim_tmp
-        If AAnim_tmp.NumBones <> hrc_sk.NumBones Then
+        If AAnim_tmp.NumBones <> hrc_sk.NumBones And AAnim_tmp.NumBones <> 0 Then
             MsgBox "The animation has a wrong number of bones", vbOKOnly, "Error"
             Exit Sub
         Else
