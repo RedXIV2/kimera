@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Begin VB.Form ModelEditor
+Begin VB.Form ModelEditor 
    Caption         =   "Kimera - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
    ClientHeight    =   9195
    ClientLeft      =   60
@@ -14,7 +14,7 @@ Begin VB.Form ModelEditor
    ScaleMode       =   0  'User
    ScaleWidth      =   656.313
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CommandButton SaveFF7AnimationButton
+   Begin VB.CommandButton SaveFF7AnimationButton 
       Caption         =   "Save Animation"
       Height          =   255
       Left            =   8040
@@ -23,7 +23,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CommandButton InterpolateAllAnimsCommand
+   Begin VB.CommandButton InterpolateAllAnimsCommand 
       Caption         =   "Interpolate all anims"
       Height          =   255
       Left            =   8040
@@ -31,7 +31,7 @@ Begin VB.Form ModelEditor
       Top             =   8880
       Width           =   1695
    End
-   Begin VB.CommandButton ShowCharModelDBButton
+   Begin VB.CommandButton ShowCharModelDBButton 
       Caption         =   "Show Char.lgp DB"
       CausesValidation=   0   'False
       Height          =   375
@@ -40,7 +40,7 @@ Begin VB.Form ModelEditor
       Top             =   720
       Width           =   1695
    End
-   Begin VB.CommandButton InterpolateAnimationButton
+   Begin VB.CommandButton InterpolateAnimationButton 
       Caption         =   "Interpolate Animation"
       Height          =   255
       Left            =   8040
@@ -49,7 +49,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CommandButton ComputeWeaponPositionButton
+   Begin VB.CommandButton ComputeWeaponPositionButton 
       Caption         =   "Compute attached weapon position"
       Height          =   435
       Left            =   0
@@ -58,7 +58,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   2175
    End
-   Begin VB.CommandButton ComputeGroundHeightButton
+   Begin VB.CommandButton ComputeGroundHeightButton 
       Caption         =   "Compute ground height"
       Height          =   255
       Left            =   0
@@ -67,7 +67,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   2175
    End
-   Begin VB.CheckBox ShowLastFrameGhostCheck
+   Begin VB.CheckBox ShowLastFrameGhostCheck 
       Caption         =   "Overlap last frame ghost"
       Height          =   255
       Left            =   0
@@ -75,7 +75,7 @@ Begin VB.Form ModelEditor
       Top             =   6840
       Width           =   2055
    End
-   Begin VB.CommandButton ChangeAnimationButton
+   Begin VB.CommandButton ChangeAnimationButton 
       Caption         =   "Load field animation"
       Height          =   375
       Left            =   8040
@@ -84,7 +84,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CheckBox ShowGroundCheck
+   Begin VB.CheckBox ShowGroundCheck 
       Caption         =   "Show ground"
       Height          =   255
       Left            =   0
@@ -92,7 +92,7 @@ Begin VB.Form ModelEditor
       Top             =   7080
       Width           =   1335
    End
-   Begin VB.CommandButton ShowTextureOptionsButton
+   Begin VB.CommandButton ShowTextureOptionsButton 
       Caption         =   "Show Texture options"
       Height          =   255
       Left            =   8040
@@ -101,7 +101,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Frame TexturesFrame
+   Begin VB.Frame TexturesFrame 
       Caption         =   " Textures (Part)"
       Height          =   3015
       Left            =   9840
@@ -109,14 +109,14 @@ Begin VB.Form ModelEditor
       Top             =   2160
       Visible         =   0   'False
       Width           =   1695
-      Begin VB.ComboBox TextureSelectCombo
+      Begin VB.ComboBox TextureSelectCombo 
          Height          =   315
          Left            =   360
          TabIndex        =   89
          Top             =   1560
          Width           =   1215
       End
-      Begin VB.CommandButton RemoveTextureButton
+      Begin VB.CommandButton RemoveTextureButton 
          Caption         =   "Remove Texture"
          Height          =   255
          Left            =   120
@@ -124,7 +124,7 @@ Begin VB.Form ModelEditor
          Top             =   2640
          Width           =   1455
       End
-      Begin VB.CommandButton AddTextureButton
+      Begin VB.CommandButton AddTextureButton 
          Caption         =   "Add Texture"
          Height          =   255
          Left            =   120
@@ -132,7 +132,7 @@ Begin VB.Form ModelEditor
          Top             =   2400
          Width           =   1455
       End
-      Begin VB.CommandButton ChangeTextureButton
+      Begin VB.CommandButton ChangeTextureButton 
          Caption         =   "Change Texture"
          Height          =   255
          Left            =   120
@@ -140,7 +140,7 @@ Begin VB.Form ModelEditor
          Top             =   2160
          Width           =   1455
       End
-      Begin VB.CheckBox ZeroAsTransparent
+      Begin VB.CheckBox ZeroAsTransparent 
          Caption         =   "0 as transparent"
          Height          =   255
          Left            =   120
@@ -148,7 +148,7 @@ Begin VB.Form ModelEditor
          Top             =   1920
          Width           =   1455
       End
-      Begin VB.PictureBox TextureViewer
+      Begin VB.PictureBox TextureViewer 
          Height          =   1335
          Left            =   120
          ScaleHeight     =   85
@@ -158,7 +158,7 @@ Begin VB.Form ModelEditor
          Top             =   240
          Width           =   1455
       End
-      Begin MSComCtl2.UpDown MoveTexureUpDown
+      Begin MSComCtl2.UpDown MoveTexureUpDown 
          Height          =   375
          Left            =   120
          TabIndex        =   88
@@ -171,7 +171,7 @@ Begin VB.Form ModelEditor
          Enabled         =   -1  'True
       End
    End
-   Begin VB.ComboBox WeaponCombo
+   Begin VB.ComboBox WeaponCombo 
       Height          =   315
       Left            =   1320
       TabIndex        =   70
@@ -180,7 +180,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   855
    End
-   Begin VB.ComboBox BattleAnimationCombo
+   Begin VB.ComboBox BattleAnimationCombo 
       Height          =   315
       Left            =   1320
       TabIndex        =   67
@@ -189,7 +189,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   855
    End
-   Begin VB.CheckBox DListEnableCheck
+   Begin VB.CheckBox DListEnableCheck 
       Caption         =   "Render using DLists"
       Height          =   255
       Left            =   0
@@ -197,7 +197,7 @@ Begin VB.Form ModelEditor
       Top             =   7320
       Width           =   1815
    End
-   Begin VB.CommandButton AnimationOptionsButton
+   Begin VB.CommandButton AnimationOptionsButton 
       Caption         =   "Show Frame options"
       Height          =   255
       Left            =   8040
@@ -206,7 +206,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Frame AnimationOptionsFrame
+   Begin VB.Frame AnimationOptionsFrame 
       Caption         =   "Frame options"
       Height          =   2895
       Left            =   9840
@@ -214,7 +214,7 @@ Begin VB.Form ModelEditor
       Top             =   5520
       Visible         =   0   'False
       Width           =   1695
-      Begin VB.CommandButton InterpolateFrameButton
+      Begin VB.CommandButton InterpolateFrameButton 
          Caption         =   "Interpolate Frame"
          Height          =   255
          Left            =   120
@@ -222,7 +222,7 @@ Begin VB.Form ModelEditor
          Top             =   2520
          Width           =   1455
       End
-      Begin VB.CommandButton DuplicateFrameButton
+      Begin VB.CommandButton DuplicateFrameButton 
          Caption         =   "Duplicate Frame"
          Height          =   255
          Left            =   120
@@ -230,7 +230,7 @@ Begin VB.Form ModelEditor
          Top             =   2280
          Width           =   1455
       End
-      Begin VB.CommandButton RemoveFrameButton
+      Begin VB.CommandButton RemoveFrameButton 
          Caption         =   "Remove Frame"
          Height          =   255
          Left            =   120
@@ -238,7 +238,7 @@ Begin VB.Form ModelEditor
          Top             =   2040
          Width           =   1455
       End
-      Begin VB.CheckBox PropagateChangesForwardCheck
+      Begin VB.CheckBox PropagateChangesForwardCheck 
          Caption         =   "Propagate f."
          Height          =   255
          Left            =   240
@@ -247,7 +247,7 @@ Begin VB.Form ModelEditor
          Value           =   1  'Checked
          Width           =   1335
       End
-      Begin MSComCtl2.UpDown FrameDataPartUpDown
+      Begin MSComCtl2.UpDown FrameDataPartUpDown 
          Height          =   255
          Left            =   1320
          TabIndex        =   83
@@ -260,14 +260,14 @@ Begin VB.Form ModelEditor
          Wrap            =   -1  'True
          Enabled         =   -1  'True
       End
-      Begin VB.Frame FrameDataPartOptions
+      Begin VB.Frame FrameDataPartOptions 
          Caption         =   "Bone Rotation"
          Height          =   1335
          Left            =   120
          TabIndex        =   58
          Top             =   480
          Width           =   1455
-         Begin MSComCtl2.UpDown ZAnimationFramePartUpDown
+         Begin MSComCtl2.UpDown ZAnimationFramePartUpDown 
             Height          =   255
             Left            =   1080
             TabIndex        =   82
@@ -281,7 +281,7 @@ Begin VB.Form ModelEditor
             Wrap            =   -1  'True
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown YAnimationFramePartUpDown
+         Begin MSComCtl2.UpDown YAnimationFramePartUpDown 
             Height          =   255
             Left            =   1080
             TabIndex        =   81
@@ -295,7 +295,7 @@ Begin VB.Form ModelEditor
             Wrap            =   -1  'True
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown XAnimationFramePartUpDown
+         Begin MSComCtl2.UpDown XAnimationFramePartUpDown 
             Height          =   255
             Left            =   1080
             TabIndex        =   80
@@ -309,28 +309,28 @@ Begin VB.Form ModelEditor
             Wrap            =   -1  'True
             Enabled         =   -1  'True
          End
-         Begin VB.TextBox YAnimationFramePartText
+         Begin VB.TextBox YAnimationFramePartText 
             Height          =   285
             Left            =   360
             TabIndex        =   61
             Top             =   600
             Width           =   735
          End
-         Begin VB.TextBox ZAnimationFramePartText
+         Begin VB.TextBox ZAnimationFramePartText 
             Height          =   285
             Left            =   360
             TabIndex        =   60
             Top             =   960
             Width           =   735
          End
-         Begin VB.TextBox XAnimationFramePartText
+         Begin VB.TextBox XAnimationFramePartText 
             Height          =   285
             Left            =   360
             TabIndex        =   59
             Top             =   240
             Width           =   735
          End
-         Begin VB.Label ZAnimationFramePartLabel
+         Begin VB.Label ZAnimationFramePartLabel 
             AutoSize        =   -1  'True
             Caption         =   "Z"
             Height          =   195
@@ -339,7 +339,7 @@ Begin VB.Form ModelEditor
             Top             =   960
             Width           =   105
          End
-         Begin VB.Label YAnimationFramePartLabel
+         Begin VB.Label YAnimationFramePartLabel 
             AutoSize        =   -1  'True
             Caption         =   "Y"
             Height          =   195
@@ -348,7 +348,7 @@ Begin VB.Form ModelEditor
             Top             =   600
             Width           =   105
          End
-         Begin VB.Label XAnimationFramePartLabel
+         Begin VB.Label XAnimationFramePartLabel 
             AutoSize        =   -1  'True
             Caption         =   "X"
             Height          =   195
@@ -358,7 +358,7 @@ Begin VB.Form ModelEditor
             Width           =   105
          End
       End
-      Begin VB.Label FrameOptionsPart
+      Begin VB.Label FrameOptionsPart 
          AutoSize        =   -1  'True
          Caption         =   "Frame data part"
          Height          =   195
@@ -368,7 +368,7 @@ Begin VB.Form ModelEditor
          Width           =   1110
       End
    End
-   Begin VB.CheckBox ShowBonesCheck
+   Begin VB.CheckBox ShowBonesCheck 
       Caption         =   "Show Bones"
       Enabled         =   0   'False
       Height          =   255
@@ -378,7 +378,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1215
    End
-   Begin VB.Frame SelectedPieceFrame
+   Begin VB.Frame SelectedPieceFrame 
       Caption         =   "Selected Piece"
       Enabled         =   0   'False
       Height          =   6495
@@ -386,14 +386,14 @@ Begin VB.Form ModelEditor
       TabIndex        =   25
       Top             =   0
       Width           =   2175
-      Begin VB.Frame ResizeFrame
+      Begin VB.Frame ResizeFrame 
          Caption         =   "Resize"
          Height          =   2055
          Left            =   120
          TabIndex        =   46
          Top             =   240
          Width           =   1935
-         Begin VB.TextBox ResizePieceZText
+         Begin VB.TextBox ResizePieceZText 
             Height          =   285
             Left            =   1320
             TabIndex        =   52
@@ -401,7 +401,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   375
          End
-         Begin VB.TextBox ResizePieceYText
+         Begin VB.TextBox ResizePieceYText 
             Height          =   285
             Left            =   1320
             TabIndex        =   51
@@ -409,7 +409,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   375
          End
-         Begin VB.TextBox ResizePieceXText
+         Begin VB.TextBox ResizePieceXText 
             Height          =   285
             Left            =   1320
             TabIndex        =   50
@@ -417,7 +417,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   375
          End
-         Begin VB.HScrollBar ResizePieceZ
+         Begin VB.HScrollBar ResizePieceZ 
             Height          =   255
             Left            =   240
             Max             =   400
@@ -426,7 +426,7 @@ Begin VB.Form ModelEditor
             Value           =   100
             Width           =   975
          End
-         Begin VB.HScrollBar ResizePieceY
+         Begin VB.HScrollBar ResizePieceY 
             Height          =   255
             Left            =   240
             Max             =   400
@@ -435,7 +435,7 @@ Begin VB.Form ModelEditor
             Value           =   100
             Width           =   975
          End
-         Begin VB.HScrollBar ResizePieceX
+         Begin VB.HScrollBar ResizePieceX 
             Height          =   255
             Left            =   240
             Max             =   400
@@ -444,7 +444,7 @@ Begin VB.Form ModelEditor
             Value           =   100
             Width           =   975
          End
-         Begin VB.Label ResizePieceZLabel
+         Begin VB.Label ResizePieceZLabel 
             Caption         =   "Z re-size"
             Height          =   255
             Left            =   120
@@ -452,7 +452,7 @@ Begin VB.Form ModelEditor
             Top             =   1440
             Width           =   855
          End
-         Begin VB.Label ResizePieceYLabel
+         Begin VB.Label ResizePieceYLabel 
             Caption         =   "Y re-size"
             Height          =   255
             Left            =   120
@@ -460,7 +460,7 @@ Begin VB.Form ModelEditor
             Top             =   840
             Width           =   1095
          End
-         Begin VB.Label ResizePieceXLabel
+         Begin VB.Label ResizePieceXLabel 
             Caption         =   "X re-size"
             Height          =   255
             Left            =   120
@@ -469,14 +469,14 @@ Begin VB.Form ModelEditor
             Width           =   1215
          End
       End
-      Begin VB.Frame RotateFrame
+      Begin VB.Frame RotateFrame 
          Caption         =   "Rotation"
          Height          =   2055
          Left            =   120
          TabIndex        =   36
          Top             =   4320
          Width           =   1935
-         Begin VB.HScrollBar RotateGamma
+         Begin VB.HScrollBar RotateGamma 
             Height          =   255
             Left            =   240
             Max             =   360
@@ -484,7 +484,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   975
          End
-         Begin VB.TextBox RotateGammaText
+         Begin VB.TextBox RotateGammaText 
             Height          =   285
             Left            =   1320
             TabIndex        =   41
@@ -492,7 +492,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   375
          End
-         Begin VB.TextBox RotateBetaText
+         Begin VB.TextBox RotateBetaText 
             Height          =   285
             Left            =   1320
             TabIndex        =   40
@@ -500,7 +500,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   375
          End
-         Begin VB.TextBox RotateAlphaText
+         Begin VB.TextBox RotateAlphaText 
             Height          =   285
             Left            =   1320
             TabIndex        =   39
@@ -508,7 +508,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   375
          End
-         Begin VB.HScrollBar RotateBeta
+         Begin VB.HScrollBar RotateBeta 
             Height          =   255
             Left            =   240
             Max             =   360
@@ -516,7 +516,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   975
          End
-         Begin VB.HScrollBar RotateAlpha
+         Begin VB.HScrollBar RotateAlpha 
             Height          =   255
             Left            =   240
             Max             =   360
@@ -524,7 +524,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   975
          End
-         Begin VB.Label RotateGammaLabel
+         Begin VB.Label RotateGammaLabel 
             Caption         =   "Gama rotation (Z-axis)"
             Height          =   255
             Left            =   120
@@ -532,7 +532,7 @@ Begin VB.Form ModelEditor
             Top             =   1440
             Width           =   1575
          End
-         Begin VB.Label RotateBetaLabel
+         Begin VB.Label RotateBetaLabel 
             Caption         =   "Beta rotation (Y-axis)"
             Height          =   255
             Left            =   120
@@ -540,7 +540,7 @@ Begin VB.Form ModelEditor
             Top             =   840
             Width           =   1575
          End
-         Begin VB.Label RotateAlphaLabel
+         Begin VB.Label RotateAlphaLabel 
             Caption         =   "Alpha rotation (X-axis)"
             Height          =   255
             Left            =   120
@@ -549,14 +549,14 @@ Begin VB.Form ModelEditor
             Width           =   1575
          End
       End
-      Begin VB.Frame RepositionFrame
+      Begin VB.Frame RepositionFrame 
          Caption         =   "Reposition"
          Height          =   2055
          Left            =   120
          TabIndex        =   26
          Top             =   2280
          Width           =   1935
-         Begin VB.TextBox RepositionZText
+         Begin VB.TextBox RepositionZText 
             Height          =   285
             Left            =   1320
             TabIndex        =   32
@@ -564,7 +564,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   375
          End
-         Begin VB.TextBox RepositionYText
+         Begin VB.TextBox RepositionYText 
             Height          =   285
             Left            =   1320
             TabIndex        =   31
@@ -572,7 +572,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   375
          End
-         Begin VB.TextBox RepositionXText
+         Begin VB.TextBox RepositionXText 
             Height          =   285
             Left            =   1320
             TabIndex        =   30
@@ -580,7 +580,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   375
          End
-         Begin VB.HScrollBar RepositionZ
+         Begin VB.HScrollBar RepositionZ 
             Height          =   255
             Left            =   240
             Max             =   100
@@ -589,7 +589,7 @@ Begin VB.Form ModelEditor
             Top             =   1680
             Width           =   975
          End
-         Begin VB.HScrollBar RepositionY
+         Begin VB.HScrollBar RepositionY 
             Height          =   255
             Left            =   240
             Max             =   100
@@ -598,7 +598,7 @@ Begin VB.Form ModelEditor
             Top             =   1080
             Width           =   975
          End
-         Begin VB.HScrollBar RepositionX
+         Begin VB.HScrollBar RepositionX 
             Height          =   255
             Left            =   240
             Max             =   100
@@ -607,7 +607,7 @@ Begin VB.Form ModelEditor
             Top             =   480
             Width           =   975
          End
-         Begin VB.Label RepositionZLabel
+         Begin VB.Label RepositionZLabel 
             Caption         =   "Z re-position"
             Height          =   255
             Left            =   120
@@ -615,7 +615,7 @@ Begin VB.Form ModelEditor
             Top             =   1440
             Width           =   1095
          End
-         Begin VB.Label RepositionYLabel
+         Begin VB.Label RepositionYLabel 
             Caption         =   "Y re-position"
             Height          =   255
             Left            =   120
@@ -623,7 +623,7 @@ Begin VB.Form ModelEditor
             Top             =   840
             Width           =   1095
          End
-         Begin VB.Label RepositionXLabel
+         Begin VB.Label RepositionXLabel 
             Caption         =   "X re-position"
             Height          =   255
             Left            =   120
@@ -633,14 +633,14 @@ Begin VB.Form ModelEditor
          End
       End
    End
-   Begin VB.Frame GeneralLightingFrame
+   Begin VB.Frame GeneralLightingFrame 
       Caption         =   "General Lighting"
       Height          =   2295
       Left            =   8040
       TabIndex        =   17
       Top             =   5520
       Width           =   1695
-      Begin VB.CheckBox InifintyFarLightsCheck
+      Begin VB.CheckBox InifintyFarLightsCheck 
          Caption         =   "Ininitely far lights"
          Height          =   255
          Left            =   120
@@ -648,28 +648,28 @@ Begin VB.Form ModelEditor
          Top             =   1920
          Width           =   1455
       End
-      Begin VB.HScrollBar LightPosZScroll
+      Begin VB.HScrollBar LightPosZScroll 
          Height          =   255
          Left            =   360
          TabIndex        =   101
          Top             =   960
          Width           =   1215
       End
-      Begin VB.HScrollBar LightPosYScroll
+      Begin VB.HScrollBar LightPosYScroll 
          Height          =   255
          Left            =   360
          TabIndex        =   100
          Top             =   600
          Width           =   1215
       End
-      Begin VB.HScrollBar LightPosXScroll
+      Begin VB.HScrollBar LightPosXScroll 
          Height          =   255
          Left            =   360
          TabIndex        =   99
          Top             =   240
          Width           =   1215
       End
-      Begin VB.CheckBox RightLight
+      Begin VB.CheckBox RightLight 
          Caption         =   "Right"
          Height          =   195
          Left            =   840
@@ -677,7 +677,7 @@ Begin VB.Form ModelEditor
          Top             =   1560
          Width           =   735
       End
-      Begin VB.CheckBox LeftLight
+      Begin VB.CheckBox LeftLight 
          Caption         =   "Left"
          Height          =   255
          Left            =   840
@@ -685,7 +685,7 @@ Begin VB.Form ModelEditor
          Top             =   1320
          Width           =   615
       End
-      Begin VB.CheckBox RearLight
+      Begin VB.CheckBox RearLight 
          Caption         =   "Rear"
          Height          =   255
          Left            =   120
@@ -693,7 +693,7 @@ Begin VB.Form ModelEditor
          Top             =   1560
          Width           =   735
       End
-      Begin VB.CheckBox FrontLight
+      Begin VB.CheckBox FrontLight 
          Caption         =   "Front"
          Height          =   255
          Left            =   120
@@ -701,7 +701,7 @@ Begin VB.Form ModelEditor
          Top             =   1320
          Width           =   735
       End
-      Begin VB.Label LightPosZLabel
+      Begin VB.Label LightPosZLabel 
          Caption         =   "Z:"
          Height          =   255
          Left            =   120
@@ -709,7 +709,7 @@ Begin VB.Form ModelEditor
          Top             =   960
          Width           =   135
       End
-      Begin VB.Label LightPosYLabel
+      Begin VB.Label LightPosYLabel 
          Caption         =   "Y:"
          Height          =   255
          Left            =   120
@@ -717,7 +717,7 @@ Begin VB.Form ModelEditor
          Top             =   600
          Width           =   135
       End
-      Begin VB.Label LightPosXLabel
+      Begin VB.Label LightPosXLabel 
          Caption         =   "X:"
          Height          =   255
          Left            =   120
@@ -726,7 +726,7 @@ Begin VB.Form ModelEditor
          Width           =   135
       End
    End
-   Begin VB.ComboBox BoneSelector
+   Begin VB.ComboBox BoneSelector 
       Height          =   315
       Left            =   8040
       TabIndex        =   10
@@ -734,7 +734,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.CommandButton SaveFF7ModelButton
+   Begin VB.CommandButton SaveFF7ModelButton 
       Caption         =   "Save Model"
       Height          =   255
       Left            =   8040
@@ -743,7 +743,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Frame SelectedBoneFrame
+   Begin VB.Frame SelectedBoneFrame 
       Caption         =   "Bone options"
       Enabled         =   0   'False
       Height          =   3015
@@ -752,7 +752,7 @@ Begin VB.Form ModelEditor
       Top             =   2160
       Visible         =   0   'False
       Width           =   1695
-      Begin MSComCtl2.UpDown BoneLengthUpDown
+      Begin MSComCtl2.UpDown BoneLengthUpDown 
          Height          =   255
          Left            =   1320
          TabIndex        =   79
@@ -765,7 +765,7 @@ Begin VB.Form ModelEditor
          Min             =   -999999999
          Enabled         =   -1  'True
       End
-      Begin MSComCtl2.UpDown ResizeBoneZUpDown
+      Begin MSComCtl2.UpDown ResizeBoneZUpDown 
          Height          =   285
          Left            =   1320
          TabIndex        =   78
@@ -786,7 +786,7 @@ Begin VB.Form ModelEditor
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin MSComCtl2.UpDown ResizeBoneYUpDown
+      Begin MSComCtl2.UpDown ResizeBoneYUpDown 
          Height          =   285
          Left            =   1320
          TabIndex        =   77
@@ -807,7 +807,7 @@ Begin VB.Form ModelEditor
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin MSComCtl2.UpDown ResizeBoneXUpDown
+      Begin MSComCtl2.UpDown ResizeBoneXUpDown 
          Height          =   285
          Left            =   1335
          TabIndex        =   76
@@ -828,14 +828,14 @@ Begin VB.Form ModelEditor
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin VB.TextBox ResizeBoneXText
+      Begin VB.TextBox ResizeBoneXText 
          Height          =   285
          Left            =   840
          TabIndex        =   72
          Top             =   240
          Width           =   495
       End
-      Begin VB.CommandButton RemovePieceButton
+      Begin VB.CommandButton RemovePieceButton 
          Caption         =   "Remove part from the bone"
          Height          =   495
          Left            =   120
@@ -843,7 +843,7 @@ Begin VB.Form ModelEditor
          Top             =   2280
          Width           =   1455
       End
-      Begin VB.CommandButton AddPieceButton
+      Begin VB.CommandButton AddPieceButton 
          Caption         =   "Add part to the bone"
          Height          =   495
          Left            =   120
@@ -851,28 +851,28 @@ Begin VB.Form ModelEditor
          Top             =   1680
          Width           =   1455
       End
-      Begin VB.TextBox BoneLengthText
+      Begin VB.TextBox BoneLengthText 
          Height          =   285
          Left            =   720
          TabIndex        =   15
          Top             =   1320
          Width           =   615
       End
-      Begin VB.TextBox ResizeBoneZText
+      Begin VB.TextBox ResizeBoneZText 
          Height          =   285
          Left            =   840
          TabIndex        =   13
          Top             =   960
          Width           =   495
       End
-      Begin VB.TextBox ResizeBoneYText
+      Begin VB.TextBox ResizeBoneYText 
          Height          =   285
          Left            =   840
          TabIndex        =   12
          Top             =   600
          Width           =   495
       End
-      Begin VB.Label BoneLengthLabel
+      Begin VB.Label BoneLengthLabel 
          AutoSize        =   -1  'True
          Caption         =   "Length"
          Height          =   195
@@ -881,7 +881,7 @@ Begin VB.Form ModelEditor
          Top             =   1320
          Width           =   495
       End
-      Begin VB.Label Label4
+      Begin VB.Label Label4 
          AutoSize        =   -1  'True
          Caption         =   "Z Scale"
          Height          =   195
@@ -890,7 +890,7 @@ Begin VB.Form ModelEditor
          Top             =   960
          Width           =   555
       End
-      Begin VB.Label Label3
+      Begin VB.Label Label3 
          AutoSize        =   -1  'True
          Caption         =   "Y Scale"
          Height          =   195
@@ -899,7 +899,7 @@ Begin VB.Form ModelEditor
          Top             =   600
          Width           =   555
       End
-      Begin VB.Label Label2
+      Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "X Scale"
          Height          =   195
@@ -909,7 +909,7 @@ Begin VB.Form ModelEditor
          Width           =   555
       End
    End
-   Begin VB.TextBox AnimationFrameText
+   Begin VB.TextBox AnimationFrameText 
       Enabled         =   0   'False
       Height          =   285
       Left            =   3480
@@ -918,7 +918,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   375
    End
-   Begin VB.HScrollBar CurrentFrameScroll
+   Begin VB.HScrollBar CurrentFrameScroll 
       Enabled         =   0   'False
       Height          =   255
       Left            =   3960
@@ -928,7 +928,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   2415
    End
-   Begin VB.CommandButton OpenFF7ModelButton
+   Begin VB.CommandButton OpenFF7ModelButton 
       Caption         =   "Open Model"
       Height          =   255
       Left            =   8040
@@ -936,7 +936,7 @@ Begin VB.Form ModelEditor
       Top             =   0
       Width           =   1695
    End
-   Begin VB.PictureBox Picture1
+   Begin VB.PictureBox Picture1 
       AutoSize        =   -1  'True
       Height          =   8775
       Left            =   2280
@@ -947,12 +947,12 @@ Begin VB.Form ModelEditor
       TabIndex        =   0
       Top             =   0
       Width           =   5655
-      Begin VB.Timer Timer1
+      Begin VB.Timer Timer1 
          Interval        =   1
          Left            =   480
          Top             =   0
       End
-      Begin MSComDlg.CommonDialog CommonDialog1
+      Begin MSComDlg.CommonDialog CommonDialog1 
          Left            =   0
          Top             =   0
          _ExtentX        =   847
@@ -960,7 +960,7 @@ Begin VB.Form ModelEditor
          _Version        =   393216
       End
    End
-   Begin VB.Label WeaponLabel
+   Begin VB.Label WeaponLabel 
       Caption         =   "Weapon:"
       Height          =   255
       Left            =   0
@@ -969,7 +969,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1215
    End
-   Begin VB.Label BattleAnimationLabel
+   Begin VB.Label BattleAnimationLabel 
       Caption         =   "Battle Animation:"
       Height          =   255
       Left            =   0
@@ -978,7 +978,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1215
    End
-   Begin VB.Label BoneSelectorLabel
+   Begin VB.Label BoneSelectorLabel 
       Caption         =   "Selected bone:"
       Height          =   255
       Left            =   8040
@@ -987,7 +987,7 @@ Begin VB.Form ModelEditor
       Visible         =   0   'False
       Width           =   1695
    End
-   Begin VB.Label AnimationFrameLabel
+   Begin VB.Label AnimationFrameLabel 
       Caption         =   "Animation Frame"
       Height          =   255
       Left            =   2280
@@ -1477,13 +1477,16 @@ Sub SetFieldModelAnimation(ByRef filename As String)
             MsgBox "The animation has a wrong number of bones", vbOKOnly, "Error"
             Exit Sub
         Else
+            CurrentFrameScroll.value = 0
+            
             AAnim = AAnim_tmp
+            CurrentFrameScroll.max = AAnim.NumFrames
+            
             Call SetFrameEditorFields
         End If
 
-        CurrentFrameScroll.value = 0
-
-        CurrentFrameScroll.max = AAnim.NumFrames
+'        CurrentFrameScroll.value = 0
+'        CurrentFrameScroll.max = AAnim.NumFrames
     End If
 
     Picture1_Paint

@@ -70,7 +70,7 @@ Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal
                     If FileExist(baseName + Chr$(pSufix1) + Chr$(pSufix2)) Then
                         ReDim Preserve .Bones(.NumBones)
                         If load_geometryQ Then
-                            ReadAABattleLocationPiece.Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
+                            ReadAABattleLocationPiece .Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
                         End If
                         .NumBones = .NumBones + 1
                     End If

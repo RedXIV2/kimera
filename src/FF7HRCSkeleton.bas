@@ -59,7 +59,7 @@ errorH:
 End Sub
 Sub WriteHRCSkeleton(ByRef obj As HRCSkeleton, ByVal filename As String)
     Dim BI As Integer
-    Dim pi As Integer
+    Dim PI As Integer
     Dim fileNumber As Integer
 
     On Error GoTo errorH
@@ -420,12 +420,12 @@ Sub ComputeHRCBoundingBox(ByRef obj As HRCSkeleton, ByRef Frame As AFrame, ByRef
     Dim p_max_bone_trans As Point3D
     Dim p_min_bone_trans As Point3D
 
-    p_max_HRC.x = -INFINITY_SINGLE
-    p_max_HRC.y = -INFINITY_SINGLE
+    p_max_HRC.X = -INFINITY_SINGLE
+    p_max_HRC.Y = -INFINITY_SINGLE
     p_max_HRC.z = -INFINITY_SINGLE
 
-    p_min_HRC.x = INFINITY_SINGLE
-    p_min_HRC.y = INFINITY_SINGLE
+    p_min_HRC.X = INFINITY_SINGLE
+    p_min_HRC.Y = INFINITY_SINGLE
     p_min_HRC.z = INFINITY_SINGLE
 
     glMatrixMode GL_MODELVIEW
@@ -459,14 +459,14 @@ Sub ComputeHRCBoundingBox(ByRef obj As HRCSkeleton, ByRef Frame As AFrame, ByRef
             p_min_bone_trans, p_max_bone_trans
 
         With p_max_bone_trans
-            If p_max_HRC.x < .x Then p_max_HRC.x = .x
-            If p_max_HRC.y < .y Then p_max_HRC.y = .y
+            If p_max_HRC.X < .X Then p_max_HRC.X = .X
+            If p_max_HRC.Y < .Y Then p_max_HRC.Y = .Y
             If p_max_HRC.z < .z Then p_max_HRC.z = .z
         End With
 
         With p_min_bone_trans
-            If p_min_HRC.x > .x Then p_min_HRC.x = .x
-            If p_min_HRC.y > .y Then p_min_HRC.y = .y
+            If p_min_HRC.X > .X Then p_min_HRC.X = .X
+            If p_min_HRC.Y > .Y Then p_min_HRC.Y = .Y
             If p_min_HRC.z > .z Then p_min_HRC.z = .z
         End With
 
@@ -548,7 +548,7 @@ Function GetClosestHRCBone(ByRef obj As HRCSkeleton, ByRef Frame As AFrame, ByVa
             .RootRotationGamma, rot_mat
         glMultMatrixd rot_mat(0)
     End With
-    For BI = 0 To obj.NumBones
+    For BI = 0 To obj.NumBones - 1
         glPushName BI
             While Not (obj.Bones(BI).joint_f = joint_stack(jsp)) And jsp > 0
                 glPopMatrix
@@ -594,7 +594,7 @@ Function GetClosestHRCBone(ByRef obj As HRCSkeleton, ByRef Frame As AFrame, ByVa
 End Function
 Function GetClosestHRCBonePiece(ByRef obj As HRCSkeleton, ByRef Frame As AFrame, ByVal b_index As Integer, ByVal px As Integer, ByVal py As Integer, ByVal DIST As Single) As Integer
     Dim BI As Integer
-    Dim pi As Integer
+    Dim PI As Integer
 
     Dim min_z As Single
     Dim sbi As Integer
@@ -674,11 +674,11 @@ Function GetClosestHRCBonePiece(ByRef obj As HRCSkeleton, ByRef Frame As AFrame,
         glRotated Frame.Rotations(b_index).Gamma, 0#, 0#, 1#
         jsp = jsp + 1
 
-        For pi = 0 To .NumResources - 1
-            glPushName pi
-                DrawRSBResource .Resources(pi), False
+        For PI = 0 To .NumResources - 1
+            glPushName PI
+                DrawRSBResource .Resources(PI), False
             glPopName
-        Next pi
+        Next PI
     End With
 
     While jsp > 0
@@ -693,12 +693,12 @@ Function GetClosestHRCBonePiece(ByRef obj As HRCSkeleton, ByRef Frame As AFrame,
     GetClosestHRCBonePiece = -1
     min_z = -1
 
-    For pi = 0 To nPieces - 1
-        If CompareLongs(min_z, Sel_BUFF(pi * 4 + 1)) Then
-            min_z = Sel_BUFF(pi * 4 + 1)
-            GetClosestHRCBonePiece = Sel_BUFF(pi * 4 + 3)
+    For PI = 0 To nPieces - 1
+        If CompareLongs(min_z, Sel_BUFF(PI * 4 + 1)) Then
+            min_z = Sel_BUFF(PI * 4 + 1)
+            GetClosestHRCBonePiece = Sel_BUFF(PI * 4 + 3)
         End If
-    Next pi
+    Next PI
     ''Debug.Print GetClosestHRCBonePiece, nPieces
 End Function
 Sub SelectHRCBoneAndPiece(ByRef obj As HRCSkeleton, ByRef Frame As AFrame, ByVal b_index As Integer, ByVal p_index As Integer)
@@ -847,8 +847,8 @@ Sub GetTwoAFramesInterpolation(ByRef skeleton As HRCSkeleton, ByRef frame_a As A
         BuildMatrixFromQuaternion quat_interp, mat
         euler_res = GetEulerYXZrFromMatrix(mat)
 
-        .RootRotationAlpha = euler_res.y
-        .RootRotationBeta = euler_res.x
+        .RootRotationAlpha = euler_res.Y
+        .RootRotationBeta = euler_res.X
         .RootRotationGamma = euler_res.z
 
         alpha_inv = 1# - alpha
@@ -892,8 +892,8 @@ Sub GetTwoAFramesInterpolation(ByRef skeleton As HRCSkeleton, ByRef frame_a As A
             BuildMatrixFromQuaternion quat_interp_final, mat
             euler_res = GetEulerYXZrFromMatrix(mat)
 
-            .Rotations(BI).alpha = euler_res.y
-            .Rotations(BI).Beta = euler_res.x
+            .Rotations(BI).alpha = euler_res.Y
+            .Rotations(BI).Beta = euler_res.X
             .Rotations(BI).Gamma = euler_res.z
 
             jsp = jsp + 1
