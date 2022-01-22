@@ -29,6 +29,7 @@ Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal
     Dim ti As Integer
     Dim B As Boolean
     Dim pSuffix2End As Integer
+    Dim fixfield As Integer
 
     On Error GoTo ErrHandRead
 
@@ -60,15 +61,24 @@ Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal
 
         If .NumBones = 0 Then   'It's a battle location model
             .IsBattleLocation = True
-            For pSufix2 = 109 To 122
-                If FileExist(baseName + Chr$(pSufix1) + Chr$(pSufix2)) Then
-                    ReDim Preserve .Bones(.NumBones)
-                    If load_geometryQ Then
-                        ReadAABattleLocationPiece .Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
+
+            For pSufix1 = 97 To 123
+
+                If pSufix1 = 97 Then fixfield = 109 Else fixfield = 97
+
+                For pSufix2 = fixfield To 123
+                    If FileExist(baseName + Chr$(pSufix1) + Chr$(pSufix2)) Then
+                        ReDim Preserve .Bones(.NumBones)
+                        If load_geometryQ Then
+                            ReadAABattleLocationPiece.Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
+                        End If
+                        .NumBones = .NumBones + 1
                     End If
-                    .NumBones = .NumBones + 1
-                End If
-            Next pSufix2
+                Next pSufix2
+
+            Next pSufix1
+
+            pSufix1 = 97
         Else                    'It's a character battle model
             .IsBattleLocation = False
             pSufix2 = 109
