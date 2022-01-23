@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
-Begin VB.Form InterpolateAllAnimsForm
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Begin VB.Form InterpolateAllAnimsForm 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Interpolate all FF7 animations"
    ClientHeight    =   2115
@@ -14,14 +14,14 @@ Begin VB.Form InterpolateAllAnimsForm
    ScaleWidth      =   6795
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
-   Begin VB.Frame ProgressFrame
+   Begin VB.Frame ProgressFrame 
       BorderStyle     =   0  'None
       Height          =   855
       Left            =   0
       TabIndex        =   14
       Top             =   2280
       Width           =   6855
-      Begin VB.PictureBox ProgressBarPicture
+      Begin VB.PictureBox ProgressBarPicture 
          BackColor       =   &H00FFFFFF&
          Height          =   375
          Left            =   120
@@ -32,7 +32,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   360
          Width           =   5415
       End
-      Begin VB.CommandButton CancelCommand
+      Begin VB.CommandButton CancelCommand 
          Caption         =   "Cancel"
          Height          =   375
          Left            =   5640
@@ -40,7 +40,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   360
          Width           =   1095
       End
-      Begin VB.Label ProgressLabel
+      Begin VB.Label ProgressLabel 
          AutoSize        =   -1  'True
          Caption         =   "Progress"
          Height          =   195
@@ -50,14 +50,14 @@ Begin VB.Form InterpolateAllAnimsForm
          Width           =   615
       End
    End
-   Begin VB.Frame InterpolateOptionsFrame
+   Begin VB.Frame InterpolateOptionsFrame 
       BorderStyle     =   0  'None
       Height          =   2175
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   6855
-      Begin VB.CommandButton SaveConfigCommand
+      Begin VB.CommandButton SaveConfigCommand 
          Caption         =   "Save config"
          Height          =   375
          Left            =   5400
@@ -65,7 +65,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   1680
          Width           =   1335
       End
-      Begin MSComCtl2.UpDown NumInterpFramesBattleUpDown
+      Begin MSComCtl2.UpDown NumInterpFramesBattleUpDown 
          Height          =   285
          Left            =   5760
          TabIndex        =   30
@@ -76,7 +76,7 @@ Begin VB.Form InterpolateAllAnimsForm
          _Version        =   393216
          Value           =   3
          BuddyControl    =   "NumInterpFramesBattleText"
-         BuddyDispid     =   196638
+         BuddyDispid     =   196615
          OrigLeft        =   5760
          OrigTop         =   960
          OrigRight       =   6015
@@ -85,21 +85,21 @@ Begin VB.Form InterpolateAllAnimsForm
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin VB.TextBox NumInterpFramesBattleText
+      Begin VB.TextBox NumInterpFramesBattleText 
          Height          =   285
          Left            =   5400
          TabIndex        =   29
          Top             =   960
          Width           =   375
       End
-      Begin VB.TextBox NumInterpFramesFieldText
+      Begin VB.TextBox NumInterpFramesFieldText 
          Height          =   285
          Left            =   5400
          TabIndex        =   28
          Top             =   480
          Width           =   375
       End
-      Begin MSComCtl2.UpDown NumInterpFramesFieldUpDown
+      Begin MSComCtl2.UpDown NumInterpFramesFieldUpDown 
          Height          =   285
          Left            =   5760
          TabIndex        =   27
@@ -110,7 +110,7 @@ Begin VB.Form InterpolateAllAnimsForm
          _Version        =   393216
          Value           =   1
          BuddyControl    =   "NumInterpFramesFieldText"
-         BuddyDispid     =   196636
+         BuddyDispid     =   196616
          OrigLeft        =   5760
          OrigTop         =   480
          OrigRight       =   6015
@@ -119,7 +119,7 @@ Begin VB.Form InterpolateAllAnimsForm
          BuddyProperty   =   65547
          Enabled         =   -1  'True
       End
-      Begin VB.CommandButton MagicLGPDataDirDestCommand
+      Begin VB.CommandButton MagicLGPDataDirDestCommand 
          Caption         =   "..."
          Height          =   255
          Left            =   4680
@@ -127,7 +127,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   1200
          Width           =   375
       End
-      Begin VB.CommandButton BattleLGPDataDirDestCommand
+      Begin VB.CommandButton BattleLGPDataDirDestCommand 
          Caption         =   "..."
          Height          =   255
          Left            =   4680
@@ -135,7 +135,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   840
          Width           =   375
       End
-      Begin VB.CommandButton CharLGPDataDirDestCommand
+      Begin VB.CommandButton CharLGPDataDirDestCommand 
          Caption         =   "..."
          Height          =   255
          Left            =   4680
@@ -143,28 +143,28 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   480
          Width           =   375
       End
-      Begin VB.TextBox MagicLGPDataDirDestText
+      Begin VB.TextBox MagicLGPDataDirDestText 
          Height          =   285
          Left            =   3120
          TabIndex        =   21
          Top             =   1200
          Width           =   1600
       End
-      Begin VB.TextBox BattleLGPDataDirDestText
+      Begin VB.TextBox BattleLGPDataDirDestText 
          Height          =   285
          Left            =   3120
          TabIndex        =   20
          Top             =   840
          Width           =   1600
       End
-      Begin VB.TextBox CharLGPDataDirDestText
+      Begin VB.TextBox CharLGPDataDirDestText 
          Height          =   285
          Left            =   3120
          TabIndex        =   19
          Top             =   480
          Width           =   1600
       End
-      Begin VB.CommandButton GoCommand
+      Begin VB.CommandButton GoCommand 
          Caption         =   "Go!"
          Height          =   375
          Left            =   120
@@ -172,28 +172,28 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   1680
          Width           =   5175
       End
-      Begin VB.CheckBox MagicLGPDataDirCheck
+      Begin VB.CheckBox MagicLGPDataDirCheck 
          Height          =   255
          Left            =   6360
          TabIndex        =   12
          Top             =   1200
          Width           =   255
       End
-      Begin VB.CheckBox BattleLGPDataDirCheck
+      Begin VB.CheckBox BattleLGPDataDirCheck 
          Height          =   255
          Left            =   6360
          TabIndex        =   11
          Top             =   840
          Width           =   255
       End
-      Begin VB.CheckBox CharLGPDataDirCheck
+      Begin VB.CheckBox CharLGPDataDirCheck 
          Height          =   255
          Left            =   6360
          TabIndex        =   10
          Top             =   480
          Width           =   255
       End
-      Begin VB.CommandButton MagicLGPDataDirCommand
+      Begin VB.CommandButton MagicLGPDataDirCommand 
          Caption         =   "..."
          Height          =   255
          Left            =   2640
@@ -201,21 +201,21 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   1200
          Width           =   375
       End
-      Begin VB.TextBox MagicLGPDataDirText
+      Begin VB.TextBox MagicLGPDataDirText 
          Height          =   285
          Left            =   1080
          TabIndex        =   8
          Top             =   1200
          Width           =   1600
       End
-      Begin VB.TextBox BattleLGPDataDirText
+      Begin VB.TextBox BattleLGPDataDirText 
          Height          =   285
          Left            =   1080
          TabIndex        =   5
          Top             =   840
          Width           =   1600
       End
-      Begin VB.CommandButton BattleLGPDataDirCommand
+      Begin VB.CommandButton BattleLGPDataDirCommand 
          Caption         =   "..."
          Height          =   255
          Left            =   2640
@@ -223,7 +223,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   840
          Width           =   375
       End
-      Begin VB.CommandButton CharLGPDataDirCommand
+      Begin VB.CommandButton CharLGPDataDirCommand 
          Caption         =   "..."
          Height          =   255
          Left            =   2640
@@ -231,14 +231,14 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   480
          Width           =   375
       End
-      Begin VB.TextBox CharLGPDataDirText
+      Begin VB.TextBox CharLGPDataDirText 
          Height          =   285
          Left            =   1080
          TabIndex        =   2
          Top             =   480
          Width           =   1600
       End
-      Begin VB.Label Label1
+      Begin VB.Label Label1 
          Alignment       =   2  'Center
          Caption         =   "Num frames"
          Height          =   375
@@ -247,7 +247,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   0
          Width           =   615
       End
-      Begin VB.Label InterpLabel
+      Begin VB.Label InterpLabel 
          Caption         =   "Interp."
          Height          =   255
          Left            =   6240
@@ -255,7 +255,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   120
          Width           =   495
       End
-      Begin VB.Label DestinationPathLabel
+      Begin VB.Label DestinationPathLabel 
          Caption         =   "Destination path"
          Height          =   255
          Left            =   3360
@@ -263,7 +263,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   120
          Width           =   1215
       End
-      Begin VB.Label SourcePathLabel
+      Begin VB.Label SourcePathLabel 
          Caption         =   "Source path"
          Height          =   255
          Left            =   1440
@@ -271,7 +271,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   120
          Width           =   975
       End
-      Begin VB.Label MagicLGPDataDirLabel
+      Begin VB.Label MagicLGPDataDirLabel 
          Caption         =   "Magic LGP"
          Height          =   255
          Left            =   120
@@ -279,7 +279,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   1200
          Width           =   855
       End
-      Begin VB.Label BattleLGPDataDirLabel
+      Begin VB.Label BattleLGPDataDirLabel 
          Caption         =   "Battle LGP"
          Height          =   255
          Left            =   120
@@ -287,7 +287,7 @@ Begin VB.Form InterpolateAllAnimsForm
          Top             =   840
          Width           =   855
       End
-      Begin VB.Label CharLGPDataDirLabel
+      Begin VB.Label CharLGPDataDirLabel 
          Caption         =   "Char LGP"
          Height          =   255
          Left            =   120
@@ -422,7 +422,7 @@ Private Sub InterpolateAllAnimations()
                 Exit For
             End If
             With CharLGPRegisters(mi)
-                ReadHRCSkeleton hrc_sk, CHAR_LGP_PATH + "\" + .filename + ".HRC", False
+                ReadHRCSkeleton hrc_sk, CHAR_LGP_PATH + "\" + .fileName + ".HRC", False
                 For ai = 0 To .NumAnims - 1
                     aiu = 0
                     While aiu < num_used_char_anims And Not foundQ
@@ -436,14 +436,21 @@ Private Sub InterpolateAllAnimations()
 
                         ReadAAnimation a_anim, CHAR_LGP_PATH + "\" + .Animations(ai) + ".A"
                         FixAAnimation hrc_sk, a_anim
-                        If a_anim.NumBones = hrc_sk.NumBones Then
+                        If a_anim.NumBones = hrc_sk.NumBones Or a_anim.NumBones = 0 Then
                             InterpolateAAnimation hrc_sk, a_anim, NumInterpFramesFieldUpDown.value, False
                             WriteAAnimation a_anim, CHAR_LGP_PATH_DEST + "\" + .Animations(ai) + ".A"
+                            
+                            ReDim Preserve used_char_anims(num_used_char_anims)
+                            used_char_anims(num_used_char_anims) = .Animations(ai)
+                            
                             num_used_char_anims = num_used_char_anims + 1
-                            ReDim used_char_anims(num_used_char_anims - 1)
-                            used_char_anims(num_used_char_anims - 1) = .Animations(ai)
+                            'num_used_char_anims = num_used_char_anims + 1
+                            'ReDim used_char_anims(num_used_char_anims - 1)
+                            'used_char_anims(num_used_char_anims - 1) = .Animations(ai)
                         End If
                     End If
+                    
+                    foundQ = False
                 Next ai
             End With
         Next mi
@@ -540,8 +547,8 @@ Private Sub InitializeProgressBar()
     oldb = SelectObject(ProgressBarPicture.hdc, hNewBrush)
     DeleteObject oldb
 End Sub
-Private Sub UpdateProgressBar(ByVal percent As Single, ByVal filename As String)
-    ProgressLabel.Caption = "Progress " + Str$(Fix(100# * percent)) + "% (" + filename + ")"
+Private Sub UpdateProgressBar(ByVal percent As Single, ByVal fileName As String)
+    ProgressLabel.Caption = "Progress " + Str$(Fix(100# * percent)) + "% (" + fileName + ")"
     Rectangle ProgressBarPicture.hdc, 0, 0, ProgressBarPicture.ScaleWidth * percent, ProgressBarPicture.ScaleHeight
 End Sub
 
