@@ -805,17 +805,25 @@ Public Sub NormalizeQuaternion(ByRef quat As Quaternion)
     Dim test As Double
     With quat
         mag2 = .w * .w + .x * .x + .y * .y + .z * .z
-        If Abs(mag2 - 1#) > QUAT_NORM_TOLERANCE Then
-            mag = Sqr(mag2)
-            .w = .w / mag
-            .x = .x / mag
-            .y = .y / mag
-            .z = .z / mag
-        End If
+        
+        mag = Sqr(mag2)
+        .w = .w / mag
+        .x = .x / mag
+        .y = .y / mag
+        .z = .z / mag
+                   
+        ' NEW UDPATE vertex2995 fix for Hojo/Heidegger animations
+        'If Abs(mag2 - 1#) > QUAT_NORM_TOLERANCE Then
+        '    mag = Sqr(mag2)
+        '    .w = .w / mag
+        '    .x = .x / mag
+        '    .y = .y / mag
+        '    .z = .z / mag
+        'End If
 
-        If .w > 1# Then
-            .w = 1
-        End If
+        'If .w > 1# Then
+        '    .w = 1
+        'End If
     End With
 End Sub
 'Convert Quaternion to Matrix
