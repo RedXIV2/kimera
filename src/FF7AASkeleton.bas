@@ -1,10 +1,11 @@
 Attribute VB_Name = "FF7AASkeleton"
 Option Explicit
 Type AASkeleton
-    filename As String
+    fileName As String
     unk(3) As Long
     NumBones As Long
     unk2(2) As Long
+    NumJoints As Long ' NEW UPDATE: This will help to know the number of Joints in 3D Battle Location Environments.
     NumTextures As Long
     NumBodyAnims As Long
     unk3(2) As Long
@@ -18,7 +19,7 @@ Type AASkeleton
     IsBattleLocation As Boolean
     IsLimitBreak As Boolean
 End Type
-Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal is_limit_breakQ As Boolean, ByVal load_geometryQ As Boolean)
+Sub ReadAASkeleton(ByVal fileName As String, ByRef skeleton As AASkeleton, ByVal is_limit_breakQ As Boolean, ByVal load_geometryQ As Boolean)
     Dim fileNumber As Integer
     Dim pSufix1 As Integer
     Dim pSufix2 As Integer
@@ -29,20 +30,22 @@ Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal
     Dim ti As Integer
     Dim B As Boolean
     Dim pSuffix2End As Integer
-    Dim fixfield As Integer
+    'Dim fixfield As Integer
+    Dim iJointsCnt As Integer
 
     On Error GoTo ErrHandRead
 
-    ChDir GetPathFromString(filename)
+    ChDir GetPathFromString(fileName)
 
     fileNumber = FreeFile
-    Open filename For Binary As fileNumber
+    Open fileName For Binary As fileNumber
 
     With skeleton
-        .filename = TrimPath(filename)
+        .fileName = TrimPath(fileName)
         Get fileNumber, 1, .unk
         Get fileNumber, 13, .NumBones
         Get fileNumber, 17, .unk2
+        Get fileNumber, 21, .NumJoints
         Get fileNumber, 25, .NumTextures
         Get fileNumber, 29, .NumBodyAnims
         Get fileNumber, 33, .unk3
@@ -55,30 +58,50 @@ Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal
         'End If
 
         .IsLimitBreak = is_limit_breakQ
-        baseName = Left$(filename, Len(filename) - 2)
+        baseName = Left$(fileName, Len(fileName) - 2)
         pSufix1 = 97
         B = False
 
         If .NumBones = 0 Then   'It's a battle location model
             .IsBattleLocation = True
-
-            For pSufix1 = 97 To 123
-
-                If pSufix1 = 97 Then fixfield = 109 Else fixfield = 97
-
-                For pSufix2 = fixfield To 123
-                    If FileExist(baseName + Chr$(pSufix1) + Chr$(pSufix2)) Then
-                        ReDim Preserve .Bones(.NumBones)
-                        If load_geometryQ Then
-                            ReadAABattleLocationPiece .Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
-                        End If
-                        .NumBones = .NumBones + 1
-                    End If
-                Next pSufix2
-
-            Next pSufix1
-
+            
             pSufix1 = 97
+            pSufix2 = 109
+            
+            For iJointsCnt = 0 To .NumJoints - 1
+                If pSufix2 > 122 Then
+                    pSufix2 = 97
+                    pSufix1 = pSufix1 + 1
+                End If
+                
+                ReDim Preserve .Bones(.NumBones)
+                
+                If load_geometryQ Then
+                    ReadAABattleLocationPiece .Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
+                End If
+                
+                .NumBones = .NumBones + 1
+                
+                pSufix2 = pSufix2 + 1
+            Next iJointsCnt
+
+'            For pSufix1 = 97 To 123
+
+'                If pSufix1 = 97 Then fixfield = 109 Else fixfield = 97
+
+'                For pSufix2 = fixfield To 123
+'                    If FileExist(baseName + Chr$(pSufix1) + Chr$(pSufix2)) Then
+'                        ReDim Preserve .Bones(.NumBones)
+'                        If load_geometryQ Then
+'                            ReadAABattleLocationPiece .Bones(.NumBones), .NumBones, baseName + Chr$(pSufix1) + Chr$(pSufix2)
+'                        End If
+'                        .NumBones = .NumBones + 1
+'                    End If
+'                Next pSufix2
+
+'            Next pSufix1
+
+'            pSufix1 = 97
         Else                    'It's a character battle model
             .IsBattleLocation = False
             pSufix2 = 109
@@ -138,9 +161,9 @@ Sub ReadAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal
     Exit Sub
 ErrHandRead:
     'Debug.Print "Error reading AA file!!!"
-    MsgBox "Error reading AA file " + filename + "!!!", vbOKOnly, "Error reading"
+    MsgBox "Error reading AA file " + fileName + "!!!", vbOKOnly, "Error reading"
 End Sub
-Sub ReadMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, ByVal load_geometryQ As Boolean)
+Sub ReadMagicSkeleton(ByVal fileName As String, ByRef skeleton As AASkeleton, ByVal load_geometryQ As Boolean)
     Dim fileNumber As Integer
     Dim pSufix As String
     Dim tSufix As String
@@ -152,13 +175,13 @@ Sub ReadMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, By
 
     On Error GoTo ErrHandRead
 
-    ChDir GetPathFromString(filename)
+    ChDir GetPathFromString(fileName)
 
     fileNumber = FreeFile
-    Open filename For Binary As fileNumber
+    Open fileName For Binary As fileNumber
 
     With skeleton
-        .filename = TrimPath(filename)
+        .fileName = TrimPath(fileName)
         Get fileNumber, 1, .unk
         Get fileNumber, 13, .NumBones
         Get fileNumber, 17, .unk2
@@ -168,7 +191,7 @@ Sub ReadMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, By
         Get fileNumber, 41, .NumWeaponAnims
         Get fileNumber, 45, .unk4
 
-        baseName = Left$(filename, Len(filename) - 1)
+        baseName = Left$(fileName, Len(fileName) - 1)
 
         .IsBattleLocation = False
         .IsLimitBreak = False
@@ -212,10 +235,10 @@ Sub ReadMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton, By
     Exit Sub
 ErrHandRead:
     'Debug.Print "Error reading D file!!!"
-    MsgBox "Error reading D file " + filename + "!!!", vbOKOnly, "Error reading"
+    MsgBox "Error reading D file " + fileName + "!!!", vbOKOnly, "Error reading"
 End Sub
 
-Sub WriteAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton)
+Sub WriteAASkeleton(ByVal fileName As String, ByRef skeleton As AASkeleton)
     Dim fileNumber As Integer
     Dim pSufix1 As Integer
     Dim pSufix2 As Integer
@@ -228,15 +251,15 @@ Sub WriteAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton)
 
     On Error GoTo ErrHandWrite
 
-    ChDir GetPathFromString(filename)
+    ChDir GetPathFromString(fileName)
 
     fileNumber = FreeFile
-    Open filename For Output As fileNumber
+    Open fileName For Output As fileNumber
     Close fileNumber
-    Open filename For Binary As fileNumber
+    Open fileName For Binary As fileNumber
 
     With skeleton
-        baseName = Left$(filename, Len(filename) - 2)
+        baseName = Left$(fileName, Len(fileName) - 2)
         pSufix1 = 97
         pSufix2 = 109
         For BI = 0 To .NumBones - 1
@@ -279,9 +302,9 @@ Sub WriteAASkeleton(ByVal filename As String, ByRef skeleton As AASkeleton)
     Exit Sub
 ErrHandWrite:
     'Debug.Print "Error writting AA file!!!"
-    MsgBox "Error writting AA file " + filename + "!!!", vbOKOnly, "Error writting"
+    MsgBox "Error writting AA file " + fileName + "!!!", vbOKOnly, "Error writting"
 End Sub
-Sub WriteMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton)
+Sub WriteMagicSkeleton(ByVal fileName As String, ByRef skeleton As AASkeleton)
     Dim fileNumber As Integer
     Dim pSufix As String
     Dim tSufix As String
@@ -293,15 +316,15 @@ Sub WriteMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton)
 
     On Error GoTo ErrHandWrite
 
-    ChDir GetPathFromString(filename)
+    ChDir GetPathFromString(fileName)
 
     fileNumber = FreeFile
-    Open filename For Output As fileNumber
+    Open fileName For Output As fileNumber
     Close fileNumber
-    Open filename For Binary As fileNumber
+    Open fileName For Binary As fileNumber
 
     With skeleton
-        baseName = Left$(filename, Len(filename) - 1)
+        baseName = Left$(fileName, Len(fileName) - 1)
 
         'ReDim .Bones(.NumBones)
         For BI = 0 To .NumBones - 1
@@ -336,7 +359,7 @@ Sub WriteMagicSkeleton(ByVal filename As String, ByRef skeleton As AASkeleton)
     Exit Sub
 ErrHandWrite:
     'Debug.Print "Error writting D file!!!"
-    MsgBox "Error writting D file " + filename + "!!!", vbOKOnly, "Error writting"
+    MsgBox "Error writting D file " + fileName + "!!!", vbOKOnly, "Error writting"
 End Sub
 Sub CreateDListsFromAASkeleton(ByRef obj As AASkeleton)
     Dim BI As Integer
@@ -1260,7 +1283,7 @@ Sub CreateCompatibleDAAnimationsPackAnimation1stFrame(ByRef obj As AASkeleton, B
 End Sub
 
 Public Function GetBattleModelTextureFilename(ByRef obj As AASkeleton, ByVal tex_num As Integer) As String
-    GetBattleModelTextureFilename = LCase$(Left(obj.filename, 2)) + "a" + Chr$(99 + tex_num)
+    GetBattleModelTextureFilename = LCase$(Left(obj.fileName, 2)) + "a" + Chr$(99 + tex_num)
 End Function
 Sub InterpolateDAAnimationsPack(ByRef skeleton As AASkeleton, ByRef anims_pack As DAAnimationsPack, ByVal num_interpolated_frames As Integer, ByVal is_loopQ As Boolean)
     Dim ai As Integer
@@ -1585,7 +1608,7 @@ Function GetModelAnimationPacksFilter(ByVal clean_filename As String) As String
         GetModelAnimationPacksFilter = "Limit breaks (limcl*.a00, blaver.a00, kyou.a00)|limcl2.a00;limcl3.a00;limcl4.a00;limcl5.a00;limcl6.a00;limcl7.a00;blaver.a00;kyou.a00"
     'Cid
     ElseIf clean_filename = "rzaa" Then
-        GetModelAnimationPacksFilter = "Limit breaks (limcd*.a00)|limcd1.a00;limcd2.a00;limcd3.a00;limcd4.a00;limcd5.a00;limcd6.a00"
+        GetModelAnimationPacksFilter = "Limit breaks (limcd*.a00)|limcd1.a00;limcd2.a00;limcd3.a00;limcd4.a00;limcd5.a00;limcd6.a00;limcd7.a00"
     'Cait Sith
     ElseIf clean_filename = "ryaa" Then
         GetModelAnimationPacksFilter = "Limit breaks (dice.a00)|dice.a00"
