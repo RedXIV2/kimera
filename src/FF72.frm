@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
-Begin VB.Form PEditor
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Begin VB.Form PEditor 
    Caption         =   "P Editor"
    ClientHeight    =   7980
    ClientLeft      =   60
@@ -14,21 +14,21 @@ Begin VB.Form PEditor
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   634
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame PlaneOperationsFrame
+   Begin VB.Frame PlaneOperationsFrame 
       Caption         =   "Plane Operations"
       Height          =   1575
       Left            =   1800
       TabIndex        =   84
       Top             =   6360
       Width           =   5655
-      Begin VB.Frame PlaneGeometryFrame
+      Begin VB.Frame PlaneGeometryFrame 
          BorderStyle     =   0  'None
          Height          =   1335
          Left            =   2880
          TabIndex        =   91
          Top             =   120
          Width           =   2655
-         Begin VB.CheckBox ShowPlaneCheck
+         Begin VB.CheckBox ShowPlaneCheck 
             Caption         =   "Show plane"
             Height          =   255
             Left            =   120
@@ -37,7 +37,7 @@ Begin VB.Form PEditor
             Value           =   1  'Checked
             Width           =   1215
          End
-         Begin VB.TextBox XPlaneText
+         Begin VB.TextBox XPlaneText 
             Height          =   285
             Left            =   240
             TabIndex        =   98
@@ -45,7 +45,7 @@ Begin VB.Form PEditor
             Top             =   240
             Width           =   615
          End
-         Begin VB.TextBox YPlaneText
+         Begin VB.TextBox YPlaneText 
             Height          =   285
             Left            =   240
             TabIndex        =   97
@@ -53,7 +53,7 @@ Begin VB.Form PEditor
             Top             =   600
             Width           =   615
          End
-         Begin VB.TextBox ZPlaneText
+         Begin VB.TextBox ZPlaneText 
             Height          =   285
             Left            =   240
             TabIndex        =   96
@@ -61,7 +61,7 @@ Begin VB.Form PEditor
             Top             =   960
             Width           =   615
          End
-         Begin VB.TextBox AlphaPlaneText
+         Begin VB.TextBox AlphaPlaneText 
             Height          =   285
             Left            =   1800
             TabIndex        =   95
@@ -69,7 +69,7 @@ Begin VB.Form PEditor
             Top             =   360
             Width           =   615
          End
-         Begin VB.TextBox BetaPlaneText
+         Begin VB.TextBox BetaPlaneText 
             Height          =   285
             Left            =   1800
             TabIndex        =   94
@@ -77,7 +77,7 @@ Begin VB.Form PEditor
             Top             =   840
             Width           =   615
          End
-         Begin VB.CommandButton InvertPlaneButton
+         Begin VB.CommandButton InvertPlaneButton 
             Caption         =   "Invert"
             Height          =   255
             Left            =   1440
@@ -85,7 +85,7 @@ Begin VB.Form PEditor
             Top             =   0
             Width           =   615
          End
-         Begin VB.CommandButton ResetPlaneButton
+         Begin VB.CommandButton ResetPlaneButton 
             Caption         =   "Reset"
             Height          =   255
             Left            =   2040
@@ -93,13 +93,13 @@ Begin VB.Form PEditor
             Top             =   0
             Width           =   615
          End
-         Begin MSComCtl2.UpDown ZPlaneUpDown
+         Begin MSComCtl2.UpDown ZPlaneUpDown 
             Height          =   285
             Left            =   840
             TabIndex        =   100
             Top             =   960
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "ZPlaneText"
@@ -114,13 +114,13 @@ Begin VB.Form PEditor
             BuddyProperty   =   65547
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown YPlaneUpDown
+         Begin MSComCtl2.UpDown YPlaneUpDown 
             Height          =   285
             Left            =   840
             TabIndex        =   101
             Top             =   600
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "YPlaneText"
@@ -135,13 +135,13 @@ Begin VB.Form PEditor
             BuddyProperty   =   65547
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown XPlaneUpDown
+         Begin MSComCtl2.UpDown XPlaneUpDown 
             Height          =   285
             Left            =   840
             TabIndex        =   102
             Top             =   240
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "XPlaneText"
@@ -156,13 +156,13 @@ Begin VB.Form PEditor
             BuddyProperty   =   65547
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown BetaPlaneUpDown
+         Begin MSComCtl2.UpDown BetaPlaneUpDown 
             Height          =   285
             Left            =   2415
             TabIndex        =   103
             Top             =   840
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "BetaPlaneText"
@@ -177,13 +177,13 @@ Begin VB.Form PEditor
             BuddyProperty   =   0
             Enabled         =   -1  'True
          End
-         Begin MSComCtl2.UpDown AlphaPlaneUpDown
+         Begin MSComCtl2.UpDown AlphaPlaneUpDown 
             Height          =   285
             Left            =   2400
             TabIndex        =   104
             Top             =   360
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "AlphaPlaneText"
@@ -198,7 +198,7 @@ Begin VB.Form PEditor
             BuddyProperty   =   0
             Enabled         =   -1  'True
          End
-         Begin VB.Label BetaPlaneLabel
+         Begin VB.Label BetaPlaneLabel 
             Caption         =   "Beta"
             Height          =   255
             Left            =   1200
@@ -206,7 +206,7 @@ Begin VB.Form PEditor
             Top             =   840
             Width           =   375
          End
-         Begin VB.Label XPlaneLabel
+         Begin VB.Label XPlaneLabel 
             Caption         =   "X"
             Height          =   255
             Left            =   0
@@ -214,7 +214,7 @@ Begin VB.Form PEditor
             Top             =   240
             Width           =   135
          End
-         Begin VB.Label YPlaneLabel
+         Begin VB.Label YPlaneLabel 
             Caption         =   "Y"
             Height          =   255
             Left            =   0
@@ -222,7 +222,7 @@ Begin VB.Form PEditor
             Top             =   600
             Width           =   135
          End
-         Begin VB.Label ZPlaneLabel
+         Begin VB.Label ZPlaneLabel 
             Caption         =   "Z"
             Height          =   255
             Left            =   0
@@ -230,7 +230,7 @@ Begin VB.Form PEditor
             Top             =   960
             Width           =   135
          End
-         Begin VB.Label AlphaPlaneLabel
+         Begin VB.Label AlphaPlaneLabel 
             Caption         =   "Alpha"
             Height          =   255
             Left            =   1200
@@ -239,7 +239,7 @@ Begin VB.Form PEditor
             Width           =   495
          End
       End
-      Begin VB.CommandButton SlimButton
+      Begin VB.CommandButton SlimButton 
          Caption         =   "Slim"
          Height          =   255
          Left            =   1440
@@ -247,7 +247,7 @@ Begin VB.Form PEditor
          Top             =   1200
          Width           =   1335
       End
-      Begin VB.CommandButton FlattenButton
+      Begin VB.CommandButton FlattenButton 
          Caption         =   "Fatten"
          Height          =   255
          Left            =   120
@@ -255,7 +255,7 @@ Begin VB.Form PEditor
          Top             =   1200
          Width           =   1335
       End
-      Begin VB.CommandButton CutModelButton
+      Begin VB.CommandButton CutModelButton 
          Caption         =   "Cut model"
          Height          =   255
          Left            =   120
@@ -263,7 +263,7 @@ Begin VB.Form PEditor
          Top             =   960
          Width           =   2655
       End
-      Begin VB.CommandButton EraseLowerEmisphereButton
+      Begin VB.CommandButton EraseLowerEmisphereButton 
          Caption         =   "Erase lower emisphere"
          Height          =   255
          Left            =   120
@@ -271,7 +271,7 @@ Begin VB.Form PEditor
          Top             =   720
          Width           =   2655
       End
-      Begin VB.CommandButton MakeSymetricButton
+      Begin VB.CommandButton MakeSymetricButton 
          Caption         =   "Make model simetric"
          Height          =   255
          Left            =   120
@@ -279,7 +279,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   2655
       End
-      Begin VB.CommandButton MirrorHorizontallyButton
+      Begin VB.CommandButton MirrorHorizontallyButton 
          Caption         =   "Mirror model"
          Height          =   255
          Left            =   120
@@ -288,7 +288,7 @@ Begin VB.Form PEditor
          Width           =   2655
       End
    End
-   Begin VB.CheckBox ShowAxesCheck
+   Begin VB.CheckBox ShowAxesCheck 
       Caption         =   "Show axes"
       Height          =   255
       Left            =   7560
@@ -297,46 +297,62 @@ Begin VB.Form PEditor
       Value           =   1  'Checked
       Width           =   1095
    End
-   Begin VB.Frame GroupsFrame
+   Begin VB.Frame GroupsFrame 
       Caption         =   "Groups"
-      Height          =   1095
-      Left            =   4680
+      Height          =   1215
+      Left            =   4560
       TabIndex        =   78
-      Top             =   4200
-      Width           =   2775
-      Begin VB.CommandButton HideShowGroupButton
+      Top             =   4080
+      Width           =   2895
+      Begin VB.CommandButton DownGroupCommand 
+         Caption         =   "Down"
+         Height          =   255
+         Left            =   720
+         TabIndex        =   111
+         Top             =   840
+         Width           =   615
+      End
+      Begin VB.CommandButton UpGroupCommand 
+         Caption         =   "Up"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   110
+         Top             =   840
+         Width           =   615
+      End
+      Begin VB.CommandButton HideShowGroupButton 
          Caption         =   "Hide/Show Group"
          Height          =   255
-         Left            =   1200
+         Left            =   1320
          TabIndex        =   83
          Top             =   720
          Width           =   1455
       End
-      Begin VB.CommandButton GroupPropertiesButton
+      Begin VB.CommandButton GroupPropertiesButton 
          Caption         =   "Group Properties"
          Height          =   255
-         Left            =   1200
+         Left            =   1320
          TabIndex        =   81
          Top             =   480
          Width           =   1455
       End
-      Begin VB.CommandButton DeleteGroupButton
+      Begin VB.CommandButton DeleteGroupButton 
          Caption         =   "Delete Group"
          Height          =   255
-         Left            =   1200
+         Left            =   1320
          TabIndex        =   80
          Top             =   240
          Width           =   1455
       End
-      Begin VB.ListBox GroupsList
+      Begin VB.ListBox GroupsList 
          Height          =   645
          Left            =   120
          TabIndex        =   79
          Top             =   240
-         Width           =   1095
+         Width           =   1215
       End
    End
-   Begin VB.CommandButton SaveAsButton
+   Begin VB.CommandButton SaveAsButton 
       Caption         =   "Save as"
       Height          =   375
       Left            =   0
@@ -344,7 +360,7 @@ Begin VB.Form PEditor
       Top             =   840
       Width           =   1695
    End
-   Begin VB.CommandButton ApplyChangesButton
+   Begin VB.CommandButton ApplyChangesButton 
       Caption         =   "Apply changes"
       Height          =   375
       Left            =   0
@@ -352,7 +368,7 @@ Begin VB.Form PEditor
       Top             =   480
       Width           =   1695
    End
-   Begin VB.CommandButton LoadPButton
+   Begin VB.CommandButton LoadPButton 
       Caption         =   "Load p file"
       Height          =   375
       Left            =   0
@@ -360,81 +376,82 @@ Begin VB.Form PEditor
       Top             =   120
       Width           =   1695
    End
-   Begin VB.Frame LightFrame
+   Begin VB.Frame LightFrame 
       Caption         =   "Light"
-      Height          =   1095
+      Height          =   1215
       Left            =   1800
       TabIndex        =   58
-      Top             =   4200
-      Width           =   2775
-      Begin VB.CheckBox LightingCheck
+      Top             =   4080
+      Width           =   2655
+      Begin VB.CheckBox LightingCheck 
          Caption         =   "Enable lighting"
          Height          =   675
          Left            =   1800
+         Style           =   1  'Graphical
          TabIndex        =   65
-         Top             =   240
-         Width           =   855
+         Top             =   360
+         Width           =   735
       End
-      Begin VB.HScrollBar LightZScroll
+      Begin VB.HScrollBar LightZScroll 
          Height          =   255
          Left            =   360
          Max             =   10
          Min             =   -10
          TabIndex        =   61
-         Top             =   720
+         Top             =   840
          Width           =   1335
       End
-      Begin VB.HScrollBar LightYScroll
+      Begin VB.HScrollBar LightYScroll 
          Height          =   255
          Left            =   360
          Max             =   10
          Min             =   -10
          TabIndex        =   60
-         Top             =   480
+         Top             =   600
          Width           =   1335
       End
-      Begin VB.HScrollBar LightXScroll
+      Begin VB.HScrollBar LightXScroll 
          Height          =   255
          Left            =   360
          Max             =   10
          Min             =   -10
          TabIndex        =   59
-         Top             =   240
+         Top             =   360
          Width           =   1335
       End
-      Begin VB.Label Label18
+      Begin VB.Label Label18 
          Caption         =   "Z:"
          Height          =   255
          Left            =   120
          TabIndex        =   64
-         Top             =   720
+         Top             =   840
          Width           =   255
       End
-      Begin VB.Label Label17
+      Begin VB.Label Label17 
          Caption         =   "Y:"
          Height          =   255
          Left            =   120
          TabIndex        =   63
-         Top             =   480
+         Top             =   600
          Width           =   255
       End
-      Begin VB.Label Label16
+      Begin VB.Label Label16 
          Caption         =   "X:"
          Height          =   255
          Left            =   120
          TabIndex        =   62
-         Top             =   240
+         Top             =   360
          Width           =   255
       End
    End
-   Begin VB.Frame MiscFrame
+   Begin VB.Frame MiscFrame 
       Caption         =   "Misc"
       Height          =   1095
       Left            =   1800
       TabIndex        =   54
       Top             =   5280
       Width           =   5655
-      Begin VB.CommandButton KillLightingButton
+      Begin VB.CommandButton KillLightingButton 
          Caption         =   "Kill precalculated lighting"
          Enabled         =   0   'False
          Height          =   255
@@ -443,7 +460,7 @@ Begin VB.Form PEditor
          Top             =   720
          Width           =   5415
       End
-      Begin VB.CommandButton DeletePolysColorCommand
+      Begin VB.CommandButton DeletePolysColorCommand 
          Caption         =   "Delete all polygons with the selected color"
          Enabled         =   0   'False
          Height          =   255
@@ -452,7 +469,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   5415
       End
-      Begin VB.CommandButton DeletePolysNotColorCommand
+      Begin VB.CommandButton DeletePolysNotColorCommand 
          Caption         =   "Delete all polygons but those with the selected color"
          Enabled         =   0   'False
          Height          =   255
@@ -462,14 +479,14 @@ Begin VB.Form PEditor
          Width           =   5415
       End
    End
-   Begin VB.Frame RepositionFrame
+   Begin VB.Frame RepositionFrame 
       Caption         =   "Reposition"
       Height          =   2055
       Left            =   7560
       TabIndex        =   44
       Top             =   2280
       Width           =   1935
-      Begin VB.TextBox RepositionZText
+      Begin VB.TextBox RepositionZText 
          Height          =   285
          Left            =   1320
          TabIndex        =   50
@@ -477,7 +494,7 @@ Begin VB.Form PEditor
          Top             =   1680
          Width           =   375
       End
-      Begin VB.TextBox RepositionYText
+      Begin VB.TextBox RepositionYText 
          Height          =   285
          Left            =   1320
          TabIndex        =   49
@@ -485,7 +502,7 @@ Begin VB.Form PEditor
          Top             =   1080
          Width           =   375
       End
-      Begin VB.TextBox RepositionXText
+      Begin VB.TextBox RepositionXText 
          Height          =   285
          Left            =   1320
          TabIndex        =   48
@@ -493,7 +510,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   375
       End
-      Begin VB.HScrollBar RepositionZ
+      Begin VB.HScrollBar RepositionZ 
          Height          =   255
          Left            =   240
          Max             =   100
@@ -502,7 +519,7 @@ Begin VB.Form PEditor
          Top             =   1680
          Width           =   975
       End
-      Begin VB.HScrollBar RepositionY
+      Begin VB.HScrollBar RepositionY 
          Height          =   255
          Left            =   240
          Max             =   100
@@ -511,7 +528,7 @@ Begin VB.Form PEditor
          Top             =   1080
          Width           =   975
       End
-      Begin VB.HScrollBar RepositionX
+      Begin VB.HScrollBar RepositionX 
          Height          =   255
          Left            =   240
          Max             =   100
@@ -520,7 +537,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   975
       End
-      Begin VB.Label RepositionZLabel
+      Begin VB.Label RepositionZLabel 
          Caption         =   "Z re-position"
          Height          =   255
          Left            =   120
@@ -528,7 +545,7 @@ Begin VB.Form PEditor
          Top             =   1440
          Width           =   1095
       End
-      Begin VB.Label RepositionYLabel
+      Begin VB.Label RepositionYLabel 
          Caption         =   "Y re-position"
          Height          =   255
          Left            =   120
@@ -536,7 +553,7 @@ Begin VB.Form PEditor
          Top             =   840
          Width           =   1095
       End
-      Begin VB.Label RepositionXLabel
+      Begin VB.Label RepositionXLabel 
          Caption         =   "X re-position"
          Height          =   255
          Left            =   120
@@ -545,14 +562,14 @@ Begin VB.Form PEditor
          Width           =   1215
       End
    End
-   Begin VB.Frame RotateFrame
+   Begin VB.Frame RotateFrame 
       Caption         =   "Rotation"
       Height          =   2055
       Left            =   7560
       TabIndex        =   31
       Top             =   4440
       Width           =   1935
-      Begin VB.HScrollBar RotateGamma
+      Begin VB.HScrollBar RotateGamma 
          Height          =   255
          Left            =   240
          Max             =   360
@@ -560,7 +577,7 @@ Begin VB.Form PEditor
          Top             =   1680
          Width           =   975
       End
-      Begin VB.TextBox RotateGammaText
+      Begin VB.TextBox RotateGammaText 
          Height          =   285
          Left            =   1320
          TabIndex        =   38
@@ -568,7 +585,7 @@ Begin VB.Form PEditor
          Top             =   1680
          Width           =   375
       End
-      Begin VB.TextBox RotateBetaText
+      Begin VB.TextBox RotateBetaText 
          Height          =   285
          Left            =   1320
          TabIndex        =   35
@@ -576,7 +593,7 @@ Begin VB.Form PEditor
          Top             =   1080
          Width           =   375
       End
-      Begin VB.TextBox RotateAlphaText
+      Begin VB.TextBox RotateAlphaText 
          Height          =   285
          Left            =   1320
          TabIndex        =   34
@@ -584,7 +601,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   375
       End
-      Begin VB.HScrollBar RotateBeta
+      Begin VB.HScrollBar RotateBeta 
          Height          =   255
          Left            =   240
          Max             =   360
@@ -592,7 +609,7 @@ Begin VB.Form PEditor
          Top             =   1080
          Width           =   975
       End
-      Begin VB.HScrollBar RotateAlpha
+      Begin VB.HScrollBar RotateAlpha 
          Height          =   255
          Left            =   240
          Max             =   360
@@ -600,7 +617,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   975
       End
-      Begin VB.Label RotateGammaLabel
+      Begin VB.Label RotateGammaLabel 
          Caption         =   "Gama rotation (Z-axis)"
          Height          =   255
          Left            =   120
@@ -608,7 +625,7 @@ Begin VB.Form PEditor
          Top             =   1440
          Width           =   1575
       End
-      Begin VB.Label RotateBetaLabel
+      Begin VB.Label RotateBetaLabel 
          Caption         =   "Beta rotation (Y-axis)"
          Height          =   255
          Left            =   120
@@ -616,7 +633,7 @@ Begin VB.Form PEditor
          Top             =   840
          Width           =   1575
       End
-      Begin VB.Label RotateAlphaLabel
+      Begin VB.Label RotateAlphaLabel 
          Caption         =   "Alpha rotation (X-axis)"
          Height          =   255
          Left            =   120
@@ -625,14 +642,14 @@ Begin VB.Form PEditor
          Width           =   1575
       End
    End
-   Begin VB.Frame ResizeFrame
+   Begin VB.Frame ResizeFrame 
       Caption         =   "Resize"
       Height          =   2055
       Left            =   7560
       TabIndex        =   17
       Top             =   120
       Width           =   1935
-      Begin VB.TextBox ResizeZText
+      Begin VB.TextBox ResizeZText 
          Height          =   285
          Left            =   1320
          TabIndex        =   30
@@ -640,7 +657,7 @@ Begin VB.Form PEditor
          Top             =   1680
          Width           =   375
       End
-      Begin VB.TextBox ResizeYText
+      Begin VB.TextBox ResizeYText 
          Height          =   285
          Left            =   1320
          TabIndex        =   29
@@ -648,7 +665,7 @@ Begin VB.Form PEditor
          Top             =   1080
          Width           =   375
       End
-      Begin VB.TextBox ResizeXText
+      Begin VB.TextBox ResizeXText 
          Height          =   285
          Left            =   1320
          TabIndex        =   28
@@ -656,7 +673,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   375
       End
-      Begin VB.HScrollBar ResizeZ
+      Begin VB.HScrollBar ResizeZ 
          Height          =   255
          Left            =   240
          Max             =   400
@@ -665,7 +682,7 @@ Begin VB.Form PEditor
          Value           =   100
          Width           =   975
       End
-      Begin VB.HScrollBar ResizeY
+      Begin VB.HScrollBar ResizeY 
          Height          =   255
          Left            =   240
          Max             =   400
@@ -674,7 +691,7 @@ Begin VB.Form PEditor
          Value           =   100
          Width           =   975
       End
-      Begin VB.HScrollBar ResizeX
+      Begin VB.HScrollBar ResizeX 
          Height          =   255
          Left            =   240
          Max             =   400
@@ -683,7 +700,7 @@ Begin VB.Form PEditor
          Value           =   100
          Width           =   975
       End
-      Begin VB.Label ResizeZLabel
+      Begin VB.Label ResizeZLabel 
          Caption         =   "Z re-size"
          Height          =   255
          Left            =   120
@@ -691,7 +708,7 @@ Begin VB.Form PEditor
          Top             =   1440
          Width           =   855
       End
-      Begin VB.Label Label7
+      Begin VB.Label Label7 
          Caption         =   "Y re-size"
          Height          =   255
          Left            =   120
@@ -699,7 +716,7 @@ Begin VB.Form PEditor
          Top             =   840
          Width           =   1095
       End
-      Begin VB.Label ResizeXLabel
+      Begin VB.Label ResizeXLabel 
          Caption         =   "X re-size"
          Height          =   255
          Left            =   120
@@ -708,14 +725,14 @@ Begin VB.Form PEditor
          Width           =   1215
       End
    End
-   Begin VB.Frame ColorFrame
+   Begin VB.Frame ColorFrame 
       Caption         =   "Color editor"
       Height          =   5295
       Left            =   0
       TabIndex        =   6
       Top             =   2640
       Width           =   1695
-      Begin VB.CheckBox PalletizedCheck
+      Begin VB.CheckBox PalletizedCheck 
          Caption         =   "Palletized mode"
          Height          =   195
          Left            =   120
@@ -723,7 +740,7 @@ Begin VB.Form PEditor
          Top             =   3840
          Width           =   1455
       End
-      Begin VB.CommandButton LessBightnessButton
+      Begin VB.CommandButton LessBightnessButton 
          Caption         =   "-"
          Height          =   255
          Left            =   960
@@ -731,7 +748,7 @@ Begin VB.Form PEditor
          Top             =   4920
          Width           =   495
       End
-      Begin VB.CommandButton MoreBightnessButton
+      Begin VB.CommandButton MoreBightnessButton 
          Caption         =   "+"
          Height          =   255
          Left            =   240
@@ -739,8 +756,8 @@ Begin VB.Form PEditor
          Top             =   4920
          Width           =   495
       End
-      Begin VB.TextBox ThersholdText
-         BeginProperty DataFormat
+      Begin VB.TextBox ThersholdText 
+         BeginProperty DataFormat 
             Type            =   1
             Format          =   "0"
             HaveTrueFalseNull=   0
@@ -757,8 +774,8 @@ Begin VB.Form PEditor
          Top             =   4320
          Width           =   375
       End
-      Begin VB.TextBox SelectedColorBText
-         BeginProperty DataFormat
+      Begin VB.TextBox SelectedColorBText 
+         BeginProperty DataFormat 
             Type            =   1
             Format          =   "0"
             HaveTrueFalseNull=   0
@@ -774,8 +791,8 @@ Begin VB.Form PEditor
          Top             =   3480
          Width           =   375
       End
-      Begin VB.TextBox SelectedColorGText
-         BeginProperty DataFormat
+      Begin VB.TextBox SelectedColorGText 
+         BeginProperty DataFormat 
             Type            =   1
             Format          =   "0"
             HaveTrueFalseNull=   0
@@ -791,8 +808,8 @@ Begin VB.Form PEditor
          Top             =   2880
          Width           =   375
       End
-      Begin VB.TextBox SelectedColorRText
-         BeginProperty DataFormat
+      Begin VB.TextBox SelectedColorRText 
+         BeginProperty DataFormat 
             Type            =   1
             Format          =   "0"
             HaveTrueFalseNull=   0
@@ -808,7 +825,7 @@ Begin VB.Form PEditor
          Top             =   2280
          Width           =   375
       End
-      Begin VB.HScrollBar ThresholdSlider
+      Begin VB.HScrollBar ThresholdSlider 
          Enabled         =   0   'False
          Height          =   255
          Left            =   120
@@ -818,7 +835,7 @@ Begin VB.Form PEditor
          Value           =   20
          Width           =   975
       End
-      Begin VB.HScrollBar SelectedColorB
+      Begin VB.HScrollBar SelectedColorB 
          Height          =   255
          Left            =   120
          Max             =   255
@@ -826,7 +843,7 @@ Begin VB.Form PEditor
          Top             =   3480
          Width           =   975
       End
-      Begin VB.HScrollBar SelectedColorG
+      Begin VB.HScrollBar SelectedColorG 
          Height          =   255
          Left            =   120
          Max             =   255
@@ -834,7 +851,7 @@ Begin VB.Form PEditor
          Top             =   2880
          Width           =   975
       End
-      Begin VB.HScrollBar SelectedColorR
+      Begin VB.HScrollBar SelectedColorR 
          Height          =   255
          Left            =   120
          Max             =   255
@@ -842,7 +859,7 @@ Begin VB.Form PEditor
          Top             =   2280
          Width           =   975
       End
-      Begin VB.PictureBox PalletePicture
+      Begin VB.PictureBox PalletePicture 
          Height          =   1455
          Left            =   120
          ScaleHeight     =   93
@@ -852,7 +869,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   1455
       End
-      Begin VB.Label Label15
+      Begin VB.Label Label15 
          Caption         =   "Brightness control"
          Height          =   255
          Left            =   120
@@ -860,7 +877,7 @@ Begin VB.Form PEditor
          Top             =   4680
          Width           =   1335
       End
-      Begin VB.Label Label5
+      Begin VB.Label Label5 
          Caption         =   "Detection threshold"
          Height          =   255
          Left            =   120
@@ -868,7 +885,7 @@ Begin VB.Form PEditor
          Top             =   4080
          Width           =   1455
       End
-      Begin VB.Label Label4
+      Begin VB.Label Label4 
          Caption         =   "Green level"
          Height          =   255
          Left            =   120
@@ -876,7 +893,7 @@ Begin VB.Form PEditor
          Top             =   2640
          Width           =   1215
       End
-      Begin VB.Label Label3
+      Begin VB.Label Label3 
          Caption         =   "Blue level"
          Height          =   255
          Left            =   120
@@ -884,7 +901,7 @@ Begin VB.Form PEditor
          Top             =   3240
          Width           =   1095
       End
-      Begin VB.Label Label2
+      Begin VB.Label Label2 
          Caption         =   "Red level"
          Height          =   255
          Left            =   120
@@ -892,7 +909,7 @@ Begin VB.Form PEditor
          Top             =   2040
          Width           =   1215
       End
-      Begin VB.Label Label1
+      Begin VB.Label Label1 
          Caption         =   "Pallete:"
          Height          =   255
          Left            =   120
@@ -901,14 +918,14 @@ Begin VB.Form PEditor
          Width           =   1335
       End
    End
-   Begin VB.Frame DrawModeFrame
+   Begin VB.Frame DrawModeFrame 
       Caption         =   "Draw Mode"
       Height          =   1215
       Left            =   0
       TabIndex        =   1
       Top             =   1320
       Width           =   1695
-      Begin VB.OptionButton MeshOption
+      Begin VB.OptionButton MeshOption 
          Caption         =   "Mesh"
          Height          =   255
          Left            =   120
@@ -916,7 +933,7 @@ Begin VB.Form PEditor
          Top             =   240
          Width           =   1455
       End
-      Begin VB.OptionButton PolysOption
+      Begin VB.OptionButton PolysOption 
          Caption         =   "Polygon colors"
          Height          =   375
          Left            =   120
@@ -924,7 +941,7 @@ Begin VB.Form PEditor
          Top             =   480
          Width           =   1335
       End
-      Begin VB.OptionButton VertsOption
+      Begin VB.OptionButton VertsOption 
          Caption         =   "Vetex colors"
          Height          =   255
          Left            =   120
@@ -933,14 +950,14 @@ Begin VB.Form PEditor
          Width           =   1215
       End
    End
-   Begin MSComDlg.CommonDialog CommonDialog1
+   Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   0
       Top             =   0
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
    End
-   Begin VB.PictureBox MainPicture
+   Begin VB.PictureBox MainPicture 
       AutoSize        =   -1  'True
       Height          =   3975
       Left            =   1800
@@ -951,13 +968,13 @@ Begin VB.Form PEditor
       TabIndex        =   0
       Top             =   120
       Width           =   5655
-      Begin VB.Timer Timer1
+      Begin VB.Timer Timer1 
          Interval        =   1
          Left            =   0
          Top             =   0
       End
    End
-   Begin VB.Frame CommandsFrame
+   Begin VB.Frame CommandsFrame 
       BorderStyle     =   0  'None
       Caption         =   "Frame8"
       Height          =   1215
@@ -965,7 +982,7 @@ Begin VB.Form PEditor
       TabIndex        =   68
       Top             =   6360
       Width           =   1935
-      Begin VB.CommandButton NewPolyButton
+      Begin VB.CommandButton NewPolyButton 
          Height          =   495
          Left            =   1440
          MaskColor       =   &H00FF0000&
@@ -977,7 +994,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton PanButton
+      Begin VB.CommandButton PanButton 
          BackColor       =   &H0000C000&
          Height          =   495
          Left            =   960
@@ -990,7 +1007,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton ZoomButton
+      Begin VB.CommandButton ZoomButton 
          BackColor       =   &H00FF0000&
          Height          =   495
          Left            =   480
@@ -1003,7 +1020,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton RotateButton
+      Begin VB.CommandButton RotateButton 
          BackColor       =   &H000000FF&
          Height          =   495
          Left            =   0
@@ -1016,7 +1033,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton PickVertexButton
+      Begin VB.CommandButton PickVertexButton 
          Height          =   495
          Left            =   1440
          MaskColor       =   &H00FF0000&
@@ -1028,7 +1045,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton EraseButton
+      Begin VB.CommandButton EraseButton 
          Height          =   495
          Left            =   960
          MaskColor       =   &H00FF0000&
@@ -1040,7 +1057,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton CutEdgeButton
+      Begin VB.CommandButton CutEdgeButton 
          Height          =   495
          Left            =   480
          MaskColor       =   &H00FF0000&
@@ -1052,7 +1069,7 @@ Begin VB.Form PEditor
          UseMaskColor    =   -1  'True
          Width           =   495
       End
-      Begin VB.CommandButton PaintButton
+      Begin VB.CommandButton PaintButton 
          BackColor       =   &H80000016&
          Height          =   495
          Left            =   0
@@ -2107,6 +2124,8 @@ Private Sub Timer1_Timer()
     Timer1.Enabled = False
     MainPicture.Enabled = True
 End Sub
+
+
 
 Private Sub VertsOption_Click()
     d_type = 2
@@ -3856,7 +3875,87 @@ Private Sub RotationModifiersChanged()
 End Sub
 
 
-
+Private Sub UpGroupCommand_Click()
+    Dim groupIndex As Integer
+    Dim tmpGroups() As PGroup
+    Dim i As Integer
+            
+    ' Get the group selected in p model
+    groupIndex = GroupsList.ListIndex
+                                       
+    If groupIndex > 0 Then
+        ' Prepare the new .p model
+        
+        tmpGroups = EditedPModel.Groups
+        
+        ' Here we will reorder the groups of the .p model
+        For i = 0 To GroupsList.ListCount - 1
+            If i = groupIndex - 1 Then
+                tmpGroups(i) = EditedPModel.Groups(groupIndex)
+            Else
+                If i = groupIndex Then
+                    tmpGroups(i) = EditedPModel.Groups(i - 1)
+                Else
+                    tmpGroups(i) = EditedPModel.Groups(i)
+                End If
+            End If
+            
+        Next
+        
+        ' Now we need to reasing the ordered groups to the edited p model
+        EditedPModel.Groups = tmpGroups
+        
+        ' Refresh Groups List
+        GroupProperties.Hide
+        FillGroupsList
+        
+        MainPicture_Paint
+        
+        ' Let's select in listbox the record.
+        GroupsList.ListIndex = groupIndex - 1
+    End If
+End Sub
+    
+Private Sub DownGroupCommand_Click()
+    Dim groupIndex As Integer
+    Dim tmpGroups() As PGroup
+    Dim i As Integer
+            
+    ' Get the group selected in p model
+    groupIndex = GroupsList.ListIndex
+                                       
+    If groupIndex > -1 And groupIndex < GroupsList.ListCount - 1 Then
+        ' Prepare the new .p model
+        
+        tmpGroups = EditedPModel.Groups
+        
+        ' Here we will reorder the groups of the .p model
+        For i = 0 To GroupsList.ListCount - 1
+            If i = groupIndex + 1 Then
+                tmpGroups(i) = EditedPModel.Groups(groupIndex)
+            Else
+                If i = groupIndex Then
+                    tmpGroups(i) = EditedPModel.Groups(i + 1)
+                Else
+                    tmpGroups(i) = EditedPModel.Groups(i)
+                End If
+            End If
+            
+        Next
+        
+        ' Now we need to reasing the ordered groups to the edited p model
+        EditedPModel.Groups = tmpGroups
+        
+        ' Refresh Groups List
+        GroupProperties.Hide
+        FillGroupsList
+        
+        MainPicture_Paint
+        
+        ' Let's select in listbox the record
+        GroupsList.ListIndex = groupIndex + 1
+    End If
+End Sub
 
 
 
