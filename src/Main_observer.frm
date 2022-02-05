@@ -2,11 +2,11 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form ModelEditor 
-   Caption         =   "Kimera v1.02f - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
-   ClientHeight    =   9195
+   Caption         =   "Kimera v1.08f - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
+   ClientHeight    =   9192
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   9825
+   ClientTop       =   348
+   ClientWidth     =   9828
    Icon            =   "Main_observer.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
@@ -14,6 +14,25 @@ Begin VB.Form ModelEditor
    ScaleMode       =   0  'User
    ScaleWidth      =   656.313
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton PasteFrmButton 
+      Caption         =   "Paste Frm"
+      Enabled         =   0   'False
+      Height          =   264
+      Left            =   900
+      TabIndex        =   109
+      Top             =   8820
+      Visible         =   0   'False
+      Width           =   852
+   End
+   Begin VB.CommandButton CopyFrmButton 
+      Caption         =   "Copy Frm"
+      Height          =   264
+      Left            =   60
+      TabIndex        =   108
+      Top             =   8820
+      Visible         =   0   'False
+      Width           =   824
+   End
    Begin VB.CommandButton SaveFF7AnimationButton 
       Caption         =   "Save Animation"
       Height          =   255
@@ -28,7 +47,7 @@ Begin VB.Form ModelEditor
       Height          =   255
       Left            =   8040
       TabIndex        =   106
-      Top             =   8880
+      Top             =   8904
       Width           =   1695
    End
    Begin VB.CommandButton ShowCharModelDBButton 
@@ -45,34 +64,34 @@ Begin VB.Form ModelEditor
       Height          =   255
       Left            =   8040
       TabIndex        =   104
-      Top             =   8640
+      Top             =   8652
       Visible         =   0   'False
       Width           =   1695
    End
    Begin VB.CommandButton ComputeWeaponPositionButton 
       Caption         =   "Compute attached weapon position"
       Height          =   435
-      Left            =   0
+      Left            =   84
       TabIndex        =   98
-      Top             =   7800
+      Top             =   7560
       Visible         =   0   'False
       Width           =   2175
    End
    Begin VB.CommandButton ComputeGroundHeightButton 
       Caption         =   "Compute ground height"
       Height          =   255
-      Left            =   0
+      Left            =   84
       TabIndex        =   97
-      Top             =   7560
+      Top             =   7320
       Visible         =   0   'False
       Width           =   2175
    End
    Begin VB.CheckBox ShowLastFrameGhostCheck 
       Caption         =   "Overlap last frame ghost"
       Height          =   255
-      Left            =   0
+      Left            =   84
       TabIndex        =   96
-      Top             =   6840
+      Top             =   6600
       Width           =   2055
    End
    Begin VB.CommandButton ChangeAnimationButton 
@@ -87,9 +106,9 @@ Begin VB.Form ModelEditor
    Begin VB.CheckBox ShowGroundCheck 
       Caption         =   "Show ground"
       Height          =   255
-      Left            =   0
+      Left            =   84
       TabIndex        =   90
-      Top             =   7080
+      Top             =   6840
       Width           =   1335
    End
    Begin VB.CommandButton ShowTextureOptionsButton 
@@ -151,9 +170,9 @@ Begin VB.Form ModelEditor
       Begin VB.PictureBox TextureViewer 
          Height          =   1335
          Left            =   120
-         ScaleHeight     =   85
+         ScaleHeight     =   107
          ScaleMode       =   3  'Pixel
-         ScaleWidth      =   93
+         ScaleWidth      =   117
          TabIndex        =   74
          Top             =   240
          Width           =   1455
@@ -164,37 +183,37 @@ Begin VB.Form ModelEditor
          TabIndex        =   88
          Top             =   1560
          Width           =   240
-         _ExtentX        =   450
-         _ExtentY        =   661
+         _ExtentX        =   445
+         _ExtentY        =   656
          _Version        =   393216
          Wrap            =   -1  'True
          Enabled         =   -1  'True
       End
    End
    Begin VB.ComboBox WeaponCombo 
-      Height          =   315
-      Left            =   1320
+      Height          =   288
+      Left            =   1404
       TabIndex        =   70
       Text            =   "0"
-      Top             =   8640
+      Top             =   8400
       Visible         =   0   'False
       Width           =   855
    End
    Begin VB.ComboBox BattleAnimationCombo 
-      Height          =   315
-      Left            =   1320
+      Height          =   288
+      Left            =   1404
       TabIndex        =   67
       Text            =   "0"
-      Top             =   8280
+      Top             =   8040
       Visible         =   0   'False
       Width           =   855
    End
    Begin VB.CheckBox DListEnableCheck 
       Caption         =   "Render using DLists"
       Height          =   255
-      Left            =   0
+      Left            =   84
       TabIndex        =   66
-      Top             =   7320
+      Top             =   7080
       Width           =   1815
    End
    Begin VB.CommandButton AnimationOptionsButton 
@@ -253,8 +272,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   83
          Top             =   240
          Width           =   240
-         _ExtentX        =   450
-         _ExtentY        =   450
+         _ExtentX        =   445
+         _ExtentY        =   445
          _Version        =   393216
          Max             =   2
          Wrap            =   -1  'True
@@ -273,8 +292,8 @@ Begin VB.Form ModelEditor
             TabIndex        =   82
             Top             =   960
             Width           =   240
-            _ExtentX        =   450
-            _ExtentY        =   450
+            _ExtentX        =   445
+            _ExtentY        =   445
             _Version        =   393216
             Increment       =   10000
             Max             =   7200000
@@ -287,8 +306,8 @@ Begin VB.Form ModelEditor
             TabIndex        =   81
             Top             =   600
             Width           =   240
-            _ExtentX        =   450
-            _ExtentY        =   450
+            _ExtentX        =   445
+            _ExtentY        =   445
             _Version        =   393216
             Increment       =   10000
             Max             =   7200000
@@ -301,8 +320,8 @@ Begin VB.Form ModelEditor
             TabIndex        =   80
             Top             =   240
             Width           =   240
-            _ExtentX        =   450
-            _ExtentY        =   450
+            _ExtentX        =   445
+            _ExtentY        =   445
             _Version        =   393216
             Increment       =   10000
             Max             =   7200000
@@ -372,9 +391,9 @@ Begin VB.Form ModelEditor
       Caption         =   "Show Bones"
       Enabled         =   0   'False
       Height          =   255
-      Left            =   6480
+      Left            =   6720
       TabIndex        =   56
-      Top             =   8880
+      Top             =   8904
       Visible         =   0   'False
       Width           =   1215
    End
@@ -758,8 +777,8 @@ Begin VB.Form ModelEditor
          TabIndex        =   79
          Top             =   1320
          Width           =   240
-         _ExtentX        =   450
-         _ExtentY        =   450
+         _ExtentX        =   445
+         _ExtentY        =   445
          _Version        =   393216
          Max             =   999999999
          Min             =   -999999999
@@ -771,11 +790,11 @@ Begin VB.Form ModelEditor
          TabIndex        =   78
          Top             =   960
          Width           =   240
-         _ExtentX        =   450
-         _ExtentY        =   503
+         _ExtentX        =   445
+         _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneZText"
-         BuddyDispid     =   196694
+         BuddyDispid     =   196697
          OrigLeft        =   1320
          OrigTop         =   960
          OrigRight       =   1560
@@ -792,11 +811,11 @@ Begin VB.Form ModelEditor
          TabIndex        =   77
          Top             =   600
          Width           =   240
-         _ExtentX        =   450
-         _ExtentY        =   503
+         _ExtentX        =   445
+         _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneYText"
-         BuddyDispid     =   196695
+         BuddyDispid     =   196698
          OrigLeft        =   1335
          OrigTop         =   600
          OrigRight       =   1575
@@ -813,11 +832,11 @@ Begin VB.Form ModelEditor
          TabIndex        =   76
          Top             =   240
          Width           =   240
-         _ExtentX        =   450
-         _ExtentY        =   503
+         _ExtentX        =   445
+         _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneXText"
-         BuddyDispid     =   196690
+         BuddyDispid     =   196693
          OrigLeft        =   1320
          OrigTop         =   240
          OrigRight       =   1560
@@ -911,8 +930,8 @@ Begin VB.Form ModelEditor
    End
    Begin VB.TextBox AnimationFrameText 
       Enabled         =   0   'False
-      Height          =   285
-      Left            =   3480
+      Height          =   288
+      Left            =   3780
       TabIndex        =   4
       Top             =   8880
       Visible         =   0   'False
@@ -921,10 +940,10 @@ Begin VB.Form ModelEditor
    Begin VB.HScrollBar CurrentFrameScroll 
       Enabled         =   0   'False
       Height          =   255
-      Left            =   3960
+      Left            =   4200
       Max             =   0
       TabIndex        =   2
-      Top             =   8880
+      Top             =   8904
       Visible         =   0   'False
       Width           =   2415
    End
@@ -941,9 +960,9 @@ Begin VB.Form ModelEditor
       Height          =   8775
       Left            =   2280
       Negotiate       =   -1  'True
-      ScaleHeight     =   581
+      ScaleHeight     =   727
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   373
+      ScaleWidth      =   467
       TabIndex        =   0
       Top             =   0
       Width           =   5655
@@ -960,23 +979,34 @@ Begin VB.Form ModelEditor
          _Version        =   393216
       End
    End
+   Begin VB.Label CopyPasteFrmLabel 
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "Lab"
+      Enabled         =   0   'False
+      Height          =   276
+      Left            =   1740
+      TabIndex        =   110
+      Top             =   8820
+      Visible         =   0   'False
+      Width           =   684
+   End
    Begin VB.Label WeaponLabel 
       Caption         =   "Weapon:"
-      Height          =   255
-      Left            =   0
+      Height          =   252
+      Left            =   84
       TabIndex        =   71
-      Top             =   8640
+      Top             =   8400
       Visible         =   0   'False
-      Width           =   1215
+      Width           =   1212
    End
    Begin VB.Label BattleAnimationLabel 
       Caption         =   "Battle Animation:"
-      Height          =   255
-      Left            =   0
+      Height          =   252
+      Left            =   84
       TabIndex        =   68
-      Top             =   8280
+      Top             =   8040
       Visible         =   0   'False
-      Width           =   1215
+      Width           =   1212
    End
    Begin VB.Label BoneSelectorLabel 
       Caption         =   "Selected bone:"
@@ -989,12 +1019,12 @@ Begin VB.Form ModelEditor
    End
    Begin VB.Label AnimationFrameLabel 
       Caption         =   "Animation Frame"
-      Height          =   255
-      Left            =   2280
+      Height          =   252
+      Left            =   2520
       TabIndex        =   3
-      Top             =   8880
+      Top             =   8904
       Visible         =   0   'False
-      Width           =   1215
+      Width           =   1212
    End
 End
 Attribute VB_Name = "ModelEditor"
@@ -1066,6 +1096,11 @@ Dim ControlPressedQ As Boolean
 
 Dim DontRefreshPicture As Boolean
 
+' NEW UPDATE L@ZAR0
+Dim AFrameToCopy As AFrame
+Dim DAFrameToCopy As DAFrame
+Dim DAFrameToCopy_W As DAFrame
+
 Private Type ModelEditorState
     P_Model As PModel
     aa_sk As AASkeleton
@@ -1135,6 +1170,15 @@ Public Sub OpenFF7File(ByVal fileName As String)
 
     SelectedBoneFrame.Enabled = False
     SelectedPieceFrame.Enabled = False
+      
+    ' NEW UPDATE L@ZAR0
+    AnimationFrameText.Text = 0
+    
+    CopyPasteFrmLabel.Visible = False
+    CopyPasteFrmLabel.Caption = ""
+    CopyFrmButton.Visible = False
+    PasteFrmButton.Visible = False
+    PasteFrmButton.Enabled = False
 
     If LCase(Right$(fileName, 2)) = ".p" Then
         ReadPModel P_Model, fileName
@@ -1225,6 +1269,13 @@ Public Sub OpenFF7File(ByVal fileName As String)
             ComputeGroundHeightButton.Visible = True
             ComputeWeaponPositionButton.Visible = False
             InterpolateAnimationButton.Visible = True
+            
+            ' NEW UPDATE L@ZAR0
+            CopyFrmButton.Visible = True
+            PasteFrmButton.Visible = True
+            CopyPasteFrmLabel.Visible = True
+            CopyPasteFrmLabel.Caption = ""
+            
             Call SetFrameEditorFields
             Call SetTextureEditorFields
         Else
@@ -1271,6 +1322,12 @@ Public Sub OpenFF7File(ByVal fileName As String)
                     BattleAnimationCombo.ListIndex = 0
                     BattleAnimationCombo.Visible = True
                     BattleAnimationLabel.Visible = True
+                    
+                    ' NEW UPDATE L@ZAR0
+                    CopyFrmButton.Visible = True
+                    PasteFrmButton.Visible = True
+                    CopyPasteFrmLabel.Visible = True
+                    CopyPasteFrmLabel.Caption = ""
                 End If
 
                 With CurrentFrameScroll
@@ -1358,7 +1415,7 @@ Public Sub OpenFF7File(ByVal fileName As String)
                         .max = max(1, DAAnims.BodyAnimations(0).NumFrames2)
                         .Enabled = True
                     End With
-
+                    
                     'With CurrentFrameScroll
                     '    .value = 0
                     '    .Min = -1
@@ -2333,7 +2390,6 @@ Private Sub MoveTexureUpDown_UpClick()
     Picture1_Paint
 End Sub
 
-
 Private Sub RemoveFrameButton_Click()
     Dim anim_index As Integer
     Dim fi As Integer
@@ -2985,6 +3041,12 @@ Private Sub Form_Resize()
             AnimationOptionsButton.Left = .ScaleWidth - 115
             InterpolateAnimationButton.Left = .ScaleWidth - 115
             InterpolateAllAnimsCommand.Left = .ScaleWidth - 115
+            
+            ' NEW UPDATE: L@ZAR0
+            CopyFrmButton.Top = .ScaleHeight - 20
+            PasteFrmButton.Top = .ScaleHeight - 20
+            CopyPasteFrmLabel.Top = .ScaleHeight - 20
+
             Picture1_Paint
         End If
     End With
@@ -5086,3 +5148,100 @@ Private Sub PieceRotationModifiersChanged()
     DoNotAddStateQ = False
 End Sub
 
+Private Sub CopyFrmButton_Click()
+    ' NEW UDPATE: L@ZAR0
+    Dim anim_index As Integer
+    
+    Select Case ModelType
+        Case K_HRC_SKELETON:
+            If AnimationFrameText.Text <> "" Then
+                CopyAFrame AAnim.Frames(CurrentFrameScroll.value), AFrameToCopy
+                
+                PasteFrmButton.Enabled = True
+                
+                CopyPasteFrmLabel.Caption = "F" + AnimationFrameText.Text
+            End If
+        Case K_AA_SKELETON:
+            If AnimationFrameText.Text <> "" And BattleAnimationCombo.ListIndex > -1 Then
+                anim_index = BattleAnimationCombo.List(BattleAnimationCombo.ListIndex)
+            
+                With DAAnims.BodyAnimations(anim_index)
+                    CopyDAFrame .Frames(CurrentFrameScroll.value), DAFrameToCopy
+                End With
+            
+                CopyPasteFrmLabel.Caption = "A" + BattleAnimationCombo.Text + "/F" + AnimationFrameText.Text
+            
+                ' If we want to copy battle animation with weapon animation, we will do that also.
+                If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
+                    CopyDAFrame DAAnims.WeaponAnimations(anim_index).Frames(CurrentFrameScroll.value), DAFrameToCopy_W
+                End If
+                
+                PasteFrmButton.Enabled = True
+            End If
+    End Select
+End Sub
+
+Private Sub PasteFrmButton_Click()
+    ' NEW UDPATE: L@ZAR0
+    Dim anim_index As Integer
+    Dim fi As Integer
+    Dim primary_secondary_counters_coef As Single
+    
+
+    AddStateToBuffer
+    
+    Select Case ModelType
+        Case K_HRC_SKELETON:
+            If AnimationFrameText.Text <> "" Then
+                With AAnim
+                    .NumFrames = .NumFrames + 1
+                    ReDim Preserve .Frames(.NumFrames - 1)
+            
+                    For fi = .NumFrames - 2 To CurrentFrameScroll.value Step -1
+                        .Frames(fi + 1) = .Frames(fi)
+                    Next fi
+                    
+                    CurrentFrameScroll.max = CurrentFrameScroll.max + 1
+                
+                    .Frames(CurrentFrameScroll.value + 1) = AFrameToCopy
+                End With
+          
+            End If
+        Case K_AA_SKELETON:
+            If AnimationFrameText.Text <> "" And BattleAnimationCombo.ListIndex > -1 Then
+                anim_index = BattleAnimationCombo.List(BattleAnimationCombo.ListIndex)
+        
+                With DAAnims.BodyAnimations(anim_index)
+                    primary_secondary_counters_coef = .NumFrames1 / .NumFrames2
+            
+                    .NumFrames2 = .NumFrames2 + 1
+                    .NumFrames1 = .NumFrames2 * primary_secondary_counters_coef
+                    
+                    ReDim Preserve .Frames(.NumFrames2 - 1)
+                    
+                    For fi = .NumFrames2 - 2 To CurrentFrameScroll.value Step -1
+                        .Frames(fi + 1) = .Frames(fi)
+                    Next fi
+                    
+                    CurrentFrameScroll.max = CurrentFrameScroll.max + 1
+                    
+                    .Frames(CurrentFrameScroll.value + 1) = DAFrameToCopy
+                    
+                    ' If we want to copy battle animation with weapon animation, we will do that also.
+                    If anim_index < DAAnims.NumWeaponAnimations And aa_sk.NumWeapons > 0 Then
+                        ReDim Preserve DAAnims.WeaponAnimations(anim_index).Frames(.NumFrames2 - 1)
+                        
+                        For fi = .NumFrames2 - 2 To CurrentFrameScroll.value Step -1
+                            DAAnims.WeaponAnimations(anim_index).Frames(fi + 1) = _
+                                                DAAnims.WeaponAnimations(anim_index).Frames(fi)
+                        Next fi
+                        
+                        DAAnims.WeaponAnimations(anim_index).Frames(CurrentFrameScroll.value + 1) = DAFrameToCopy_W
+                        
+                        DAAnims.WeaponAnimations(anim_index).NumFrames2 = .NumFrames2
+                        DAAnims.WeaponAnimations(anim_index).NumFrames1 = .NumFrames1
+                    End If
+                End With
+            End If
+    End Select
+End Sub
