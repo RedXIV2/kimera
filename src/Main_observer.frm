@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form ModelEditor 
-   Caption         =   "Kimera v1.08f - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
+   Caption         =   "Kimera v1.10f - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
    ClientHeight    =   9192
    ClientLeft      =   60
    ClientTop       =   348
@@ -794,7 +794,7 @@ Begin VB.Form ModelEditor
          _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneZText"
-         BuddyDispid     =   196697
+         BuddyDispid     =   196696
          OrigLeft        =   1320
          OrigTop         =   960
          OrigRight       =   1560
@@ -815,7 +815,7 @@ Begin VB.Form ModelEditor
          _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneYText"
-         BuddyDispid     =   196698
+         BuddyDispid     =   196697
          OrigLeft        =   1335
          OrigTop         =   600
          OrigRight       =   1575
@@ -836,7 +836,7 @@ Begin VB.Form ModelEditor
          _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneXText"
-         BuddyDispid     =   196693
+         BuddyDispid     =   196692
          OrigLeft        =   1320
          OrigTop         =   240
          OrigRight       =   1560
@@ -1405,6 +1405,12 @@ Public Sub OpenFF7File(ByVal fileName As String)
                     BattleAnimationLabel.Visible = True
                     WeaponCombo.Visible = False
                     WeaponLabel.Visible = False
+                    
+                    ' NEW UPDATE L@ZAR0
+                    CopyFrmButton.Visible = True
+                    PasteFrmButton.Visible = True
+                    CopyPasteFrmLabel.Visible = True
+                    CopyPasteFrmLabel.Caption = ""
 
                     AddPieceButton.Enabled = True
 
