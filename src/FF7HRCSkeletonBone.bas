@@ -92,17 +92,17 @@ Sub WriteHRCBone(ByVal NFile As Integer, ByRef bone As HRCBone)
 
         If (.NumResources > 0) Then
             base_name_rsd = Left$(.Resources(0).res_file, 4)
-            base_name_p = Left$(.Resources(0).Model.filename, 4)
+            base_name_p = Left$(.Resources(0).Model.fileName, 4)
 
             rsd_list = rsd_list + " " + .Resources(0).res_file
             WriteRSBResource .Resources(0), .Resources(0).res_file
-            WritePModel .Resources(0).Model, .Resources(0).Model.filename
+            WritePModel .Resources(0).Model, .Resources(0).Model.fileName
             For ri = 1 To .NumResources - 1
                 .Resources(ri).res_file = base_name_rsd + Right$(Str$(ri), Len(Str$(ri)) - 1)
-                .Resources(ri).Model.filename = base_name_p + Right$(Str$(ri), Len(Str$(ri)) - 1) + ".p"
+                .Resources(ri).Model.fileName = base_name_p + Right$(Str$(ri), Len(Str$(ri)) - 1) + ".p"
                 rsd_list = rsd_list + " " + .Resources(ri).res_file
                 WriteRSBResource .Resources(ri), .Resources(ri).res_file
-                WritePModel .Resources(ri).Model, .Resources(ri).Model.filename
+                WritePModel .Resources(ri).Model, .Resources(ri).Model.fileName
             Next ri
 
             If Len(rsd_list) = 1 Then rsd_list = rsd_list + " "
@@ -224,18 +224,18 @@ Sub AddHRCBonePiece(ByRef bone As HRCBone, ByRef Piece As PModel)
         .Resources(.NumResources - 1).id = .Resources(0).id
         .Resources(.NumResources - 1).Model = Piece
         If .NumResources > 1 Then _
-            .Resources(.NumResources - 1).Model.filename = Left$(.Resources(0).Model.filename, Len(.Resources(0).Model.filename) - 2) + Right$(Str$(.NumResources - 1), Len(Str$(.NumResources - 1)) - 1) + ".P"
+            .Resources(.NumResources - 1).Model.fileName = Left$(.Resources(0).Model.fileName, Len(.Resources(0).Model.fileName) - 2) + Right$(Str$(.NumResources - 1), Len(Str$(.NumResources - 1)) - 1) + ".P"
         .Resources(.NumResources - 1).res_file = .Resources(0).res_file + Right$(Str$(.NumResources - 1), Len(Str$(.NumResources - 1)) - 1)
     End With
 End Sub
 Sub RemoveHRCBonePiece(ByRef bone As HRCBone, ByVal p_index As Integer)
-    Dim pi As Integer
+    Dim PI As Integer
 
     With bone
         If p_index < .NumResources - 1 Then
-            For pi = p_index To .NumResources - 2
-                .Resources(pi) = .Resources(pi + 1)
-            Next pi
+            For PI = p_index To .NumResources - 2
+                .Resources(PI) = .Resources(PI + 1)
+            Next PI
         End If
         .NumResources = .NumResources - 1
         ReDim Preserve .Resources(.NumResources)

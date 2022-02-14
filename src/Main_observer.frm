@@ -2,17 +2,17 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form ModelEditor 
-   Caption         =   "Kimera v1.10f - FF7PC simple model editor ( Maintained by the Tsunamods Team )"
+   Caption         =   "Kimera v1.18g - FF7PC Model Editor by Borde ( Maintained by the Tsunamods Team )"
    ClientHeight    =   9192
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   9828
+   ClientWidth     =   9792
    Icon            =   "Main_observer.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    ScaleHeight     =   613
    ScaleMode       =   0  'User
-   ScaleWidth      =   656.313
+   ScaleWidth      =   653.909
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton PasteFrmButton 
       Caption         =   "Paste Frm"
@@ -128,6 +128,30 @@ Begin VB.Form ModelEditor
       Top             =   2160
       Visible         =   0   'False
       Width           =   1695
+      Begin VB.CommandButton FlipHorizontalButton 
+         Caption         =   "FH"
+         Height          =   252
+         Left            =   1200
+         TabIndex        =   113
+         Top             =   2640
+         Width           =   432
+      End
+      Begin VB.CommandButton FlipVerticalButton 
+         Caption         =   "FV"
+         Height          =   252
+         Left            =   1200
+         TabIndex        =   112
+         Top             =   2400
+         Width           =   432
+      End
+      Begin VB.CommandButton RotateButton 
+         Caption         =   "R"
+         Height          =   252
+         Left            =   1200
+         TabIndex        =   111
+         Top             =   2160
+         Width           =   432
+      End
       Begin VB.ComboBox TextureSelectCombo 
          Height          =   315
          Left            =   360
@@ -136,28 +160,28 @@ Begin VB.Form ModelEditor
          Width           =   1215
       End
       Begin VB.CommandButton RemoveTextureButton 
-         Caption         =   "Remove Texture"
+         Caption         =   "Remove Text."
          Height          =   255
-         Left            =   120
+         Left            =   60
          TabIndex        =   87
          Top             =   2640
-         Width           =   1455
+         Width           =   1152
       End
       Begin VB.CommandButton AddTextureButton 
-         Caption         =   "Add Texture"
+         Caption         =   "Add Text."
          Height          =   255
-         Left            =   120
-         TabIndex        =   86
+         Left            =   60
+         TabIndex        =   85
          Top             =   2400
-         Width           =   1455
+         Width           =   1152
       End
       Begin VB.CommandButton ChangeTextureButton 
-         Caption         =   "Change Texture"
+         Caption         =   "Change Text."
          Height          =   255
-         Left            =   120
-         TabIndex        =   85
+         Left            =   60
+         TabIndex        =   86
          Top             =   2160
-         Width           =   1455
+         Width           =   1152
       End
       Begin VB.CheckBox ZeroAsTransparent 
          Caption         =   "0 as transparent"
@@ -794,7 +818,7 @@ Begin VB.Form ModelEditor
          _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneZText"
-         BuddyDispid     =   196696
+         BuddyDispid     =   196699
          OrigLeft        =   1320
          OrigTop         =   960
          OrigRight       =   1560
@@ -815,7 +839,7 @@ Begin VB.Form ModelEditor
          _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneYText"
-         BuddyDispid     =   196697
+         BuddyDispid     =   196700
          OrigLeft        =   1335
          OrigTop         =   600
          OrigRight       =   1575
@@ -836,7 +860,7 @@ Begin VB.Form ModelEditor
          _ExtentY        =   508
          _Version        =   393216
          BuddyControl    =   "ResizeBoneXText"
-         BuddyDispid     =   196692
+         BuddyDispid     =   196695
          OrigLeft        =   1320
          OrigTop         =   240
          OrigRight       =   1560
@@ -5250,4 +5274,275 @@ Private Sub PasteFrmButton_Click()
                 End With
             End If
     End Select
+End Sub
+
+Private Sub FlipVerticalButton_Click()
+    ' NEW UDPATE: L@ZAR0
+    Dim pct As PictureBox
+    Dim tex As TEXTexture
+    Dim tex_index As Integer
+
+    Picture1.Enabled = False
+
+    tex_index = TextureSelectCombo.ListIndex
+    
+    If tex_index > -1 Then
+        Select Case ModelType
+            Case K_HRC_SKELETON:
+                If SelectedBone > -1 Then
+                    tex = hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece).textures(tex_index)
+                End If
+            Case K_AA_SKELETON:
+                tex = aa_sk.textures(tex_index)
+        End Select
+                                                    
+        Dim row, col, BPPStride, i As Long
+        Dim current, flipped As Long
+        Dim result() As Byte
+            
+        current = 0
+        flipped = 0
+        BPPStride = tex.BytesPerPixel
+            
+        ReDim result(tex.width * tex.height * BPPStride - 1)
+                   
+        Dim WidthStride, HeightStride As Long
+        HeightStride = tex.height * BPPStride
+        WidthStride = tex.width * BPPStride
+        
+        For row = 0 To HeightStride - 1 Step BPPStride
+            For col = 0 To WidthStride - 1 Step BPPStride
+                current = (row * tex.width) + col
+                flipped = (row * tex.width) + (WidthStride - col - BPPStride)
+                
+                For i = 0 To BPPStride - 1
+                    result(flipped + i) = tex.PixelData(current + i)
+                Next i
+            Next col
+        Next row
+            
+        tex.PixelData = result
+
+        ' Let's refresh this TEXTexture in the rest of P Models
+        Dim r, t As Integer
+        Select Case ModelType
+            Case K_HRC_SKELETON:
+                If SelectedBone > -1 Then
+                    For i = 0 To hrc_sk.NumBones - 1
+                        For r = 0 To hrc_sk.Bones(i).NumResources - 1
+                            For t = 0 To hrc_sk.Bones(i).Resources(r).NumTextures - 1
+                                With hrc_sk.Bones(i).Resources(r)
+                                    If .textures(t).tex_file = tex.tex_file Then
+                                        .textures(t) = tex
+                                    
+                                        UnloadTexture .textures(t)
+                                        LoadTEXTexture .textures(t)
+                                        LoadBitmapFromTEXTexture .textures(t)
+                                    End If
+                                End With
+                            Next t
+                        Next r
+                    Next i
+                End If
+            Case K_AA_SKELETON:
+                For i = 0 To aa_sk.NumTextures - 1
+                    If aa_sk.textures(i).tex_file = tex.tex_file Then
+                        aa_sk.textures(i) = tex
+                    
+                        UnloadTexture aa_sk.textures(i)
+                        LoadTEXTexture aa_sk.textures(i)
+                        LoadBitmapFromTEXTexture aa_sk.textures(i)
+                    End If
+                Next i
+        End Select
+
+        Erase result
+
+        SetTextureEditorFields
+        TextureSelectCombo.ListIndex = tex_index
+                                  
+        Picture1_Paint
+    End If
+    Timer1.Enabled = True
+End Sub
+
+Private Sub FlipHorizontalButton_Click()
+    ' NEW UDPATE: L@ZAR0
+    Dim pct As PictureBox
+    Dim tex As TEXTexture
+    Dim tex_index As Integer
+
+    tex_index = TextureSelectCombo.ListIndex
+    
+    If tex_index > -1 Then
+        Select Case ModelType
+            Case K_HRC_SKELETON:
+                If SelectedBone > -1 Then
+                    tex = hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece).textures(tex_index)
+                End If
+            Case K_AA_SKELETON:
+                tex = aa_sk.textures(tex_index)
+        End Select
+
+        Dim row, col, BPPStride, i As Long
+        Dim current, flipped As Long
+        Dim result() As Byte
+            
+        current = 0
+        flipped = 0
+        BPPStride = tex.BytesPerPixel
+        
+        ReDim result(tex.width * tex.height * BPPStride - 1)
+               
+        Dim WidthStride, HeightStride As Long
+        HeightStride = tex.height * BPPStride
+        WidthStride = tex.width * BPPStride
+
+        For row = 0 To HeightStride - 1 Step BPPStride
+            For col = 0 To WidthStride - 1 Step BPPStride
+                current = (row * tex.height) + col
+                flipped = (HeightStride * (tex.height - 1)) + col - (HeightStride * (row / BPPStride))
+        
+                For i = 0 To BPPStride - 1
+                    result(flipped + i) = tex.PixelData(current + i)
+                Next i
+            Next col
+        Next row
+        
+        tex.PixelData = result
+                   
+        Select Case ModelType
+            Case K_HRC_SKELETON:
+                If SelectedBone > -1 Then
+                    ' Let's update all the textures used in other Bones
+                    Dim r, t As Integer
+                    For i = 0 To hrc_sk.NumBones - 1
+                        For r = 0 To hrc_sk.Bones(i).NumResources - 1
+                            For t = 0 To hrc_sk.Bones(i).Resources(r).NumTextures - 1
+                                With hrc_sk.Bones(i).Resources(r)
+                                    If .textures(t).tex_file = tex.tex_file Then
+                                        .textures(t) = tex
+                                    
+                                        UnloadTexture .textures(t)
+                                        LoadTEXTexture .textures(t)
+                                        LoadBitmapFromTEXTexture .textures(t)
+                                    End If
+                                End With
+                            Next t
+                        Next r
+                    Next i
+                End If
+            Case K_AA_SKELETON:
+                For i = 0 To aa_sk.NumTextures - 1
+                    If aa_sk.textures(i).tex_file = tex.tex_file Then
+                        aa_sk.textures(i) = tex
+                    
+                        UnloadTexture aa_sk.textures(i)
+                        LoadTEXTexture aa_sk.textures(i)
+                        LoadBitmapFromTEXTexture aa_sk.textures(i)
+                    End If
+                Next i
+        End Select
+                   
+        Erase result
+                   
+        SetTextureEditorFields
+        TextureSelectCombo.ListIndex = tex_index
+            
+        Picture1_Paint
+    End If
+End Sub
+
+Private Sub RotateButton_Click()
+    ' NEW UDPATE: L@ZAR0
+    Dim pct As PictureBox
+    Dim tex As TEXTexture
+    Dim tex_index As Integer
+
+    tex_index = TextureSelectCombo.ListIndex
+    
+    If tex_index > -1 Then
+        Select Case ModelType
+            Case K_HRC_SKELETON:
+                If SelectedBone > -1 Then
+                    tex = hrc_sk.Bones(SelectedBone).Resources(SelectedBonePiece).textures(tex_index)
+                End If
+            Case K_AA_SKELETON:
+                tex = aa_sk.textures(tex_index)
+        End Select
+                                                            
+        Dim row, col, BPPStride, i As Long
+        Dim newWidth, newHeight, originalWidth, originalHeight
+        Dim destinationX, destinationY, destinationPosition, sourcePosition
+                    
+        Dim result() As Byte
+        BPPStride = tex.BytesPerPixel
+            
+        ReDim result(tex.width * tex.height * BPPStride - 1)
+                   
+        newWidth = tex.height
+        newHeight = tex.width
+        
+        originalWidth = tex.width
+        originalHeight = tex.height
+        
+        Dim WidthStride, HeightStride As Long
+        HeightStride = tex.height * BPPStride
+        WidthStride = tex.width * BPPStride
+        
+        For row = 0 To HeightStride - 1 Step BPPStride
+            destinationX = WidthStride - BPPStride - row
+            For col = 0 To WidthStride - 1 Step BPPStride
+                sourcePosition = (row * tex.height) + col
+                destinationY = col
+                destinationPosition = (destinationX + destinationY * newWidth)
+                
+                For i = 0 To BPPStride - 1
+                    result(destinationPosition + i) = tex.PixelData(sourcePosition + i)
+                Next i
+            Next col
+        Next row
+        
+        tex.PixelData = result
+                   
+        Select Case ModelType
+            Case K_HRC_SKELETON:
+                If SelectedBone > -1 Then
+                    ' Let's update all the textures used in other Bones
+                    Dim r, t As Integer
+                    For i = 0 To hrc_sk.NumBones - 1
+                        For r = 0 To hrc_sk.Bones(i).NumResources - 1
+                            For t = 0 To hrc_sk.Bones(i).Resources(r).NumTextures - 1
+                                With hrc_sk.Bones(i).Resources(r)
+                                    If .textures(t).tex_file = tex.tex_file Then
+                                        .textures(t) = tex
+                                    
+                                        UnloadTexture .textures(t)
+                                        LoadTEXTexture .textures(t)
+                                        LoadBitmapFromTEXTexture .textures(t)
+                                    End If
+                                End With
+                            Next t
+                        Next r
+                    Next i
+                End If
+            Case K_AA_SKELETON:
+                For i = 0 To aa_sk.NumTextures - 1
+                    If aa_sk.textures(i).tex_file = tex.tex_file Then
+                        aa_sk.textures(i) = tex
+                    
+                        UnloadTexture aa_sk.textures(i)
+                        LoadTEXTexture aa_sk.textures(i)
+                        LoadBitmapFromTEXTexture aa_sk.textures(i)
+                    End If
+                Next i
+        End Select
+        
+        Erase result
+        
+        SetTextureEditorFields
+        TextureSelectCombo.ListIndex = tex_index
+                              
+        Picture1_Paint
+    End If
 End Sub
