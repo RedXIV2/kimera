@@ -31,7 +31,7 @@ End Type
 Private Const MIN_SMOOTH_COS As Double = -0.2
 Sub ReadGroups(ByVal NFile As Integer, ByVal offset As Long, ByRef Groups() As PGroup, ByVal NumGroups As Long)
     Dim gi As Long
-    
+
     ReDim Groups(NumGroups - 1)
     For gi = 0 To NumGroups - 1
         With Groups(gi)
@@ -57,7 +57,7 @@ End Sub
 Sub WriteGroups(ByVal NFile As Integer, ByVal offset As Long, ByRef Groups() As PGroup)
     Dim gi As Long
     Dim NumGroups As Long
-    
+
     NumGroups = UBound(Groups()) + 1
     For gi = 0 To NumGroups - 1
         With Groups(gi)
@@ -87,31 +87,31 @@ Sub MergeGroups(ByRef g1() As PGroup, ByRef g2() As PGroup)
     Dim NumEdges As Integer
     Dim NumVerts As Integer
     Dim NumTexCs As Integer
-    
-    
+
+
     NumGroupsG1 = UBound(g1) + 1
     NumGroupsG2 = UBound(g2) + 1
-    
+
     ReDim Preserve g1(NumGroupsG1 + NumGroupsG2 - 1)
-    
+
     MaxTIG1 = 0
     For gi = 0 To NumGroupsG1 - 1
         If g1(gi).texFlag = 1 Then _
             If g1(gi).TexID > MaxTIG1 Then MaxTIG1 = g1(gi).TexID
     Next gi
-    
+
     With g1(NumGroupsG1 - 1)
         NumPolys = .offpoly + .numPoly
         NumEdges = .offEdge + .numEdge
         NumVerts = .offvert + .numvert
-    
+
         If g1(NumGroupsG1).texFlag = 1 Then
             NumTexCs = .offTex + .numvert
         Else
             NumTexCs = .offTex
         End If
     End With
-    
+
     For gi = 0 To NumGroupsG2 - 1
         With g2(gi)
             .offpoly = .offpoly + NumPolys
@@ -131,7 +131,7 @@ Sub CreateDListFromPGroup(ByRef Group As PGroup, ByRef polys() As PPolygon, ByRe
             glDeleteLists .DListNum, 1
             .DListNum = glGenLists(1)
         End If
-        
+
         glNewList .DListNum, GL_COMPILE
             DrawGroup Group, polys, Verts, vcolors, Normals, TexCoords, hundret, False
         glEndList
@@ -147,18 +147,18 @@ Sub DrawGroup(ByRef Group As PGroup, ByRef polys() As PPolygon, ByRef Verts() As
               ByRef TexCoords() As Point2D, ByRef hundret As PHundret, ByVal HideHiddenQ As Boolean)
     If Group.HiddenQ And HideHiddenQ Then _
         Exit Sub
-        
+
     Dim PI As Integer
     Dim vi As Integer
     Dim TexEnabled As Boolean
     Dim x As Single, y As Single, z As Single
-    
+
     TexEnabled = (glIsEnabled(GL_TEXTURE_2D) = GL_TRUE)
-    
+
     glBegin GL_TRIANGLES
     glColorMaterial GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE
     For PI = Group.offpoly To Group.offpoly + Group.numPoly - 1
-        
+
             For vi = 0 To 2
                 With vcolors(polys(PI).Verts(vi) + Group.offvert)
                     If hundret.blend_mode = 0 And Not TexEnabled Then
@@ -166,19 +166,19 @@ Sub DrawGroup(ByRef Group As PGroup, ByRef polys() As PPolygon, ByRef Verts() As
                     Else
                         glColor4f CSng(.r) / 255#, CSng(.g) / 255#, CSng(.B) / 255#, 1#
                     End If
-                    
+
                 End With
-                
+
                 With Normals(polys(PI).Normals(vi))
                     glNormal3f .x, .y, .z
                 End With
-                
+
                 If Group.texFlag = 1 Then
                     With TexCoords(Group.offTex + polys(PI).Verts(vi))
                         x = .x
                         y = .y
                         glTexCoord2f x, y
-                        
+
                     End With
                 End If
 
@@ -188,22 +188,22 @@ Sub DrawGroup(ByRef Group As PGroup, ByRef polys() As PPolygon, ByRef Verts() As
                     z = .z
                     glVertex3f x, y, z
                 End With
-                
+
             Next vi
-        
+
     Next PI
     glEnd
-    
+
 End Sub
 Function GetPolygonGroup(ByRef Groups() As PGroup, ByVal PI As Integer) As Integer
     Dim NumGroups As Long
     Dim p_base As Integer
-    
+
     NumGroups = UBound(Groups()) - 1
-    
+
     GetPolygonGroup = 0
     p_base = p_base + Groups(0).numPoly
-    
+
     While p_base <= PI
         GetPolygonGroup = GetPolygonGroup + 1
         p_base = p_base + Groups(GetPolygonGroup).numPoly
@@ -212,12 +212,12 @@ End Function
 Function GetVertexGroup(ByRef Groups() As PGroup, ByVal vi As Integer) As Integer
     Dim NumGroups As Long
     Dim v_base As Integer
-    
+
     NumGroups = UBound(Groups()) - 1
-    
+
     GetVertexGroup = 0
     v_base = v_base + Groups(0).numvert
-    
+
     While v_base <= vi
         GetVertexGroup = GetVertexGroup + 1
         v_base = v_base + Groups(GetVertexGroup).numvert
@@ -229,7 +229,7 @@ Public Sub SmoothPGroup(ByRef group_in As PGroup, _
                         ByRef tex_coords_in() As Point2D, _
                         ByRef group_out As PGroup, _
                         ByRef polys_out() As PPolygon, ByRef verts_out() As Point3D, ByRef v_colors_out() As color, ByRef tex_coords_out() As Point2D)
-    
+
     Dim polys_aux() As PPolygon
     Dim verts_aux() As Point3D
     Dim normals_aux() As Point3D
@@ -237,27 +237,27 @@ Public Sub SmoothPGroup(ByRef group_in As PGroup, _
     Dim tex_coords_aux() As Point2D
     Dim v_colors_aux_copy() As color
     Dim tex_coords_aux_copy() As Point2D
-    
+
     Dim per_edge_verts() As VertsGroup
     Dim per_vertex_verts() As VertsGroup
     Dim vert_groups_per_edge() As Long
-    
+
     Dim polys_per_edge() As VertsGroup
     Dim vertex_verts_central_verts() As Long
     Dim per_vertex_verts_polys() As VertsGroup
     Dim per_vertex_coefs() As Point2D
-    
+
     Dim num_verts As Long
-    
+
     GetIsolatedGroup group_in, polys_in, verts_in, v_colors_in, tex_coords_in, _
                      polys_aux, verts_aux, v_colors_aux, tex_coords_aux
-    
+
     SplitSharedVertices polys_aux, verts_aux, normals_aux, v_colors_aux, tex_coords_aux, normals_in
-    
+
     CreateEdgeVerticesTable polys_aux, verts_aux, per_edge_verts
     CreateVertexVerticesTable verts_aux, normals_aux, per_edge_verts, per_vertex_verts
     CreateVertGroupsPerEdgeTable verts_aux, per_edge_verts, per_vertex_verts, vert_groups_per_edge
-    
+
     num_verts = UBound(verts_aux) + 1
     ReDim v_colors_aux_copy(num_verts - 1)
     CopyMemory v_colors_aux_copy(0), v_colors_aux(0), 4 * (num_verts - 1)
@@ -266,14 +266,14 @@ Public Sub SmoothPGroup(ByRef group_in As PGroup, _
         CopyMemory tex_coords_aux_copy(0), tex_coords_aux(0), 2 * 3 * (num_verts - 1)
     End If
     DooSabinPolysContraction polys_aux, verts_aux, v_colors_aux, tex_coords_aux, per_edge_verts, per_vertex_verts, per_vertex_coefs
-    
+
     ConnectEdgeVertices polys_aux, verts_aux, v_colors_aux, tex_coords_aux, per_edge_verts, polys_per_edge
     ConnectVertexVertices polys_aux, verts_aux, v_colors_aux, tex_coords_aux, v_colors_aux_copy, tex_coords_aux_copy, per_vertex_verts, _
                           vertex_verts_central_verts, per_vertex_verts_polys
-    
+
     FixVertexAtributes polys_aux, verts_aux, normals_aux, v_colors_aux, tex_coords_aux, v_colors_aux_copy, tex_coords_aux, _
                        per_vertex_coefs, per_edge_verts, polys_per_edge, vertex_verts_central_verts, per_vertex_verts_polys, vert_groups_per_edge
-    
+
     AppendIsolatedGroup group_in, polys_aux, verts_aux, v_colors_aux, tex_coords_aux, _
                         group_out, polys_out, verts_out, v_colors_out, tex_coords_out
 
@@ -284,7 +284,7 @@ Private Sub GetIsolatedGroup(ByRef Group As PGroup, _
                              ByRef polys_out() As PPolygon, ByRef verts_out() As Point3D, ByRef v_colors_out() As color, ByRef tex_coords_out() As Point2D)
     'Dim PI As Long
     'Dim vi As Integer
-    
+
     With Group
         ReDim polys_out(.numPoly - 1)
         ReDim verts_out(.numvert - 1)
@@ -292,15 +292,15 @@ Private Sub GetIsolatedGroup(ByRef Group As PGroup, _
         If .texFlag = 1 Then
             ReDim tex_coords_out(.numvert - 1)
         End If
-        
+
         CopyMemory polys_out(0), polys_in(.offpoly), .numPoly * 24
         CopyMemory verts_out(0), verts_in(.offvert), .numvert * 3 * 4
         CopyMemory v_colors_out(0), v_colors_in(.offvert), .numvert * 4
-        
+
         If .texFlag = 1 Then
             CopyMemory tex_coords_out(0), tex_coords_in(.offTex), .numvert * 2 * 4
         End If
-        
+
         'For PI = 0 To .numPoly - 1
         '    For vi = 0 To 2
         '        polys_out(PI).Verts(vi) = polys_out(PI).Verts(vi) - .offvert
@@ -313,7 +313,7 @@ End Sub
 Private Function AppendVertex(ByRef vert As Point3D, ByRef normal As Point3D, ByRef v_color As color, ByRef Verts() As Point3D, ByRef Normals() As Point3D, _
                               ByRef v_colors() As color) As Long
     Dim num_verts As Long
-    
+
     num_verts = UBound(Verts) + 1
     ReDim Preserve Verts(num_verts)
     CopyMemory Verts(num_verts), vert, 3 * 4
@@ -321,7 +321,7 @@ Private Function AppendVertex(ByRef vert As Point3D, ByRef normal As Point3D, By
     CopyMemory Normals(num_verts), normal, 3 * 4
     ReDim Preserve v_colors(num_verts)
     CopyMemory v_colors(num_verts), v_color, 4
-    
+
     AppendVertex = num_verts
 End Function
 'Appends a vertex with the specified data (with texture coords)
@@ -329,12 +329,12 @@ Private Function AppendVertexWithTexCoords(ByRef vert As Point3D, ByRef normal A
                                            ByRef Verts() As Point3D, ByRef Normals() As Point3D, ByRef v_colors() As color, ByRef tex_coords() As Point2D) As Long
     Dim num_verts As Long
     Dim num_tex_coords As Long
-    
+
     num_verts = AppendVertex(vert, normal, v_color, Verts, Normals, v_colors)
     num_tex_coords = UBound(tex_coords) + 1
     ReDim Preserve tex_coords(num_tex_coords)
     CopyMemory tex_coords(num_tex_coords), tex_coord, 2 * 4
-    
+
     AppendVertexWithTexCoords = num_verts
 End Function
 'Splits all shared vertices
@@ -352,15 +352,15 @@ Private Sub SplitSharedVertices(ByRef polys() As PPolygon, ByRef Verts() As Poin
     Dim aux_normal As Point3D
     Dim aux_v_color As color
     Dim aux_tex_coord As Point2D
-    
+
     num_polys = UBound(polys) + 1
     num_verts = UBound(Verts) + 1
     ReDim Normals(num_verts - 1)
     ReDim used_verts(num_verts - 1) As Boolean
     ZeroMemory used_verts(0), (num_verts - 1) * 2
-    
+
     has_tex_coordsQ = SafeArrayGetDim(tex_coords) > 0
-    
+
     For PI = 0 To num_polys - 1
         With polys(PI)
             For vi = 0 To 2
@@ -376,7 +376,7 @@ Private Sub SplitSharedVertices(ByRef polys() As PPolygon, ByRef Verts() As Poin
                     Else
                         vertex_index = AppendVertex(aux_vert, aux_normal, aux_v_color, Verts, Normals, v_colors)
                     End If
-                    
+
                     .Verts(vi) = vertex_index
                     .Normals(vi) = vertex_index
                 Else
@@ -394,24 +394,24 @@ Private Sub CreateEdgeVerticesTable(ByRef polys() As PPolygon, ByRef Verts() As 
     Dim pi2 As Long
     Dim vi As Long
     Dim vi2 As Long
-    
+
     Dim v_indexA1 As Integer
     Dim v_indexA2 As Integer
     Dim v_indexB1 As Integer
     Dim v_indexB2 As Integer
-    
+
     Dim aux_vertA1 As Point3D
     Dim aux_vertA2 As Point3D
     Dim aux_vertB1 As Point3D
     Dim aux_vertB2 As Point3D
-    
+
     Dim num_polys As Long
     Dim num_edges As Long
     Dim match_foundQ As Boolean
-    
+
     num_polys = UBound(polys) + 1
     num_edges = 0
-    
+
     'We will take adventage of edge indices to store topolgy information. To be discarded later.
     For PI = 0 To num_polys - 1
         With polys(PI)
@@ -420,24 +420,24 @@ Private Sub CreateEdgeVerticesTable(ByRef polys() As PPolygon, ByRef Verts() As 
             .Edges(2) = -1
         End With
     Next PI
-    
+
     For PI = 0 To num_polys - 1
         With polys(PI)
             For vi = 0 To 2
                 If .Edges(vi) = -1 Then
                     ReDim Preserve edge_verts_out(num_edges)
                     ReDim edge_verts_out(num_edges).indices(1)
-                    
+
                     v_indexA1 = .Verts(vi)
                     v_indexA2 = .Verts((vi + 1) Mod 3)
-                    
+
                     .Edges(vi) = num_edges
                     edge_verts_out(num_edges).indices(0) = v_indexA1
                     edge_verts_out(num_edges).indices(1) = v_indexA2
-                    
+
                     aux_vertA1 = Verts(v_indexA1)
                     aux_vertA2 = Verts(v_indexA2)
-                    
+
                     match_foundQ = False
                     For pi2 = 0 To num_polys - 1
                         If pi2 <> PI Then
@@ -445,25 +445,25 @@ Private Sub CreateEdgeVerticesTable(ByRef polys() As PPolygon, ByRef Verts() As 
                                 If polys(pi2).Edges(vi2) = -1 Then
                                     v_indexB1 = polys(pi2).Verts(vi2)
                                     v_indexB2 = polys(pi2).Verts((vi2 + 1) Mod 3)
-                                    
+
                                     aux_vertB1 = Verts(v_indexB1)
                                     aux_vertB2 = Verts(v_indexB2)
-                                    
+
                                     'Adjacent polygons cross the vertices in oposing directions
                                     If CompareSimilarPoints3D(aux_vertA1, aux_vertB2) And CompareSimilarPoints3D(aux_vertA2, aux_vertB1) Then
                                         ReDim Preserve edge_verts_out(num_edges).indices(3)
                                         edge_verts_out(num_edges).indices(2) = v_indexB1
                                         edge_verts_out(num_edges).indices(3) = v_indexB2
-                                        
+
                                         polys(pi2).Edges(vi2) = num_edges
                                         match_foundQ = True
-                                        
+
                                         Exit For
                                     End If
                                 End If
                             Next vi2
                         End If
-                        
+
                         If match_foundQ Then Exit For
                     Next pi2
                     num_edges = num_edges + 1
@@ -484,20 +484,20 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
     Dim ei As Long
     Dim last_edge_index As Long
     Dim next_vector_list_index As Long
-    
+
     Dim num_verts As Long
     Dim num_vert_groups As Long
     Dim num_verts_per_vert As Long
     Dim num_verts_per_edge As Long
-    
+
     Dim num_edges  As Long
     Dim edge_usages() As Integer
-    
+
     Dim match_foundQ As Boolean
     Dim must_reverse_orderQ As Boolean
     Dim aux_must_reverse_orderQ As Boolean
     Dim check_opposite_directionQ As Boolean
-    
+
     'First find equivalent vertices
     num_verts = UBound(Verts) + 1
     num_vert_groups = 0
@@ -512,14 +512,14 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
                     .normal.x = .normal.x + Normals(vi).x
                     .normal.y = .normal.y + Normals(vi).y
                     .normal.z = .normal.z + Normals(vi).z
-                    
+
                     match_foundQ = True
-                    
+
                     Exit For
                 End If
             End With
         Next vgi
-        
+
         If Not match_foundQ Then
             ReDim Preserve vertex_verts_out(num_vert_groups)
             ReDim Preserve vertex_verts_out(num_vert_groups).indices(0)
@@ -531,7 +531,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
             num_vert_groups = num_vert_groups + 1
         End If
     Next vi
-    
+
     For vgi = 0 To num_vert_groups - 1
         With vertex_verts_out(vgi)
             num_verts_per_vert = UBound(.indices) + 1
@@ -541,7 +541,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
             .normal = Normalize(.normal)
         End With
     Next vgi
-    
+
     'Order equivalent vertices (acording to edges topology)
     num_edges = UBound(edge_verts) + 1
     ReDim edge_usages(num_edges - 1)
@@ -564,7 +564,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
                             If num_verts_per_edge = 4 Then
                                 next_vector_list_index = -1
                                 aux_must_reverse_orderQ = False
-                                
+
                                 If .indices(0) = v_index_aux Then
                                     v_index_next_aux = .indices(3)
                                     aux_must_reverse_orderQ = True
@@ -580,7 +580,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
                                     v_index_next_aux = .indices(0)
                                     match_foundQ = True
                                 End If
-                                
+
                                 'If the vertex was found on this edge, make sure it's connected to one of the still unsorted vertices
                                 If match_foundQ Then
                                     If check_opposite_directionQ Then
@@ -592,7 +592,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
                                                                                              num_verts_per_vert - 1, v_index_next_aux)
                                     End If
                                 End If
-                                
+
                                 If next_vector_list_index > -1 Then
                                     If aux_must_reverse_orderQ Then
                                         must_reverse_orderQ = True
@@ -607,7 +607,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
                     End With
                 End If
             Next ei
-            
+
             If Not match_foundQ Then
                 If check_opposite_directionQ Then
                     Debug.Assert "OhGodWhy"
@@ -630,7 +630,7 @@ Private Sub CreateVertexVerticesTable(ByRef Verts() As Point3D, ByRef Normals() 
                 v_index_aux = v_index_next_aux
             End If
         Wend
-        
+
         'If the vertices where traversed on the wrong order, invert it
         If must_reverse_orderQ Then
             With vertex_verts_out(vgi)
@@ -650,20 +650,20 @@ Private Sub CreateVertGroupsPerEdgeTable(ByRef Verts() As Point3D, ByRef edge_ve
     Dim PI As Long
     Dim vi As Long
     Dim vie As Long
-    
+
     Dim num_edges As Long
     Dim num_verts_per_edge As Long
     Dim num_polys As Long
     Dim num_verts As Long
     Dim num_verts_per_vert As Long
-    
+
     Dim v_index As Long
-    
+
     num_edges = UBound(edge_verts) + 1
     num_verts = UBound(vertex_verts) + 1
-    
+
     ReDim verts_per_edge_out(num_edges - 1, 1)
-    
+
     For ei = 0 To num_edges - 1
         num_verts_per_edge = UBound(edge_verts(ei).indices) + 1
         For vie = 0 To 1
@@ -680,12 +680,12 @@ End Sub
 Private Sub ComputePolysPerEdgeTable(ByRef polys() As PPolygon, ByRef polys_per_edge_out() As VertsGroup)
     Dim PI As Long
     Dim ei As Long
-    
+
     Dim num_group_polys As Long
     Dim num_polys As Long
-    
+
     num_polys = UBound(polys) + 1
-    
+
     For PI = 0 To num_polys - 1
         For ei = 0 To 2
             With polys_per_edge_out(polys(PI).Edges(ei))
@@ -705,15 +705,15 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                                      ByRef edge_verts() As VertsGroup, ByRef vertex_verts() As VertsGroup, ByRef per_vertex_coefs_out() As Point2D)
     Dim PI As Long
     Dim vi As Long
-    
+
     Dim vi_prev As Long
     Dim vi_next As Long
-    
+
     Dim ei_to_prev As Long
     Dim ei_to_next As Long
     Dim e_index_to_prev As Long
     Dim e_index_to_next As Long
-    
+
     Dim poly_center As Point3D
     Dim color_center(4) As Single
     Dim tex_coord_center As Point2D
@@ -725,7 +725,7 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
     Dim mid_point_tex_coord2 As Point2D
     Dim mid_point1_valid As Boolean
     Dim mid_point2_valid As Boolean
-    
+
     Dim normals_angle_cos As Double
     Dim normal_current As Point3D
     Dim normal_aux As Point3D
@@ -734,13 +734,13 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
     Dim adjacent_poly_index As Long
     Dim adjacent_poly_index1 As Long
     Dim adjacent_poly_index2 As Long
-    
+
     Dim num_polys_per_edge_1 As Long
     Dim num_polys_per_edge_2 As Long
-    
+
     Dim poly_normals() As Point3D
     Dim poly_normals_computed() As Boolean
-    
+
     Dim aux_vert As Point3D
     Dim aux_v_color As color
     Dim aux_tex_coord As Point2D
@@ -750,26 +750,26 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
     Dim temp_tex_coords(2) As Point2D
     Dim alpha_prev As Single
     Dim alpha_next As Single
-    
+
     Dim num_verts As Long
     Dim num_polys  As Long
     num_verts = UBound(Verts) + 1
     num_polys = UBound(polys) + 1
-    
+
     Dim has_tex_coordsQ As Boolean
     has_tex_coordsQ = SafeArrayGetDim(tex_coords) > 0
-    
+
     Dim polys_per_edge() As VertsGroup
     ReDim polys_per_edge(UBound(edge_verts))
     ComputePolysPerEdgeTable polys, polys_per_edge
-    
+
     ReDim poly_normals(num_polys)
     ReDim poly_normals_computed(num_polys)
     ZeroMemory poly_normals_computed(0), num_polys * 2
-    
+
     ReDim per_vertex_coefs_out(num_verts - 1)
     ZeroMemory per_vertex_coefs_out(0), num_verts * 2 * 4
-    
+
     For PI = 0 To num_polys - 1
         With polys(PI)
             If poly_normals_computed(PI) Then
@@ -788,13 +788,13 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                 poly_center.x = poly_center.x + aux_vert.x
                 poly_center.y = poly_center.y + aux_vert.y
                 poly_center.z = poly_center.z + aux_vert.z
-                
+
                 aux_v_color = v_colors(.Verts(vi))
                 color_center(0) = color_center(0) + CSng(aux_v_color.r)
                 color_center(1) = color_center(1) + CSng(aux_v_color.g)
                 color_center(2) = color_center(2) + CSng(aux_v_color.B)
                 color_center(3) = color_center(3) + CSng(aux_v_color.a)
-                
+
                 If has_tex_coordsQ Then
                     aux_tex_coord = tex_coords(.Verts(vi))
                     tex_coord_center.x = tex_coord_center.x + aux_tex_coord.x
@@ -804,50 +804,50 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
             poly_center.x = poly_center.x / 3
             poly_center.y = poly_center.y / 3
             poly_center.z = poly_center.z / 3
-            
+
             color_center(0) = color_center(0) / 3
             color_center(1) = color_center(1) / 3
             color_center(2) = color_center(2) / 3
             color_center(3) = color_center(3) / 3
-            
+
             If has_tex_coordsQ Then
                 tex_coord_center.x = tex_coord_center.x / 3
                 tex_coord_center.y = tex_coord_center.y / 3
             End If
-            
+
             For vi = 0 To 2
                 aux_vert = Verts(.Verts(vi))
                 aux_v_color = v_colors(.Verts(vi))
                 If has_tex_coordsQ Then
                     aux_tex_coord = tex_coords(.Verts(vi))
                 End If
-                
+
                 vi_next = (vi + 1) Mod 3
                 vi_prev = (vi + 2) Mod 3
-                
+
                 ei_to_prev = vi
                 ei_to_next = vi_prev
-                
+
                 e_index_to_prev = .Edges(ei_to_prev)
                 e_index_to_next = .Edges(ei_to_next)
-                
+
                 mid_point1_valid = False
                 mid_point2_valid = False
                 num_polys_per_edge_1 = UBound(polys_per_edge(e_index_to_next).indices) + 1
                 num_polys_per_edge_2 = UBound(polys_per_edge(e_index_to_prev).indices) + 1
-                
+
                 If num_polys_per_edge_1 = 2 And num_polys_per_edge_2 = 2 Then
                     'Both edges connect two polygons. The angle between them must be lower than the maximum.
                     adjacent_poly_index1 = polys_per_edge(e_index_to_next).indices(0)
                     If adjacent_poly_index1 = PI Then
                         adjacent_poly_index1 = polys_per_edge(e_index_to_next).indices(1)
                     End If
-                    
+
                     adjacent_poly_index2 = polys_per_edge(e_index_to_prev).indices(0)
                     If adjacent_poly_index2 = PI Then
                         adjacent_poly_index2 = polys_per_edge(e_index_to_prev).indices(1)
                     End If
-                    
+
                     If poly_normals_computed(adjacent_poly_index1) Then
                         normal_aux1 = poly_normals(adjacent_poly_index1)
                     Else
@@ -858,7 +858,7 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                         poly_normals(adjacent_poly_index1) = normal_aux1
                         poly_normals_computed(adjacent_poly_index1) = True
                     End If
-                    
+
                     If poly_normals_computed(adjacent_poly_index2) Then
                         normal_aux2 = poly_normals(adjacent_poly_index2)
                     Else
@@ -869,7 +869,7 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                         poly_normals(adjacent_poly_index2) = normal_aux2
                         poly_normals_computed(adjacent_poly_index2) = True
                     End If
-                    
+
                     normals_angle_cos = ComputeVectorsAngleCos(normal_aux1, normal_aux2)
                     If normals_angle_cos > MIN_SMOOTH_COS Then
                         mid_point1_valid = True
@@ -883,7 +883,7 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                         If adjacent_poly_index = PI Then
                             adjacent_poly_index = polys_per_edge(e_index_to_next).indices(1)
                         End If
-                            
+
                         If poly_normals_computed(adjacent_poly_index) Then
                             normal_aux = poly_normals(adjacent_poly_index)
                         Else
@@ -894,18 +894,18 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                             poly_normals(adjacent_poly_index) = normal_aux
                             poly_normals_computed(adjacent_poly_index) = True
                         End If
-                        
+
                         normals_angle_cos = ComputeVectorsAngleCos(normal_current, normal_aux)
                         mid_point1_valid = (normals_angle_cos > MIN_SMOOTH_COS)
                     End If
-                    
+
                     If num_polys_per_edge_2 = 2 Then
                         'The edge 2 connects two polygons. The angle between both must be lower than the maximum.
                         adjacent_poly_index = polys_per_edge(e_index_to_prev).indices(0)
                         If adjacent_poly_index = PI Then
                             adjacent_poly_index = polys_per_edge(e_index_to_prev).indices(1)
                         End If
-                            
+
                         If poly_normals_computed(adjacent_poly_index) Then
                             normal_aux = poly_normals(adjacent_poly_index)
                         Else
@@ -916,13 +916,13 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                             poly_normals(adjacent_poly_index) = normal_aux
                             poly_normals_computed(adjacent_poly_index) = True
                         End If
-                        
+
                         normals_angle_cos = ComputeVectorsAngleCos(normal_current, normal_aux)
-                        
+
                         mid_point2_valid = (normals_angle_cos > MIN_SMOOTH_COS)
                     End If
                 End If
-                
+
                 If mid_point1_valid Then
                     mid_point1 = GetPointInLine(aux_vert, Verts(.Verts(vi_next)), 0.5)
                     mid_point_color1 = InterpolateColor(v_colors(.Verts(vi)), v_colors(.Verts(vi_next)), 0.5)
@@ -930,7 +930,7 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                         mid_point_tex_coord1 = InterpolatePoint2D(tex_coords(.Verts(vi)), tex_coords(.Verts(vi_next)), 0.5)
                     End If
                 End If
-                
+
                 If mid_point2_valid Then
                     mid_point2 = GetPointInLine(aux_vert, Verts(.Verts(vi_prev)), 0.5)
                     mid_point_color2 = InterpolateColor(v_colors(.Verts(vi)), v_colors(.Verts(vi_prev)), 0.5)
@@ -938,67 +938,67 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                         mid_point_tex_coord2 = InterpolatePoint2D(tex_coords(.Verts(vi)), tex_coords(.Verts(vi_prev)), 0.5)
                     End If
                 End If
-                
+
                 If mid_point1_valid And mid_point2_valid Then
                     temp_verts(vi) = poly_center
-                    
+
                     temp_verts(vi).x = temp_verts(vi).x + mid_point1.x
                     temp_verts(vi).y = temp_verts(vi).y + mid_point1.y
                     temp_verts(vi).z = temp_verts(vi).z + mid_point1.z
-                    
+
                     temp_verts(vi).x = temp_verts(vi).x + mid_point2.x
                     temp_verts(vi).y = temp_verts(vi).y + mid_point2.y
                     temp_verts(vi).z = temp_verts(vi).z + mid_point2.z
-                    
+
                     temp_verts(vi).x = temp_verts(vi).x + aux_vert.x
                     temp_verts(vi).y = temp_verts(vi).y + aux_vert.y
                     temp_verts(vi).z = temp_verts(vi).z + aux_vert.z
-                    
+
                     temp_verts(vi).x = temp_verts(vi).x / 4
                     temp_verts(vi).y = temp_verts(vi).y / 4
                     temp_verts(vi).z = temp_verts(vi).z / 4
-                    
-                    
+
+
                     CopyMemory avg_v_color(0), color_center(0), 4 * 4
-                    
+
                     avg_v_color(0) = avg_v_color(0) + CSng(mid_point_color1.r)
                     avg_v_color(1) = avg_v_color(1) + CSng(mid_point_color1.g)
                     avg_v_color(2) = avg_v_color(2) + CSng(mid_point_color1.B)
                     avg_v_color(3) = avg_v_color(3) + CSng(mid_point_color1.a)
-                    
+
                     avg_v_color(0) = avg_v_color(0) + CSng(mid_point_color2.r)
                     avg_v_color(1) = avg_v_color(1) + CSng(mid_point_color2.g)
                     avg_v_color(2) = avg_v_color(2) + CSng(mid_point_color2.B)
                     avg_v_color(3) = avg_v_color(3) + CSng(mid_point_color2.a)
-                    
+
                     avg_v_color(0) = avg_v_color(0) + CSng(aux_v_color.r)
                     avg_v_color(1) = avg_v_color(1) + CSng(aux_v_color.g)
                     avg_v_color(2) = avg_v_color(2) + CSng(aux_v_color.B)
                     avg_v_color(3) = avg_v_color(3) + CSng(aux_v_color.a)
-                    
+
                     temp_v_colors(vi).r = CByte(Min(255, avg_v_color(0) / 4))
                     temp_v_colors(vi).g = CByte(Min(255, avg_v_color(1) / 4))
                     temp_v_colors(vi).B = CByte(Min(255, avg_v_color(2) / 4))
                     temp_v_colors(vi).a = CByte(Min(255, avg_v_color(3) / 4))
-                    
-                    
+
+
                     If has_tex_coordsQ Then
                         temp_tex_coords(vi) = tex_coord_center
-                        
+
                         temp_tex_coords(vi).x = temp_tex_coords(vi).x + mid_point_tex_coord1.x
                         temp_tex_coords(vi).y = temp_tex_coords(vi).y + mid_point_tex_coord1.y
-                        
+
                         temp_tex_coords(vi).x = temp_tex_coords(vi).x + mid_point_tex_coord2.x
                         temp_tex_coords(vi).y = temp_tex_coords(vi).y + mid_point_tex_coord2.y
-                        
+
                         temp_tex_coords(vi).x = temp_tex_coords(vi).x + aux_tex_coord.x
                         temp_tex_coords(vi).y = temp_tex_coords(vi).y + aux_tex_coord.y
-                        
+
                         temp_tex_coords(vi).x = temp_tex_coords(vi).x / 4
                         temp_tex_coords(vi).y = temp_tex_coords(vi).y / 4
                     End If
-                    
-                    
+
+
                     per_vertex_coefs_out(.Verts(vi)).x = CalculatePoint2LineProjectionPosition(temp_verts(vi), Verts(.Verts(vi_next)), aux_vert)
                     per_vertex_coefs_out(.Verts(vi)).y = CalculatePoint2LineProjectionPosition(temp_verts(vi), Verts(.Verts(vi_prev)), aux_vert)
                 ElseIf mid_point1_valid Then
@@ -1021,7 +1021,7 @@ Private Sub DooSabinPolysContraction(ByRef polys() As PPolygon, ByRef Verts() As
                     temp_tex_coords(vi) = aux_tex_coord
                 End If
             Next vi
-            
+
             For vi = 0 To 2
                 CopyMemory Verts(.Verts(vi)), temp_verts(vi), 3 * 4
                 CopyMemory v_colors(.Verts(vi)), temp_v_colors(vi), 4
@@ -1035,19 +1035,19 @@ End Sub
 'Adds a new triangle and returns it's index
 Private Function AppendTriangle(ByRef polys() As PPolygon, ByVal v_index1 As Integer, ByVal v_index2 As Integer, ByVal v_index3 As Integer) As Long
     Dim num_polys As Long
-    
+
     num_polys = UBound(polys) + 1
     ReDim Preserve polys(num_polys)
     With polys(num_polys)
         .Verts(0) = v_index1
         .Verts(1) = v_index2
         .Verts(2) = v_index3
-        
+
         .Edges(0) = -1
         .Edges(1) = -1
         .Edges(2) = -1
     End With
-    
+
     AppendTriangle = num_polys
 End Function
 'Adds a pair of triangle (forming a quad) and returns the index of the first one (the second one is correlative)
@@ -1065,10 +1065,10 @@ Private Sub ConnectEdgeVertices(ByRef polys() As PPolygon, ByRef Verts() As Poin
                                 ByRef edge_verts() As VertsGroup, ByRef edge_polys_out() As VertsGroup)
     Dim ei As Long
     Dim pi_new As Long
-    
+
     Dim num_edges As Long
     num_edges = UBound(edge_verts) + 1
-    
+
     ReDim edge_polys_out(num_edges - 1)
     For ei = 0 To num_edges - 1
         pi_new = AppendQuad(polys, edge_verts(ei))
@@ -1083,13 +1083,13 @@ Private Function AppendTrinagleFan(ByRef polys() As PPolygon, ByRef external_ver
     Dim vi As Long
     Dim num_external_verts As Long
     Dim last_pi_new As Long
-    
+
     num_external_verts = UBound(external_verts) + 1
     For vi = 0 To num_external_verts - 2
         AppendTriangle polys, v_center_index, external_verts(vi), external_verts(vi + 1)
     Next vi
     last_pi_new = AppendTriangle(polys, v_center_index, external_verts(num_external_verts - 1), external_verts(0))
-    
+
     AppendTrinagleFan = last_pi_new - num_external_verts - 1
 End Function
 'Connects the vertices that where colapsed befor calling DooSabinPolysContraction. The new polygon will be triangulated as a fan (adding a vertex at the center)
@@ -1102,7 +1102,7 @@ Private Sub ConnectVertexVertices(ByRef polys() As PPolygon, ByRef Verts() As Po
     Dim center_vertex_index As Long
     Dim v_color_aux As color
     Dim tex_coord_aux As Point2D
-    
+
     Dim aux_d As Single
     Dim fan_center As Point3D
     Dim fan_center_a As Point3D
@@ -1111,19 +1111,19 @@ Private Sub ConnectVertexVertices(ByRef polys() As PPolygon, ByRef Verts() As Po
     Dim aux_length_b As Single
     Dim longuest_edge_a As Single
     Dim longuest_edge_b As Single
-    
+
     Dim first_fan_triangle_index As Long
-    
+
     Dim num_verts As Long
     Dim num_group_verts As Long
     num_group_verts = UBound(vertex_verts) + 1
-    
+
     Dim has_tex_coordsQ As Boolean
     has_tex_coordsQ = SafeArrayGetDim(tex_coords) > 0
-    
+
     Dim dummy_normal As Point3D
     Dim dummy_normals() As Point3D
-    
+
     ReDim vertex_polys_out(num_group_verts - 1)
     ReDim vertex_verts_center_out(num_group_verts - 1)
     For vgi = 0 To num_group_verts - 1
@@ -1137,18 +1137,18 @@ Private Sub ConnectVertexVertices(ByRef polys() As PPolygon, ByRef Verts() As Po
                 .y = .y + Verts(v_index_aux).y
                 .z = .z + Verts(v_index_aux).z
             Next vi
-            
+
             .x = .x / num_verts
             .y = .y / num_verts
             .z = .z / num_verts
         End With
-        
+
         'Polygon center B: Compute orthogonal projection
         With vertex_verts(vgi)
             aux_d = ComputePlaneD(.normal, Verts(.indices(0)))
             fan_center_b = GetPoint3DOrthogonalProjection(.OriginalPosition, .normal.x, .normal.y, .normal.z, aux_d)
         End With
-        
+
         'Pick the vertex which creates shortest edges
         longuest_edge_a = 0
         longuest_edge_b = 0
@@ -1159,13 +1159,13 @@ Private Sub ConnectVertexVertices(ByRef polys() As PPolygon, ByRef Verts() As Po
             longuest_edge_a = IIf(aux_length_a > longuest_edge_a, aux_length_a, longuest_edge_a)
             longuest_edge_b = IIf(aux_length_b > longuest_edge_b, aux_length_b, longuest_edge_b)
         Next vi
-        
+
         If longuest_edge_a > longuest_edge_b Then
             fan_center = fan_center_b
         Else
             fan_center = fan_center_a
         End If
-        
+
         v_index_aux = vertex_verts(vgi).indices(0)
         CopyMemory v_color_aux, v_colors_original(v_index_aux), 4
         If has_tex_coordsQ Then
@@ -1191,22 +1191,22 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
     Dim ei As Long
     Dim PI As Long
     Dim vi As Long
-    
+
     Dim v1_index As Long
     Dim v2_index As Long
-    
+
     Dim v_edge0 As Point3D
     Dim v_edge1 As Point3D
     Dim v_edge2 As Point3D
     Dim v_edge3 As Point3D
-    
+
     Dim vect1 As Point3D
     Dim vect2 As Point3D
     Dim a As Single
     Dim B As Single
     Dim C As Single
     Dim d As Single
-    
+
     Dim cut1_validQ As Boolean
     Dim cut2_validQ As Boolean
     Dim cut_alpha1 As Double
@@ -1218,27 +1218,27 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
     Dim aux_v2 As Point3D
     Dim aux_v_color(3) As color
     Dim aux_tex_coord(3) As Point2D
-    
+
     Dim vertex_indices_copy(3) As Long
     Dim v_colors_copy(3) As color
     Dim tex_coords_copy(3) As Point2D
     Dim new_verts_indices(3) As Long
-    
+
     Dim dummy As Point3D
     dummy.x = 0
     dummy.y = 0
     dummy.z = 0
-    
+
     Dim num_edges As Long
     Dim num_polys As Long
-    
+
     num_edges = UBound(edge_polys) + 1
-    
+
     Dim has_tex_coordsQ As Boolean
     has_tex_coordsQ = SafeArrayGetDim(tex_coords) > 0
-    
+
     Dim must_separate_attributesQ As Boolean
-    
+
     For ei = 0 To num_edges - 1
         must_separate_attributesQ = False
         If SafeArrayGetDim(per_edge_verts(ei).indices) > 0 Then
@@ -1251,7 +1251,7 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                 End If
             End With
         End If
-        
+
         'There is no need to cut the geometry if there is no discontinuty in the attributes.
         If must_separate_attributesQ Then
             'Separate edge polygons for ease sake
@@ -1266,7 +1266,7 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                     End If
                 Next vi
             End With
-            
+
             ReDim Preserve per_edge_verts(ei).indices(5)
             With per_edge_verts(ei)
                 If has_tex_coordsQ Then
@@ -1274,45 +1274,45 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                                                             Verts, Normals, v_colors, tex_coords)
                     .indices(5) = AppendVertexWithTexCoords(Verts(.indices(2)), dummy, v_colors(.indices(2)), tex_coords(.indices(2)), _
                                                             Verts, Normals, v_colors, tex_coords)
-                    
+
                 Else
                     .indices(4) = AppendVertex(Verts(.indices(0)), dummy, v_colors(.indices(0)), Verts, Normals, v_colors)
                     .indices(5) = AppendVertex(Verts(.indices(2)), dummy, v_colors(.indices(2)), Verts, Normals, v_colors)
                 End If
             End With
-            
+
             With polys(edge_polys(ei).indices(0))
                 .Verts(0) = per_edge_verts(ei).indices(2)
                 .Verts(1) = per_edge_verts(ei).indices(1)
                 .Verts(2) = per_edge_verts(ei).indices(0)
             End With
-            
+
             With polys(edge_polys(ei).indices(1))
                 .Verts(0) = per_edge_verts(ei).indices(3)
                 .Verts(1) = per_edge_verts(ei).indices(5)
                 .Verts(2) = per_edge_verts(ei).indices(4)
             End With
-            
+
             'Compute cut plane
             v1_index = vert_groups_per_edge(ei, 0)
             v2_index = vert_groups_per_edge(ei, 1)
             vect1 = Verts(v1_index)
             vect2 = Verts(v2_index)
-            
+
             With Verts(vertex_verts_center(v1_index)) '.OriginalPosition
                 vect1.x = vect1.x - .x
                 vect1.y = vect1.y - .y
                 vect1.z = vect1.z - .z
             End With
-            
+
             With Verts(vertex_verts_center(v2_index)) '.OriginalPosition
                 vect2.x = vect2.x - .x
                 vect2.y = vect2.y - .y
                 vect2.z = vect2.z - .z
             End With
-            
+
             ComputePlaneABCD vect1, vect2, Verts(v1_index), a, B, C, d
-            
+
             With per_edge_verts(ei)
                 v_edge0 = Verts(.indices(0))
                 v_edge1 = Verts(.indices(1))
@@ -1322,12 +1322,12 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
             'Compute cut points
             cut1_validQ = GetVectorToPlaneIntersection(v_edge0, v_edge3, a, B, C, d, cut_alpha1)
             cut2_validQ = GetVectorToPlaneIntersection(v_edge1, v_edge2, a, B, C, d, cut_alpha2)
-            
+
             copy_attribs(0) = -1
             copy_attribs(1) = -1
             copy_attribs(2) = -1
             copy_attribs(3) = -1
-            
+
             'Decide where attirbutes must be copied to and handle extreme cases
             If cut1_validQ Then
                 If cut_alpha1 < 0.0001 Then
@@ -1346,7 +1346,7 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                 cut_point1 = v_edge0
                 copy_attribs(0) = 3
             End If
-            
+
             If cut2_validQ Then
                 If cut_alpha2 < 0.0001 Then
                     cut_point2 = v_edge1
@@ -1364,10 +1364,10 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                 cut_point2 = v_edge1
                 copy_attribs(1) = 2
             End If
-            
+
             copy_attribs(4) = copy_attribs(0)
             copy_attribs(5) = copy_attribs(2)
-            
+
             With per_edge_verts(ei)
                 aux_v1 = Verts(.indices(3))
                 aux_v2 = Verts(.indices(2))
@@ -1380,18 +1380,18 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                         End If
                     End If
                 Next vi
-            
+
                 'Cut the edges of the edge quad
                 If cut1_validQ Or cut2_validQ Then
                     If cut1_validQ Then
                         Verts(.indices(3)) = cut_point1
                     End If
-                    
+
                     If cut2_validQ Then
                         Verts(.indices(2)) = cut_point2
                         Verts(.indices(5)) = cut_point2
                     End If
-                
+
                     If cut1_validQ And cut2_validQ Then
                         '.y -> next, .x -> prev
                         'aux_v_color(0) = InterpolateColor(original_v_colors(vertex_indices_copy(0)), original_v_colors(vertex_indices_copy(1)), _
@@ -1407,7 +1407,7 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                         '                                        per_vertex_coefs(vertex_indices_copy(1).x))
                         '    aux_tex_coord(2) = original_tex_coords(vertex_indices_copy(2))
                         '    aux_tex_coord(3) = original_tex_coords(vertex_indices_copy(3))
-                        
+
                         '    new_verts(0) = AppendVertexWithTexCoords(cut_point1, dummy, aux_v_color(0), aux_tex_coord(0), Verts, Normals, v_colors, tex_coords)
                         '    new_verts(1) = AppendVertexWithTexCoords(cut_point2, dummy, aux_v_color(1), aux_tex_coord(1), Verts, Normals, v_colors, tex_coords)
                         '    new_verts(2) = AppendVertexWithTexCoords(aux_v1, dummy, aux_v_color(2), aux_tex_coord(2), Verts, Normals, v_colors, tex_coords)
@@ -1419,10 +1419,10 @@ Private Sub FixVertexAtributes(ByRef polys() As PPolygon, ByRef Verts() As Point
                         '    new_verts(3) = AppendVertex(aux_v2, dummy, aux_v_color(3), Verts, Normals, v_colors)
                         'End
                         'pi_new = AppendQuad(polys, new_verts)
-                        
-                        
+
+
                     Else
-                        
+
                     End If
                 End If
             End With
@@ -1437,34 +1437,34 @@ Private Sub AppendIsolatedGroup(ByRef group_in As PGroup, _
     Dim PI As Long
     Dim vi As Long
     Dim vertex_index As Long
-    
+
     CopyMemory group_out, group_in, 14 * 4
 
     With group_out
         .DListNum = 0
         .HiddenQ = False
-        
+
         .numPoly = UBound(polys) + 1
         .numvert = UBound(Verts) + 1
-        
+
         If SafeArrayGetDim(polys_out) > 0 Then
             .offpoly = UBound(polys_out) + 1
         Else
             .offpoly = 0
         End If
-        
+
         If SafeArrayGetDim(verts_out) > 0 Then
             .offvert = UBound(verts_out) + 1
         Else
             .offvert = 0
         End If
-        
+
         If SafeArrayGetDim(tex_coords_out) > 0 Then
             .offTex = UBound(tex_coords_out) + 1
         Else
             .offTex = 0
         End If
-        
+
         'Debug.Print ".offpoly = "; .offpoly; ", .numPoly = "; .numPoly
         'Debug.Print "Hola2: .offpoly = "; .offpoly; ", .offvert = "; .offvert
         'Debug.Print "Hola2: .numPoly = "; .numPoly; ", .numvert = "; .numvert
@@ -1475,14 +1475,14 @@ Private Sub AppendIsolatedGroup(ByRef group_in As PGroup, _
         If .texFlag = 1 Then
             ReDim Preserve tex_coords_out(.offTex + .numvert - 1)
         End If
-        
+
         CopyMemory polys_out(.offpoly), polys(0), .numPoly * 24
         CopyMemory verts_out(.offvert), Verts(0), .numvert * 3 * 4
         CopyMemory v_colors_out(.offvert), v_colors(0), .numvert * 4
         If .texFlag = 1 Then
             CopyMemory tex_coords_out(.offTex), tex_coords(0), .numvert * 2 * 4
         End If
-        
+
         'For PI = .offpoly To .offpoly + .numPoly - 1
         '    For vi = 0 To 2
                 'polys_out(PI).Verts(vi) = polys_out(PI).Verts(vi) + .offvert

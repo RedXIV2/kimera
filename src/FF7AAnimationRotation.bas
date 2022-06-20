@@ -21,7 +21,7 @@ End Sub
 
 Function IsBrokenARotation(ByRef rot As ARotation) As Boolean
     IsBrokenARotation = False
-    
+
     With rot
         If IsNan(.alpha) Then
             IsBrokenARotation = True

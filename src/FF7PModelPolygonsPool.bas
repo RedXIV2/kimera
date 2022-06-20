@@ -17,10 +17,10 @@ End Sub
 Sub MergePolygons(ByRef p1() As PPolygon, ByRef p2() As PPolygon)
     Dim NumPolysP1 As Integer
     Dim NumPolysP2 As Integer
-    
+
     NumPolysP1 = UBound(p1) + 1
     NumPolysP2 = UBound(p2) + 1
     ReDim Preserve p1(NumPolysP1 + NumPolysP2 - 1)
-    
+
     CopyMemory p1(NumPolysP1), p2(0), NumPolysP2 * 24
 End Sub

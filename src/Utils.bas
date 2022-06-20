@@ -34,7 +34,7 @@ Type Quaternion
     w As Double
 End Type
 
-    
+
 Public Const PI = 3.14159265358979
 Public Const PIOVER180 = PI / 180#
 Public Const QUAT_NORM_TOLERANCE = 0.00001
@@ -51,9 +51,9 @@ Private OnBits(0 To 31) As Long
 '---------------------------------------------------------------------------------------------------------
 Function IsNan(ByVal val As Single) As Boolean
     Dim raw_val As Long
-    
+
     CopyMemory raw_val, val, 4
-    
+
     IsNan = ((raw_val And &H7F800000) = &H7F800000)
 End Function
 Function GetDegreesFromRaw(ByVal val As Long, ByVal key As Integer) As Single
@@ -82,22 +82,22 @@ Function InvertBitInteger(ByVal val As Integer, ByVal bit_index As Integer)
 End Function
 Function NormalizeAngle180(ByVal val As Single) As Single
     Dim dec As Single
-    
+
     If val > 0 Then
         dec = 360#
     Else
         dec = -360#
     End If
-    
+
     NormalizeAngle180 = val
     While (NormalizeAngle180 > 0# And val > 0#) Or (NormalizeAngle180 < 0# And val < 0#)
         NormalizeAngle180 = NormalizeAngle180 - dec
     Wend
-    
+
     If Abs(NormalizeAngle180) > Abs(NormalizeAngle180 + dec) Then
         NormalizeAngle180 = NormalizeAngle180 + dec
     End If
-    
+
     If NormalizeAngle180 >= 180# Then
         NormalizeAngle180 = NormalizeAngle180 - 360#
     End If
@@ -125,14 +125,14 @@ End Function
 ' error if NUMBER is outside the range [-1,1]
 Function ACos(ByVal number As Double) As Double
     On Error Resume Next
-    
+
     If number = 1 Then
         ACos = 0
         Exit Function
     End If
 
     ACos = Atn(-number / Sqr(-number * number + 1)) + 2 * Atn(1)
-    
+
     On Error GoTo 0
 End Function
 ' arc cotangent
@@ -220,14 +220,14 @@ End Function
 Public Function LShiftLong(ByVal value As Long, _
     ByVal Shift As Integer) As Long
     Dim BI As Integer
-    
+
     If Shift = 0 Then
         LShiftLong = value
     Else
         MakeOnBits
-    
+
         If (value And (2 ^ (31 - Shift))) Then GoTo OverFlow
-    
+
         LShiftLong = ((value And OnBits(31 - Shift)) * (2 ^ Shift))
         'LShiftLong = value
         'For bi = 0 To Shift - 1
@@ -237,10 +237,10 @@ Public Function LShiftLong(ByVal value As Long, _
     Exit Function
 
 OverFlow:
-  
+
     LShiftLong = ((value And OnBits(31 - (Shift + 1))) * _
        (2 ^ (Shift))) Or &H80000000
-  
+
 End Function
 
 Public Function RShiftLong(ByVal value As Long, _
@@ -248,7 +248,7 @@ Public Function RShiftLong(ByVal value As Long, _
     Dim hi As Long
     MakeOnBits
     If (value And &H80000000) Then hi = &H40000000
-  
+
     RShiftLong = (value And &H7FFFFFFE) \ (2 ^ Shift)
     RShiftLong = (RShiftLong Or (hi \ (2 ^ (Shift - 1))))
     'Dim bi As Integer
@@ -260,16 +260,16 @@ End Function
 
 Public Function ExtendSignInteger(ByVal val As Integer, ByVal length As Integer) As Integer
     Dim aux_res As Long
-    
+
     If length <> 12 Then
         aux_res = aux_res
     End If
-    
+
     If (val And 2 ^ (length - 1)) <> 0 Then
         aux_res = 2 ^ 16 - 1
         aux_res = aux_res Xor ((2 ^ length) - 1)
         aux_res = aux_res Or val
-        
+
         CopyMemory ExtendSignInteger, aux_res, 2
     Else
         ExtendSignInteger = val
@@ -278,14 +278,14 @@ End Function
 Private Sub MakeOnBits()
     Dim j As Integer, _
         v As Long
-  
+
     For j = 0 To 30
-  
+
         v = v + (2 ^ j)
         OnBits(j) = v
-  
+
     Next j
-  
+
     OnBits(j) = v + &H80000000
 
 End Sub
@@ -306,24 +306,24 @@ Public Function GetBitBlockVUnsigned(ByRef vect() As Byte, ByVal nBits As Intege
     Dim first_aligned_byte As Long
     Dim last_aligned_byte As Long
     Dim end_bits As Long
-    
+
     Dim aux_res As Integer
-    
-    
+
+
     If nBits > 0 Then
         base_byte = FBit \ 8
         unaligned_by_bits = FBit Mod 8
-        
+
         If unaligned_by_bits + nBits > 8 Then
             is_aligned = (unaligned_by_bits = 0)
-            
+
             end_bits = (FBit + nBits) Mod 8
             clean_end = (end_bits = 0)
-            
+
             num_bytes = (nBits - IIf(is_aligned, 0, 8 - unaligned_by_bits) - IIf(clean_end, 0, end_bits)) \ 8 + IIf(is_aligned, 0, 1) + IIf(clean_end, 0, 1)
             last_aligned_byte = num_bytes - IIf(clean_end, 0, 1) - 1
             first_aligned_byte = 0
-            
+
             res = 0
             'Unaligned prefix
             'Stored at the begining of the byte
@@ -332,13 +332,13 @@ Public Function GetBitBlockVUnsigned(ByRef vect() As Byte, ByVal nBits As Intege
                 res = res And ((2 ^ (8 - unaligned_by_bits)) - 1)
                 first_aligned_byte = 1
             End If
-            
+
             'Aligned bytes
             For BI = first_aligned_byte To last_aligned_byte
                 res = res * 256
                 res = res Or CLng(vect(base_byte + BI))
             Next BI
-            
+
             'Sufix
             'Stored at the end of the byte
             If Not clean_end Then
@@ -352,9 +352,9 @@ Public Function GetBitBlockVUnsigned(ByRef vect() As Byte, ByVal nBits As Intege
             res = res \ (2 ^ (8 - (unaligned_by_bits + nBits)))
             res = res And ((2 ^ nBits) - 1)
         End If
-        
+
         CopyMemory GetBitBlockVUnsigned, res, 2
-        
+
         FBit = FBit + nBits
     Else
         GetBitBlockVUnsigned = 0
@@ -372,28 +372,28 @@ Public Sub PutBitBlockV(ByRef vect() As Byte, ByVal nBits As Integer, ByRef FBit
     Dim first_aligned_byte As Long
     Dim last_aligned_byte As Long
     Dim end_bits As Long
-    
+
     Dim aux_val As Long
-    
+
     'Deal with it as some raw positive value. Divisions can't be used for bit shifting negative values, since they round towards 0 instead of minus infinity
     value = value And ((2 ^ nBits) - 1)
-    
+
     If nBits > 0 Then
         base_byte = FBit \ 8
         unaligned_by_bits = FBit Mod 8
-        
+
         If unaligned_by_bits + nBits > 8 Then
             is_aligned = (unaligned_by_bits = 0)
-            
+
             end_bits = (FBit + nBits) Mod 8
             clean_end = (end_bits = 0)
-            
+
             num_bytes = (nBits - IIf(is_aligned, 0, 8 - unaligned_by_bits) - IIf(clean_end, 0, end_bits)) \ 8 + IIf(is_aligned, 0, 1) + IIf(clean_end, 0, 1)
             last_aligned_byte = num_bytes - IIf(clean_end, 0, 1) - 1
             first_aligned_byte = 0
-            
+
             ReDim Preserve vect(base_byte + num_bytes - 1)
-            
+
             'Unaligned prefix
             If Not is_aligned Then
                 aux_val = value \ 2 ^ (nBits - (8 - unaligned_by_bits))
@@ -401,13 +401,13 @@ Public Sub PutBitBlockV(ByRef vect() As Byte, ByVal nBits As Integer, ByRef FBit
                 vect(base_byte) = vect(base_byte) Or aux_val
                 first_aligned_byte = 1
             End If
-            
+
             'Aligned bytes
             For BI = first_aligned_byte To last_aligned_byte
                 aux_val = value \ 2 ^ ((last_aligned_byte - BI) * 8 + end_bits)
                 vect(base_byte + BI) = aux_val And 255
             Next BI
-            
+
             'Sufix
             If Not clean_end Then
                 aux_val = value And (2 ^ (end_bits) - 1)
@@ -423,7 +423,7 @@ Public Sub PutBitBlockV(ByRef vect() As Byte, ByVal nBits As Integer, ByRef FBit
             vect(base_byte) = vect(base_byte) Or aux_val
         End If
     End If
-    
+
     FBit = FBit + nBits
 End Sub
 
@@ -451,7 +451,7 @@ Public Function GetSignExtendedLong(ByVal src As Long, ByVal valLength As Intege
             'Else
              '   tempV = src
             'End If
-        
+
             'CopyMemory GetSignExtendedShort, tempV, 2
             GetSignExtendedLong = tempV
         Else
@@ -478,22 +478,22 @@ Public Sub QuickSortNumericDescending(ByRef narray() As order_pair, inLow As Lon
    Dim tmpSwap As order_pair
    Dim tmpLow As Long
    Dim tmpHi  As Long
-   
+
    tmpLow = inLow
    tmpHi = inHi
-   
+
    pivot = narray((inLow + inHi) / 2)
-   
+
    While (tmpLow <= tmpHi)
-        
+
       While (narray(tmpLow).d > pivot.d And tmpLow < inHi)
          tmpLow = tmpLow + 1
       Wend
-      
+
       While (pivot.d > narray(tmpHi).d And tmpHi > inLow)
          tmpHi = tmpHi - 1
       Wend
-      
+
       If (tmpLow <= tmpHi) Then
          tmpSwap = narray(tmpLow)
          narray(tmpLow) = narray(tmpHi)
@@ -501,9 +501,9 @@ Public Sub QuickSortNumericDescending(ByRef narray() As order_pair, inLow As Lon
          tmpLow = tmpLow + 1
          tmpHi = tmpHi - 1
       End If
-      
+
    Wend
-    
+
    If (inLow < tmpHi) Then QuickSortNumericDescending narray(), inLow, tmpHi
    If (tmpLow < inHi) Then QuickSortNumericDescending narray(), tmpLow, inHi
 
@@ -527,15 +527,15 @@ End Sub
 Public Sub GetSubMatrix(ByRef mat() As Double, ByVal i As Integer, ByVal j As Integer, ByRef mat_out() As Double)
     Dim i2 As Integer
     Dim j2 As Integer
-    
+
     Dim order As Integer
     Dim pos As Integer
-    
+
     order = Sqr(UBound(mat))
     Dim test As String
-    
+
     ReDim mat_out((order - 1) ^ 2)
-    
+
     For i2 = 0 To order - 1
         If i2 <> i Then
             For j2 = 0 To order - 1
@@ -555,10 +555,10 @@ Public Sub GetAtachedMatrix(ByRef mat() As Double, ByRef mat_out() As Double)
 
     Dim order As Integer
     Dim mat_aux() As Double
-    
+
     order = Sqr(UBound(mat))
     ReDim mat_out(order ^ 2)
-    
+
     For i = 0 To order - 1
         For j = 0 To order - 1
             GetSubMatrix mat, i, j, mat_aux
@@ -570,21 +570,21 @@ Public Function GetMatrixDeterminant(ByRef mat() As Double) As Double
     Dim i As Integer
     Dim i2 As Integer
     Dim j As Integer
-    
+
     Dim order As Integer
     Dim det_aux As Double
-    
+
     Dim mat_aux() As Double
-    
+
     order = Sqr(UBound(mat))
-    
+
     If order > 2 Then
         For i = 0 To order - 1
             If mat(i) <> 0 Then
                 GetSubMatrix mat, i, 0, mat_aux
                 det_aux = GetMatrixDeterminant(mat_aux) * ((-1) ^ (i)) * mat(i)
                 GetMatrixDeterminant = GetMatrixDeterminant + det_aux
-                
+
             End If
         Next i
     Else
@@ -594,18 +594,18 @@ End Function
 Public Sub InvertMatrix(ByRef mat() As Double)
     Dim i As Integer
     Dim j As Integer
-    
+
     Dim order As Integer
     Dim mat_aux() As Double
-    
+
     Dim det As Double
-    
+
     order = Sqr(UBound(mat))
-    
+
     det = GetMatrixDeterminant(mat)
-    
+
     GetAtachedMatrix mat, mat_aux
-    
+
     For i = 0 To order - 1
         For j = 0 To order - 1
             mat(i + j * order) = mat_aux(i + j * order) / det
@@ -617,11 +617,11 @@ Public Sub MultiplyMatrix(ByRef matA() As Double, ByRef matB() As Double, ByRef 
     Dim i As Integer
     Dim j As Integer
     Dim j2 As Integer
-    
+
     Dim order As Integer
-    
+
     order = Sqr(UBound(matA))
-    
+
     For i = 0 To order - 1
         For j = 0 To order - 1
             matRes(i + j * order) = 0
@@ -630,7 +630,7 @@ Public Sub MultiplyMatrix(ByRef matA() As Double, ByRef matB() As Double, ByRef 
             Next j2
         Next j
     Next i
-    
+
 End Sub
 Public Sub MultiplyPoint3DByOGLMatrix(ByRef matA() As Double, ByRef p_in As Point3D, ByRef p_out As Point3D)
     With p_out
@@ -656,11 +656,11 @@ Public Sub BuildRotationMatrixWithQuaternions(ByVal alpha As Double, ByVal Beta 
     py.x = 0
     py.y = 1
     py.z = 0
-    
+
     pz.x = 0
     pz.y = 0
     pz.z = 1
-    
+
     'BuildQuaternionFromEuler -Alpha, -Beta, -Gamma, quat_xyz 'quat_x
     BuildQuaternionFromAxis px, alpha, quat_x
     BuildQuaternionFromAxis py, Beta, quat_y
@@ -668,7 +668,7 @@ Public Sub BuildRotationMatrixWithQuaternions(ByVal alpha As Double, ByVal Beta 
 
     MultiplyQuaternions quat_y, quat_x, quat_xy
     MultiplyQuaternions quat_xy, quat_z, quat_xyz
-    
+
     'BuildQuaternionFromEuler -alpha, -beta, -gamma, quat_xyz
     BuildMatrixFromQuaternion quat_xyz, mat_res
 End Sub
@@ -676,9 +676,9 @@ End Sub
 Public Function RotateVectorAlpha(ByVal alpha As Single, ByRef vect As Point3D) As Point3D
     Dim quat_alpha As Quaternion
     Dim res As Point3D
-    
+
     BuildQuaternionFromEuler alpha, 0, 0, quat_alpha
-    
+
     res = RotatePointByQuaternion(quat_alpha, vect)
     RotateVectorAlpha = res
 End Function
@@ -686,18 +686,18 @@ End Function
 Public Function RotateVectorBeta(ByVal Beta As Single, ByRef vect As Point3D) As Point3D
     Dim quat_beta As Quaternion
     Dim res As Point3D
-    
+
     BuildQuaternionFromEuler 0, Beta, 0, quat_beta
-    
+
     res = RotatePointByQuaternion(quat_beta, vect)
     RotateVectorBeta = res
 End Function
 Public Function RotateVectorGamma(ByVal Gamma As Single, ByRef vect As Point3D) As Point3D
     Dim quat_gamma As Quaternion
     Dim res As Point3D
-    
+
     BuildQuaternionFromEuler 0, 0, Gamma, quat_gamma
-    
+
     res = RotatePointByQuaternion(quat_gamma, vect)
     RotateVectorGamma = res
 End Function
@@ -713,18 +713,18 @@ Public Function RotatePointByQuaternion(ByRef quat As Quaternion, ByRef vect As 
     Dim vect_quat As Quaternion
     Dim quat_conj As Quaternion
     Dim quat_aux As Quaternion
-    
+
     With vect_quat
         .x = vect.x
         .y = vect.y
         .z = vect.z
         .w = 1
     End With
-    
+
     MultiplyQuaternions quat, vect_quat, quat_aux
     quat_conj = GetQuaternionConjugate(quat)
     MultiplyQuaternions quat_aux, quat_conj, vect_quat
-    
+
     With RotatePointByQuaternion
         .x = vect_quat.x
         .y = vect_quat.y
@@ -747,18 +747,18 @@ Public Sub BuildRotationMatrixWithQuaternionsXYZ(ByVal alpha As Double, ByVal Be
     py.x = 0
     py.y = 1
     py.z = 0
-    
+
     pz.x = 0
     pz.y = 0
     pz.z = 1
-    
+
     BuildQuaternionFromAxis px, alpha, quat_x
     BuildQuaternionFromAxis py, Beta, quat_y
     BuildQuaternionFromAxis pz, Gamma, quat_z
 
     MultiplyQuaternions quat_x, quat_y, quat_xy
     MultiplyQuaternions quat_xy, quat_z, quat_xyz
-    
+
     BuildMatrixFromQuaternion quat_xyz, mat_res
 End Sub
 
@@ -766,7 +766,7 @@ End Sub
 Public Sub BuildQuaternionFromEuler(ByVal alpha As Double, ByVal Beta As Double, ByVal Gamma As Double, ByRef quat_res As Quaternion)
     'Basically we create 3 Quaternions, one for pitch, one for yaw, one for roll
     'and multiply those together.
- 
+
     Dim quat_x As Quaternion
     Dim quat_y As Quaternion
     Dim quat_z As Quaternion
@@ -782,18 +782,18 @@ Public Sub BuildQuaternionFromEuler(ByVal alpha As Double, ByVal Beta As Double,
     py.x = 0
     py.y = 1
     py.z = 0
-    
+
     pz.x = 0
     pz.y = 0
     pz.z = 1
-    
+
     BuildQuaternionFromAxis px, alpha, quat_x
     BuildQuaternionFromAxis py, Beta, quat_y
     BuildQuaternionFromAxis pz, Gamma, quat_z
 
     MultiplyQuaternions quat_y, quat_x, quat_xy
     MultiplyQuaternions quat_xy, quat_z, quat_res
- 
+
     NormalizeQuaternion quat_res
 End Sub
 
@@ -805,17 +805,25 @@ Public Sub NormalizeQuaternion(ByRef quat As Quaternion)
     Dim test As Double
     With quat
         mag2 = .w * .w + .x * .x + .y * .y + .z * .z
-        If Abs(mag2 - 1#) > QUAT_NORM_TOLERANCE Then
-            mag = Sqr(mag2)
-            .w = .w / mag
-            .x = .x / mag
-            .y = .y / mag
-            .z = .z / mag
-        End If
         
-        If .w > 1# Then
-            .w = 1
-        End If
+        mag = Sqr(mag2)
+        .w = .w / mag
+        .x = .x / mag
+        .y = .y / mag
+        .z = .z / mag
+                   
+        ' NEW UDPATE vertex2995 fix for Hojo/Heidegger animations
+        'If Abs(mag2 - 1#) > QUAT_NORM_TOLERANCE Then
+        '    mag = Sqr(mag2)
+        '    .w = .w / mag
+        '    .x = .x / mag
+        '    .y = .y / mag
+        '    .z = .z / mag
+        'End If
+
+        'If .w > 1# Then
+        '    .w = 1
+        'End If
     End With
 End Sub
 'Convert Quaternion to Matrix
@@ -829,7 +837,7 @@ Public Sub BuildMatrixFromQuaternion(ByRef quat As Quaternion, ByRef mat_res() A
     Dim wx As Double
     Dim wy As Double
     Dim wz As Double
-    
+
     With quat
         X2 = .x * .x
         Y2 = .y * .y
@@ -841,7 +849,7 @@ Public Sub BuildMatrixFromQuaternion(ByRef quat As Quaternion, ByRef mat_res() A
         wy = .w * .y
         wz = .w * .z
     End With
-    
+
     'This calculation would be a lot more complicated for non-unit length quaternions
     'Note: The constructor of Matrix4 expects the Matrix in column-major format like expected by
     'OpenGL
@@ -866,9 +874,9 @@ End Sub
 Public Sub BuildQuaternionFromAxis(ByRef vec As Point3D, ByVal angle As Double, ByRef res_quat As Quaternion)
     Dim sinAngle As Double
     angle = angle * PIOVER180 / 2
- 
+
     sinAngle = Sin(angle)
- 
+
     With res_quat
         .x = (vec.x * sinAngle)
         .y = (vec.y * sinAngle)
@@ -889,7 +897,7 @@ Public Function ConvertQ(ByVal heading As Double, ByVal attitude As Double, ByVa
     Dim c1, c2, c1c2, s1, s2, s1s2, c3, s3, w, h, a, B As Double
     Dim PI As Double
     PI = 4 * Atn(1)
-    
+
     h = heading * (PI / 360#)
     a = attitude * (PI / 360#)
     B = bank * (PI / 360#)
@@ -929,8 +937,8 @@ Public Function GetEulerAnglesFromQuaternion(ByRef quat As Quaternion, ByVal hom
     Dim sqy As Double
     Dim sqz As Double
     Dim test As Double
-    
-    
+
+
     With quat
         test = .x * .y + .z * .w
         If test > 0.499 Then ' singularity at north pole
@@ -952,7 +960,7 @@ Public Function GetEulerAnglesFromQuaternion(ByRef quat As Quaternion, ByVal hom
             End If
         End If
     End With
-    
+
     With GetEulerAnglesFromQuaternion
         Dim aux As Double
         .x = RadToDeg(.x)
@@ -1008,7 +1016,7 @@ Public Function GetEulerFromAxisAngle(ByVal axis_x As Double, ByVal axis_y As Do
             .y = ASin(axis_x * axis_y * t + axis_z * s)
             .z = atan2(axis_x * s - axis_y * axis_z * t, 1# - (axis_x * axis_x + axis_z * axis_z) * t)
         End If
-        
+
         .x = RadToDeg(.x)
         .y = RadToDeg(.y)
         .z = RadToDeg(.z)
@@ -1036,9 +1044,9 @@ Public Function GetQuaternionFromEulerUniversal(ByVal y As Double, ByVal x As Do
     Dim cs As Double
     Dim sc As Double
     Dim ss As Double
-    
+
     Dim t As Double
-    
+
     If f = EulFrmR Then
         t = x
         x = z
@@ -1091,9 +1099,9 @@ End Function
 Public Function GetEulerFormMatrixUniversal(ByRef mat() As Double, ByVal i As Integer, ByVal j As Integer, ByVal k As Integer, ByVal h As Integer, ByVal n As Integer, ByVal s As Integer, ByVal f As Integer) As Point3D
     Dim sy As Double
     Dim cy As Double
-    
+
     Dim t As Double
-    
+
     With GetEulerFormMatrixUniversal
         If s = EulRepYes Then
             sy = Sqr(mat(i + 4 * j) * mat(i + 4 * j) + mat(i + 4 * k) * mat(i + 4 * k))
@@ -1129,7 +1137,7 @@ Public Function GetEulerFormMatrixUniversal(ByRef mat() As Double, ByVal i As In
             .z = t
         End If
         'ea.w = order
-        
+
         .x = RadToDeg(.x)
         .y = RadToDeg(.y)
         .z = RadToDeg(.z)
@@ -1156,7 +1164,7 @@ Public Function QuaternionsSlerp(ByRef qa As Quaternion, ByRef qb As Quaternion,
             qb2.z = qb.z
         End If
     End With
-    
+
     With QuaternionsSlerp
         If (Abs(cosHalfTheta) >= 1) Then
             .w = qa.w
@@ -1182,7 +1190,7 @@ Public Function QuaternionsSlerp(ByRef qa As Quaternion, ByRef qb As Quaternion,
             .z = (qa.z * ratioA + qb2.z * ratioB)
         End If
     End With
-    
+
     NormalizeQuaternion QuaternionsSlerp
 End Function
 Public Function QuaternionsDot(ByRef q1 As Quaternion, ByRef q2 As Quaternion) As Double
@@ -1209,8 +1217,8 @@ Public Function QuaternionSlerp2(ByRef q1 As Quaternion, ByRef q2 As Quaternion,
     Dim sin_angle As Double
     Dim sin_angle_by_t As Double
     Dim sin_angle_by_one_t As Double
-    
-    
+
+
     dot = QuaternionsDot(q1, q2)
 
     '  dot = cos(theta)
@@ -1232,7 +1240,7 @@ Public Function QuaternionSlerp2(ByRef q1 As Quaternion, ByRef q2 As Quaternion,
             .w = q2.w
         End With
     End If
-    
+
     If dot < 0.95 Then
         angle = ACos(dot)
         one_minus_t = 1# - t
@@ -1316,19 +1324,19 @@ Public Function GetCommLine() As String
     RetStr = GetCommandLine
     'Get the length of that string
     SLen = lstrlen(RetStr)
-    
+
     If SLen > 0 Then
         'Create a buffer
         GetCommLine = Space$(SLen)
         'Copy to the buffer
         CopyMemory ByVal GetCommLine, ByVal RetStr, SLen
-        
+
         GetCommLine = Right$(GetCommLine, SLen - 1)
-        
+
         While Left$(GetCommLine, 1) <> "" + Chr$(34)
             GetCommLine = Right$(GetCommLine, Len(GetCommLine) - 1)
         Wend
-            
+
         If Len(GetCommLine) > 3 Then
             GetCommLine = Right$(GetCommLine, Len(GetCommLine) - 3)
             GetCommLine = Left$(GetCommLine, Len(GetCommLine) - 1)
@@ -1339,7 +1347,7 @@ Public Function GetCommLine() As String
 End Function
 Public Function GetPathFromString(ByVal fileName As String) As String
     Dim ci As Integer
-    
+
     For ci = 1 To Len(fileName)
         If Left$(Right$(fileName, 1), Len(fileName)) = "\" Then
             GetPathFromString = Left$(fileName, Len(fileName))
@@ -1353,7 +1361,7 @@ End Function
 '---------------------------------------------------------------------------------------------------------
 'Function creaDC(ByVal x As Long, ByVal y As Long) As Long
 '    Dim hBITMAP As Long, hdc As Long, tam As tagSIZE, tipo As Integer, error As String
-'    error = "Error de gráficos!"
+'    error = "Error de grï¿½ficos!"
 '    tipo = 0 + 0 + 16
 '    While hdc < 1
 '        hdc = CreateCompatibleDC(GetDC(0))
@@ -1372,7 +1380,7 @@ End Function
 Sub Draw_Buffer(ByVal hdc As Long, ByRef buffer() As Long, ByVal width As Integer, ByVal height As Integer)
     Dim i As Integer
     Dim j As Integer
-    
+
     ''Debug.Print "Dibujando buffer de " + Str$(width) + " X" + Str$(height) + " pixels en " + Str$(hdc)
     For i = 0 To width
         For j = 0 To height
@@ -1390,9 +1398,9 @@ Sub Interpolate_Buffer(ByRef dest() As Long, ByRef src() As Long, ByVal width As
     Dim b_temp As Byte
     Dim c1 As Long
     Dim c2 As Long
-    
+
     ''Debug.Print "Interpolando buffer de " + Str$(width) + " X" + Str$(height) + " pixels"
-    
+
     For x = 0 To width
         For y = 0 To height
                 dest(x * 2, y * 2) = src(x, y)
@@ -1403,9 +1411,9 @@ Sub Interpolate_Buffer(ByRef dest() As Long, ByRef src() As Long, ByVal width As
         For y = 0 To height * 2 Step 2
 
             c1 = dest(x - 1, y)
-            
+
             c2 = dest(x + 1, y)
-            
+
             r_temp = ((c1 And &HFF) + (c2 And &HFF)) / 2
             g_temp = ((c1 And 65280) + (c2 And 65280)) / 2 ^ 9
             b_temp = ((c1 And 16711680) + (c2 And 16711680)) / 2 ^ 17
@@ -1418,9 +1426,9 @@ Sub Interpolate_Buffer(ByRef dest() As Long, ByRef src() As Long, ByVal width As
         For y = 1 To height * 2 - 1 Step 2
 
             c1 = dest(x, y - 1)
-            
+
             c2 = dest(x, y + 1)
-            
+
             r_temp = ((c1 And &HFF) + (c2 And &HFF)) / 2
             g_temp = ((c1 And 65280) + (c2 And 65280)) / 2 ^ 9
             b_temp = ((c1 And 16711680) + (c2 And 16711680)) / 2 ^ 17
@@ -1429,7 +1437,7 @@ Sub Interpolate_Buffer(ByRef dest() As Long, ByRef src() As Long, ByVal width As
         Next y
     Next x
     DoEvents
-    
+
     ''Debug.Print "Interpolate_buffer finalizado"
 End Sub
 Function CombineColor(ByRef a As color, ByRef B As color) As color
@@ -1448,7 +1456,7 @@ Function ConvertTwipsToPixels(lngTwips As Long, _
    Dim lngPixelsPerInch As Long
    Const nTwipsPerInch = 1440
    'lngDC = GetDC(0)
-   
+
    'If (lngDirection = 0) Then       'Horizontal
       'lngPixelsPerInch = GetDeviceCaps(lngDC, WU_LOGPIXELSX)
    'Else                            'Vertical
@@ -1476,14 +1484,14 @@ Public Function getBlue(ByVal col As Long)
 End Function
 Public Function ConvertRGB555ToRGB888(ByVal src As Integer) As Long
     Dim r As Byte, B As Byte, g As Byte
-    
+
     r = LShiftLong(src And 31!, 3)
     If r > 0 Then r = r + 7
     g = LShiftLong(RShiftLong(src And 992!, 5), 3)
     If g > 0 Then g = g + 7
     B = LShiftLong(RShiftLong(src And 31744!, 10), 3)
     If B > 0 Then B = B + 7
-    
+
     ConvertRGB555ToRGB888 = RGB(r, g, B)
 End Function
 Public Function GetLongFromRGB(ByVal red As Byte, ByVal green As Byte, ByVal blue As Byte) As Long
@@ -1491,7 +1499,7 @@ Public Function GetLongFromRGB(ByVal red As Byte, ByVal green As Byte, ByVal blu
 End Function
 Public Sub DrawBox(ByVal max_x As Double, ByVal max_y As Double, ByVal max_z As Double, ByVal min_x As Double, ByVal min_y As Double, ByVal min_z As Double, ByVal red As Single, ByVal green As Single, ByVal blue As Single)
     glColor3f red, green, blue
-    
+
     glBegin GL_LINES
         glVertex3f max_x, max_y, max_z
         glVertex3f max_x, max_y, min_z
@@ -1499,24 +1507,24 @@ Public Sub DrawBox(ByVal max_x As Double, ByVal max_y As Double, ByVal max_z As 
         glVertex3f max_x, min_y, max_z
         glVertex3f max_x, max_y, max_z
         glVertex3f min_x, max_y, max_z
-                
+
         glVertex3f min_x, min_y, min_z
         glVertex3f min_x, min_y, max_z
         glVertex3f min_x, min_y, min_z
         glVertex3f min_x, max_y, min_z
         glVertex3f min_x, min_y, min_z
         glVertex3f max_x, min_y, min_z
-                
+
         glVertex3f max_x, min_y, min_z
         glVertex3f max_x, max_y, min_z
         glVertex3f max_x, min_y, min_z
         glVertex3f max_x, min_y, max_z
-                
+
         glVertex3f min_x, max_y, min_z
         glVertex3f min_x, max_y, max_z
         glVertex3f min_x, max_y, min_z
         glVertex3f max_x, max_y, min_z
-                
+
         glVertex3f min_x, min_y, max_z
         glVertex3f min_x, max_y, max_z
         glVertex3f min_x, min_y, max_z
@@ -1529,15 +1537,15 @@ Public Sub ComputeTransformedBoxBoundingBox(ByRef MV_matrix() As Double, _
     Dim box_pointsV(7) As Point3D
     Dim p_aux_trans As Point3D
     Dim PI As Integer
-    
+
     p_max_trans.x = -INFINITY_SINGLE
     p_max_trans.y = -INFINITY_SINGLE
     p_max_trans.z = -INFINITY_SINGLE
-    
+
     p_min_trans.x = INFINITY_SINGLE
     p_min_trans.y = INFINITY_SINGLE
     p_min_trans.z = INFINITY_SINGLE
-    
+
     box_pointsV(0) = p_min
     With box_pointsV(1)
         .x = p_min.x
@@ -1570,14 +1578,14 @@ Public Sub ComputeTransformedBoxBoundingBox(ByRef MV_matrix() As Double, _
         .y = p_min.y
         .z = p_min.z
     End With
-    
+
     For PI = 0 To 7
         MultiplyPoint3DByOGLMatrix MV_matrix, box_pointsV(PI), p_aux_trans
         With p_aux_trans
             If p_max_trans.x < .x Then p_max_trans.x = .x
             If p_max_trans.y < .y Then p_max_trans.y = .y
             If p_max_trans.z < .z Then p_max_trans.z = .z
-            
+
             If p_min_trans.x > .x Then p_min_trans.x = .x
             If p_min_trans.y > .y Then p_min_trans.y = .y
             If p_min_trans.z > .z Then p_min_trans.z = .z
@@ -1588,28 +1596,28 @@ Sub GetViewportWorldBox(ByRef p_min As Point3D, ByRef p_max As Point3D)
     Dim MV_matrix(16) As Double
     Dim P_matrix(16) As Double
     Dim PMV_matrix(16) As Double
-    
+
     Dim p_min_aux As Point3D
     Dim p_max_aux As Point3D
-    
+
     With p_min_aux
         .x = 0
         .y = 0
         .z = 0
     End With
-    
+
     With p_max_aux
         .x = 1
         .y = 1
         .z = 0
     End With
-    
+
     glGetDoublev GL_MODELVIEW_MATRIX, MV_matrix(0)
     glGetDoublev GL_PROJECTION_MATRIX, P_matrix(0)
-    
+
     MultiplyMatrix P_matrix, MV_matrix, PMV_matrix
     InvertMatrix PMV_matrix
-    
+
     MultiplyPoint3DByOGLMatrix PMV_matrix, p_min_aux, p_min
     MultiplyPoint3DByOGLMatrix PMV_matrix, p_max_aux, p_max
 End Sub
@@ -1632,54 +1640,54 @@ Function ComputeSceneRadius(ByRef p_min As Point3D, ByRef p_max As Point3D) As D
 End Function
 Sub SetCameraModelView(ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByVal alpha As Single, ByVal Beta As Single, ByVal Gamma As Single, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
     Dim rot_mat(16) As Double
-    
+
     glMatrixMode GL_MODELVIEW
     glLoadIdentity
-    
+
     glTranslatef cx, cy, CZ
-    
+
     BuildRotationMatrixWithQuaternionsXYZ alpha, Beta, _
         Gamma, rot_mat
     glMultMatrixd rot_mat(0)
-    
+
     glScalef redX, redY, redZ
 End Sub
 Sub SetCameraModelViewQuat(ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByRef quat As Quaternion, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
     Dim rot_mat(16) As Double
-    
+
     glMatrixMode GL_MODELVIEW
     glLoadIdentity
-    
+
     glTranslatef cx, cy, CZ
-    
+
     BuildMatrixFromQuaternion quat, rot_mat
     glMultMatrixd rot_mat(0)
-    
+
     glScalef redX, redY, redZ
 End Sub
 Sub ConcatenateCameraModelView(ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByVal alpha As Single, ByVal Beta As Single, ByVal Gamma As Single, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
     Dim rot_mat(16) As Double
-    
+
     glMatrixMode GL_MODELVIEW
 
     glTranslatef cx, cy, CZ
-    
+
     BuildRotationMatrixWithQuaternionsXYZ alpha, Beta, _
         Gamma, rot_mat
     glMultMatrixd rot_mat(0)
-    
+
     glScalef redX, redY, redZ
 End Sub
 Sub ConcatenateCameraModelViewQuat(ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByRef quat As Quaternion, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
     Dim rot_mat(16) As Double
-    
+
     glMatrixMode GL_MODELVIEW
 
     glTranslatef cx, cy, CZ
-    
+
     BuildMatrixFromQuaternion quat, rot_mat
     glMultMatrixd rot_mat(0)
-    
+
     glScalef redX, redY, redZ
 End Sub
 Sub SetCameraAroundModel(ByRef p_min As Point3D, ByRef p_max As Point3D, ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByVal alpha As Single, ByVal Beta As Single, ByVal Gamma As Single, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
@@ -1687,17 +1695,17 @@ Sub SetCameraAroundModel(ByRef p_min As Point3D, ByRef p_max As Point3D, ByVal c
     Dim height As Integer
     Dim scene_radius As Single
     Dim vp(4) As Long
-    
+
     glGetIntegerv GL_VIEWPORT, vp(0)
     width = vp(2)
     height = vp(3)
-    
+
     glMatrixMode GL_PROJECTION
     glLoadIdentity
 
     scene_radius = ComputeSceneRadius(p_min, p_max)
     gluPerspective 60, width / height, max(0.1, -CZ - scene_radius), max(0.1, -CZ + scene_radius)
-    
+
     SetCameraModelView cx, cy, CZ, alpha, Beta, Gamma, redX, redY, redZ
 End Sub
 Sub SetCameraAroundModelQuat(ByRef p_min As Point3D, ByRef p_max As Point3D, ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByRef quat As Quaternion, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
@@ -1705,17 +1713,17 @@ Sub SetCameraAroundModelQuat(ByRef p_min As Point3D, ByRef p_max As Point3D, ByV
     Dim height As Integer
     Dim scene_radius As Single
     Dim vp(4) As Long
-    
+
     glGetIntegerv GL_VIEWPORT, vp(0)
     width = vp(2)
     height = vp(3)
-    
+
     glMatrixMode GL_PROJECTION
     glLoadIdentity
 
     scene_radius = ComputeSceneRadius(p_min, p_max)
     gluPerspective 60, width / height, max(0.1, -CZ - scene_radius), max(0.1, -CZ + scene_radius)
-    
+
     SetCameraModelViewQuat cx, cy, CZ, quat, redX, redY, redZ
 End Sub
 Sub SetCameraInfinite(ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single, ByVal alpha As Single, ByVal Beta As Single, ByVal Gamma As Single, ByVal redX As Single, ByVal redY As Single, ByVal redZ As Single)
@@ -1723,15 +1731,15 @@ Sub SetCameraInfinite(ByVal cx As Single, ByVal cy As Single, ByVal CZ As Single
     Dim width As Long
     Dim height As Long
     Dim rot_mat(16) As Double
-    
+
     glGetIntegerv GL_VIEWPORT, vp(0)
     width = vp(2)
     height = vp(3)
-    
+
     glMatrixMode GL_PROJECTION
     glLoadIdentity
     gluPerspective 60, width / height, 0.1, 1000000
-    
+
     SetCameraModelView cx, cy, CZ, alpha, Beta, Gamma, redX, redY, redZ
 End Sub
 '---------------------------------------------------------------------------------------------------------
@@ -1739,7 +1747,7 @@ End Sub
 '---------------------------------------------------------------------------------------------------------
 Public Function Normalize(ByRef v As Point3D) As Point3D
     Dim l As Single
-    
+
     l = Sqr(v.x ^ 2 + v.y ^ 2 + v.z ^ 2)
     If l > 0 Then
         l = 1 / l
@@ -1765,7 +1773,7 @@ Public Function VectorProduct(ByRef vect1 As Point3D, ByRef vect2 As Point3D) As
 End Function
 Public Function CalculateNormal(ByRef p1 As Point3D, ByRef p2 As Point3D, ByRef p3 As Point3D) As Point3D
     Dim Qx, Qy, Qz, px, py, pz As Single
- 
+
     px = p2.x - p1.x
     py = p2.y - p1.y
     pz = p2.z - p1.z
@@ -1779,17 +1787,17 @@ End Function
 Public Function CalculatePoint2LineProjectionPosition(ByRef q As Point3D, ByRef p1 As Point3D, ByRef p2 As Point3D) As Single
     Dim alpha As Single
     Dim VD As Point3D
-    
+
     VD.x = p2.x - p1.x
     VD.y = p2.y - p1.y
     VD.z = p2.z - p1.z
-    
+
     alpha = (VD.x * (q.x - p1.x) + VD.y * (q.y - p1.y) + VD.z * (q.z - p1.z)) / _
             (VD.x ^ 2 + VD.y ^ 2 + VD.z ^ 2)
 
     If alpha > 1 Then alpha = 1
     If alpha < -1 Then alpha = -1
-    
+
     CalculatePoint2LineProjectionPosition = alpha
 End Function
 Public Function CalculateLinePoint(ByVal alpha As Single, ByRef p1 As Point3D, ByRef p2 As Point3D) As Point3D
@@ -1803,7 +1811,7 @@ Public Function CalculatePoint2LineProjection(ByRef q As Point3D, ByRef p1 As Po
     Dim alpha As Single
 
     alpha = CalculatePoint2LineProjectionPosition(q, p1, p2)
-    
+
     CalculatePoint2LineProjection = CalculateLinePoint(alpha, p1, p2)
 End Function
 
@@ -1830,16 +1838,16 @@ Public Function CompareSimilarPoints3D(ByRef a As Point3D, ByRef B As Point3D) A
         Dim dx As Single
         Dim dy As Single
         Dim dz As Single
-        
+
         Dim dist_square As Single
-        
+
         With a
             dx = .x - B.x
             dy = .y - B.y
             dz = .z - B.z
         End With
         dist_square = dx * dx + dy * dy + dz * dz
-        
+
         CompareSimilarPoints3D = dist_square <= MAX_DELTA_SQUARED
     End If
 End Function
@@ -1860,7 +1868,7 @@ Public Function IsLexicographicallyGreater(ByVal str1 As String, ByVal str2 As S
     Dim min_len As Integer
     Dim c1 As Integer
     Dim c2 As Integer
-    
+
     len1 = Len(str1)
     len2 = Len(str2)
     min_len = IIf(len1 > len2, len2, len1)
@@ -1883,17 +1891,17 @@ Public Function IsPoint3DUnderPlane(ByRef point As Point3D, ByVal a As Single, B
     Dim orthogonal_projection As Point3D
     Dim vect As Point3D
     Dim vect_norm As Point3D
-    
+
     orthogonal_projection = GetPoint3DOrthogonalProjection(point, a, B, C, d)
-    
+
     With vect
         .x = orthogonal_projection.x - point.x
         .y = orthogonal_projection.y - point.y
         .z = orthogonal_projection.z - point.z
     End With
-    
+
     vect_norm = Normalize(vect)
-    
+
     With vect_norm
         IsPoint3DUnderPlane = Not (Abs(a - .x) < 0.0001 And _
                                     Abs(B - .y) < 0.0001 And _
@@ -1907,17 +1915,17 @@ Public Function IsPoint3DAbovePlane(ByRef point As Point3D, ByVal a As Single, B
     Dim orthogonal_projection As Point3D
     Dim vect As Point3D
     Dim vect_norm As Point3D
-    
+
     orthogonal_projection = GetPoint3DOrthogonalProjection(point, a, B, C, d)
-    
+
     With vect
         .x = orthogonal_projection.x - point.x
         .y = orthogonal_projection.y - point.y
         .z = orthogonal_projection.z - point.z
     End With
-    
+
     vect_norm = Normalize(vect)
-    
+
     With vect_norm
         IsPoint3DAbovePlane = (Abs(a - .x) < 0.0001 And _
                                     Abs(B - .y) < 0.0001 And _
@@ -1929,11 +1937,11 @@ Public Function GetPoint3DOrthogonalProjection(ByRef point As Point3D, ByVal a A
                                     ByVal B As Single, ByVal C As Single, ByVal d As Single) As Point3D
 
     Dim alpha As Single
-    
+
     With point
         alpha = (-a * .x - B * .y - C * .z - d) / (a * a + B * B + C * C)
     End With
-    
+
     With GetPoint3DOrthogonalProjection
         .x = point.x + alpha * a
         .y = point.y + alpha * B
@@ -1973,11 +1981,11 @@ Public Function GetPointMirroredRelativeToPlane(ByRef point As Point3D, ByVal a 
                                                 ByVal B As Single, ByVal C As Single, _
                                                 ByVal d As Single) As Point3D
     Dim alpha As Single
-    
+
     With point
         alpha = (-a * .x - B * .y - C * .z - d) / (a * a + B * B + C * C)
     End With
-    
+
     With GetPointMirroredRelativeToPlane
         .x = point.x + 2 * alpha * a
         .y = point.y + 2 * alpha * B
@@ -1989,10 +1997,10 @@ Public Sub ComputePlaneABCD(ByRef PlaneVect1 As Point3D, ByRef PlaneVect2 As Poi
                             ByRef PlanePoint As Point3D, ByRef a As Single, ByRef B As Single, _
                             ByRef C As Single, ByRef d As Single)
     Dim normal_plane As Point3D
-    
+
     normal_plane = VectorProduct(PlaneVect1, PlaneVect2)
     normal_plane = Normalize(normal_plane)
-    
+
     With normal_plane
         a = .x
         B = .y
@@ -2017,28 +2025,28 @@ End Sub
 Public Function ComputeVectorsAngleCos(ByRef vec_1 As Point3D, ByRef vec_2 As Point3D) As Double
     Dim x1, Y1, z1 As Double
     Dim X2, Y2, z2 As Double
-    
+
     With vec_1
         x1 = CDbl(vec_1.x)
         Y1 = CDbl(vec_1.y)
         z1 = CDbl(vec_1.z)
     End With
-    
+
     With vec_2
         X2 = CDbl(vec_2.x)
         Y2 = CDbl(vec_2.y)
         z2 = CDbl(vec_2.z)
     End With
-        
+
     ComputeVectorsAngleCos = (x1 * X2 + Y1 * Y2 + z1 * z2) / _
                             (Sqr(x1 * x1 + Y1 * Y1 + z1 * z1) * Sqr(X2 * X2 + Y2 * Y2 + z2 * z2))
-    
+
     'Debug.Print "v1 = ("; Str$(x1); ","; Str$(Y1); ","; Str$(z1); "), v2 = ("; Str$(X2); ","; Str$(Y2); ","; Str$(z2); "), res = "; Str$(ComputeVectorsAngleCos)
 End Function
 Public Function AreVectorsParalel(ByRef vec1 As Point3D, ByRef vec2 As Point3D) As Boolean
     Dim norm_vec1 As Point3D
     Dim norm_vec2 As Point3D
-    
+
     norm_vec1 = Normalize(vec1)
     norm_vec2 = Normalize(vec2)
     AreVectorsParalel = CompareSimilarPoints3D(norm_vec1, norm_vec2)
@@ -2054,17 +2062,17 @@ End Function
 Public Function GetVectorToPlaneIntersection(ByRef v1 As Point3D, ByRef v2 As Point3D, ByVal a As Double, ByVal B As Double, ByVal C As Double, ByVal d As Double, ByRef alpha_out As Double) As Boolean
     Dim triangle_normal As Point3D
     Dim plane_normal As Point3D
-    
+
     Dim lambda_mult_plane As Double
     Dim k_plane As Double
-    
+
     triangle_normal = VectorProduct(v1, v2)
     With plane_normal
         .x = a
         .y = B
         .z = C
     End With
-    
+
     alpha_out = 0
     GetVectorToPlaneIntersection = AreVectorsParalel(triangle_normal, plane_normal)
     If Not GetVectorToPlaneIntersection Then
@@ -2073,7 +2081,7 @@ Public Function GetVectorToPlaneIntersection(ByRef v1 As Point3D, ByRef v2 As Po
             lambda_mult_plane = -a * CDbl(.x) - B * CDbl(.y) - C * CDbl(.z)
             k_plane = lambda_mult_plane - d
         End With
-        
+
         With v2
             lambda_mult_plane = lambda_mult_plane + a * CDbl(.x) + B * CDbl(.y) + C * CDbl(.z)
         End With
@@ -2086,15 +2094,15 @@ End Function
 Public Function GetFirstIndexOccurrenceLong(ByRef vect() As Long, ByVal first_index As Long, ByVal last_index As Long, ByVal value As Long) As Long
     Dim elem_index As Long
     Dim num_elems As Long
-    
+
     num_elems = UBound(vect) + 1
-    
+
     For elem_index = first_index To last_index
         If vect(elem_index) = value Then
             Exit For
         End If
     Next elem_index
-    
+
     If vect(elem_index) = value Then
         GetFirstIndexOccurrenceLong = elem_index
     Else
@@ -2104,7 +2112,7 @@ End Function
 
 Public Sub EchangeVectorElementsLong(ByRef vect() As Long, ByVal index1 As Long, ByVal index2 As Long)
     Dim aux_val As Long
-    
+
     aux_val = vect(index1)
     vect(index1) = vect(index2)
     vect(index2) = aux_val
@@ -2113,7 +2121,7 @@ End Sub
 Public Sub PrintTableLong(ByRef vect() As Long)
     Dim num_elems As Long
     Dim ei As Long
-    
+
     Debug.Print "{"
     num_elems = UBound(vect) + 1
     For ei = 0 To num_elems - 1

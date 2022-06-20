@@ -1,0 +1,12 @@
+# Visual Basic 6
+.DS_Store
+.Trashes
+*.vbw
+*.csi
+*.exp
+*.lib
+*.lvw
+*.dca
+*.scc
+*.tmp
+/.vs

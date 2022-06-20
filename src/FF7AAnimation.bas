@@ -17,18 +17,18 @@ End Type
 Function ReadAAnimationNBones(ByVal fileName As String) As Integer
     Dim fi As Long
     Dim fileNumber As Integer
-    
+
     On Error GoTo errorH
     If fileName = "" Then
         ReadAAnimationNBones = -1
         Exit Function
     End If
-        
+
     fileNumber = FreeFile
     Open fileName For Binary As fileNumber
 
     Get fileNumber, 9, ReadAAnimationNBones
-    
+
     Close fileNumber
     Exit Function
 errorH:
@@ -37,12 +37,12 @@ End Function
 Sub ReadAAnimation(ByRef obj As AAnimation, ByVal fileName As String)
     Dim fi As Long
     Dim fileNumber As Integer
-    
+
     On Error GoTo errorH
-    
+
     fileNumber = FreeFile
     Open fileName For Binary As fileNumber
-    
+
     With obj
         .AFile = Right$(fileName, Len(fileName) - Len(GetPathFromString(fileName)))
         Get fileNumber, 1, .version
@@ -51,15 +51,15 @@ Sub ReadAAnimation(ByRef obj As AAnimation, ByVal fileName As String)
         Get fileNumber, 13, .RotationOrder
         Get fileNumber, 16, .unused
         Get fileNumber, 17, .runtime_data
-        
+
         'If .NumFrames > 1 Then
         '    .NumFrames = .NumFrames * 2
         'End If
-        
+
         ReDim .Frames(.NumFrames)
-        
+
         ReadAFrame fileNumber, 25 + 12 + fi * (.NumBones * 12 + 24), .NumBones, .Frames(0)
-        
+
         For fi = 0 To .NumFrames - 1
             ReadAFrame fileNumber, 25 + 12 + fi * (.NumBones * 12 + 24), .NumBones, .Frames(fi)
         Next fi
@@ -72,16 +72,16 @@ End Sub
 Sub WriteAAnimation(ByRef obj As AAnimation, ByVal fileName As String)
     Dim fi As Integer
     Dim fileNumber As Integer
-    
+
     On Error GoTo errorH
-    
+
     If fileName = "" Then _
         fileName = "dummy_animation.a"
     fileNumber = FreeFile
     Open fileName For Output As fileNumber
     Close fileNumber
     Open fileName For Binary As fileNumber
-    
+
     With obj
         Put fileNumber, 1, .version
         Put fileNumber, 5, .NumFrames
@@ -93,7 +93,7 @@ Sub WriteAAnimation(ByRef obj As AAnimation, ByVal fileName As String)
         Put fileNumber, 13, .RotationOrder
         Put fileNumber, 16, .unused
         Put fileNumber, 17, .runtime_data
-        
+
         For fi = 0 To .NumFrames - 1
             WriteAFrame fileNumber, 25 + 12 + (fi) * (.NumBones * 12 + 24), .NumBones, .Frames(fi)
         Next fi
@@ -105,7 +105,7 @@ errorH:
 End Sub
 Sub CreateCompatibleEmptyAAnimation(ByRef obj As AAnimation, ByVal NumBones As Integer)
     Dim i As Integer
-    
+
     With obj
         .AFile = ""
         .NumBones = NumBones
@@ -123,7 +123,7 @@ Sub CreateCompatibleEmptyAAnimation(ByRef obj As AAnimation, ByVal NumBones As I
 End Sub
 Function RemoveFrameAAnimation(ByRef obj As AAnimation, ByVal frame_index As Integer) As Boolean
     Dim fi As Integer
-    
+
     With obj
         If .NumFrames > 1 Then
             For fi = frame_index To .NumFrames - 2
@@ -131,7 +131,7 @@ Function RemoveFrameAAnimation(ByRef obj As AAnimation, ByVal frame_index As Int
             Next fi
             .NumFrames = .NumFrames - 1
             ReDim Preserve .Frames(.NumFrames - 1)
-            
+
             RemoveFrameAAnimation = True
         Else
             RemoveFrameAAnimation = False

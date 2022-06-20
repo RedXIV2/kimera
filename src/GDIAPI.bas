@@ -160,7 +160,7 @@ Public Const PI_180 = 3.141593 / 180
 
 Public Const BI_RGB = 0&
 Public Const DIB_RGB_COLORS = 0   '  tabla de color en RGB (rojo-verde-azul)
-Public Const DIB_PAL_COLORS = 1   '  tabla de color en los índices de la paleta
+Public Const DIB_PAL_COLORS = 1   '  tabla de color en los ï¿½ndices de la paleta
 
 Public Const GL_FUNC_ADD = 32774
 Public Const GL_FUNC_SUBTRACT = 32778
@@ -198,7 +198,7 @@ Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, ByVal x As Long, ByV
                                      ByVal nwidth As Long, ByVal nheight As Long, _
                                      ByVal hSrcDC As Long, ByVal xSrc As Long, _
                                      ByVal ySrc As Long, ByVal dwRop As Long) As Long
-                                     
+
 Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hdc As Long) As Long
 Declare Function SelectObject Lib "gdi32" (ByVal hdc As Long, ByVal hObject As Long) As Long
 Declare Function DeleteDC Lib "gdi32" (ByVal hdc As Long) As Long
@@ -270,7 +270,7 @@ Declare Sub gluPickMatrix Lib "glu32.dll" (ByVal x As Double, ByVal y As Double,
 
 Function creaDC(ByVal dc As Long, ByVal x As Long, ByVal y As Long) As Long
 Dim hBitmap As Long, hdc As Long, tipo As Integer, error As String
-error = "Error de gráficos!"
+error = "Error de grï¿½ficos!"
 tipo = 0 + 0 + 16
 Do
     hdc = CreateCompatibleDC(dc)
@@ -293,26 +293,26 @@ BitBlt creaDC, 0, 0, x, y, creaDC, 0, 0, Blackness
 End Function
 Sub GetHeaderBitmapInfo(ByVal hdc As Long, ByVal hbmp As Long, ByRef BMPinfo As BITMAPINFO)
     BMPinfo.bmiHeader.biSize = 40
-    
+
     GetDIBits hdc, hbmp, 0, 0, ByVal 0&, BMPinfo, DIB_RGB_COLORS
 End Sub
 'Uses the 3-call method to GetDIBits for retriving the bitmap data (including original pallete)
 Sub GetAllBitmapData(ByVal hdc As Long, ByVal hbmp As Long, ByRef BMPData() As Byte, ByRef BMPinfo As BITMAPINFO)
-    
+
     GetHeaderBitmapInfo hdc, hbmp, BMPinfo
-    
+
     If (BMPinfo.bmiHeader.biBitCount <= 8) Then
         Dim OldUsed As Long
         OldUsed = BMPinfo.bmiHeader.biClrUsed ' Read bitmap palette
         Call GetDIBits(hdc, hbmp, 0, 0, ByVal 0&, BMPinfo, 0)
         BMPinfo.bmiHeader.biClrUsed = OldUsed
     End If
-    
+
     With BMPinfo.bmiHeader ' Allocate data array
         ReDim BMPData((((((.biWidth * .biBitCount) + 31) And _
             &HFFFFFFE0) \ &H20) * .biHeight) * 4 - 1) As Byte
     End With
-    
+
     ' Read image data
     Call GetDIBits(hdc, hbmp, 0, _
         BMPinfo.bmiHeader.biHeight, BMPData(0), BMPinfo, 0)

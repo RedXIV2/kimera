@@ -1,6 +1,6 @@
 Attribute VB_Name = "mBrowseFolder"
 ' mBrowseFolder
-' 2000/12/17 Copyright © 2000, Larry Rebich, using the VAIO
+' 2000/12/17 Copyright ï¿½ 2000, Larry Rebich, using the VAIO
 ' 2000/12/17 larry@buygold.net, www.buygold.net, 760.771.4730
 '
 ' Use this module in conjunction with class module: cBrowseFolder.cls
@@ -68,31 +68,31 @@ Attribute VB_Name = "mBrowseFolder"
     Const WM_USER = &H400
     Const BFFM_SETSELECTIONA As Long = (WM_USER + 102)
     Const BFFM_SETSELECTIONW As Long = (WM_USER + 103)
-    
+
     Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
     '
-    
+
 Public Function BrowseCallbackProcStr(ByVal hWnd As Long, ByVal uMsg As Long, ByVal lParam As Long, ByVal lpData As Long) As Long
-                                       
+
     'Callback for the Browse STRING method.
- 
+
     'On initialization, set the dialog's
     'pre-selected folder from the pointer
     'to the path allocated as bi.lParam,
     'passed back to the callback as lpData param.
- 
+
     Select Case uMsg
         Case BFFM_INITIALIZED
             Call SendMessage(hWnd, BFFM_SETSELECTIONA, True, ByVal lpData)
     End Select
-          
+
 End Function
 
 Public Function FARPROC(ByVal pfn As Long) As Long
-  
+
     'A dummy procedure that receives and returns
     'the value of the AddressOf operator.
- 
+
     'Obtain and set the address of the callback
     'This workaround is needed as you can't assign
     'AddressOf directly to a member of a user-
@@ -103,7 +103,7 @@ Public Function FARPROC(ByVal pfn As Long) As Long
     'Matt (Curland) correctly pointed out that in passing the addressof via a
     'wrapper routine, we really *do* want to pass the real address, and not a
     'reference. Add ByVal to above function [ByVal pfn As Long]
- 
+
     FARPROC = pfn
 
 End Function

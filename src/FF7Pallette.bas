@@ -19,13 +19,13 @@ Sub ConvertFF7Color2RGB(ByVal src As GLshort, ByRef dest As color)
         If .green > 0 Then .green = .green + 7
         .blue = LShiftLong(RShiftLong(src And 31744!, 10), 3)
         If .blue > 0 Then .blue = .blue + 7
-        
+
         If src < 0 Then
             .mask = 1
         Else
             .mask = 0
         End If
-        
+
     End With
 End Sub
 Function ConvertRGB2FF7Color(ByRef src As color) As GLushort
@@ -35,7 +35,7 @@ Function ConvertRGB2FF7Color(ByRef src As color) As GLushort
         Else
             ConvertRGB2FF7Color = 0
         End If
-        
+
         ConvertRGB2FF7Color = ConvertRGB2FF7Color Or _
                               RShiftLong(.red, 3) And &H1F Or _
                               LShiftLong(RShiftLong(.green, 3) And &H1F, 5) Or _
@@ -53,17 +53,17 @@ End Sub
 Sub Load_Pallette(ByVal n_file As Integer, ByVal offset As GLuint, ByVal nbColors As GLuint, ByRef pal As Pallette)
     Dim c_i As GLuint
     Dim c_temp As GLushort
-    
+
     With pal
         .nbColors = nbColors
         ReDim .colors(nbColors)
-    
+
         For c_i = 0 To nbColors
             Get n_file, offset + c_i * 2, c_temp
             ConvertFF7Color2RGB c_temp, .colors(c_i)
             If .colors(c_i).red = 0 And .colors(c_i).green = 255 And .colors(c_i).blue = 0 Then _
                 Debug.Print "Paleta " + Str$(c_i \ 256) + " Color Verde" + Str$(c_i Mod 256) + " Antes " + Str$(c_temp)
-            
+
             If .colors(c_i).red = 63 And .colors(c_i).green = 55 And .colors(c_i).blue = 39 Then _
                 Debug.Print "Paleta " + Str$(c_i \ 256) + " Color Marron" + Str$(c_i Mod 256) + " Antes " + Str$(c_temp)
         Next c_i
@@ -72,7 +72,7 @@ End Sub
 Sub Save_Pallette(ByVal n_file As Integer, ByVal offset As GLuint, ByRef pal As Pallette)
     Dim c_i As GLuint
     Dim c_temp As GLushort
-    
+
     With pal
         For c_i = 0 To .nbColors - 1
             c_temp = ConvertRGB2FF7Color(.colors(c_i))
@@ -90,7 +90,7 @@ Function addColor(ByRef pal As Pallette, ByVal pal_i As Integer, ByRef color As 
     Dim passed As Boolean
     Dim min_cost_c As Long
     Dim cost_c As Long
-    
+
     rv = 1
     bv = 1
     gv = 1
@@ -121,7 +121,7 @@ Function addColor(ByRef pal As Pallette, ByVal pal_i As Integer, ByRef color As 
             End If
         End If
     End With
-    
+
     min_cost_c = 2147483647
     passed = False
     For c_i = pal_i * 256 To pal_i * 256 + 255
@@ -147,6 +147,6 @@ Function addColor(ByRef pal As Pallette, ByVal pal_i As Integer, ByRef color As 
             End If
         End With
     Next c_i
-    
+
     addColor = c_if Mod 256
 End Function

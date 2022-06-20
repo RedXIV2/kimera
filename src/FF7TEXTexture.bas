@@ -5,7 +5,7 @@ Public Type TEXTexture
     tex_id As Long
     hdc As Long
     hbmp As Long
-    
+
     'TEX file format by Mirex and Aali
     'http://wiki.qhimm.com/FF7/TEX_format
     version As Long             'Must be 1 for FF7 to load it
@@ -80,18 +80,18 @@ End Type
 Function ReadTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String) As Integer
     Dim NFile As Integer
     Dim offBitmap As Long
-    
+
     On Error GoTo errorH
-    
+
     Texture.tex_id = -1
     ReadTEXTexture = -1
     If FileExist(fileName) Then
         NFile = FreeFile
         Open fileName For Binary As NFile
-        
+
         With Texture
             .tex_file = fileName
-            
+
             Get NFile, 1, .version
             Get NFile, 1 + &H4, .unk1
             Get NFile, 1 + &H8, .ColorKeyFlag
@@ -119,7 +119,7 @@ Function ReadTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String) A
             Get NFile, 1 + &H60, .RuntimeData
             Get NFile, 1 + &H64, .BitsPerPixel
             Get NFile, 1 + &H68, .BytesPerPixel
-            
+
             Get NFile, 1 + &H6C, .NumRedBits
             Get NFile, 1 + &H70, .NumGreenBits
             Get NFile, 1 + &H74, .NumBlueBits
@@ -140,7 +140,7 @@ Function ReadTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String) A
             Get NFile, 1 + &HB0, .GreenMax
             Get NFile, 1 + &HB4, .BlueMax
             Get NFile, 1 + &HB8, .AlphaMax
-            
+
             Get NFile, 1 + &HBC, .ColorKeyArrayFlag
             Get NFile, 1 + &HC0, .RuntimeData2
             Get NFile, 1 + &HC4, .ReferenceAlpha
@@ -153,17 +153,17 @@ Function ReadTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String) A
             Get NFile, 1 + &HE0, .unk9
             Get NFile, 1 + &HE4, .unk10
             Get NFile, 1 + &HE8, .unk11
-            
+
             offBitmap = 1 + &HEC
             If .PalleteFlag = 1 Then
                 ReDim .Pallete(.PalleteSize * 4 - 1)
                 Get NFile, 1 + &HEC, .Pallete
                 offBitmap = offBitmap + .PalleteSize * 4
             End If
-                
+
             ReDim .PixelData(.width * .height * .BytesPerPixel - 1)
             Get NFile, offBitmap, .PixelData
-            
+
             If .ColorKeyArrayFlag = 1 Then
                 ReDim .ColorKeyData(.NumPalletes - 1)
                 Get NFile, offBitmap + .width * .height * .BytesPerPixel, .ColorKeyData
@@ -183,17 +183,17 @@ End Function
 Sub WriteTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String)
     Dim NFile As Integer
     Dim offBitmap As Long
-    
+
     On Error GoTo errorH
-    
+
     If Texture.tex_id = -1 Then _
         Exit Sub
-    
+
     NFile = FreeFile
     Open fileName For Output As NFile
     Close NFile
     Open fileName For Binary As NFile
-    
+
     With Texture
         Put NFile, 1, .version
         Put NFile, 1 + &H4, .unk1
@@ -222,7 +222,7 @@ Sub WriteTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String)
         Put NFile, 1 + &H60, .RuntimeData
         Put NFile, 1 + &H64, .BitsPerPixel
         Put NFile, 1 + &H68, .BytesPerPixel
-        
+
         Put NFile, 1 + &H6C, .NumRedBits
         Put NFile, 1 + &H70, .NumGreenBits
         Put NFile, 1 + &H74, .NumBlueBits
@@ -243,7 +243,7 @@ Sub WriteTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String)
         Put NFile, 1 + &HB0, .GreenMax
         Put NFile, 1 + &HB4, .BlueMax
         Put NFile, 1 + &HB8, .AlphaMax
-        
+
         Put NFile, 1 + &HBC, .ColorKeyArrayFlag
         Put NFile, 1 + &HC0, .RuntimeData2
         Put NFile, 1 + &HC4, .ReferenceAlpha
@@ -261,9 +261,9 @@ Sub WriteTEXTexture(ByRef Texture As TEXTexture, ByVal fileName As String)
             Put NFile, 1 + &HEC, .Pallete
             offBitmap = offBitmap + .PalleteSize * 4
         End If
-            
+
         Put NFile, offBitmap, .PixelData
-        
+
         If .ColorKeyArrayFlag = 1 Then
             Put NFile, offBitmap + .width * .height * .BytesPerPixel, .ColorKeyData
         End If
@@ -282,7 +282,7 @@ Public Sub LoadImageAsTexTexture(ByVal fileName As String, ByRef tex As TEXTextu
     Dim pic As Picture
     Dim name As String
     Dim dot_pos As Long
-    
+
     name = TrimPath(fileName)
     dot_pos = Len(name) - 3
     tex.tex_file = Left(name, dot_pos) + "tex"
@@ -295,7 +295,7 @@ Public Sub LoadImageAsTexTexture(ByVal fileName As String, ByRef tex As TEXTextu
 
         GetTEXTextureFromBitmap tex, GetDC(0), pic.handle
     End If
-    
+
     LoadTEXTexture tex
     LoadBitmapFromTEXTexture tex
 End Sub
@@ -307,7 +307,7 @@ Public Sub ConvertBMPToTex(ByRef tex_in As BMPTexture, ByRef tex_out As TEXTextu
     Dim row_end As Long
     Dim pal_size As Long
     Dim offBit As Long
-    
+
     With tex_out
         .version = 1
         .unk1 = 0
@@ -438,7 +438,7 @@ Public Sub ConvertBMPToTex(ByRef tex_in As BMPTexture, ByRef tex_out As TEXTextu
                 Next si
             End If
         Next ri
-        
+
         If .PalleteFlag = 1 Then
             ReDim .Pallete(.PalleteSize * 4)
             For ci = 0 To 4 * .PalleteSize - 1 Step 4
@@ -512,7 +512,7 @@ Sub LoadTEXTexture(ByRef Texture As TEXTexture)
     Dim internalformat As Long
     Dim format As Long
     Dim color_type As Long
-    
+
     With Texture
         'Debug.Print "Loading Texture", .tex_file
         glGenTextures 1, .tex_id
@@ -522,7 +522,7 @@ Sub LoadTEXTexture(ByRef Texture As TEXTexture)
         ''Debug.Print "Binding Texture...", glGetError = GL_NO_ERROR
         glTexParameterf GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR
         glTexParameterf GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR
-        
+
         Select Case .BitDepth
                 Case 1:
                     format = GL_BGRA
@@ -546,7 +546,7 @@ Sub LoadTEXTexture(ByRef Texture As TEXTexture)
                     format = GL_BGRA
                     internalformat = GL_RGBA
         End Select
-        
+
         glPixelStorei GL_UNPACK_ALIGNMENT, 1
         GetTEXTexturev Texture, TextureImg
         glTexImage2D GL_TEXTURE_2D, 0, internalformat, .width, .height, 0, format, GL_UNSIGNED_BYTE, TextureImg(0)
@@ -575,10 +575,10 @@ Sub LoadBitmapFromTEXTexture(ByRef tex_in As TEXTexture)
     Dim parts As Integer
     Dim parts_left As Integer
     Dim line_end As Long
-    
+
     Dim PicInfo As BITMAPINFO
     Dim PicData() As Byte
-    
+
     With PicInfo.bmiHeader
         .biSize = 40
         .biWidth = tex_in.width
@@ -590,32 +590,32 @@ Sub LoadBitmapFromTEXTexture(ByRef tex_in As TEXTexture)
             .biBitCount = tex_in.BitDepth
         End If
         .biCompression = BI_RGB
-        
+
         LineLength = .biWidth * .biBitCount
         LinePad = IIf(LineLength Mod 32 = 0, 0, 32 * (LineLength \ 32 + 1) - 8 * (LineLength \ 8))
         LinePadUseful = IIf(LinePad = 0, 0, LineLength - 8 * (LineLength \ 8))
         LinePadBytes = IIf(LinePad > 0 And LinePad < 8, 1, LinePad \ 8)
         LineLengthBytes = LineLength \ 8 + LinePadBytes
         BMPSizeBytes = LineLengthBytes * .biHeight
-        
+
         .biSizeImage = BMPSizeBytes
         .biXPelsPerMeter = 0
         .biYPelsPerMeter = 0
         .biClrUsed = IIf(tex_in.ColorKeyFlag = 1, tex_in.PalleteSize, 0)
         .biClrImportant = .biClrUsed
-    
-    
+
+
         If (PicInfo.bmiHeader.biBitCount <= 8) Then
             Dim aux As Integer
             aux = tex_in.PalleteSize * 4
-            
+
             CopyMemory PicInfo.bmiColors(0), _
                         tex_in.Pallete(0), _
                         aux
         End If
 
         ReDim PicData(BMPSizeBytes - 1)
-        
+
         If .biBitCount = 1 Or .biBitCount = 4 Then
             si = 0
             Shift = 2 ^ .biBitCount
@@ -674,12 +674,12 @@ Sub GetTEXTextureFromBitmap(ByRef tex_out As TEXTexture, ByRef hdc As Long, ByVa
     Dim parts As Integer
     Dim parts_left As Integer
     Dim line_end As Long
-    
+
     Dim PicInfo As BITMAPINFO
     Dim PicData() As Byte
-    
+
     GetAllBitmapData hdc, hbmp, PicData, PicInfo
-    
+
     Bits = PicInfo.bmiHeader.biBitCount
     pal_size = IIf(Bits <= 8, 2 ^ Bits, 0)
     With tex_out
@@ -771,7 +771,7 @@ Sub GetTEXTextureFromBitmap(ByRef tex_out As TEXTexture, ByRef hdc As Long, ByVa
         .unk9 = 480
         .unk10 = 320
         .unk11 = 512
-        
+
         LineLength = .width * .BitsPerPixel
         LinePad = IIf(LineLength Mod 32 = 0, 0, 32 * (LineLength \ 32 + 1) - 8 * (LineLength \ 8))
         LinePadUseful = IIf(LinePad = 0, 0, LineLength + -8 * (LineLength \ 8))
@@ -779,7 +779,7 @@ Sub GetTEXTextureFromBitmap(ByRef tex_out As TEXTexture, ByRef hdc As Long, ByVa
         LineLengthBytes = LineLength \ 8 + LinePadBytes
         TexBitmapSize = .width * .height * .BytesPerPixel - 1
         ReDim .PixelData(TexBitmapSize)
-        
+
         If Bits = 1 Or Bits = 4 Then
             ti = 0
             Shift = 2 ^ Bits
@@ -812,7 +812,7 @@ Sub GetTEXTextureFromBitmap(ByRef tex_out As TEXTexture, ByRef hdc As Long, ByVa
                     LineLength \ 8
             Next li
         End If
-        
+
         If .PalleteFlag = 1 Then
             ReDim .Pallete(4 * .NumColorsPerPallete - 1)
             CopyMemory .Pallete(0), PicInfo.bmiColors(0), 4 * .NumColorsPerPallete

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form InterpolateAllAnimsForm 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Interpolate all FF7 animations"
@@ -76,7 +76,7 @@ Begin VB.Form InterpolateAllAnimsForm
          _Version        =   393216
          Value           =   3
          BuddyControl    =   "NumInterpFramesBattleText"
-         BuddyDispid     =   196638
+         BuddyDispid     =   196615
          OrigLeft        =   5760
          OrigTop         =   960
          OrigRight       =   6015
@@ -110,7 +110,7 @@ Begin VB.Form InterpolateAllAnimsForm
          _Version        =   393216
          Value           =   1
          BuddyControl    =   "NumInterpFramesFieldText"
-         BuddyDispid     =   196636
+         BuddyDispid     =   196616
          OrigLeft        =   5760
          OrigTop         =   480
          OrigRight       =   6015
@@ -356,7 +356,7 @@ Private Sub GoCommand_Click()
     ProgressFrame.Top = InterpolateOptionsFrame.Top + InterpolateOptionsFrame.height / 2 - ProgressFrame.height / 2
     InterpolateOptionsFrame.Visible = False
     ProgressFrame.Visible = True
-    
+
     InterpolateAllAnimations
 End Sub
 Private Sub SaveConfigCommand_Click()
@@ -369,18 +369,18 @@ End Sub
 Public Sub ResetForm()
     ProgressFrame.Visible = False
     InterpolateOptionsFrame.Visible = True
-    
+
     CharLGPDataDirText.Text = CHAR_LGP_PATH
     BattleLGPDataDirText.Text = BATTLE_LGP_PATH
     MagicLGPDataDirText.Text = MAGIC_LGP_PATH
-    
+
     CharLGPDataDirDestText.Text = CHAR_LGP_PATH_DEST
     BattleLGPDataDirDestText.Text = BATTLE_LGP_PATH_DEST
     MagicLGPDataDirDestText.Text = MAGIC_LGP_PATH_DEST
-    
+
     NumInterpFramesFieldUpDown.value = DEFAULT_FIELD_INTERP_FRAMES
     NumInterpFramesBattleUpDown.value = DEFAULT_BATTLE_INTERP_FRAMES
-    
+
     OperationCancelled = False
 End Sub
 
@@ -396,7 +396,7 @@ Private Sub InterpolateAllAnimations()
     Dim foundQ As Boolean
     Dim hrc_sk As HRCSkeleton
     Dim a_anim As AAnimation
-    
+
     Dim PI As Integer
     Dim battle_anims_packs_names(UNIQUE_BATTLE_ANIMS_COUNT - 1) As String
     Dim num_used_battle_anims_pack As Integer
@@ -405,15 +405,15 @@ Private Sub InterpolateAllAnimations()
     Dim battle_skeleton_filename As String
     Dim limit_owner_skeleton_filename As String
     Dim anims_pack_filename As String
-    
+
     Dim magic_anims_packs_names(UNIQUE_BATTLE_ANIMS_COUNT - 1) As String
-    
+
     InitializeProgressBar
-    
+
     num_anim_groups = IIf(CharLGPDataDirCheck.value = vbChecked, 1, 0)
     num_anim_groups = num_anim_groups + IIf(BattleLGPDataDirCheck.value = vbChecked, 1, 0)
     num_anim_groups = num_anim_groups + IIf(MagicLGPDataDirCheck.value = vbChecked, 1, 0)
-        
+
     base_percentage = 0
     If CharLGPDataDirCheck.value = vbChecked Then
         num_used_char_anims = 0
@@ -422,7 +422,7 @@ Private Sub InterpolateAllAnimations()
                 Exit For
             End If
             With CharLGPRegisters(mi)
-                ReadHRCSkeleton hrc_sk, CHAR_LGP_PATH + "\" + .filename + ".HRC", False
+                ReadHRCSkeleton hrc_sk, CHAR_LGP_PATH + "\" + .fileName + ".HRC", False
                 For ai = 0 To .NumAnims - 1
                     aiu = 0
                     While aiu < num_used_char_anims And Not foundQ
@@ -433,24 +433,31 @@ Private Sub InterpolateAllAnimations()
                         UpdateProgressBar (num_used_char_anims / UNIQUE_CHAR_ANIMS_COUNT) / num_anim_groups, .Animations(ai) + ".A"
                         DoEvents
                         Refresh
-                        
+
                         ReadAAnimation a_anim, CHAR_LGP_PATH + "\" + .Animations(ai) + ".A"
                         FixAAnimation hrc_sk, a_anim
-                        If a_anim.NumBones = hrc_sk.NumBones Then
+                        If a_anim.NumBones = hrc_sk.NumBones Or a_anim.NumBones = 0 Then
                             InterpolateAAnimation hrc_sk, a_anim, NumInterpFramesFieldUpDown.value, False
                             WriteAAnimation a_anim, CHAR_LGP_PATH_DEST + "\" + .Animations(ai) + ".A"
+                            
+                            ReDim Preserve used_char_anims(num_used_char_anims)
+                            used_char_anims(num_used_char_anims) = .Animations(ai)
+                            
                             num_used_char_anims = num_used_char_anims + 1
-                            ReDim used_char_anims(num_used_char_anims - 1)
-                            used_char_anims(num_used_char_anims - 1) = .Animations(ai)
+                            'num_used_char_anims = num_used_char_anims + 1
+                            'ReDim used_char_anims(num_used_char_anims - 1)
+                            'used_char_anims(num_used_char_anims - 1) = .Animations(ai)
                         End If
                     End If
+                    
+                    foundQ = False
                 Next ai
             End With
         Next mi
-        
+
         base_percentage = 1# / num_anim_groups
     End If
-    
+
     If BattleLGPDataDirCheck.value = vbChecked And Not OperationCancelled Then
         anims_pack_filename = Dir(BATTLE_LGP_PATH + "\*da")
 
@@ -460,29 +467,29 @@ Private Sub InterpolateAllAnimations()
             anims_pack_filename = Dir()
             PI = PI + 1
         Loop
-        
+
         For PI = 0 To UNIQUE_BATTLE_ANIMS_COUNT - 1
             If OperationCancelled Then
                 Exit For
             End If
-            
+
             UpdateProgressBar base_percentage + (PI / UNIQUE_BATTLE_ANIMS_COUNT) / num_anim_groups, battle_anims_packs_names(PI)
             DoEvents
             Refresh
-            
+
             anims_pack_filename = BATTLE_LGP_PATH + "\" + battle_anims_packs_names(PI)
             battle_skeleton_filename = Left$(anims_pack_filename, Len(anims_pack_filename) - 2) + "aa"
             ReadAASkeleton battle_skeleton_filename, aa_sk, False, False
             ReadDAAnimationsPack anims_pack_filename, aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, da_anims_pack
-            
+
             InterpolateDAAnimationsPack aa_sk, da_anims_pack, NumInterpFramesBattleUpDown.value, False
-            
+
             WriteDAAnimationsPack BATTLE_LGP_PATH_DEST + "\" + battle_anims_packs_names(PI), da_anims_pack
         Next
-        
+
         base_percentage = base_percentage + 1# / num_anim_groups
     End If
-    
+
     If MagicLGPDataDirCheck.value = vbChecked And Not OperationCancelled Then
         anims_pack_filename = Dir(MAGIC_LGP_PATH + "\*.a00")
 
@@ -492,16 +499,16 @@ Private Sub InterpolateAllAnimations()
             anims_pack_filename = Dir()
             PI = PI + 1
         Loop
-        
+
         For PI = 0 To UNIQUE_MAGIC_ANIMS_COUNT - 1
             If OperationCancelled Then
                 Exit For
             End If
-            
+
             UpdateProgressBar base_percentage + (PI / UNIQUE_MAGIC_ANIMS_COUNT) / num_anim_groups, magic_anims_packs_names(PI)
             DoEvents
             Refresh
-            
+
             anims_pack_filename = MAGIC_LGP_PATH + "\" + magic_anims_packs_names(PI)
             battle_skeleton_filename = Left$(anims_pack_filename, Len(anims_pack_filename) - 3) + "d"
             limit_owner_skeleton_filename = GetLimitCharacterFileName(magic_anims_packs_names(PI))
@@ -512,13 +519,13 @@ Private Sub InterpolateAllAnimations()
                 ReadMagicSkeleton battle_skeleton_filename, aa_sk, False
                 ReadDAAnimationsPack anims_pack_filename, aa_sk.NumBones, aa_sk.NumBodyAnims, aa_sk.NumWeaponAnims, da_anims_pack
             End If
-            
+
             InterpolateDAAnimationsPack aa_sk, da_anims_pack, NumInterpFramesBattleUpDown.value, False
-            
+
             WriteDAAnimationsPack MAGIC_LGP_PATH_DEST + "\" + magic_anims_packs_names(PI), da_anims_pack
         Next
     End If
-    
+
     If OperationCancelled Then
         MsgBox "Operation cancelled.", vbOKOnly, "Cancelled"
     Else
@@ -540,8 +547,8 @@ Private Sub InitializeProgressBar()
     oldb = SelectObject(ProgressBarPicture.hdc, hNewBrush)
     DeleteObject oldb
 End Sub
-Private Sub UpdateProgressBar(ByVal percent As Single, ByVal filename As String)
-    ProgressLabel.Caption = "Progress " + Str$(Fix(100# * percent)) + "% (" + filename + ")"
+Private Sub UpdateProgressBar(ByVal percent As Single, ByVal fileName As String)
+    ProgressLabel.Caption = "Progress " + Str$(Fix(100# * percent)) + "% (" + fileName + ")"
     Rectangle ProgressBarPicture.hdc, 0, 0, ProgressBarPicture.ScaleWidth * percent, ProgressBarPicture.ScaleHeight
 End Sub
 
@@ -549,12 +556,12 @@ Private Function DirectoryToTextBox(ByVal init_val As String) As String
     ' Browse for Drive/Folder
     Dim oBrowseFolder As New cBrowseFolder
     Dim sFolder As String
-    
+
     ' Trim and addbackslash to the current folder
     sFolder = AddBackslash(Trim$(init_val))
     'FieldDataDirText.Text = sFolder          'return to text
     'Refresh
-    
+
     With oBrowseFolder                  'define object
         .lhWnd = Me.hWnd                'owner
         .sTitle = "Select a Drive"      'title
@@ -567,19 +574,19 @@ Private Function DirectoryToTextBox(ByVal init_val As String) As String
             DirectoryToTextBox = ""
         End If
     End With
-    
+
     Set oBrowseFolder = Nothing
 End Function
 
 Private Function GetTotalNumberUniqueAnimations() As Integer
     Dim used_char_anims() As String
-    
+
     Dim mi As Integer
     Dim ai As Integer
     Dim aiu As Integer
-    
+
     Dim foundQ As Boolean
-    
+
     GetTotalNumberUniqueAnimations = 0
     For mi = 0 To NumCharLGPRegisters - 1
         With CharLGPRegisters(mi)

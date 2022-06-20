@@ -97,7 +97,7 @@ Sub ReadMaterial3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fil
     Dim red As Byte
     Dim green As Byte
     Dim blue As Byte
-    
+
     isAmbientQ = False
     isDiffuseQ = False
     isSpecularQ = False
@@ -109,18 +109,18 @@ Sub ReadMaterial3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fil
     Else
         material_index = 0
     End If
-    
+
     ReDim Preserve MaterialsV(material_index)
     With MaterialsV(material_index)
         Do
             Get fileNumber, offset, id
             offset = offset + 2
-            
+
             If offset >= fileLength Then ' OOPS! EOF
                 doneQ = True
                 Exit Do
             End If
-              
+
             Get fileNumber, offset, llen
             offset = offset + 4
             Select Case id
@@ -239,13 +239,13 @@ Sub ReadMesh3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLen
     Dim num_faces As Integer
     Dim foundQ As Boolean
     Dim temp_mesh As mesh_object_node
-    
+
     Dim test_str As String
-    
+
     count = offset + Length - 6
-    
+
     doneQ = False
-    
+
     With temp_mesh
         ci = 0
         Do
@@ -254,19 +254,19 @@ Sub ReadMesh3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLen
             offset = offset + 1
             ci = ci + 1
         Loop Until .MeshName(ci - 1) = 0
-        
+
         Do
             Get fileNumber, offset, id
             offset = offset + 2
-            
+
             If (offset >= fileLength) Then
                 doneQ = True
                 Exit Do
             End If
-            
+
             Get fileNumber, offset, llen
             offset = offset + 4
-            
+
             Select Case id
                 Case &H4100:
                     'Errr... don't know. Do nothing.
@@ -291,7 +291,7 @@ Sub ReadMesh3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLen
                     Else
                         mat_index = 0
                     End If
-                    
+
                     ReDim Preserve .FaceMaterialsV(mat_index)
                     ci = 0
                     Do
@@ -299,7 +299,7 @@ Sub ReadMesh3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLen
                         offset = offset + 1
                         ci = ci + 1
                     Loop Until .FaceMaterialsV(mat_index).MaterialName(ci - 1) = 0
-                    
+
                     Get fileNumber, offset, .FaceMaterialsV(mat_index).NumEntries
                     offset = offset + 2
                     ReDim .FaceMaterialsV(mat_index).facesV(.FaceMaterialsV(mat_index).NumEntries - 1)
@@ -332,7 +332,7 @@ Sub ReadMesh3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLen
             End Select
         Loop Until doneQ
     End With
-    
+
     If temp_mesh.NumVerts > 0 Then
         If SafeArrayGetDim(MeshesV) <> 0 Then
             mesh_index = UBound(MeshesV) + 1
@@ -351,11 +351,11 @@ Sub ReadObject3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileL
     Dim doneQ As Boolean
     Dim ci As Integer
     Dim model_index As Integer
-    
+
     count = offset + Length - 6
-    
+
     doneQ = False
-    
+
     If SafeArrayGetDim(ModelsV) <> 0 Then
         model_index = UBound(ModelsV) + 1
     Else
@@ -366,15 +366,15 @@ Sub ReadObject3Ds(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileL
         Do
             Get fileNumber, offset, id
             offset = offset + 2
-            
+
             If (offset >= fileLength) Then
                 doneQ = True
                 Exit Do
             End If
-            
+
             Get fileNumber, offset, llen
             offset = offset + 4
-            
+
             Select Case id
                 Case &H4000:
                     'Some object chunk (provably a mesh)
@@ -402,20 +402,20 @@ Sub Read3DS(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLength 
     Dim doneQ As Boolean
     Dim ci As Integer
     Dim mesh_index As Integer
-    
+
     doneQ = False
     Do
         Get fileNumber, offset, id
         offset = offset + 2
-        
+
         If (offset >= fileLength) Then
             doneQ = True
             Exit Do
         End If
-        
+
         Get fileNumber, offset, llen
         offset = offset + 4
-        
+
         Select Case id
             Case &HFFFF:
                 doneQ = True
@@ -433,7 +433,7 @@ End Sub
 Function ReadPrimaryChunk3DS(ByVal fileNumber As Integer, ByRef offset As Long, ByVal fileLength As Long, ByRef ModelsV() As Model3Ds) As Boolean
     Dim version As Byte
     Dim flag As Integer
-    
+
     Get fileNumber, offset, flag
     offset = offset + 4
     If flag = &H4D4D Then
@@ -455,7 +455,7 @@ End Function
 
 Sub BuildFaceMaterialsList(ByRef Model As Model3Ds)
     'Build the list of material indices for every face
-    
+
     Dim num_meshes As Integer
     Dim num_materials As Integer
     Dim mei As Integer
@@ -466,7 +466,7 @@ Sub BuildFaceMaterialsList(ByRef Model As Model3Ds)
     Dim foundQ As Boolean
     Dim num_face_mat_groups As Integer
     Dim num_faces As Integer
-    
+
     num_meshes = UBound(Model.MeshesV) + 1
     num_materials = UBound(Model.MaterialsV) + 1
     For mei = 0 To num_meshes - 1
@@ -484,14 +484,14 @@ Sub BuildFaceMaterialsList(ByRef Model As Model3Ds)
                             Model.MaterialsV(mai).MaterialName(ci) <> 0
                             ci = ci + 1
                     Wend
-                    
+
                     foundQ = .FaceMaterialsV(mfi).MaterialName(ci) = _
                             Model.MaterialsV(mai).MaterialName(ci)
                     mai = mai + 1
                 Loop Until foundQ Or mai = num_materials
-        
+
                 mai = mai - 1
-                
+
                 num_faces = .FaceMaterialsV(mfi).NumEntries
                 For fi = 0 To num_faces - 1
                     .FaceMaterialIndicesV(.FaceMaterialsV(mfi).facesV(fi)) = mai
@@ -507,7 +507,7 @@ Sub Load3DS(ByVal fileName As String, ByRef ModelsV() As Model3Ds)
     Dim fileLength As Long
     Dim num_models As Integer
     Dim mi As Integer
-    
+
     On Error GoTo errorH
     fileNumber = FreeFile
     offset = 1
@@ -515,13 +515,13 @@ Sub Load3DS(ByVal fileName As String, ByRef ModelsV() As Model3Ds)
     Open fileName For Binary As fileNumber
     While (ReadPrimaryChunk3DS(fileNumber, offset, fileLength, ModelsV))
     Wend
-    
+
     If SafeArrayGetDim(ModelsV) <> 0 Then
         num_models = UBound(ModelsV) + 1
     Else
         num_models = 0
     End If
-    
+
     For mi = 0 To num_models - 1
         BuildFaceMaterialsList ModelsV(mi)
     Next mi
@@ -534,14 +534,14 @@ End Sub
 '---------------------------------------------------------------------------------------------------------
 Private Sub GetVerts(ByRef Mesh As mesh_object_node, ByRef vertsV() As Point3D)
     ReDim vertsV(Mesh.NumVerts - 1)
-    
+
     CopyMemory vertsV(0), Mesh.vertsV(0), CLng(Mesh.NumVerts) * 4 * 3
 End Sub
 Private Sub GetFaces(ByRef Mesh As mesh_object_node, ByRef facesV() As PPolygon)
     Dim fi As Integer
-    
+
     ReDim facesV(Mesh.NumFaces - 1)
-    
+
     For fi = 0 To Mesh.NumFaces - 1
         With facesV(fi)
             .Tag1 = 0
@@ -555,7 +555,7 @@ End Sub
 Private Sub GetTexCoords(ByRef Mesh As mesh_object_node, ByRef tex_coordsV() As Point2D)
     If Mesh.NumMappedVerts > 0 Then
         ReDim tex_coordsV(Mesh.NumVerts - 1)
-        
+
         CopyMemory tex_coordsV(0), Mesh.TexCoordsV(0), CLng(Mesh.NumMappedVerts) * 2 * 4
     End If
 End Sub
@@ -567,39 +567,39 @@ Private Sub GetVColors(ByRef Mesh As mesh_object_node, ByRef MaterialsV() As mat
     Dim temp_r As Long
     Dim temp_g As Long
     Dim temp_b As Long
-    
+
     Dim v_index As Integer
     Dim face_index As Integer
-    
+
     ReDim faces_per_vert(Mesh.NumVerts - 1)
-    
+
     For fi = 0 To Mesh.NumFaces - 1
         v_index = Mesh.facesV(fi).vertA
         face_index = faces_per_vert(v_index).Length
         ReDim Preserve faces_per_vert(v_index).vector(face_index)
         faces_per_vert(v_index).vector(face_index) = fi
         faces_per_vert(v_index).Length = face_index + 1
-        
+
         v_index = Mesh.facesV(fi).vertB
         face_index = faces_per_vert(v_index).Length
         ReDim Preserve faces_per_vert(v_index).vector(face_index)
         faces_per_vert(v_index).vector(face_index) = fi
         faces_per_vert(v_index).Length = face_index + 1
-        
+
         v_index = Mesh.facesV(fi).vertC
         face_index = faces_per_vert(v_index).Length
         ReDim Preserve faces_per_vert(v_index).vector(face_index)
         faces_per_vert(v_index).vector(face_index) = fi
         faces_per_vert(v_index).Length = face_index + 1
     Next fi
-    
+
     ReDim vcolorsV(Mesh.NumVerts - 1)
-    
+
     For ci = 0 To Mesh.NumVerts - 1
         temp_r = 0
         temp_g = 0
         temp_b = 0
-        
+
         For fi = 0 To faces_per_vert(ci).Length - 1
             With MaterialsV(Mesh.FaceMaterialIndicesV(faces_per_vert(ci).vector(fi))).Diffuse
                 temp_r = temp_r + .red
@@ -607,7 +607,7 @@ Private Sub GetVColors(ByRef Mesh As mesh_object_node, ByRef MaterialsV() As mat
                 temp_b = temp_b + .blue
             End With
         Next fi
-        
+
         If (Not faces_per_vert(ci).Length = 0) Then
             With vcolorsV(ci)
                 .r = temp_r / faces_per_vert(ci).Length
@@ -620,9 +620,9 @@ Private Sub GetVColors(ByRef Mesh As mesh_object_node, ByRef MaterialsV() As mat
 End Sub
 Private Sub GetPColors(ByRef Mesh As mesh_object_node, ByRef MaterialsV() As mat_list_node, ByRef pcolorsV() As color)
     Dim ci As Integer
-    
+
     ReDim pcolorsV(Mesh.NumFaces - 1)
-    
+
     For ci = 0 To Mesh.NumFaces - 1
         With MaterialsV(Mesh.FaceMaterialIndicesV(ci)).Diffuse
             pcolorsV(ci).r = pcolorsV(ci).r + .red
@@ -637,19 +637,19 @@ Private Sub ConvertMesh3DsToPModel(ByRef Mesh As mesh_object_node, ByRef Materia
     Dim tex_coordsV() As Point2D
     Dim vcolorsV() As color
     Dim pcolorsV() As color
-    
+
     GetVerts Mesh, vertsV
     GetFaces Mesh, facesV
     GetTexCoords Mesh, tex_coordsV
     GetVColors Mesh, MaterialsV, vcolorsV
     GetPColors Mesh, MaterialsV, pcolorsV
-    
+
     AddGroup Model_out, vertsV, facesV, tex_coordsV, vcolorsV, pcolorsV
 End Sub
 Private Sub ConvertModel3DsToPModel(ByRef Model As Model3Ds, ByRef Model_out As PModel)
     Dim mi As Integer
     Dim num_meshes As Integer
-    
+
     num_meshes = UBound(Model.MeshesV) + 1
     With Model
         For mi = 0 To num_meshes - 1
@@ -661,7 +661,7 @@ End Sub
 Sub ConvertModels3DsToPModel(ByRef ModelsV() As Model3Ds, ByRef Model_out As PModel)
     Dim mi As Integer
     Dim num_models As Integer
-    
+
     num_models = UBound(ModelsV) + 1
     For mi = 0 To num_models - 1
         ConvertModel3DsToPModel ModelsV(mi), Model_out
@@ -669,7 +669,7 @@ Sub ConvertModels3DsToPModel(ByRef ModelsV() As Model3Ds, ByRef Model_out As PMo
     With Model_out
         .head.off00 = 1
         .head.off04 = 1
-        
+
         .ResizeX = 1
         .ResizeY = 1
         .ResizeZ = 1
@@ -684,7 +684,7 @@ Sub ConvertModels3DsToPModel(ByRef ModelsV() As Model3Ds, ByRef Model_out As PMo
         .RotationQuaternion.z = 0
         .RotationQuaternion.w = 1
     End With
-    
+
     ComputeNormals Model_out
     ComputeBoundingBox Model_out
     ComputeEdges Model_out

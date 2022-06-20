@@ -13,10 +13,10 @@ Type AFrame
 End Type
 Sub ReadAFrame(ByVal NFile As Integer, ByVal offset As Long, ByVal NumBones As Integer, ByRef obj As AFrame)
     Dim BI As Integer
-    
+
     With obj
         ReDim obj.Rotations(NumBones)
-        
+
         Get NFile, offset, .RootRotationAlpha
         Get NFile, offset + 4, .RootRotationBeta
         Get NFile, offset + 8, .RootRotationGamma
@@ -30,7 +30,7 @@ Sub ReadAFrame(ByVal NFile As Integer, ByVal offset As Long, ByVal NumBones As I
 End Sub
 Sub WriteAFrame(ByVal NFile As Integer, ByVal offset As Long, ByVal NumBones As Integer, ByRef obj As AFrame)
     Dim BI As Integer
-    
+
     With obj
         Put NFile, offset, .RootRotationAlpha
         Put NFile, offset + 4, .RootRotationBeta
@@ -46,11 +46,11 @@ End Sub
 Sub CopyAFrame(ByRef frame_in As AFrame, ByRef frame_out As AFrame)
     Dim NumBones As Integer
     Dim BI As Integer
-    
+
     With frame_in
         NumBones = UBound(.Rotations) + 1
         ReDim frame_out.Rotations(NumBones - 1)
-    
+
         frame_out.RootRotationAlpha = .RootRotationAlpha
         frame_out.RootRotationBeta = .RootRotationBeta
         frame_out.RootRotationGamma = .RootRotationGamma
@@ -64,9 +64,9 @@ Sub CopyAFrame(ByRef frame_in As AFrame, ByRef frame_out As AFrame)
 End Sub
 Function IsBrokenAAFrame(ByRef Frame As AFrame, ByVal num_bones As Integer) As Boolean
     Dim BI As Integer
-    
+
     IsBrokenAAFrame = False
-    
+
     With Frame
         If IsNan(.RootTranslationX) Then
             IsBrokenAAFrame = True
@@ -77,7 +77,7 @@ Function IsBrokenAAFrame(ByRef Frame As AFrame, ByVal num_bones As Integer) As B
         If IsNan(.RootTranslationZ) Then
             IsBrokenAAFrame = True
         End If
-        
+
         If IsNan(.RootRotationAlpha) Then
             IsBrokenAAFrame = True
         ElseIf .RootRotationAlpha > 9999# Then
@@ -99,7 +99,7 @@ Function IsBrokenAAFrame(ByRef Frame As AFrame, ByVal num_bones As Integer) As B
         ElseIf .RootRotationGamma < -9999# Then
             IsBrokenAAFrame = True
         End If
-        
+
         If Not IsBrokenAAFrame Then
             For BI = 0 To num_bones - 1
                 IsBrokenAAFrame = IsBrokenARotation(.Rotations(BI))

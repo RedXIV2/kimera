@@ -15,15 +15,15 @@ Sub ReadDAAnimationsPack(ByVal filename As String, ByVal NumBones As Integer, By
     Dim fileNumber As Integer
     Dim ai As Integer
     Dim offset As Long
-    
+
     On Error GoTo ErrHandRead
     'Debug.Print "Loadng animations pack " + fileName
-    
+
     'Debug.Print "Reading pack "; fileName
-    
+
     fileNumber = FreeFile
     Open filename For Binary As fileNumber
-    
+
     With AnimationsPack
         Get fileNumber, 1, .NumAnimations
         '.NumAnimations = 1
@@ -31,7 +31,7 @@ Sub ReadDAAnimationsPack(ByVal filename As String, ByVal NumBones As Integer, By
         .NumBodyAnimations = NumBodyAnimations
         'NumWeaponAnimations = 1
         .NumWeaponAnimations = NumWeaponAnimations
-        
+
         ReDim .BodyAnimations(NumBodyAnimations)
         ReDim .WeaponAnimations(NumWeaponAnimations)
         offset = 5
@@ -42,7 +42,7 @@ Sub ReadDAAnimationsPack(ByVal filename As String, ByVal NumBones As Integer, By
             ReadDAAnimation fileNumber, offset, IIf(NumBones > 1, NumBones + 1, 1), .BodyAnimations(ai)
             'offset = offset + .Animations(ai).BlockLength
         Next ai
-        
+
         For ai = 0 To NumWeaponAnimations - 1
             ''Debug.Print "anim "; ai
             'Debug.Print "Weapon Animation "; Str$(ai)
@@ -50,7 +50,7 @@ Sub ReadDAAnimationsPack(ByVal filename As String, ByVal NumBones As Integer, By
             'offset = offset + .Animations(ai).BlockLength
         Next ai
     End With
-    
+
     Close fileNumber
     Exit Sub
 ErrHandRead:
@@ -69,23 +69,23 @@ Sub WriteDAAnimationsPack(ByVal filename As String, ByRef AnimationsPack As DAAn
     Dim fileNumber As Integer
     Dim ai As Integer
     Dim offset As Long
-    
+
     On Error GoTo ErrHandRead
-    
-    'Since we're using signed data there is no way we can store values outside the [-180º, 180º] (shoudln't matter though, due to angular equivalences)
+
+    'Since we're using signed data there is no way we can store values outside the [-180ï¿½, 180ï¿½] (shoudln't matter though, due to angular equivalences)
     'Normalize just to be safe
     NormalizeDAAnimationsPack AnimationsPack
-    
+
     'Debug.Print "Writting pack "; fileName
-    
+
     fileNumber = FreeFile
     Open filename For Output As fileNumber
     Close fileNumber
     Open filename For Binary As fileNumber
-    
+
     With AnimationsPack
         Put fileNumber, 1, .NumAnimations
-        
+
         offset = 5
         For ai = 0 To .NumBodyAnimations - 1
             WriteDAAnimation fileNumber, offset, .BodyAnimations(ai)
@@ -100,7 +100,7 @@ Sub WriteDAAnimationsPack(ByVal filename As String, ByRef AnimationsPack As DAAn
             'offset = offset + .WeaponAnimations(ai).BlockLength
         Next ai
     End With
-    
+
     Close fileNumber
     Exit Sub
 ErrHandRead:
@@ -122,7 +122,7 @@ Sub NormalizeDAAnimationsPack(ByRef AnimationsPack As DAAnimationsPack)
     Dim ai As Integer
     Dim BI As Integer
     Dim num_bones As Integer
-    
+
     For ai = 0 To AnimationsPack.NumBodyAnimations - 1
         If AnimationsPack.BodyAnimations(ai).BlockLength >= 11 And AnimationsPack.BodyAnimations(ai).NumFrames2 > 0 Then
             num_bones = UBound(AnimationsPack.BodyAnimations(ai).Frames(0).Bones) + 1
@@ -152,23 +152,23 @@ Sub CheckWriteDAAnimationsPack(ByVal filename As String, ByRef AnimationsPack As
     Dim fileNumber As Integer
     Dim ai As Integer
     Dim offset As Long
-    
+
     Dim num_animations As Long
     Dim num_body_animations As Long
     Dim num_weapon_animations As Long
-    
+
     Dim body_animations() As DAAnimation
     Dim weapon_animations() As DAAnimation
-    
+
     fileNumber = FreeFile
     Open filename For Binary As fileNumber
-    
+
     With AnimationsPack
         Get fileNumber, 1, num_animations
         If num_animations <> .NumAnimations Then
             Debug.Print "Error"
         End If
-        
+
         ReDim body_animations(.NumBodyAnimations)
         ReDim weapon_animations(.NumWeaponAnimations)
         offset = 5
@@ -176,11 +176,11 @@ Sub CheckWriteDAAnimationsPack(ByVal filename As String, ByRef AnimationsPack As
         For ai = 0 To .NumBodyAnimations - 1
             CheckWriteDAAnimation fileNumber, offset, .BodyAnimations(ai)
         Next ai
-        
+
         For ai = 0 To .NumWeaponAnimations - 1
             CheckWriteDAAnimation fileNumber, offset, .WeaponAnimations(ai)
         Next ai
     End With
-    
+
     Close fileNumber
 End Sub

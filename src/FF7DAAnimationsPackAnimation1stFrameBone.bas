@@ -5,11 +5,11 @@ Type DAFrameBone
     AccumAlphaS As Integer
     AccumBetaS As Integer
     AccumGammaS As Integer
-    
+
     AccumAlphaL As Long
     AccumBetaL As Long
     AccumGammaL As Long
-    
+
     alpha As Single
     Beta As Single
     Gamma As Single
@@ -17,7 +17,7 @@ End Type
 'For raw rotations
 Function ReadDAUncompressedFrameBoneRotation(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, ByVal key As Byte) As Integer
     Dim value As Integer
-    
+
     value = GetBitBlockV(AnimationStream, 12 - key, offsetBit)
     'Convert to 12-bits value
     value = value * (2 ^ key)
@@ -41,10 +41,10 @@ Function ReadDAFrameBoneRotationDelta(ByRef AnimationStream() As Byte, ByRef off
                 value = GetBitBlockV(AnimationStream, 12 - key, offsetBit)
             Case Else:
                 value = GetBitBlockV(AnimationStream, dLength, offsetBit)
-                
+
                 'Invert the value of the last bit
                 aux_sign_val = 2 ^ (dLength - 1)
-            
+
                 If value < 0 Then
                     value = value - aux_sign_val
                 Else
@@ -64,11 +64,11 @@ Sub ReadDAUncompressedFrameBone(ByRef AnimationStream() As Byte, ByRef offsetBit
         .AccumAlphaS = ReadDAUncompressedFrameBoneRotation(AnimationStream, offsetBit, key)
         .AccumBetaS = ReadDAUncompressedFrameBoneRotation(AnimationStream, offsetBit, key)
         .AccumGammaS = ReadDAUncompressedFrameBoneRotation(AnimationStream, offsetBit, key)
-        
+
         .AccumAlphaL = IIf(.AccumAlphaS < 0, .AccumAlphaS + &H1000, .AccumAlphaS)
         .AccumBetaL = IIf(.AccumBetaS < 0, .AccumBetaS + &H1000, .AccumBetaS)
         .AccumGammaL = IIf(.AccumGammaS < 0, .AccumGammaS + &H1000, .AccumGammaS)
-        
+
         .alpha = GetDegreesFromRaw(.AccumAlphaL, 0)
         .Beta = GetDegreesFromRaw(.AccumBetaL, 0)
         .Gamma = GetDegreesFromRaw(.AccumGammaL, 0)
@@ -80,11 +80,11 @@ Sub ReadDAFrameBone(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, By
         .AccumAlphaS = LastFrameBone.AccumAlphaS + ReadDAFrameBoneRotationDelta(AnimationStream, offsetBit, key)
         .AccumBetaS = LastFrameBone.AccumBetaS + ReadDAFrameBoneRotationDelta(AnimationStream, offsetBit, key)
         .AccumGammaS = LastFrameBone.AccumGammaS + ReadDAFrameBoneRotationDelta(AnimationStream, offsetBit, key)
-        
+
         .AccumAlphaL = IIf(.AccumAlphaS < 0, .AccumAlphaS + &H1000, .AccumAlphaS)
         .AccumBetaL = IIf(.AccumBetaS < 0, .AccumBetaS + &H1000, .AccumBetaS)
         .AccumGammaL = IIf(.AccumGammaS < 0, .AccumGammaS + &H1000, .AccumGammaS)
-        
+
         .alpha = GetDegreesFromRaw(.AccumAlphaL, 0)
         .Beta = GetDegreesFromRaw(.AccumBetaL, 0)
         .Gamma = GetDegreesFromRaw(.AccumGammaL, 0)
@@ -97,15 +97,15 @@ Sub WriteDAFrameBoneRotationDelta(ByRef AnimationStream() As Byte, ByRef offsetB
     Dim foundQ As Boolean
     Dim value_out_reduced As Integer
     Dim precision_divisor As Long
-    
+
     'Remove sign to prevent bad rounding on shift
     Value_out = (value And (2 ^ (12 - key) - 1))
-    
+
     If (Value_out = 0) Then
         PutBitBlockV AnimationStream, 1, offsetBit, 0
     Else
         PutBitBlockV AnimationStream, 1, offsetBit, 1
-        
+
         If Value_out = -(2 ^ key) Then
             'Minimum subtraction given the key precision
             PutBitBlockV AnimationStream, 3, offsetBit, 0
@@ -118,10 +118,10 @@ Sub WriteDAFrameBoneRotationDelta(ByRef AnimationStream() As Byte, ByRef offsetB
                 dLength = dLength + 1
             Wend
             dLength = IIf(foundQ, dLength - 1, 7)
-            
+
             'Write data length
             PutBitBlockV AnimationStream, 3, offsetBit, dLength
-    
+
             If foundQ Then
                 'Write compressed (dLength < 7)
                 Value_out = InvertBitInteger(Value_out, dLength - 1)
@@ -136,11 +136,11 @@ End Sub
 'For raw rotations
 Sub WriteDAUncompressedFrameBoneRotation(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, ByVal key As Byte, ByVal value As Long)
     Dim Value_out As Long
-    
+
     'Reduce precision to key bits
     'Remove sign to prevent bad rounding on shift
     'Value_out = (value And (2 ^ 12 - 1)) \ (2 ^ key)
-    
+
     PutBitBlockV AnimationStream, 12 - key, offsetBit, value
 End Sub
 'For bone rotations of the first frame
@@ -162,18 +162,18 @@ Sub WriteDAFrameBone(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, B
         '.x = bone.alpha - LastFrameBone.alpha + AnimationCarry.x
         '.y = bone.Beta - LastFrameBone.Beta + AnimationCarry.y
         '.z = bone.Gamma - LastFrameBone.Gamma + AnimationCarry.z
-        
+
         'raw_diff_x = GetRawFromDegrees(.x, key)
         'raw_diff_y = GetRawFromDegrees(.y, key)
         'raw_diff_z = GetRawFromDegrees(.z, key)
         raw_diff_x = GetRawFromDegrees(bone.alpha, key) - GetRawFromDegrees(LastFrameBone.alpha, key)
         raw_diff_y = GetRawFromDegrees(bone.Beta, key) - GetRawFromDegrees(LastFrameBone.Beta, key)
         raw_diff_z = GetRawFromDegrees(bone.Gamma, key) - GetRawFromDegrees(LastFrameBone.Gamma, key)
-        
+
         WriteDAFrameBoneRotationDelta AnimationStream, offsetBit, key, raw_diff_x
         WriteDAFrameBoneRotationDelta AnimationStream, offsetBit, key, raw_diff_y
         WriteDAFrameBoneRotationDelta AnimationStream, offsetBit, key, raw_diff_z
-        
+
         'AnimationCarry.x = .x - GetDegreesFromRaw(raw_diff_x, key)
         'AnimationCarry.y = .y - GetDegreesFromRaw(raw_diff_y, key)
         'AnimationCarry.z = .z - GetDegreesFromRaw(raw_diff_z, key)
@@ -196,11 +196,11 @@ Sub NormalizeDAAnimationsPackAnimationFrameBone(ByRef bone As DAFrameBone, ByRef
 End Sub
 Sub NormalizeDAAnimationsPackAnimationFrameBoneComponent(ByVal val As Single, ByRef next_val As Single)
     Dim delta As Single
-    
+
     delta = next_val - val
     If Abs(delta) > 180# Or delta = 180# Then
         delta = NormalizeAngle180(delta)
-        
+
         next_val = val + delta
         If next_val - val >= 180# Then
             Debug.Print "WTF!"
@@ -212,7 +212,7 @@ End Sub
 Sub CheckWriteDAUncompressedFrameBone(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, ByVal key As Byte, ByRef ref_bone As DAFrameBone)
     Dim aux As Integer
     Dim aux2 As Integer
-    
+
     With ref_bone
         aux = GetRawFromDegrees(.alpha, key)
         aux2 = ReadDAUncompressedFrameBoneRotation(AnimationStream, offsetBit, key)

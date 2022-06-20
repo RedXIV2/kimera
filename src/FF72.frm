@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form PEditor 
    Caption         =   "P Editor"
    ClientHeight    =   7980
@@ -99,7 +99,7 @@ Begin VB.Form PEditor
             TabIndex        =   100
             Top             =   960
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "ZPlaneText"
@@ -120,7 +120,7 @@ Begin VB.Form PEditor
             TabIndex        =   101
             Top             =   600
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "YPlaneText"
@@ -141,7 +141,7 @@ Begin VB.Form PEditor
             TabIndex        =   102
             Top             =   240
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "XPlaneText"
@@ -162,7 +162,7 @@ Begin VB.Form PEditor
             TabIndex        =   103
             Top             =   840
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "BetaPlaneText"
@@ -183,7 +183,7 @@ Begin VB.Form PEditor
             TabIndex        =   104
             Top             =   360
             Width           =   240
-            _ExtentX        =   423
+            _ExtentX        =   450
             _ExtentY        =   503
             _Version        =   393216
             BuddyControl    =   "AlphaPlaneText"
@@ -299,15 +299,31 @@ Begin VB.Form PEditor
    End
    Begin VB.Frame GroupsFrame 
       Caption         =   "Groups"
-      Height          =   1095
-      Left            =   4680
+      Height          =   1215
+      Left            =   4560
       TabIndex        =   78
-      Top             =   4200
-      Width           =   2775
+      Top             =   4080
+      Width           =   2895
+      Begin VB.CommandButton DownGroupCommand 
+         Caption         =   "Down"
+         Height          =   255
+         Left            =   720
+         TabIndex        =   111
+         Top             =   840
+         Width           =   615
+      End
+      Begin VB.CommandButton UpGroupCommand 
+         Caption         =   "Up"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   110
+         Top             =   840
+         Width           =   615
+      End
       Begin VB.CommandButton HideShowGroupButton 
          Caption         =   "Hide/Show Group"
          Height          =   255
-         Left            =   1200
+         Left            =   1320
          TabIndex        =   83
          Top             =   720
          Width           =   1455
@@ -315,7 +331,7 @@ Begin VB.Form PEditor
       Begin VB.CommandButton GroupPropertiesButton 
          Caption         =   "Group Properties"
          Height          =   255
-         Left            =   1200
+         Left            =   1320
          TabIndex        =   81
          Top             =   480
          Width           =   1455
@@ -323,7 +339,7 @@ Begin VB.Form PEditor
       Begin VB.CommandButton DeleteGroupButton 
          Caption         =   "Delete Group"
          Height          =   255
-         Left            =   1200
+         Left            =   1320
          TabIndex        =   80
          Top             =   240
          Width           =   1455
@@ -333,7 +349,7 @@ Begin VB.Form PEditor
          Left            =   120
          TabIndex        =   79
          Top             =   240
-         Width           =   1095
+         Width           =   1215
       End
    End
    Begin VB.CommandButton SaveAsButton 
@@ -362,18 +378,19 @@ Begin VB.Form PEditor
    End
    Begin VB.Frame LightFrame 
       Caption         =   "Light"
-      Height          =   1095
+      Height          =   1215
       Left            =   1800
       TabIndex        =   58
-      Top             =   4200
-      Width           =   2775
+      Top             =   4080
+      Width           =   2655
       Begin VB.CheckBox LightingCheck 
          Caption         =   "Enable lighting"
          Height          =   675
          Left            =   1800
+         Style           =   1  'Graphical
          TabIndex        =   65
-         Top             =   240
-         Width           =   855
+         Top             =   360
+         Width           =   735
       End
       Begin VB.HScrollBar LightZScroll 
          Height          =   255
@@ -381,7 +398,7 @@ Begin VB.Form PEditor
          Max             =   10
          Min             =   -10
          TabIndex        =   61
-         Top             =   720
+         Top             =   840
          Width           =   1335
       End
       Begin VB.HScrollBar LightYScroll 
@@ -390,7 +407,7 @@ Begin VB.Form PEditor
          Max             =   10
          Min             =   -10
          TabIndex        =   60
-         Top             =   480
+         Top             =   600
          Width           =   1335
       End
       Begin VB.HScrollBar LightXScroll 
@@ -399,7 +416,7 @@ Begin VB.Form PEditor
          Max             =   10
          Min             =   -10
          TabIndex        =   59
-         Top             =   240
+         Top             =   360
          Width           =   1335
       End
       Begin VB.Label Label18 
@@ -407,7 +424,7 @@ Begin VB.Form PEditor
          Height          =   255
          Left            =   120
          TabIndex        =   64
-         Top             =   720
+         Top             =   840
          Width           =   255
       End
       Begin VB.Label Label17 
@@ -415,7 +432,7 @@ Begin VB.Form PEditor
          Height          =   255
          Left            =   120
          TabIndex        =   63
-         Top             =   480
+         Top             =   600
          Width           =   255
       End
       Begin VB.Label Label16 
@@ -423,7 +440,7 @@ Begin VB.Form PEditor
          Height          =   255
          Left            =   120
          TabIndex        =   62
-         Top             =   240
+         Top             =   360
          Width           =   255
       End
    End
@@ -1189,27 +1206,27 @@ Private Type PEditorState
     PanX As Single
     PanY As Single
     PanZ As Single
-    
+
     DIST As Single
-    
+
     redX As Single
     redY As Single
     redZ As Single
-    
+
     repX As Single
     repY As Single
     repZ As Single
-    
+
     RotateAlpha As Single
     RotateBeta As Single
     RotateGamma As Single
-    
+
     alpha As Single
     Beta As Single
     Gamma As Single
-    
+
     EditedPModel As PModel
-    
+
     PalletizedQ As Boolean
     color_table() As color
     translation_table_polys() As pair_i_b
@@ -1220,7 +1237,7 @@ End Type
 
 Dim UnDoBuffer() As PEditorState
 Dim ReDoBuffer() As PEditorState
-    
+
 Dim UnDoCursor As Integer
 Dim ReDoCursor As Integer
 
@@ -1230,11 +1247,11 @@ Private MinFormHeight As Integer
 Private Function Min4(ByVal a As Long, ByVal B As Long, ByVal C As Long, ByVal d As Long)
     Dim i As Integer
     Dim temp(3) As Long
-    
+
     temp(0) = B
     temp(1) = C
     temp(2) = d
-       
+
     Min4 = a
     For i = 1 To 3
         If temp(i) < Min4 Then Min4 = temp(i)
@@ -1256,10 +1273,10 @@ Private Sub AlphaPlaneUpDown_Change()
     Dim diff As Single
     Dim aux_quat As Quaternion
     Dim res_quat As Quaternion
-    
+
     diff = AlphaPlaneUpDown.value - OldAlphaPlane
     OldAlphaPlane = AlphaPlaneUpDown.value
-    
+
     BuildQuaternionFromEuler diff, 0, 0, aux_quat
     MultiplyQuaternions PlaneRotationQuat, aux_quat, res_quat
     PlaneRotationQuat = res_quat
@@ -1268,9 +1285,9 @@ Private Sub AlphaPlaneUpDown_Change()
     PlaneTransformation(13) = YPlaneUpDown.value * EditedPModel.diameter / 100
     PlaneTransformation(14) = ZPlaneUpDown.value * EditedPModel.diameter / 100
     NormalizeQuaternion PlaneRotationQuat
-    
+
     ComputeCurrentEquations
-    
+
     MainPicture_Paint
 End Sub
 
@@ -1295,10 +1312,10 @@ Private Sub BetaPlaneUpDown_Change()
     Dim diff As Single
     Dim aux_quat As Quaternion
     Dim res_quat As Quaternion
-    
+
     diff = BetaPlaneUpDown.value - OldBetaPlane
     OldBetaPlane = BetaPlaneUpDown.value
-    
+
     BuildQuaternionFromEuler 0, diff, 0, aux_quat
     MultiplyQuaternions PlaneRotationQuat, aux_quat, res_quat
     PlaneRotationQuat = res_quat
@@ -1307,9 +1324,9 @@ Private Sub BetaPlaneUpDown_Change()
     PlaneTransformation(13) = YPlaneUpDown.value * EditedPModel.diameter / 100
     PlaneTransformation(14) = ZPlaneUpDown.value * EditedPModel.diameter / 100
     NormalizeQuaternion PlaneRotationQuat
-    
+
     ComputeCurrentEquations
-    
+
     MainPicture_Paint
 End Sub
 
@@ -1317,12 +1334,12 @@ Private Sub CutModelButton_Click()
     Dim known_plane_pointsV() As Point3D
     If loaded Then
         AddStateToBuffer
-        
+
         CutPModelThroughPlane EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD, known_plane_pointsV
-        
+
         If LightingCheck.value = 1 Then _
             ComputeNormals EditedPModel
-            
+
         MainPicture_Paint
     End If
 End Sub
@@ -1331,19 +1348,19 @@ Private Sub EraseLowerEmisphereButton_Click()
     Dim known_plane_pointsV() As Point3D
     If loaded Then
         AddStateToBuffer
-        
+
         CutPModelThroughPlane EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD, known_plane_pointsV
         EraseEmisphereVertices EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD, False, known_plane_pointsV
-        
+
         GroupProperties.Hide
         FillGroupsList
-        
+
         If LightingCheck.value = 1 Then _
             ComputeNormals EditedPModel
-            
+
         MainPicture_Paint
     End If
-    
+
 End Sub
 
 Private Sub Form_Activate()
@@ -1356,11 +1373,11 @@ End Sub
 Private Sub HideShowGroupButton_Click()
     If GroupsList.ListIndex >= 0 Then
         AddStateToBuffer
-        
+
         GroupProperties.Hide
         EditedPModel.Groups(GroupsList.ListIndex).HiddenQ = _
             Not EditedPModel.Groups(GroupsList.ListIndex).HiddenQ
-        
+
         FillGroupsList
         MainPicture_Paint
     End If
@@ -1378,7 +1395,7 @@ Private Sub LightingCheck_Click()
     Else
         glDisable GL_NORMALIZE
     End If
-    
+
     MainPicture_Paint
 End Sub
 
@@ -1399,14 +1416,14 @@ Private Sub DeleteGroupButton_Click()
     If GroupsList.ListCount > 1 Then
         If GroupsList.ListIndex >= 0 Then
             AddStateToBuffer
-            
+
             GroupProperties.Hide
             VCountNewPoly = 0
             RemoveGroup EditedPModel, GroupsList.ListIndex
             CheckModelConsistency EditedPModel
-            
+
             GroupProperties.Hide
-            
+
             FillGroupsList
             MainPicture_Paint
         End If
@@ -1418,7 +1435,7 @@ End Sub
 Private Sub DeletePolysColorCommand_Click()
     Dim pi_table As Integer
     Dim pi_model As Integer
-    
+
     AddStateToBuffer
     pi_model = 0
     For pi_table = 0 To EditedPModel.head.NumPolys - 1
@@ -1428,17 +1445,17 @@ Private Sub DeletePolysColorCommand_Click()
             pi_model = pi_model + 1
         End If
     Next pi_table
-    
+
     n_colors = 0
     fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, translation_table_polys, threshold
-    
+
     MainPicture_Paint
 End Sub
 
 Private Sub DeletePolysNotColorCommand_Click()
     Dim pi_table As Integer
     Dim pi_model As Integer
-    
+
     AddStateToBuffer
     pi_model = 0
     For pi_table = 0 To EditedPModel.head.NumPolys - 1
@@ -1448,10 +1465,10 @@ Private Sub DeletePolysNotColorCommand_Click()
             pi_model = pi_model + 1
         End If
     Next pi_table
-    
+
     n_colors = 0
     fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, translation_table_polys, threshold
-    
+
     MainPicture_Paint
 End Sub
 
@@ -1471,18 +1488,18 @@ End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     DoNotAddStateQ = False
-    
+
     If KeyCode = vbKeyHome Then _
         ResetCamera
-    
+
     If KeyCode = vbKeyControl Then _
         ControlPressedQ = True
-        
+
     If KeyCode = vbKeyZ And ControlPressedQ Then _
         UnDo
     If KeyCode = vbKeyY And ControlPressedQ Then _
         ReDo
-        
+
     MainPicture_Paint
 End Sub
 
@@ -1505,18 +1522,18 @@ End Sub
 Private Sub LoadPButton_Click()
     Dim pattern As String
     Dim file As String
-    
+
     On Error GoTo hand
-    
+
     'MainPicture.Enabled = False
     pattern = "FF7 part file (field model)|*.p|FF7 part file (battle model)|*|3D Studio file|*.3ds"
     CommonDialog1.Filter = pattern
     CommonDialog1.ShowOpen 'Display the Open File Common Dialog
-   
+
     file = EditedPModel.fileName
     If (CommonDialog1.fileName <> "") Then _
         OpenP CommonDialog1.fileName
-        
+
     EditedPModel.fileName = file
     Timer1.Enabled = True
     Exit Sub
@@ -1531,41 +1548,41 @@ End Sub
 
 Private Sub MakeSymetricButton_Click()
     Dim known_plane_pointsV() As Point3D
-    
+
     If loaded Then
         AddStateToBuffer
         CutPModelThroughPlane EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD, known_plane_pointsV
         EraseEmisphereVertices EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD, False, known_plane_pointsV
         DuplicateMirrorEmisphere EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD
         CheckModelConsistency EditedPModel
-        
+
         GroupProperties.Hide
         FillGroupsList
-        
+
         If LightingCheck.value = 1 Then _
             ComputeNormals EditedPModel
-            
+
         MainPicture_Paint
     End If
 End Sub
 
 Private Sub ResetPlaneButton_Click()
     ResetPlane
-    
+
     MainPicture_Paint
 End Sub
 
 Private Sub SaveAsButton_Click()
     Dim pattern As String
     Dim file As String
-    
+
     On Error GoTo hand
 
     MainPicture.Enabled = False
     pattern = "FF7 part file (field model)|*.p|FF7 part file (battle model)|*"
     CommonDialog1.Filter = pattern
     CommonDialog1.ShowSave 'Display the Open File Common Dialog
-   
+
     If (CommonDialog1.fileName <> "") Then
         SaveP CommonDialog1.fileName
         ResizeX.value = 100
@@ -1605,7 +1622,7 @@ Dim i As Integer
     Dim max_x As Single, max_y As Single, max_z As Single
     If loaded Then
         AddStateToBuffer
-        
+
         With EditedPModel.BoundingBox
             min_x = .min_x
             min_y = .min_y
@@ -1614,15 +1631,15 @@ Dim i As Integer
             max_y = .max_y
             max_z = .max_z
         End With
-        
+
         For i = 0 To 15
             trans_inverse(i) = PlaneTransformation(i)
         Next i
-        
+
         InvertMatrix trans_inverse
         ApplyPModelTransformation EditedPModel, trans_inverse
         ComputeBoundingBox EditedPModel
-        
+
         Slim EditedPModel
         ApplyPModelTransformation EditedPModel, PlaneTransformation
         With EditedPModel.BoundingBox
@@ -1633,7 +1650,7 @@ Dim i As Integer
             .max_y = max_y
             .max_z = max_z
         End With
-        
+
         If LightingCheck.value = 1 Then ComputeNormals EditedPModel
         MainPicture_Paint
     End If
@@ -1642,7 +1659,7 @@ End Sub
 Private Sub KillLightingButton_Click()
     If loaded Then
         AddStateToBuffer
-        
+
         KillPrecalculatedLighting EditedPModel, translation_table_vertex
         ApplyColorTable EditedPModel, color_table, translation_table_vertex
         MainPicture_Paint
@@ -1735,7 +1752,7 @@ Private Sub PalletePicture_MouseMove(Button As Integer, Shift As Integer, x As S
     Dim n_rows As Long
     Dim xc, yc As Integer
     Dim col As Long
-    
+
     If loaded = True And Button <> 0 Then
         If PalletizedCheck.value Then
             s_row = 2 * PalletePicture.ScaleHeight / n_colors
@@ -1746,9 +1763,9 @@ Private Sub PalletePicture_MouseMove(Button As Integer, Shift As Integer, x As S
             Else
                 xc = 0
             End If
-            
+
             Selected_color = yc * 2 + xc
-            
+
             SelectedColorR.value = color_table(Selected_color).r
             SelectedColorG.value = color_table(Selected_color).g
             SelectedColorB.value = color_table(Selected_color).B
@@ -1781,35 +1798,35 @@ End Sub
 Private Sub MirrorHorizontallyButton_Click()
     If loaded Then
         AddStateToBuffer
-        
+
         MirrorEmisphere EditedPModel, PlaneA, PlaneB, PlaneC, PlaneD
-        
+
         If LightingCheck.value = 1 Then _
             ComputeNormals EditedPModel
-            
+
         MainPicture_Paint
     End If
 End Sub
 Private Sub MoreBightnessButton_Click()
     Dim i As Integer
-    
+
     If loaded Then
         AddStateToBuffer
-        
+
         ChangeBrigthness EditedPModel, 5
-        
+
         MainPicture_Paint
     End If
 End Sub
 
 Private Sub LessBightnessButton_Click()
     Dim i As Integer
-    
+
     If loaded Then
         AddStateToBuffer
-        
+
         ChangeBrigthness EditedPModel, -5
-        
+
         MainPicture_Paint
     End If
 End Sub
@@ -1820,7 +1837,7 @@ Private Sub FlattenButton_Click()
     Dim max_x As Single, max_y As Single, max_z As Single
     If loaded Then
         AddStateToBuffer
-        
+
         With EditedPModel.BoundingBox
             min_x = .min_x
             min_y = .min_y
@@ -1829,15 +1846,15 @@ Private Sub FlattenButton_Click()
             max_y = .max_y
             max_z = .max_z
         End With
-        
+
         For i = 0 To 15
             trans_inverse(i) = PlaneTransformation(i)
         Next i
-        
+
         InvertMatrix trans_inverse
         ApplyPModelTransformation EditedPModel, trans_inverse
         ComputeBoundingBox EditedPModel
-        
+
         Fatten EditedPModel
         ApplyPModelTransformation EditedPModel, PlaneTransformation
         With EditedPModel.BoundingBox
@@ -1848,7 +1865,7 @@ Private Sub FlattenButton_Click()
             .max_y = max_y
             .max_z = max_z
         End With
-        
+
         If LightingCheck.value = 1 Then ComputeNormals EditedPModel
         MainPicture_Paint
     End If
@@ -1856,19 +1873,19 @@ End Sub
 Private Sub Form_Load()
     ReDim UnDoBuffer(UNDO_BUFFER_CAPACITY)
     ReDim ReDoBuffer(UNDO_BUFFER_CAPACITY)
-    
+
     LightXScroll.max = LIGHT_STEPS
     LightXScroll.Min = -LIGHT_STEPS
     LightYScroll.max = LIGHT_STEPS
     LightYScroll.Min = -LIGHT_STEPS
     LightZScroll.max = LIGHT_STEPS
     LightZScroll.Min = -LIGHT_STEPS
-   
+
     SelectedColorR.Enabled = False
     SelectedColorG.Enabled = False
     SelectedColorB.Enabled = False
     ThresholdSlider.Enabled = False
-    
+
     RotateGamma.Enabled = False
     RotateBeta.Enabled = False
     RotateAlpha.Enabled = False
@@ -1879,24 +1896,24 @@ Private Sub Form_Load()
     ResizeZ.Enabled = False
     ResizeY.Enabled = False
     ResizeX.Enabled = False
-    
+
     SelectedColorRText.Enabled = False
     SelectedColorGText.Enabled = False
     SelectedColorBText.Enabled = False
     ThersholdText.Enabled = False
-    
+
     ResizeXText.Enabled = False
     ResizeYText.Enabled = False
     ResizeZText.Enabled = False
-    
+
     RepositionZText.Enabled = False
     RepositionYText.Enabled = False
     RepositionXText.Enabled = False
-    
+
     RotateAlphaText.Enabled = False
     RotateBetaText.Enabled = False
     RotateGammaText.Enabled = False
-    
+
     d_type = 2
     loaded = False
     rotate = False
@@ -1917,7 +1934,7 @@ Private Sub Form_Load()
     DrawPallete K_LOAD
     Set GroupProperties = Forms.Add("GroupPropertiesForm")
     OGLContextEditor = CreateOGLContext(MainPicture.hdc)
-    
+
     MinFormWidth = Me.width
     MinFormHeight = Me.height
 End Sub
@@ -1939,13 +1956,13 @@ Private Sub Form_Resize()
         Me.RotateFrame.Left = Me.ScaleWidth - Me.RotateFrame.width
         CommandsFrame.Left = Me.RotateFrame.Left
         ShowAxesCheck.Left = Me.RotateFrame.Left
-        
+
         Me.MainPicture.width = Me.ScaleWidth - Me.ResizeFrame.width - Me.ColorFrame.width - _
                                 (Me.MainPicture.Left - (Me.ColorFrame.Left + Me.ColorFrame.width)) _
                                 - 5
         Me.MainPicture.height = Me.ScaleHeight - Me.LightFrame.height - Me.MiscFrame.height _
                                 - Me.PlaneOperationsFrame.height - Me.MainPicture.Top
-                                
+
         'Central frames placement
         Me.LightFrame.width = Me.MainPicture.width / 2
         Me.GroupsFrame.width = Me.MainPicture.width / 2
@@ -1956,10 +1973,10 @@ Private Sub Form_Resize()
         Me.GroupsFrame.Top = Me.LightFrame.Top
         Me.MiscFrame.Top = Me.LightFrame.Top + Me.LightFrame.height
         Me.PlaneOperationsFrame.Top = Me.MiscFrame.Top + Me.MiscFrame.height
-        
+
         Me.PlaneGeometryFrame.Left = Screen.TwipsPerPixelX * (Me.PlaneOperationsFrame.width - 3) _
                                     - Me.PlaneGeometryFrame.width
-                                    
+
         'Plane operations buttons placement
         Me.MirrorHorizontallyButton.width = Me.PlaneGeometryFrame.Left _
                                             - Me.MirrorHorizontallyButton.Left * 2
@@ -1969,23 +1986,23 @@ Private Sub Form_Resize()
         Me.FlattenButton.width = Me.MirrorHorizontallyButton.width / 2
         Me.SlimButton.width = Me.FlattenButton.width
         Me.SlimButton.Left = Me.FlattenButton.width + Me.FlattenButton.Left
-        
+
         'Misc operations buttons placement
         Me.DeletePolysNotColorCommand.width = Me.MiscFrame.width * Screen.TwipsPerPixelX _
                                                 - Me.DeletePolysNotColorCommand.Left * 2
         Me.DeletePolysColorCommand.width = Me.DeletePolysNotColorCommand.width
         Me.KillLightingButton.width = Me.DeletePolysNotColorCommand.width
-        
-        
+
+
         Me.DeleteGroupButton.width = (GroupsFrame.width / 2 + 2) * Screen.TwipsPerPixelX
         Me.DeleteGroupButton.Left = (GroupsFrame.width / 2 - 5) * Screen.TwipsPerPixelX
-        
+
         Me.GroupPropertiesButton.width = Me.DeleteGroupButton.width
         Me.GroupPropertiesButton.Left = Me.DeleteGroupButton.Left
-        
+
         Me.HideShowGroupButton.width = Me.DeleteGroupButton.width
         Me.HideShowGroupButton.Left = Me.DeleteGroupButton.Left
-        
+
         Me.GroupsList.width = (GroupsFrame.width / 2 - 15) * Screen.TwipsPerPixelX
 
         MainPicture_Paint
@@ -1995,7 +2012,7 @@ End Sub
 Private Sub Form_Terminate()
     DeleteDC mezclasDC
     DeleteDC palDC
-    
+
     DisableOpenGL OGLContextEditor
     Unload GroupProperties
 End Sub
@@ -2004,7 +2021,7 @@ Private Sub SelectedColorR_Change()
     If Selected_color > -1 Then
         If Not DoNotAddStateQ Then AddStateToBuffer
         DoNotAddStateQ = True
-        
+
         color_table(Selected_color).r = SelectedColorR.value
         ApplyColorTable EditedPModel, color_table, translation_table_vertex
         CopyVColors EditedPModel.vcolors, VColors_Original
@@ -2035,7 +2052,7 @@ Private Sub SelectedColorG_Change()
     If Selected_color > -1 Then
         If Not DoNotAddStateQ Then AddStateToBuffer
         DoNotAddStateQ = True
-        
+
         color_table(Selected_color).g = SelectedColorG.value
         ApplyColorTable EditedPModel, color_table, translation_table_vertex
         CopyVColors EditedPModel.vcolors, VColors_Original
@@ -2050,9 +2067,9 @@ Private Sub SelectedColorB_Change()
     If Selected_color > -1 Then
         If Not DoNotAddStateQ Then AddStateToBuffer
         DoNotAddStateQ = True
-        
+
         color_table(Selected_color).B = SelectedColorB.value
-        
+
         ApplyColorTable EditedPModel, color_table, translation_table_vertex
         CopyVColors EditedPModel.vcolors, VColors_Original
         ModelDirty = True
@@ -2067,20 +2084,20 @@ Private Sub ThresholdSlider_Change()
     Dim i As Integer
     threshold = ThresholdSlider.value
     n_colors = 0
-    
+
     If Not ModelDirty Then
         CopyVColors VColors_Original, EditedPModel.vcolors
     Else
         If Not DoNotAddStateQ Then AddStateToBuffer
         DoNotAddStateQ = True
-        
+
         CopyVColors EditedPModel.vcolors, VColors_Original
         ModelDirty = False
     End If
-        
+
     fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, translation_table_polys, threshold
     ApplyColorTable EditedPModel, color_table, translation_table_vertex
-    
+
     MainPicture_Paint
     PalletePicture_Paint
     ThersholdText.Text = ThresholdSlider.value
@@ -2108,6 +2125,8 @@ Private Sub Timer1_Timer()
     MainPicture.Enabled = True
 End Sub
 
+
+
 Private Sub VertsOption_Click()
     d_type = 2
     MainPicture_Paint
@@ -2115,13 +2134,13 @@ End Sub
 Private Sub MainPicture_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If loaded Then
         SetOGLSettings
-        
+
         If LightingCheck.value = vbChecked Then glEnable GL_LIGHTING
-    
+
         glClearColor 0.5, 0.5, 1, 0
         glViewport 0, 0, MainPicture.ScaleWidth, MainPicture.ScaleHeight
         glClear GL_COLOR_BUFFER_BIT Or GL_DEPTH_BUFFER_BIT
-            
+
         SetCameraPModel EditedPModel, PanX, PanY, _
                         PanZ + DIST, alpha, _
                         Beta, Gamma, 1, 1, 1
@@ -2131,7 +2150,7 @@ Private Sub MainPicture_MouseDown(Button As Integer, Shift As Integer, x As Sing
 
         x_last = x
         y_last = y
-        
+
         If Button = vbLeftButton Then
             DoFunction PrimaryFunction, K_CLICK + Shift, x, y
         Else
@@ -2142,7 +2161,7 @@ Private Sub MainPicture_MouseDown(Button As Integer, Shift As Integer, x As Sing
                     DoFunction TernaryFunction, K_CLICK + Shift, x, y
             End If
         End If
-        
+
         MainPicture_Paint
     End If
 End Sub
@@ -2152,14 +2171,14 @@ Private Sub MainPicture_MouseMove(Button As Integer, Shift As Integer, x As Sing
         glClearColor 0.5, 0.5, 1, 0
         glViewport 0, 0, MainPicture.ScaleWidth, MainPicture.ScaleHeight
         glClear GL_COLOR_BUFFER_BIT Or GL_DEPTH_BUFFER_BIT
-        
+
         SetCameraPModel EditedPModel, PanX, PanY, _
                         PanZ + DIST, alpha, _
                         Beta, Gamma, 1, 1, 1
 
         ConcatenateCameraModelView repX, repY, repZ, _
             RotateAlpha.value, RotateBeta.value, RotateGamma.value, redX, redY, redZ
-                        
+
         If Button = vbLeftButton Then
             DoFunction PrimaryFunction, K_MOVE, x, y
         Else
@@ -2170,10 +2189,10 @@ Private Sub MainPicture_MouseMove(Button As Integer, Shift As Integer, x As Sing
                     DoFunction TernaryFunction, K_MOVE, x, y
             End If
         End If
-        
+
         x_last = x
         y_last = y
-        
+
         MainPicture_Paint
     End If
 End Sub
@@ -2193,7 +2212,7 @@ Private Sub PalletePicture_MouseDown(Button As Integer, Shift As Integer, x As S
     Dim n_rows As Long
     Dim xc, yc As Integer
     Dim col As Long
-    
+
     If loaded = True Then
         If PalletizedCheck.value Then
             s_row = 2 * PalletePicture.ScaleHeight / n_colors
@@ -2204,9 +2223,9 @@ Private Sub PalletePicture_MouseDown(Button As Integer, Shift As Integer, x As S
             Else
                 xc = 0
             End If
-            
+
             Selected_color = yc * 2 + xc
-            
+
             SelectedColorR.value = color_table(Selected_color).r
             SelectedColorG.value = color_table(Selected_color).g
             SelectedColorB.value = color_table(Selected_color).B
@@ -2219,29 +2238,29 @@ Private Sub PalletePicture_MouseDown(Button As Integer, Shift As Integer, x As S
             DrawPallete K_CLICK
         End If
     End If
-    
+
 End Sub
 
 Private Sub MainPicture_Paint()
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     Dim model_diameter_normalized As Single
-    
+
     Dim vi As Integer
     If loaded = True Then
         glViewport 0, 0, MainPicture.ScaleWidth, MainPicture.ScaleHeight
         glClear GL_COLOR_BUFFER_BIT Or GL_DEPTH_BUFFER_BIT
-        
+
         SetCameraPModel EditedPModel, PanX, PanY, _
                         PanZ + DIST, alpha, _
                         Beta, Gamma, 1, 1, 1
-                
+
         glMatrixMode GL_MODELVIEW
         glPushMatrix
         ConcatenateCameraModelView repX, repY, repZ, _
             RotateAlpha.value, RotateBeta.value, RotateGamma.value, redX, redY, redZ
-                
+
         If LightingCheck.value = 1 Then
             glDisable GL_LIGHT0
             glDisable GL_LIGHT1
@@ -2255,9 +2274,9 @@ Private Sub MainPicture_Paint()
         Else
             glDisable GL_LIGHTING
         End If
-        
+
         SetDefaultOGLRenderState
-        
+
         Select Case (d_type)
             Case K_MESH:
                 DrawPModelMesh EditedPModel
@@ -2270,14 +2289,14 @@ Private Sub MainPicture_Paint()
             Case K_VCOLORS:
                 DrawPModel EditedPModel, tex_ids(), True
         End Select
-        
+
         SetDefaultOGLRenderState
         If ShowPlaneCheck.value = vbChecked Then _
             DrawPlane
-        
+
         If ShowAxesCheck.value = vbChecked Then _
             DrawAxes
-        
+
         SwapBuffers MainPicture.hdc
     End If
 End Sub
@@ -2357,9 +2376,9 @@ End Sub
 
 Private Sub XPlaneUpDown_Change()
     PlaneTransformation(12) = XPlaneUpDown.value * EditedPModel.diameter / 100
-    
+
     ComputeCurrentEquations
-    
+
     MainPicture_Paint
 End Sub
 
@@ -2376,9 +2395,9 @@ End Sub
 
 Private Sub YPlaneUpDown_Change()
     PlaneTransformation(13) = YPlaneUpDown.value * EditedPModel.diameter / 100
-    
+
     ComputeCurrentEquations
-    
+
     MainPicture_Paint
 End Sub
 
@@ -2534,7 +2553,7 @@ Private Sub SetNewPolyButtonColor()
 End Sub
 Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As Integer, ByVal y As Integer)
     Dim Al As Single
-    
+
     Dim PI As Integer
     Dim ei As Integer
     Dim vi As Integer
@@ -2543,30 +2562,30 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
     Dim g_index As Integer
     Dim g_index_aux As Integer
     Dim max_p As Integer
-    
+
     Dim c_temp As color
-    
+
     Dim p_temp As Point3D
     Dim p_temp2 As Point3D
-    
+
     Dim p1 As Point3D
     Dim p2 As Point3D
-    
+
     Dim tc1 As Point2D
     Dim tc2 As Point2D
-    
+
     Dim intersection_point As Point3D
     Dim intersection_tex_coord As Point2D
-    
+
     Select Case NFunc
         Case K_PAINT:
             'Change polygon color/get polygon color
             If Ev >= K_CLICK Then
                 PI = GetClosestPolygon(EditedPModel, x, y, repZ + PanZ + DIST)
-                
+
                 If PI > -1 Then
                     AddStateToBuffer
-                    
+
                     If PalletizedCheck.value = 1 Then
                         If Ev = K_CLICK_SHIFT Then
                             Selected_color = translation_table_vertex(EditedPModel.polys(PI).Verts(0) + EditedPModel.Groups(GetPolygonGroup(EditedPModel.Groups, PI)).offvert).i
@@ -2580,7 +2599,7 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
                                PaintPolygon EditedPModel, PI, SelectedColorR.value, _
                                                         SelectedColorG.value, _
                                                         SelectedColorB.value
-        
+
                                UpdateTranslationTable translation_table_vertex, EditedPModel, PI, Selected_color
                                ModelDirty = True
                             End If
@@ -2599,7 +2618,7 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
                                                      SelectedColorB.value
                         End If
                     End If
-                    
+
                    ' If glIsEnabled(GL_LIGHTING) = GL_TRUE Then _
                    '     ComputeNormals EditedPModel
                 End If
@@ -2608,28 +2627,28 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
             'Cut an edge on the clicked point (thus slpitting the surrounding polygons)
             If Ev = K_CLICK Then
                 PI = GetClosestPolygon(EditedPModel, x, y, repZ + PanZ + DIST)
-                
+
                 If PI > -1 Then
                     AddStateToBuffer
-                    
+
                     ei = GetClosestEdge(EditedPModel, PI, x, y, Al)
-                    
+
                     vi1 = EditedPModel.polys(PI).Verts(ei)
                     vi2 = EditedPModel.polys(PI).Verts((ei + 1) Mod 3)
                     g_index = GetPolygonGroup(EditedPModel.Groups, PI)
                     p1 = EditedPModel.Verts(EditedPModel.Groups(g_index).offvert + vi1)
                     p2 = EditedPModel.Verts(EditedPModel.Groups(g_index).offvert + vi2)
-                    
+
                     If EditedPModel.Groups(g_index).texFlag = 1 Then
                         tc1 = EditedPModel.TexCoords(EditedPModel.Groups(g_index).offTex + vi1)
                         tc2 = EditedPModel.TexCoords(EditedPModel.Groups(g_index).offTex + vi2)
                     End If
-                    
+
                     intersection_point = GetPointInLine(p1, p2, Al)
                     intersection_tex_coord = GetPointInLine2D(tc1, tc2, Al)
 
                     CutEdgeAtPoint EditedPModel, PI, ei, intersection_point, intersection_tex_coord
-        
+
                     While FindNextAdjacentPolyEdge(EditedPModel, p1, p2, PI, ei)
                         'If crossed group boundaries, recompute intersection_tex_coord
                         g_index_aux = GetPolygonGroup(EditedPModel.Groups, PI)
@@ -2646,11 +2665,11 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
                         g_index = g_index_aux
                         CutEdgeAtPoint EditedPModel, PI, ei, intersection_point, intersection_tex_coord
                     Wend
-                    
+
                     ComputePColors EditedPModel
                     If glIsEnabled(GL_LIGHTING) = GL_TRUE Then _
                         ComputeNormals EditedPModel
-                    
+
                     If PalletizedCheck.value = 1 Then
                         n_colors = 0
                         fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, _
@@ -2664,16 +2683,16 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
                 PI = GetClosestPolygon(EditedPModel, x, y, repZ + PanZ + DIST)
                 If PI > -1 Then
                     AddStateToBuffer
-                    
+
                     If EditedPModel.head.NumPolys > 1 Then
                         RemovePolygon EditedPModel, PI
                     Else
                         MsgBox "A P model must have at least one polygon. This last triangle can't be removed"
                     End If
-                    
+
                     'If glIsEnabled(GL_LIGHTING) = GL_TRUE Then _
                     '   ComputeNormals EditedPModel
-                    
+
                     If PalletizedCheck.value = 1 Then
                         n_colors = 0
                         fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, _
@@ -2687,21 +2706,21 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
                 PI = GetClosestVertex(EditedPModel, x, y, repZ + PanZ + DIST)
                 If PI > -1 Then
                     AddStateToBuffer
-                    
+
                     PickedVertexZ = GetVertexProjectedDepth(EditedPModel.Verts, PI)
-                    
+
                     NumPickedVertices = GetEqualVertices(EditedPModel, PI, PickedVertices)
                     If PrimaryFunction = K_PICK_VERTEX Then
                         PrimaryFunction = K_MOVE_VERTEX
                     Else
                         SecondaryFunction = K_MOVE_VERTEX
                     End If
-                    
+
                     If glIsEnabled(GL_LIGHTING) = GL_TRUE Then
                         GetAllNormalDependentPolys EditedPModel, PickedVertices, _
                                             AdjacentPolys, AdjacentVerts, _
                                             AdjacentAdjacentPolys
-                                            
+
                     End If
                 Else
                     NumPickedVertices = 0
@@ -2712,17 +2731,17 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
             If Ev = K_MOVE Then
                 If NumPickedVertices > 0 Then
                     AddStateToBuffer
-                    
+
                     For vi = 0 To NumPickedVertices - 1
                         MoveVertex EditedPModel, PickedVertices(vi), x, y, PickedVertexZ
                     Next vi
-                    
+
                     If glIsEnabled(GL_LIGHTING) = GL_TRUE Then
                         UpdateNormals EditedPModel, PickedVertices, _
                                             AdjacentPolys, AdjacentVerts, _
                                             AdjacentAdjacentPolys
                         'ComputeNormals EditedPModel
-                        
+
                     End If
                 End If
             End If
@@ -2730,22 +2749,22 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
             'Create new polygon
             If Ev = K_CLICK Then
                 vi = GetClosestVertex(EditedPModel, x, y, repZ + PanZ + DIST)
-    
+
                 If vi > -1 Then
                     VTempNewPoly(VCountNewPoly) = vi
                     VCountNewPoly = VCountNewPoly + 1
                 End If
-                
+
                 If VCountNewPoly = 3 Then
                     AddStateToBuffer
-                    
+
                     OrderVertices EditedPModel, VTempNewPoly
-                    
+
                     AddPolygon EditedPModel, VTempNewPoly
                     If glIsEnabled(GL_LIGHTING) = GL_TRUE Then _
                         ComputeNormals EditedPModel
                     VCountNewPoly = 0
-                    
+
                     If PalletizedCheck.value = 1 Then
                         n_colors = 0
                         fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, _
@@ -2771,20 +2790,20 @@ Private Sub DoFunction(ByVal NFunc As Integer, ByVal Ev As Integer, ByVal x As I
                     .z = GetDepthZ(p_temp2)
                 End With
                 p_temp = GetUnProjectedCoords(p_temp)
-                
+
                 With p_temp
                     PanX = PanX + .x
                     PanY = PanY + .y
                     PanZ = PanZ + .z
                 End With
-                
+
                 With p_temp
                     .x = x_last
                     .y = y_last
                     .z = GetDepthZ(p_temp2)
                 End With
                 p_temp = GetUnProjectedCoords(p_temp)
-                
+
                 With p_temp
                     PanX = PanX - .x
                     PanY = PanY - .y
@@ -2806,7 +2825,7 @@ Private Sub DrawPallete(ByVal Ev As Integer)
     Dim hBrush As Long
     Dim oldb As Long
     Dim pen As Long, oldpen As Long
-    
+
     If PalletizedCheck.value Then
         NewBrush.lbColor = RGB(0, 0, 0)
         NewBrush.lbStyle = 2
@@ -2835,11 +2854,11 @@ Private Sub DrawPallete(ByVal Ev As Integer)
             Else
                     Rectangle palDC, x0, y0, x0 + PalletePicture.ScaleWidth / 2, y0 + s_rows
             End If
-            
+
             x0 = x0 + PalletePicture.ScaleWidth / 2
-            
+
             i = i + 1
-            
+
             If i Mod 2 = 0 Then
                 y0 = y0 + s_rows
                 x0 = 0
@@ -2864,13 +2883,13 @@ Private Sub DrawPallete(ByVal Ev As Integer)
             Next x
             BitBlt .hdc, 0, 0, .ScaleWidth, .ScaleHeight, palDC, 0, 0, SRCCOPY
         End With
-        
+
     End If
 End Sub
 Private Sub ResizeX_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     redX = ResizeX.value / 100
@@ -2882,7 +2901,7 @@ End Sub
 Private Sub ResizeY_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     redY = ResizeY.value / 100
@@ -2894,7 +2913,7 @@ End Sub
 Private Sub ResizeZ_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     redZ = ResizeZ.value / 100
@@ -2906,7 +2925,7 @@ End Sub
 Private Sub RepositionZ_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     repZ = RepositionZ.value * EditedPModel.diameter / 100
@@ -2918,7 +2937,7 @@ End Sub
 Private Sub RepositionX_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     repX = RepositionX.value * EditedPModel.diameter / 100
@@ -2942,7 +2961,7 @@ End Sub
 Private Sub RepositionY_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     repY = RepositionY.value * EditedPModel.diameter / 100
@@ -2954,7 +2973,7 @@ End Sub
 Private Sub RepositionXText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RepositionXText.Text) Then
         If RepositionXText.Text >= -100 And RepositionXText.Text <= 100 Then
             RepositionX.value = RepositionXText.Text
@@ -2973,7 +2992,7 @@ End Sub
 Private Sub RotateAlphaText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RotateAlphaText.Text) Then
         If RotateAlphaText.Text >= 0 And RotateAlphaText.Text <= 360 Then
             RotateAlpha.value = RotateAlphaText.Text
@@ -2992,7 +3011,7 @@ End Sub
 Private Sub RotateBetaText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RotateBetaText.Text) Then
         If RotateBetaText.Text >= 0 And RotateBetaText.Text <= 360 Then
             RotateBeta.value = RotateBetaText.Text
@@ -3012,7 +3031,7 @@ End Sub
 Private Sub RotateGammaText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RotateGammaText.Text) Then
         If RotateGammaText.Text >= 0 And RotateGammaText.Text <= 360 Then
             RotateGamma.value = RotateGammaText.Text
@@ -3031,7 +3050,7 @@ End Sub
 Private Sub resizexText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizeXText.Text) Then
         If ResizeXText.Text >= 0 And ResizeXText.Text <= 400 Then
             ResizeX.value = ResizeXText.Text
@@ -3049,7 +3068,7 @@ End Sub
 Private Sub resizeyText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizeYText.Text) Then
         If ResizeYText.Text >= 0 And ResizeYText.Text <= 400 Then
             ResizeY.value = ResizeYText.Text
@@ -3068,7 +3087,7 @@ End Sub
 Private Sub ResizeZText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(ResizeZText.Text) Then
         If ResizeZText.Text >= 0 And ResizeZText.Text <= 400 Then
             ResizeZ.value = ResizeZText.Text
@@ -3087,7 +3106,7 @@ End Sub
 Private Sub RepositionZText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RepositionZText.Text) Then
         If RepositionZText.Text >= -100 And RepositionZText.Text <= 100 Then
             RepositionZ.value = RepositionZText.Text
@@ -3106,7 +3125,7 @@ End Sub
 Private Sub RepositionYText_Change()
     If LoadingModifiersQ Then _
         Exit Sub
-        
+
     If IsNumeric(RepositionYText.Text) Then
         If RepositionYText.Text >= -100 And RepositionYText.Text <= 100 Then
             RepositionY.value = RepositionYText.Text
@@ -3127,7 +3146,7 @@ Public Sub OpenP(ByRef fileName As String)
     Dim temp_p As PModel
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     MainPicture.Enabled = False
     If fileName <> "" Then
         If LCase(Right$(fileName, 4)) = ".3ds" Then
@@ -3145,23 +3164,23 @@ Public Sub OpenP(ByRef fileName As String)
 
         ComputeBoundingBox EditedPModel
         'ComputeNormals EditedPModel
-        
+
         SetOGLContext MainPicture.hdc, OGLContextEditor
 
         glEnable GL_DEPTH_TEST
-    
+
         glClearColor 0.5, 0.5, 1, 0
-        
+
         n_colors = 0
         fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, translation_table_polys, threshold
 
         MainPicture_Paint
         DrawPallete K_LOAD
-        
+
         SelectedColorR.Enabled = True
         SelectedColorG.Enabled = True
         SelectedColorB.Enabled = True
-        
+
         ResizeZ.Enabled = True
         ResizeY.Enabled = True
         ResizeX.Enabled = True
@@ -3171,33 +3190,33 @@ Public Sub OpenP(ByRef fileName As String)
         RotateGamma.Enabled = True
         RotateBeta.Enabled = True
         RotateAlpha.Enabled = True
-        
+
         SelectedColorRText.Enabled = True
         SelectedColorGText.Enabled = True
         SelectedColorBText.Enabled = True
         ThersholdText.Enabled = True
-        
+
         ResizeXText.Enabled = True
         ResizeYText.Enabled = True
         ResizeZText.Enabled = True
-    
+
         RepositionZText.Enabled = True
         RepositionYText.Enabled = True
         RepositionXText.Enabled = True
-        
+
         RotateAlphaText.Enabled = True
         RotateBetaText.Enabled = True
         RotateGammaText.Enabled = True
-        
+
         redX = 1
         redY = 1
         redZ = 1
-        
+
         repX = 0
         repY = 0
         repZ = 0
-        
-        
+
+
         d_type = 2
         Selected_color = -1
         threshold = 20
@@ -3210,19 +3229,19 @@ Public Sub OpenP(ByRef fileName As String)
         RotateBetaText.Text = 0
         RotateGamma.value = 0
         RotateGammaText.Text = 0
-        
+
         file = EditedPModel.fileName
-        
+
         yl = 0
         ComputePModelBoundingBox EditedPModel, p_min, p_max
         DIST = -2 * ComputeSceneRadius(p_min, p_max)
-        
+
         LightXScroll.value = 0
-        
+
         LightYScroll.value = 0
-        
+
         LightZScroll.value = 0
-        
+
         Call MainPicture_Paint
         shifted = False
         loaded = True
@@ -3238,7 +3257,7 @@ Public Sub OpenP(ByRef fileName As String)
             redX = .ResizeX
             redY = .ResizeY
             redZ = .ResizeZ
-            
+
             RepositionX.value = .RepositionX / .diameter * 100
             RepositionY.value = .RepositionY / .diameter * 100
             RepositionZ.value = .RepositionZ / .diameter * 100
@@ -3248,7 +3267,7 @@ Public Sub OpenP(ByRef fileName As String)
             repX = .RepositionX
             repY = .RepositionY
             repZ = .RepositionZ
-            
+
             RotateGamma.value = .RotateGamma
             RotateBeta.value = .RotateBeta
             RotateAlpha.value = .RotateAlpha
@@ -3257,13 +3276,13 @@ Public Sub OpenP(ByRef fileName As String)
             RotateAlphaText.Text = RotateAlpha.value
         End With
         LoadingModifiersQ = False
-        
+
         FillGroupsList
-        
+
         ResetCamera
     End If
     Timer1.Enabled = True
-    
+
     ResetPlane
     Exit Sub
 hand:
@@ -3274,14 +3293,14 @@ Public Sub SaveP(ByRef fileName As String)
     Dim mres As Integer
     Dim p_temp As Point3D
     On Error GoTo hand
-    
+
     mres = vbYes
     If FileExist(fileName) Then _
         mres = MsgBox("File already exists. Overwrite?" + fileName, vbYesNo, "Overwite prompt")
-    
+
     If mres = vbYes Then
         ApplyContextualizedPChanges (UCase(Right$(fileName, 2)) <> ".P")
-    
+
         WritePModel EditedPModel, fileName
     End If
     Exit Sub
@@ -3293,30 +3312,30 @@ Sub ApplyContextualizedPChanges(ByVal DNormals As Boolean)
     Dim p_max As Point3D
     Dim model_diameter_normalized As Single
     Dim temp_dist As Single
-    
+
     AddStateToBuffer
-    
+
     SetCameraModelViewQuat repX, repY, repZ, _
                     EditedPModel.RotationQuaternion, _
                     redX, redY, redZ
     glMatrixMode GL_MODELVIEW
     glPushMatrix
-                    
+
     ComputeCurrentBoundingBox EditedPModel
-    
+
     ComputePModelBoundingBox EditedPModel, p_min, p_max
     temp_dist = -2 * ComputeSceneRadius(p_min, p_max)
-    
+
     ComputeNormals EditedPModel
-    
+
     If LightingCheck.value = 1 Then
         glViewport 0, 0, MainPicture.ScaleWidth, MainPicture.ScaleHeight
         glClear GL_COLOR_BUFFER_BIT Or GL_DEPTH_BUFFER_BIT
-        
+
         SetCameraAroundModelQuat p_min, p_max, repX, repY, repZ + temp_dist, _
                         EditedPModel.RotationQuaternion, _
                         redX, redY, redZ
-                        
+
         glDisable GL_LIGHT0
         glDisable GL_LIGHT1
         glDisable GL_LIGHT2
@@ -3328,18 +3347,18 @@ Sub ApplyContextualizedPChanges(ByVal DNormals As Boolean)
                                 model_diameter_normalized * LightZScroll.value, 1, 1, 1, False
         ApplyCurrentVColors EditedPModel
     End If
-    
+
     glMatrixMode GL_MODELVIEW
     glPopMatrix
-    
+
     SetCameraModelViewQuat repX, repY, repZ, _
                     EditedPModel.RotationQuaternion, _
                     redX, redY, redZ
-                    
+
     ApplyPChanges EditedPModel, DNormals
-    
+
     LoadingModifiersQ = True
-    
+
     ResizeX.value = 100
     ResizeY.value = 100
     ResizeZ.value = 100
@@ -3349,7 +3368,7 @@ Sub ApplyContextualizedPChanges(ByVal DNormals As Boolean)
     RotateAlpha.value = 0
     RotateBeta.value = 0
     RotateGamma.value = 0
-    
+
     RepositionXText.Text = 0
     RepositionYText.Text = 0
     RepositionZText.Text = 0
@@ -3370,34 +3389,34 @@ Sub ApplyContextualizedPChanges(ByVal DNormals As Boolean)
     repX = 0
     repY = 0
     repZ = 0
-    
+
     LoadingModifiersQ = False
 End Sub
 Sub FillGroupsList()
     Dim gi As Integer
     Dim name_str As String
-    
+
     GroupsList.Clear
-    
+
     For gi = 0 To EditedPModel.head.NumGroups - 1
         If EditedPModel.Groups(gi).HiddenQ Then
             name_str = "[HIDDEN]"
         Else
             name_str = ""
         End If
-        
+
         name_str = name_str + "Group " + Str$(gi)
-        
+
         If EditedPModel.Groups(gi).texFlag = 1 Then _
             name_str = name_str + "(Tex.Index:" + _
                                 Str$(EditedPModel.Groups(gi).TexID) + ")"
-        
+
         GroupsList.AddItem name_str
     Next gi
 End Sub
 Private Sub AddStateToBuffer()
     Dim si As Integer
-    
+
     If (UnDoCursor < UNDO_BUFFER_CAPACITY) Then
         StoreState UnDoBuffer(UnDoCursor)
         UnDoCursor = UnDoCursor + 1
@@ -3424,7 +3443,7 @@ Private Sub ReDo()
                 Next si
                 StoreState UnDoBuffer(UnDoCursor)
             End If
-            
+
             RestoreState ReDoBuffer(ReDoCursor - 1)
             ReDoCursor = ReDoCursor - 1
         Else
@@ -3449,7 +3468,7 @@ Private Sub UnDo()
                 Next si
                 StoreState ReDoBuffer(ReDoCursor)
             End If
-            
+
             RestoreState UnDoBuffer(UnDoCursor - 1)
             UnDoCursor = UnDoCursor - 1
         Else
@@ -3462,55 +3481,55 @@ End Sub
 
 Private Sub RestoreState(ByRef State As PEditorState)
     LoadingModifiersQ = True
-    
+
     With State
         PanX = .PanX
         PanY = .PanY
         PanZ = .PanZ
-        
+
         DIST = .DIST
-        
+
         redX = .redX
         redY = .redY
         redZ = .redZ
-        
+
         repX = .repX
         repY = .repY
         repZ = .repZ
-        
+
         ResizeX.value = .redX * 100
         ResizeY.value = .redY * 100
         ResizeZ.value = .redZ * 100
-        
+
         RepositionX.value = .repX / EditedPModel.diameter * 100
         RepositionY.value = .repY / EditedPModel.diameter * 100
         RepositionZ.value = .repZ / EditedPModel.diameter * 100
-        
+
         RotateAlpha.value = .RotateAlpha
         RotateBeta.value = .RotateBeta
         RotateGamma.value = .RotateGamma
-        
+
         ResizeXText.Text = ResizeX.value
         ResizeYText.Text = ResizeY.value
         ResizeZText.Text = ResizeZ.value
-        
+
         RepositionXText.Text = RepositionX.value
         RepositionYText.Text = RepositionY.value
         RepositionZText.Text = RepositionZ.value
-        
+
         RotateAlphaText.Text = RotateAlpha.value
         RotateBetaText.Text = RotateBeta.value
         RotateGammaText.Text = RotateGamma.value
-        
+
         alpha = .alpha
         Beta = .Beta
         Gamma = .Gamma
-        
+
         EditedPModel = .EditedPModel
-        
+
         If .PalletizedQ Then
             PalletizedCheck.value = vbChecked
-            
+
             color_table = .color_table
             translation_table_polys = .translation_table_polys
             translation_table_vertex = .translation_table_vertex
@@ -3520,16 +3539,16 @@ Private Sub RestoreState(ByRef State As PEditorState)
             PalletizedCheck.value = vbUnchecked
         End If
     End With
-    
+
     If PalletizedCheck.value = 1 Then
         n_colors = 0
         fill_color_table EditedPModel, color_table, n_colors, translation_table_vertex, _
                          translation_table_polys, threshold
     End If
-    
+
     GroupProperties.Hide
     FillGroupsList
-    
+
     LoadingModifiersQ = False
 End Sub
 
@@ -3538,27 +3557,27 @@ Private Sub StoreState(ByRef State As PEditorState)
         .PanX = PanX
         .PanY = PanY
         .PanZ = PanZ
-        
+
         .DIST = DIST
-        
+
         .redX = redX
         .redY = redY
         .redZ = redZ
-        
+
         .repX = repX
         .repY = repY
         .repZ = repZ
-        
+
         .RotateAlpha = RotateAlpha.value
         .RotateBeta = RotateBeta.value
         .RotateGamma = RotateGamma.value
-        
+
         .alpha = alpha
         .Beta = Beta
         .Gamma = Gamma
-        
+
         .EditedPModel = EditedPModel
-        
+
         .PalletizedQ = PalletizedCheck.value = vbChecked
         If .PalletizedQ Then
             .color_table = color_table
@@ -3572,10 +3591,10 @@ End Sub
 Private Sub ResetCamera()
     Dim p_min As Point3D
     Dim p_max As Point3D
-    
+
     If loaded Then
         ComputePModelBoundingBox EditedPModel, p_min, p_max
-        
+
         alpha = 0
         Beta = 0
         Gamma = 0
@@ -3589,21 +3608,21 @@ End Sub
 Private Sub DrawAxes()
     Dim letter_width As Single
     Dim letter_height As Single
-    
+
     Dim p_x As Point3D
     Dim p_y As Point3D
     Dim p_z As Point3D
-    
+
     Dim p_max As Point3D
     Dim p_min As Point3D
-    
+
     Dim max_x As Single
     Dim max_y As Single
     Dim max_z As Single
-    
+
     glDisable GL_LIGHTING
     ComputePModelBoundingBox EditedPModel, p_min, p_max
-    
+
     max_x = IIf(Abs(p_min.x) > Abs(p_max.x), p_min.x, p_max.x)
     max_y = IIf(Abs(p_min.y) > Abs(p_max.y), p_min.y, p_max.y)
     max_z = IIf(Abs(p_min.z) > Abs(p_max.z), p_min.z, p_max.z)
@@ -3611,41 +3630,41 @@ Private Sub DrawAxes()
         glColor3f 1, 0, 0
         glVertex3f 0, 0, 0
         glVertex3f 2 * max_x, 0, 0
-        
+
         glColor3f 0, 1, 0
         glVertex3f 0, 0, 0
         glVertex3f 0, 2 * max_y, 0
-        
+
         glColor3f 0, 0, 1
         glVertex3f 0, 0, 0
         glVertex3f 0, 0, 2 * max_z
     glEnd
-    
+
     'Get projected end of the X axis
     p_x.x = 2 * max_x
     p_x.y = 0
     p_x.z = 0
     p_x = GetProjectedCoords(p_x)
-    
+
     'Get projected end of the Y axis
     p_y.x = 0
     p_y.y = 2 * max_y
     p_y.z = 0
     p_y = GetProjectedCoords(p_y)
-    
+
     'Get projected end of the Z axis
     p_z.x = 0
     p_z.y = 0
     p_z.z = 2 * max_z
     p_z = GetProjectedCoords(p_z)
-    
+
     'Set 2D mode to draw letters
     glMatrixMode GL_PROJECTION
     glLoadIdentity
     gluOrtho2D 0, MainPicture.ScaleWidth, 0, MainPicture.ScaleHeight
     glMatrixMode GL_MODELVIEW
     glLoadIdentity
-    
+
     letter_width = LETTER_SIZE
     letter_height = LETTER_SIZE * 1.5
     glDisable GL_DEPTH_TEST
@@ -3656,22 +3675,22 @@ Private Sub DrawAxes()
         glVertex2f p_x.x + letter_width, p_x.y + letter_height
         glVertex2f p_x.x - letter_width, p_x.y + letter_height
         glVertex2f p_x.x + letter_width, p_x.y - letter_height
-        
+
         'Draw Y
         glColor3f 0, 0, 0
         glVertex2f p_y.x - letter_width, p_y.y - letter_height
         glVertex2f p_y.x + letter_width, p_y.y + letter_height
         glVertex2f p_y.x - letter_width, p_y.y + letter_height
         glVertex2f p_y.x, p_y.y
-        
+
         'Draw Z
         glColor3f 0, 0, 0
         glVertex2f p_z.x + letter_width, p_z.y + letter_height
         glVertex2f p_z.x - letter_width, p_z.y + letter_height
-        
+
         glVertex2f p_z.x + letter_width, p_z.y + letter_height
         glVertex2f p_z.x - letter_width, p_z.y - letter_height
-        
+
         glVertex2f p_z.x + letter_width, p_z.y - letter_height
         glVertex2f p_z.x - letter_width, p_z.y - letter_height
     glEnd
@@ -3679,14 +3698,14 @@ Private Sub DrawAxes()
 End Sub
 Public Sub SetOGLSettings()
     SetOGLContext MainPicture.hdc, OGLContextEditor
-    
+
     glClearDepth 1#
     glDepthFunc GL_LEQUAL
     glEnable GL_DEPTH_TEST
     glEnable GL_BLEND
     glEnable GL_ALPHA_TEST
     glBlendFunc GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA
-    
+
     Call MainPicture_Paint
 End Sub
 
@@ -3703,23 +3722,23 @@ End Sub
 
 Private Sub ZPlaneUpDown_Change()
     PlaneTransformation(14) = ZPlaneUpDown.value * EditedPModel.diameter / 100
-    
+
     ComputeCurrentEquations
-    
+
     MainPicture_Paint
 End Sub
 
 Private Sub DrawPlane()
     Dim p1 As Point3D, p2 As Point3D, p3 As Point3D, p4 As Point3D
-    
+
     MultiplyPoint3DByOGLMatrix PlaneTransformation, PlaneOriginalPoint1, p1
     MultiplyPoint3DByOGLMatrix PlaneTransformation, PlaneOriginalPoint2, p2
     MultiplyPoint3DByOGLMatrix PlaneTransformation, PlaneOriginalPoint3, p3
     MultiplyPoint3DByOGLMatrix PlaneTransformation, PlaneOriginalPoint4, p4
-    
+
     glPolygonMode GL_FRONT, GL_FILL
     glPolygonMode GL_BACK, GL_LINE
-    
+
     glColor4f 1, 0, 0, 0.25
     glBegin GL_QUADS
         With p1
@@ -3744,98 +3763,98 @@ Private Sub ResetPlane()
     XPlaneText.Text = 0
     YPlaneText.Text = 0
     ZPlaneText.Text = 0
-    
+
     OldAlphaPlane = 0
     OldBetaPlane = 0
     OldGammaPlane = 0
-    
+
     PlaneOriginalA = 0
     PlaneOriginalB = 0
     PlaneOriginalC = 1
     PlaneOriginalD = 0
-    
+
     PlaneA = PlaneOriginalA
     PlaneB = PlaneOriginalB
     PlaneC = PlaneOriginalC
     PlaneD = PlaneOriginalD
-    
+
     With PlaneOriginalPoint
         .x = 0
         .y = 0
         .z = 0
     End With
-    
+
     With PlaneRotationQuat
         .x = 0
         .y = 0
         .z = 0
         .w = 1
     End With
-    
+
     BuildMatrixFromQuaternion PlaneRotationQuat, PlaneTransformation
-    
+
     With PlaneOriginalPoint1
         .z = 0
         .x = EditedPModel.diameter
         .y = EditedPModel.diameter
     End With
-    
+
     With PlaneOriginalPoint2
         .z = 0
         .x = -EditedPModel.diameter
         .y = EditedPModel.diameter
     End With
-    
+
     With PlaneOriginalPoint3
         .z = 0
         .x = -EditedPModel.diameter
         .y = -EditedPModel.diameter
     End With
-    
+
     With PlaneOriginalPoint4
         .z = 0
         .x = EditedPModel.diameter
         .y = -EditedPModel.diameter
     End With
-    
+
     ComputeCurrentEquations
 End Sub
 
 Private Sub ComputeCurrentEquations()
     Dim normal As Point3D
     Dim normal_aux As Point3D
-    
+
     With normal_aux
         .x = PlaneOriginalA
         .y = PlaneOriginalB
         .z = PlaneOriginalC
     End With
-    
+
     With PlanePoint
         .x = PlaneTransformation(12)
         .y = PlaneTransformation(13)
         .z = PlaneTransformation(14)
     End With
-    
+
     PlaneTransformation(12) = 0
     PlaneTransformation(13) = 0
     PlaneTransformation(14) = 0
-    
+
     MultiplyPoint3DByOGLMatrix PlaneTransformation, normal_aux, normal
     normal = Normalize(normal)
-    
+
     With normal
         PlaneA = .x
         PlaneB = .y
         PlaneC = .z
     End With
-    
+
     With PlanePoint
         PlaneTransformation(12) = .x
         PlaneTransformation(13) = .y
         PlaneTransformation(14) = .z
     End With
-    
+
     With PlanePoint
         PlaneD = -PlaneA * .x - PlaneB * .y - PlaneC * .z
     End With
@@ -3844,7 +3863,7 @@ End Sub
 Private Sub RotationModifiersChanged()
     If LoadingModifiersQ Then _
         Exit Sub
-    
+
     If Not DoNotAddStateQ Then AddStateToBuffer
     DoNotAddStateQ = True
     RotatePModelModifiers EditedPModel, RotateAlpha.value, RotateBeta.value, RotateGamma.value
@@ -3856,7 +3875,87 @@ Private Sub RotationModifiersChanged()
 End Sub
 
 
-
+Private Sub UpGroupCommand_Click()
+    Dim groupIndex As Integer
+    Dim tmpGroups() As PGroup
+    Dim i As Integer
+            
+    ' Get the group selected in p model
+    groupIndex = GroupsList.ListIndex
+                                       
+    If groupIndex > 0 Then
+        ' Prepare the new .p model
+        
+        tmpGroups = EditedPModel.Groups
+        
+        ' Here we will reorder the groups of the .p model
+        For i = 0 To GroupsList.ListCount - 1
+            If i = groupIndex - 1 Then
+                tmpGroups(i) = EditedPModel.Groups(groupIndex)
+            Else
+                If i = groupIndex Then
+                    tmpGroups(i) = EditedPModel.Groups(i - 1)
+                Else
+                    tmpGroups(i) = EditedPModel.Groups(i)
+                End If
+            End If
+            
+        Next
+        
+        ' Now we need to reasing the ordered groups to the edited p model
+        EditedPModel.Groups = tmpGroups
+        
+        ' Refresh Groups List
+        GroupProperties.Hide
+        FillGroupsList
+        
+        MainPicture_Paint
+        
+        ' Let's select in listbox the record.
+        GroupsList.ListIndex = groupIndex - 1
+    End If
+End Sub
+    
+Private Sub DownGroupCommand_Click()
+    Dim groupIndex As Integer
+    Dim tmpGroups() As PGroup
+    Dim i As Integer
+            
+    ' Get the group selected in p model
+    groupIndex = GroupsList.ListIndex
+                                       
+    If groupIndex > -1 And groupIndex < GroupsList.ListCount - 1 Then
+        ' Prepare the new .p model
+        
+        tmpGroups = EditedPModel.Groups
+        
+        ' Here we will reorder the groups of the .p model
+        For i = 0 To GroupsList.ListCount - 1
+            If i = groupIndex + 1 Then
+                tmpGroups(i) = EditedPModel.Groups(groupIndex)
+            Else
+                If i = groupIndex Then
+                    tmpGroups(i) = EditedPModel.Groups(i + 1)
+                Else
+                    tmpGroups(i) = EditedPModel.Groups(i)
+                End If
+            End If
+            
+        Next
+        
+        ' Now we need to reasing the ordered groups to the edited p model
+        EditedPModel.Groups = tmpGroups
+        
+        ' Refresh Groups List
+        GroupProperties.Hide
+        FillGroupsList
+        
+        MainPicture_Paint
+        
+        ' Let's select in listbox the record
+        GroupsList.ListIndex = groupIndex + 1
+    End If
+End Sub
 
 
 

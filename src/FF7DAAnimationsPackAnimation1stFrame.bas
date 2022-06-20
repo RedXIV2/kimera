@@ -10,20 +10,20 @@ Sub ReadDAUncompressedFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As 
     Dim BI As Integer
     Dim tempV As Long
     Dim aux As Integer
-    
+
     aux = offsetBit
     With Frame
         '.BonesVectorLength = BonesVectorLength '+ IIf(NumBones = 1, 0, 1)
         'NumBones = IIf(NumBones = 2, 1, NumBones)  'Some single bone models have bones counter of 2 instead of 1, so adjust the value for convenience.
-        
+
         .X_start = GetBitBlockV(AnimationStream, 16, offsetBit)
-        
+
         .Y_start = GetBitBlockV(AnimationStream, 16, offsetBit)
-        
+
         .Z_start = GetBitBlockV(AnimationStream, 16, offsetBit)
-        
+
         'Debug.Print "       Position delta "; Str$(.X_start); ", "; Str$(.Y_start); ", "; Str$(.Z_start)
-        
+
         ReDim .Bones(BonesVectorLength - 1)
         For BI = 0 To BonesVectorLength - 1
             'Debug.Print "       Bone "; Str$(bi)
@@ -36,7 +36,7 @@ Function ReadDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, B
     Dim BI As Integer
     Dim oi As Integer
     Dim offLength As Integer
-    
+
     On Error GoTo OutOfDataHandler
 
     With Frame
@@ -62,11 +62,11 @@ Function ReadDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, B
             End Select
 
         Next oi
-        
+
         'Debug.Print "       Position delta "; Str$(.X_start); ", "; Str$(.Y_start); ", "; Str$(.Z_start)
-    
+
         ReDim .Bones(BonesVectorLength - 1)
-        
+
         For BI = 0 To BonesVectorLength - 1
             'Debug.Print "       Bone "; Str$(bi)
             ReadDAFrameBone AnimationStream, offsetBit, key, .Bones(BI), LastFrame.Bones(BI)
@@ -82,18 +82,18 @@ Sub WriteDAUncompressedFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As
     Dim BI As Integer
     Dim tempV As Long
     Dim num_bones As Integer
-    
+
     With Frame
         '.NumBones = NumBones + IIf(NumBones = 1, 0, 1)
-        
+
         'Debug.Print "       Position delta "; Str$(.X_start); ", "; Str$(.Y_start); ", "; Str$(.Z_start)
-        
+
         PutBitBlockV AnimationStream, 16, offsetBit, .X_start
-        
+
         PutBitBlockV AnimationStream, 16, offsetBit, .Y_start
-        
+
         PutBitBlockV AnimationStream, 16, offsetBit, .Z_start
-        
+
         num_bones = UBound(.Bones) + 1
         For BI = 0 To num_bones - 1
             'Debug.Print "       Bone "; Str$(bi)
@@ -107,7 +107,7 @@ Sub WriteDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, ByVal
     Dim offLength As Integer
     Dim off_delta As Long
     Dim num_bones As Integer
-    
+
     With Frame
         'Debug.Print "       Position delta "; Str$(.X_start - LastFrame.X_start); ", "; Str$(.Y_start - LastFrame.Y_start); ", "; Str$(.Z_start - LastFrame.Z_start)
         For oi = 0 To 2
@@ -121,7 +121,7 @@ Sub WriteDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, ByVal
                 Case Else:
                     'Debug.Print "What?!"
             End Select
-            
+
             If (off_delta < 2 ^ (7 - 1) And off_delta >= -2 ^ (7 - 1)) Then
                 offLength = 7
                 PutBitBlockV AnimationStream, 1, offsetBit, 0
@@ -129,10 +129,10 @@ Sub WriteDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, ByVal
                 offLength = 16
                 PutBitBlockV AnimationStream, 1, offsetBit, 1
             End If
-            
+
             PutBitBlockV AnimationStream, offLength, offsetBit, off_delta
         Next oi
-        
+
         num_bones = UBound(.Bones) + 1
         For BI = 0 To num_bones - 1
             'Debug.Print "       Bone "; Str$(bi)
@@ -152,7 +152,7 @@ Sub CopyDAFrame(ByRef frame_in As DAFrame, frame_out As DAFrame)
         frame_out.X_start = .X_start
         frame_out.Y_start = .Y_start
         frame_out.Z_start = .Z_start
-        
+
         num_bones = UBound(frame_in.Bones) + 1
         ReDim frame_out.Bones(num_bones - 1)
         For BI = 0 To num_bones - 1
@@ -163,7 +163,7 @@ End Sub
 Sub NormalizeDAAnimationsPackAnimationFrame(ByRef Frame As DAFrame, ByRef next_frame As DAFrame)
     Dim BI As Integer
     Dim num_bones As Integer
-    
+
     num_bones = UBound(Frame.Bones) + 1
     For BI = 0 To num_bones - 1
         NormalizeDAAnimationsPackAnimationFrameBone Frame.Bones(BI), next_frame.Bones(BI)
@@ -174,32 +174,32 @@ Sub CheckWriteDAUncompressedFrame(ByRef AnimationStream() As Byte, ByRef offsetB
     Dim BI As Integer
     Dim tempV As Long
     Dim aux As Integer
-    
+
     Dim X_start As Long
     Dim Y_start As Long
     Dim Z_start As Long
-    
+
     Dim num_bones As Integer
-    
+
     aux = offsetBit
     With ref_frame
         X_start = GetBitBlockV(AnimationStream, 16, offsetBit)
         If X_start <> .X_start Then
             Debug.Print "Error"
         End If
-        
+
         Y_start = GetBitBlockV(AnimationStream, 16, offsetBit)
         If Y_start <> .Y_start Then
             Debug.Print "Error"
         End If
-        
+
         Z_start = GetBitBlockV(AnimationStream, 16, offsetBit)
         If Z_start <> .Z_start Then
             Debug.Print "Error"
         End If
-        
+
         'Debug.Print "       Position delta "; Str$(.X_start); ", "; Str$(.Y_start); ", "; Str$(.Z_start)
-        
+
         num_bones = UBound(.Bones) + 1
         For BI = 0 To num_bones - 1
             'Debug.Print "       Bone "; Str$(bi)
@@ -212,11 +212,11 @@ Sub CheckWriteDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, 
     Dim BI As Integer
     Dim oi As Integer
     Dim offLength As Integer
-    
+
     Dim X_start As Long
     Dim Y_start As Long
     Dim Z_start As Long
-    
+
     Dim num_bones As Integer
 
     With ref_frame
@@ -251,9 +251,9 @@ Sub CheckWriteDAFrame(ByRef AnimationStream() As Byte, ByRef offsetBit As Long, 
             End Select
 
         Next oi
-        
+
         'Debug.Print "       Position delta "; Str$(.X_start); ", "; Str$(.Y_start); ", "; Str$(.Z_start)
-    
+
         num_bones = UBound(.Bones) + 1
         For BI = 0 To num_bones - 1
             'Debug.Print "       Bone "; Str$(bi)
